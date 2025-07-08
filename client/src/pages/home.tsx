@@ -19,28 +19,21 @@ export default function Home() {
 
   const { data: seminars = [] } = useQuery({
     queryKey: ['/api/seminars'],
-    queryFn: () => getQueryFn<Seminar[]>({ on401: "returnNull" })('/api/seminars'),
   });
 
   const { data: events = [] } = useQuery({
     queryKey: ['/api/events'],
-    queryFn: () => getQueryFn<Event[]>({ on401: "returnNull" })('/api/events'),
   });
 
   const { data: achievements = [] } = useQuery({
     queryKey: ['/api/achievements'],
-    queryFn: () => getQueryFn<Achievement[]>({ on401: "returnNull" })('/api/achievements'),
   });
 
   const { data: products = [] } = useQuery({
     queryKey: ['/api/products'],
-    queryFn: () => getQueryFn<Product[]>({ on401: "returnNull" })('/api/products'),
   });
 
-  // Debug logging
-  console.log('Seminars data:', seminars);
-  console.log('Events data:', events);
-  console.log('Products data:', products);
+
 
   return (
     <div className="pt-20">
