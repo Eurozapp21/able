@@ -135,13 +135,27 @@ export default function About() {
                   </div>
                 </div>
                 
-                <div className="relative">
-                  <img
-                    src="/attached_assets/1602069478aboutus_temp_1752007885489.jpg"
-                    alt="AbleTools - Rehabilitation Equipment & Solutions"
-                    className="w-full h-96 object-cover rounded-xl shadow-lg"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl"></div>
+                <div className="space-y-6">
+                  <div className="relative">
+                    <img
+                      src="/attached_assets/1602069478aboutus_temp_1752007885489.jpg"
+                      alt="AbleTools - Rehabilitation Equipment & Solutions"
+                      className="w-full h-64 object-cover rounded-xl shadow-lg"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl"></div>
+                  </div>
+                  
+                  <div className="relative">
+                    <img
+                      src="/attached_assets/1601936002aboutus_small2_1752009993907.jpg"
+                      alt="Professional rehabilitation therapy session - AbleTools"
+                      className="w-full h-64 object-cover rounded-xl shadow-lg"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl"></div>
+                    <div className="absolute bottom-4 left-4 text-white">
+                      <p className="text-sm font-semibold opacity-90">Professional Therapy Session</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
