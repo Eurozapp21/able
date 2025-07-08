@@ -56,6 +56,28 @@ export default function About() {
 
   return (
     <div className="pt-20 min-h-screen bg-gray-50">
+      {/* Hero Header Image - Full Width */}
+      <section className="mb-16">
+        <div className="relative">
+          <img
+            src="/attached_assets/1601935107aboutus_1752007024526.jpg"
+            alt="AbleTools Exhibition - Rehabilitation Equipment & Solutions"
+            className="w-full h-64 md:h-80 lg:h-96 object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-16">
+            <div className="container mx-auto">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
+                About AbleTools
+              </h1>
+              <p className="text-white text-lg md:text-xl lg:text-2xl">
+                Your ability to dream!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
         <Breadcrumb className="mb-6">
@@ -69,26 +91,6 @@ export default function About() {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-
-        {/* Hero Header Image */}
-        <section className="mb-16">
-          <div className="relative">
-            <img
-              src="/attached_assets/1601935107aboutus_1752007024526.jpg"
-              alt="AbleTools Exhibition - Rehabilitation Equipment & Solutions"
-              className="w-full h-64 md:h-80 object-cover rounded-lg shadow-lg"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg"></div>
-            <div className="absolute bottom-0 left-0 right-0 p-8">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-                About AbleTools
-              </h1>
-              <p className="text-white text-lg md:text-xl">
-                Your ability to dream!
-              </p>
-            </div>
-          </div>
-        </section>
 
         {/* Company Introduction */}
         <section className="mb-16">
