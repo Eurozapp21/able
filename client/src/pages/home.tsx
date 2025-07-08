@@ -37,6 +37,11 @@ export default function Home() {
     queryFn: () => getQueryFn<Product[]>({ on401: "returnNull" })('/api/products'),
   });
 
+  // Debug logging
+  console.log('Seminars data:', seminars);
+  console.log('Events data:', events);
+  console.log('Products data:', products);
+
   return (
     <div className="pt-20">
       {/* Hero Carousel */}
