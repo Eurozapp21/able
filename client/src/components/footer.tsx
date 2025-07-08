@@ -63,7 +63,7 @@ export default function Footer() {
                 />
                 <Button 
                   type="submit" 
-                  className="btn-customlogin rounded-l-none"
+                  className="bg-gray-600 hover:bg-gray-700 text-white rounded-l-none"
                   disabled={newsletterMutation.isPending}
                 >
                   {newsletterMutation.isPending ? 'Subscribing...' : 'Subscribe'}
