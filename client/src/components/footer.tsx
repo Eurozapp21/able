@@ -44,40 +44,7 @@ export default function Footer() {
 
   return (
     <>
-      {/* Newsletter Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">YOUR ABILITY TO DREAM!</h2>
-            <p className="text-lg mb-8">Stay updated with our latest products and healthcare solutions</p>
-            
-            <div className="max-w-md mx-auto">
-              <form onSubmit={handleNewsletterSubmit} className="flex">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 rounded-r-none border-0 focus:ring-2 focus:ring-white"
-                  required
-                />
-                <Button 
-                  type="submit" 
-                  className="bg-gray-600 hover:bg-gray-700 text-white rounded-l-none"
-                  disabled={newsletterMutation.isPending}
-                >
-                  {newsletterMutation.isPending ? 'Subscribing...' : 'Subscribe'}
-                </Button>
-              </form>
-              <p className="text-sm mt-2">
-                <Link href="/newsletter-consent">
-                  <span className="underline hover:no-underline cursor-pointer">Newsletter Consent</span>
-                </Link>
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Footer */}
       <footer className="bg-gray-600 text-white py-12">
