@@ -114,22 +114,19 @@ export default function About() {
                   
                   <div className="prose prose-xl text-gray-600 leading-relaxed space-y-8">
                     <p className="text-xl">
-                      <strong className="text-gray-900">Able Tools Ltd</strong> has been operated since 2006 in the field of rehabilitation equipment and new technology solutions for people in need. We specialize in innovative products for people with mobility difficulties, neurological and orthopaedic injuries, as well as autism.
+                      <strong className="text-gray-900">Able Tools Ltd</strong> has been operated since 2006 in the field of rehabilitation equipment and new technology solutions for people in need. Able Tools has a wide range of innovative products, specially adapted for people with mobility difficulties, neurological and orthopaedic injuries, as well as for people with autism.
                     </p>
                     
-                    <div className="grid md:grid-cols-2 gap-8 my-12">
-                      <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-yellow-400">
-                        <h4 className="font-bold text-lg text-gray-900 mb-3">Mobility Solutions</h4>
-                        <p className="text-gray-600">Specialized wheelchairs, rehab pushchairs, electric beds, lifting systems, stair lifts, seating systems</p>
-                      </div>
-                      <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-yellow-400">
-                        <h4 className="font-bold text-lg text-gray-900 mb-3">Daily Living Aids</h4>
-                        <p className="text-gray-600">Bath accessories, feeding aids, stabilization equipment, modified house equipment</p>
-                      </div>
-                    </div>
+                    <p className="text-lg">
+                      Our products include, among others, specialized wheelchairs, rehab pushchairs, electric beds, lifting systems, stair lifts, seating systems, standing frames, walkers, bath and commode chairs, walking aids, pillows for pressure relief and for lying down prevention, functional and dynamic splints to assist movement.
+                    </p>
                     
-                    <p className="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-xl border-l-4 border-yellow-400">
-                      We specialize in <strong className="text-gray-900">multi-sensory rooms</strong> design and implementation for rehabilitation centres and homes. These environments combine lights, colours, sounds, sensory objects, and aromas in a safe space for exploration and interaction.
+                    <p className="text-lg">
+                      Also, aids for everyday life activities such as bath accessories for grooming and hygiene, clothing, feeding, for stabilization, movement and transport. Modified house equipment (kitchen utensils, etc) and modern clinical equipment for therapeutic retraining and functional procedures are included on company's stock.
+                    </p>
+                    
+                    <p className="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-xl border-l-4 border-yellow-400 text-lg">
+                      Additionally, we are specialized in the design and implementation of <strong className="text-gray-900">multi-sensory rooms</strong>, for rehabilitation centres and user's homes. Multi-sensory rooms combine a range of stimuli to help the user to develop and engage their senses. Using multiple stimuli such as lights, colours, sounds, sensory soft play objects, aromas, all within a safe environment, they allow user to explore and interact without any risk.
                     </p>
                   </div>
                 </div>
