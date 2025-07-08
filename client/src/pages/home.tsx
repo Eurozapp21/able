@@ -704,11 +704,11 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.filter(product => product.featured).slice(0, 6).map((product) => (
+            {products.filter(product => product.isFeatured).slice(0, 6).map((product) => (
               <div key={product.id} className="group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300 hover:border-primary-gold">
                 <div className="relative overflow-hidden">
                   <img
-                    src={product.image || '/api/placeholder/400/300'}
+                    src={product.images?.[0] || '/api/placeholder/400/300'}
                     alt={product.name}
                     className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
@@ -765,7 +765,7 @@ export default function Home() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       <span className="text-2xl font-bold text-primary-gold">
-                        {product.price ? `€${product.price}` : 'Contact for Price'}
+                        Contact for Price
                       </span>
                     </div>
                     <div className="flex space-x-2">
