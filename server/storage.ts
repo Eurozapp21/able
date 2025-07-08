@@ -105,7 +105,7 @@ export class MemStorage implements IStorage {
         name: "Bingo Evolution",
         description: "Advanced rehabilitation pushchair with superior comfort and functionality",
         categoryId: 12,
-        images: ["/api/placeholder/400/300"],
+        images: ["/attached_assets/bingo_evolution_twins-1_1752003228920.jpg"],
         isFeatured: true,
         specifications: "Adjustable seating, weather protection, safety harness"
       },
@@ -114,7 +114,7 @@ export class MemStorage implements IStorage {
         name: "Zip",
         description: "Compact and lightweight rehabilitation pushchair",
         categoryId: 12,
-        images: ["/api/placeholder/400/300"],
+        images: ["/attached_assets/cc1b09e90722c7d00b3f0cb8757c6d79_1752003228919.jpg"],
         isFeatured: true,
         specifications: "Lightweight frame, easy folding, comfortable seating"
       },
@@ -123,7 +123,7 @@ export class MemStorage implements IStorage {
         name: "Mimos Pillow",
         description: "Specialized medical pillow for infant care and positioning",
         categoryId: 9,
-        images: ["/api/placeholder/400/300"],
+        images: ["/attached_assets/maxresdefault_1752003228921.jpg"],
         isFeatured: true,
         specifications: "Medical grade materials, washable, various sizes"
       },
