@@ -129,6 +129,7 @@ The system manages several core entities:
 - July 08, 2025. Enhanced About Us page with authentic AbleTools exhibition header image, improved design with yellow branding, and professional card layouts
 - July 08, 2025. Added comprehensive About Us content with detailed company description, product range, and multi-sensory room specialization. Integrated authentic therapy and logo images
 - July 08, 2025. Redesigned About Us page with modern layout, enhanced hero section, improved typography, and restored all missing content sections including timeline, team expertise, and certifications
+- July 08, 2025. Updated About Us page with authentic company content provided by user, including complete product range details and multi-sensory room specialization. Removed "Our Journey" timeline section and conditional newsletter rendering. Reduced header image height for better proportions and implemented cleaner, more focused design
 
 ## User Preferences
 

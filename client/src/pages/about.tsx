@@ -111,28 +111,27 @@ export default function About() {
                 <div className="w-20 h-1 bg-yellow-400 mx-auto"></div>
               </div>
 
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="grid lg:grid-cols-2 gap-12 items-start">
                 <div className="space-y-6">
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    <strong className="text-gray-900">Able Tools Ltd</strong> has been operating since 2006 in rehabilitation equipment and technology solutions. We offer innovative products for people with mobility difficulties, neurological and orthopedic injuries, and autism.
-                  </p>
+                  <div className="prose prose-lg text-gray-700 leading-relaxed">
+                    <p>
+                      <strong className="text-gray-900">Able Tools Ltd</strong> has been operated since 2006 in the field of rehabilitation equipment and new technology solutions for people in need. Able Tools has a wide range of innovative products, specially adapted for people with mobility difficulties, neurological and orthopaedic injuries, as well as for people with autism.
+                    </p>
+                    
+                    <p>
+                      Our products include, among others, specialized wheelchairs, rehab pushchairs, electric beds, lifting systems, stair lifts, seating systems, standing frames, walkers, bath and commode chairs, walking aids, pillows for pressure relief and for lying down prevention, functional and dynamic splints to assist movement.
+                    </p>
+                    
+                    <p>
+                      Also, aids for everyday life activities such as bath accessories for grooming and hygiene, clothing, feeding, for stabilization, movement and transport. Modified house equipment (kitchen utensils, etc) and modern clinical equipment for therapeutic retraining and functional procedures are included on company's stock.
+                    </p>
+                  </div>
                   
                   <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-xl border-l-4 border-yellow-400">
                     <h3 className="font-bold text-lg mb-3 text-gray-900">Multi-Sensory Room Specialists</h3>
                     <p className="text-gray-700">
-                      We design and implement multi-sensory rooms for rehabilitation centers and homes, combining lights, colors, sounds, and textures in safe environments for sensory development.
+                      Additionally, we are specialized in the design and implementation of multi-sensory rooms, for rehabilitation centres and user's homes. Multi-sensory rooms combine a range of stimuli to help the user to develop and engage their senses. Using multiple stimuli such as lights, colours, sounds, sensory soft play objects, aromas, all within a safe environment, they allow user to explore and interact without any risk.
                     </p>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                      <div className="text-2xl font-bold text-yellow-600">18+</div>
-                      <div className="text-sm text-gray-600">Years Experience</div>
-                    </div>
-                    <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                      <div className="text-2xl font-bold text-yellow-600">500+</div>
-                      <div className="text-sm text-gray-600">Happy Clients</div>
-                    </div>
                   </div>
                 </div>
                 
