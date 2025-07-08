@@ -246,36 +246,7 @@ export default function About() {
 
 
 
-        {/* Company Timeline */}
-        <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Our Journey</h2>
-                <p className="text-xl text-gray-600">Key milestones in our company's history</p>
-                <div className="w-24 h-1 bg-yellow-400 mx-auto mt-6"></div>
-              </div>
 
-              <div className="space-y-8">
-                {milestones.map((milestone, index) => (
-                  <div key={index} className="group">
-                    <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200">
-                      <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-                        <div className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black text-xl px-8 py-4 rounded-2xl font-bold shadow-lg group-hover:scale-105 transition-transform duration-300">
-                          {milestone.year}
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-bold text-2xl mb-3 text-gray-900">{milestone.title}</h3>
-                          <p className="text-gray-600 text-lg leading-relaxed">{milestone.description}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Team Section */}
         <section className="py-20">
