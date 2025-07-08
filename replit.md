@@ -130,3 +130,10 @@ The system manages several core entities:
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+
+## Current Footer Requirements
+- All icons must use yellow color (#ffeb3b) for consistent AbleTools branding
+- Address icons (location, email, phone, fax) must be yellow
+- Information section should have organized layout for long list
+- Newsletter field CSS must display properly without errors
+- Follow Us social media icons must be yellow
