@@ -132,6 +132,7 @@ The system manages several core entities:
 - July 08, 2025. Updated About Us page with authentic company content provided by user, including complete product range details and multi-sensory room specialization. Removed "Our Journey" timeline section and conditional newsletter rendering. Reduced header image height for better proportions and implemented cleaner, more focused design
 - July 08, 2025. Added authentic company vision statement emphasizing customer experience, customized solutions, education for healthcare professionals, global collaborations, and "the Ability to Dream" philosophy
 - July 08, 2025. Added additional professional therapy session image to About Us page showing hands-on rehabilitation work, creating a more comprehensive visual representation of company services
+- July 08, 2025. Removed "Our Core Values" and "Our Expertise" sections from About Us page to streamline content and focus on essential company information
 
 ## User Preferences
 
