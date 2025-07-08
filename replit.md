@@ -116,6 +116,8 @@ The system manages several core entities:
 - July 08, 2025. Streamlined homepage layout by removing duplicate product sections and headers for cleaner user experience
 - July 08, 2025. Enhanced Products section right side with professional card layout, overlay content, and feature highlights
 - July 08, 2025. Significantly improved HUR video section with enhanced design, key features grid, and dual call-to-action buttons
+- July 08, 2025. Embedded authentic YouTube video for HUR rehabilitation equipment demonstration
+- July 08, 2025. Completely redesigned seminars and events section with professional card layouts, icons, and enhanced user experience
 
 ## User Preferences
 
