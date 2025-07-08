@@ -135,7 +135,7 @@ export default function Footer() {
                   className="flex-1 px-3 py-2 bg-white text-gray-900 rounded-l text-sm focus:outline-none border-0"
                 />
                 <button className="bg-yellow-400 hover:bg-yellow-500 text-black px-3 py-2 rounded-r text-xs font-medium transition-colors whitespace-nowrap">
-                  Newsletter/Consent
+                  Newsletter
                 </button>
               </div>
             </div>
