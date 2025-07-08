@@ -302,7 +302,7 @@ export default function Home() {
                   
                   {/* Overlay Content */}
                   <div className="absolute bottom-4 left-4 right-4">
-                    <div className="bg-white/75 backdrop-blur-sm rounded-lg p-4">
+                    <div className="bg-white/50 backdrop-blur-sm rounded-lg p-4">
                       <h4 className="font-semibold text-text-dark mb-1">Advanced Technology</h4>
                       <p className="text-sm text-text-gray">Cutting-edge rehabilitation equipment designed for optimal patient outcomes</p>
                     </div>
