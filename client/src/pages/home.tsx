@@ -74,7 +74,7 @@ export default function Home() {
               <img
                 src="/attached_assets/1599038152about_us_home_1751993313592.jpg"
                 alt="Your ability to dream!"
-                className="max-w-full h-auto rounded-lg shadow-md"
+                className="max-w-full h-auto"
               />
             </div>
             <div className="grid grid-cols-3 gap-4">
