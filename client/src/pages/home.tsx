@@ -139,9 +139,8 @@ export default function Home() {
                 <Link href="/products?category=bikes" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path>
-                        <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd"></path>
+                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M16 2.5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm-8-2.5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm4-7.5l-1.5-1.5H9v2h1.5l1.5 1.5z"/>
                       </svg>
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Bikes</span>
@@ -151,8 +150,8 @@ export default function Home() {
                 <Link href="/products?category=pressure-care" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M2,3H22V21H2V3M20,19V5H4V19H20M15,7H21V13H15V7M16,8V12H20V8H16M3,7H13V9H3V7M3,15H13V17H3V15M3,11H13V13H3V11Z"/>
                       </svg>
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Pressure Care Aids</span>
@@ -162,8 +161,8 @@ export default function Home() {
                 <Link href="/products?category=vehicle-adaptation" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zM3 15a1 1 0 011-1h1a1 1 0 011 1v1a1 1 0 01-1 1H4a1 1 0 01-1-1v-1zm7-11a1 1 0 011-1h1a1 1 0 011 1v7a1 1 0 01-1 1h-1a1 1 0 01-1-1V4zm5-1a1 1 0 00-1 1v7a1 1 0 001 1h1a1 1 0 001-1V4a1 1 0 00-1-1h-1z" clipRule="evenodd"></path>
+                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18.92,6.01C18.72,5.42 18.16,5 17.5,5H15V4A2,2 0 0,0 13,2H11A2,2 0 0,0 9,4V5H6.5C5.84,5 5.28,5.42 5.08,6.01L3,12V20A1,1 0 0,0 4,21H5A1,1 0 0,0 6,20V19H18V20A1,1 0 0,0 19,21H20A1,1 0 0,0 21,20V12L18.92,6.01M6.5,7H17.5L19,11H5L6.5,7M11,4H13V5H11V4M7.5,16A1.5,1.5 0 0,1 6,14.5A1.5,1.5 0 0,1 7.5,13A1.5,1.5 0 0,1 9,14.5A1.5,1.5 0 0,1 7.5,16M16.5,16A1.5,1.5 0 0,1 15,14.5A1.5,1.5 0 0,1 16.5,13A1.5,1.5 0 0,1 18,14.5A1.5,1.5 0 0,1 16.5,16Z"/>
                       </svg>
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Vehicle Adaptation</span>
@@ -173,8 +172,8 @@ export default function Home() {
                 <Link href="/products?category=bath-toilet" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732L14.146 12.8l-1.179 4.456a1 1 0 01-1.934 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732L9.854 7.2l1.179-4.456A1 1 0 0112 2z" clipRule="evenodd"></path>
+                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M9,2V8H7V10H9V11A6,6 0 0,0 3,17A6,6 0 0,0 9,23A6,6 0 0,0 15,17A6,6 0 0,0 9,11V10H11V8H9V6H13V4H9V2M9,12A5,5 0 0,1 14,17A5,5 0 0,1 9,22A5,5 0 0,1 4,17A5,5 0 0,1 9,12M18,14V20H20V14H18M16,16V20H18V16H16M22,12V20H24V12H22Z"/>
                       </svg>
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Bath and Toilet Aids</span>
@@ -184,8 +183,8 @@ export default function Home() {
                 <Link href="/products?category=seat-systems" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01.293.707V12a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v8a1 1 0 01-1 1h-4a1 1 0 01-.293-.707L9.414 9H12a1 1 0 010-2H9.414l2.293-2.293A1 1 0 0112 4z" clipRule="evenodd"></path>
+                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M7,11H17V13H7V11M5,6H19A2,2 0 0,1 21,8V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V8A2,2 0 0,1 5,6M5,8V19H19V8H5Z"/>
                       </svg>
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Seat Systems</span>
@@ -195,9 +194,8 @@ export default function Home() {
                 <Link href="/products?category=wheelchairs" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                        <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd"></path>
+                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16M12,10A2,2 0 0,0 10,12A2,2 0 0,0 12,14A2,2 0 0,0 14,12A2,2 0 0,0 12,10Z"/>
                       </svg>
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Wheelchairs</span>
@@ -207,8 +205,8 @@ export default function Home() {
                 <Link href="/products?category=rehabilitation-equipment" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"></path>
+                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"/>
                       </svg>
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Rehabilitation Equipment</span>
@@ -218,8 +216,8 @@ export default function Home() {
                 <Link href="/products?category=sensory-integration" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clipRule="evenodd"></path>
+                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8M12,10A2,2 0 0,0 10,12A2,2 0 0,0 12,14A2,2 0 0,0 14,12A2,2 0 0,0 12,10Z"/>
                       </svg>
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Sensory Integration Rooms</span>
@@ -229,8 +227,8 @@ export default function Home() {
                 <Link href="/products?category=multi-sensory" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clipRule="evenodd"></path>
+                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4M9.5,8A1.5,1.5 0 0,0 8,9.5A1.5,1.5 0 0,0 9.5,11A1.5,1.5 0 0,0 11,9.5A1.5,1.5 0 0,0 9.5,8M14.5,8A1.5,1.5 0 0,0 13,9.5A1.5,1.5 0 0,0 14.5,11A1.5,1.5 0 0,0 16,9.5A1.5,1.5 0 0,0 14.5,8M12,17.23C10.25,17.23 8.71,16.5 7.81,15.42L9.23,14C9.68,14.72 10.75,15.27 12,15.27C13.25,15.27 14.32,14.72 14.77,14L16.19,15.42C15.29,16.5 13.75,17.23 12,17.23Z"/>
                       </svg>
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Multi Sensory Rooms</span>
@@ -240,8 +238,8 @@ export default function Home() {
                 <Link href="/products?category=lifting-systems" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
+                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12,2A2,2 0 0,1 14,4V8.5A2.5,2.5 0 0,1 11.5,11H11V14L16,17V21H8V17L13,14V11H12.5A2.5,2.5 0 0,1 10,8.5V4A2,2 0 0,1 12,2M12,4V8.5A0.5,0.5 0 0,0 12.5,9H11.5A0.5,0.5 0 0,0 12,8.5V4M9,10H15V12H9V10M9,12H15V14H9V12Z"/>
                       </svg>
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Lifting Systems</span>
@@ -251,8 +249,8 @@ export default function Home() {
                 <Link href="/products?category=life-golf" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd"></path>
+                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4M12,6C9.79,6 8,7.79 8,10C8,12.21 9.79,14 12,14C14.21,14 16,12.21 16,10C16,7.79 14.21,6 12,6M12,8C13.1,8 14,8.9 14,10C14,11.1 13.1,12 12,12C10.9,12 10,11.1 10,10C10,8.9 10.9,8 12,8Z"/>
                       </svg>
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Life Golf</span>
@@ -262,8 +260,8 @@ export default function Home() {
                 <Link href="/products?category=rehab-pushchairs" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 6a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 14a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path>
+                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M22,16A6,6 0 0,1 16,22A6,6 0 0,1 10,16A6,6 0 0,1 16,10A6,6 0 0,1 22,16M20,16A4,4 0 0,0 16,12A4,4 0 0,0 12,16A4,4 0 0,0 16,20A4,4 0 0,0 20,16M6,16A6,6 0 0,1 12,10V8A8,8 0 0,0 4,16A8,8 0 0,0 12,24V22A6,6 0 0,1 6,16M18,11.74A2.67,2.67 0 0,0 16.26,11.74A2.67,2.67 0 0,0 14.26,13.74A2.67,2.67 0 0,0 16.26,15.74A2.67,2.67 0 0,0 18,13.74A2.67,2.67 0 0,0 18,11.74Z"/>
                       </svg>
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Rehab Pushchairs</span>
