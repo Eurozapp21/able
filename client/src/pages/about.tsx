@@ -62,18 +62,18 @@ export default function About() {
           <img
             src="/attached_assets/1601935107aboutus_1752007024526.jpg"
             alt="AbleTools Exhibition - Rehabilitation Equipment & Solutions"
-            className="w-full h-[60vh] lg:h-[70vh] object-cover"
+            className="w-full h-[40vh] md:h-[45vh] object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center text-white px-8">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight">
+            <div className="text-center text-white px-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 tracking-tight">
                 About AbleTools
               </h1>
-              <p className="text-xl md:text-2xl lg:text-3xl font-light opacity-90">
+              <p className="text-lg md:text-xl lg:text-2xl font-light opacity-90">
                 Your ability to dream!
               </p>
-              <div className="w-24 h-1 bg-yellow-400 mx-auto mt-8"></div>
+              <div className="w-20 h-1 bg-yellow-400 mx-auto mt-6"></div>
             </div>
           </div>
         </div>
@@ -97,63 +97,52 @@ export default function About() {
       </section>
 
       <div className="bg-gradient-to-b from-gray-50 to-white">
-        {/* Company Introduction */}
-        <section className="py-20">
+        {/* Company Introduction - Redesigned */}
+        <section className="py-16">
           <div className="container mx-auto px-4">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid lg:grid-cols-5 gap-16 items-center">
-                <div className="lg:col-span-3">
-                  <div className="mb-8">
-                    <span className="inline-block bg-yellow-400 text-black px-4 py-2 rounded-full text-sm font-semibold mb-6">
-                      Since 2006
-                    </span>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 leading-tight">
-                      Empowering Lives Through Innovation
-                    </h2>
-                  </div>
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <span className="inline-block bg-yellow-400 text-black px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                  Since 2006
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+                  Empowering Lives Through Innovation
+                </h2>
+                <div className="w-20 h-1 bg-yellow-400 mx-auto"></div>
+              </div>
+
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div className="space-y-6">
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    <strong className="text-gray-900">Able Tools Ltd</strong> has been operating since 2006 in rehabilitation equipment and technology solutions. We offer innovative products for people with mobility difficulties, neurological and orthopedic injuries, and autism.
+                  </p>
                   
-                  <div className="prose prose-xl text-gray-600 leading-relaxed space-y-8">
-                    <p className="text-xl">
-                      <strong className="text-gray-900">Able Tools Ltd</strong> has been operated since 2006 in the field of rehabilitation equipment and new technology solutions for people in need. Able Tools has a wide range of innovative products, specially adapted for people with mobility difficulties, neurological and orthopaedic injuries, as well as for people with autism.
+                  <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-xl border-l-4 border-yellow-400">
+                    <h3 className="font-bold text-lg mb-3 text-gray-900">Multi-Sensory Room Specialists</h3>
+                    <p className="text-gray-700">
+                      We design and implement multi-sensory rooms for rehabilitation centers and homes, combining lights, colors, sounds, and textures in safe environments for sensory development.
                     </p>
-                    
-                    <p className="text-lg">
-                      Our products include, among others, specialized wheelchairs, rehab pushchairs, electric beds, lifting systems, stair lifts, seating systems, standing frames, walkers, bath and commode chairs, walking aids, pillows for pressure relief and for lying down prevention, functional and dynamic splints to assist movement.
-                    </p>
-                    
-                    <p className="text-lg">
-                      Also, aids for everyday life activities such as bath accessories for grooming and hygiene, clothing, feeding, for stabilization, movement and transport. Modified house equipment (kitchen utensils, etc) and modern clinical equipment for therapeutic retraining and functional procedures are included on company's stock.
-                    </p>
-                    
-                    <p className="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-xl border-l-4 border-yellow-400 text-lg">
-                      Additionally, we are specialized in the design and implementation of <strong className="text-gray-900">multi-sensory rooms</strong>, for rehabilitation centres and user's homes. Multi-sensory rooms combine a range of stimuli to help the user to develop and engage their senses. Using multiple stimuli such as lights, colours, sounds, sensory soft play objects, aromas, all within a safe environment, they allow user to explore and interact without any risk.
-                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                      <div className="text-2xl font-bold text-yellow-600">18+</div>
+                      <div className="text-sm text-gray-600">Years Experience</div>
+                    </div>
+                    <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+                      <div className="text-2xl font-bold text-yellow-600">500+</div>
+                      <div className="text-sm text-gray-600">Happy Clients</div>
+                    </div>
                   </div>
                 </div>
                 
-                <div className="lg:col-span-2">
-                  <div className="space-y-8">
-                    <div className="relative group">
-                      <img
-                        src="/attached_assets/1602069478aboutus_temp_1752007885489.jpg"
-                        alt="AbleTools - Rehabilitation Equipment & Solutions"
-                        className="w-full h-auto rounded-2xl shadow-2xl group-hover:shadow-3xl transition-all duration-300"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-2xl"></div>
-                    </div>
-                    
-                    <div className="relative group">
-                      <img
-                        src="/attached_assets/1601936002aboutus_small2_1752007885488.jpg"
-                        alt="AbleTools rehabilitation therapy session"
-                        className="w-full h-72 object-cover rounded-2xl shadow-2xl group-hover:shadow-3xl transition-all duration-300"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl"></div>
-                      <div className="absolute bottom-6 left-6 text-white">
-                        <p className="text-sm font-semibold opacity-90">Professional Therapy Session</p>
-                      </div>
-                    </div>
-                  </div>
+                <div className="relative">
+                  <img
+                    src="/attached_assets/1602069478aboutus_temp_1752007885489.jpg"
+                    alt="AbleTools - Rehabilitation Equipment & Solutions"
+                    className="w-full h-96 object-cover rounded-xl shadow-lg"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl"></div>
                 </div>
               </div>
             </div>
@@ -162,56 +151,47 @@ export default function About() {
 
 
 
-        {/* Mission and Vision */}
-        <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        {/* Why Choose Us - Simplified */}
+        <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Our Purpose & Vision</h2>
-                <div className="w-24 h-1 bg-yellow-400 mx-auto"></div>
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose AbleTools</h2>
+                <p className="text-lg text-gray-600">Trusted expertise and personalized solutions</p>
+                <div className="w-20 h-1 bg-yellow-400 mx-auto mt-4"></div>
               </div>
 
-              <div className="grid lg:grid-cols-2 gap-12">
-                <div className="group">
-                  <div className="bg-white p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 h-full">
-                    <div className="flex items-center mb-8">
-                      <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-2xl flex items-center justify-center mr-6 group-hover:scale-110 transition-transform duration-300">
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </div>
-                      <h3 className="text-3xl font-bold text-gray-900">Our Mission</h3>
-                    </div>
-                    <p className="text-gray-600 text-lg leading-relaxed">
-                      To provide comprehensive rehabilitation equipment and technology solutions that empower individuals with disabilities to achieve greater independence and quality of life. We are committed to delivering exceptional customer service and innovative solutions tailored to each person's unique needs.
-                    </p>
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl text-black">🎯</span>
                   </div>
+                  <h3 className="font-bold text-lg mb-3">Customer Focus</h3>
+                  <p className="text-gray-600">We put our customers' experience and needs at the center of everything we do.</p>
                 </div>
 
-                <div className="group">
-                  <div className="bg-white p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 h-full">
-                    <div className="flex items-center mb-8">
-                      <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-2xl flex items-center justify-center mr-6 group-hover:scale-110 transition-transform duration-300">
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                      </div>
-                      <h3 className="text-3xl font-bold text-gray-900">Our Vision</h3>
-                    </div>
-                    <div className="text-gray-600 text-lg leading-relaxed space-y-6">
-                      <p>
-                        Our focus is the customer's experience and our vision is to achieve a high-quality life and independence for every user's daily routine. We consider each client as an individual challenge and provide customized solutions for optimal lifestyle.
-                      </p>
-                      <p>
-                        Education is equally important - we provide equipment training and seminars for healthcare professionals while creating global collaborations to stay current with rehabilitation methods.
-                      </p>
-                      <p className="font-semibold text-gray-800 bg-yellow-50 p-4 rounded-xl border-l-4 border-yellow-400">
-                        We maintain <strong>"the Ability to Dream"</strong> of every individual, providing support equipment to optimize quality of life!
-                      </p>
-                    </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl text-black">🌟</span>
                   </div>
+                  <h3 className="font-bold text-lg mb-3">Quality of Life</h3>
+                  <p className="text-gray-600">Our vision is to achieve high-quality life and independence for every user.</p>
                 </div>
+
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl text-black">💡</span>
+                  </div>
+                  <h3 className="font-bold text-lg mb-3">Innovation</h3>
+                  <p className="text-gray-600">We continuously seek new technology solutions to improve rehabilitation outcomes.</p>
+                </div>
+              </div>
+
+              <div className="mt-12 bg-gradient-to-r from-yellow-50 to-orange-50 p-8 rounded-xl border-l-4 border-yellow-400">
+                <h3 className="font-bold text-xl mb-4 text-gray-900 text-center">Our Commitment</h3>
+                <p className="text-lg text-gray-700 text-center">
+                  We maintain <strong>"the Ability to Dream"</strong> of every individual, providing support equipment to optimize quality of life and independence.
+                </p>
               </div>
             </div>
           </div>
