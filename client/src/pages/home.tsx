@@ -5,25 +5,36 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import HeroCarousel from '@/components/hero-carousel';
+import { getQueryFn } from '@/lib/queryClient';
+import type { Product, Category, Seminar, Event, Achievement } from '@shared/schema';
 
 
 
 
 export default function Home() {
   const { data: categories = [] } = useQuery({
-    queryKey: ['/api/categories', { parentId: null }],
+    queryKey: ['/api/categories'],
+    queryFn: () => getQueryFn<Category[]>({ on401: "returnNull" })('/api/categories'),
   });
 
   const { data: seminars = [] } = useQuery({
-    queryKey: ['/api/seminars', { upcoming: true }],
+    queryKey: ['/api/seminars'],
+    queryFn: () => getQueryFn<Seminar[]>({ on401: "returnNull" })('/api/seminars'),
   });
 
   const { data: events = [] } = useQuery({
-    queryKey: ['/api/events', { recent: true }],
+    queryKey: ['/api/events'],
+    queryFn: () => getQueryFn<Event[]>({ on401: "returnNull" })('/api/events'),
   });
 
   const { data: achievements = [] } = useQuery({
     queryKey: ['/api/achievements'],
+    queryFn: () => getQueryFn<Achievement[]>({ on401: "returnNull" })('/api/achievements'),
+  });
+
+  const { data: products = [] } = useQuery({
+    queryKey: ['/api/products'],
+    queryFn: () => getQueryFn<Product[]>({ on401: "returnNull" })('/api/products'),
   });
 
   return (
@@ -668,6 +679,119 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="bg-primary-gold text-black px-4 py-2 rounded-full text-sm font-medium">
+                Featured Products
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-text-dark">
+              Premium Rehabilitation Equipment
+            </h2>
+            <p className="text-xl text-text-gray max-w-3xl mx-auto leading-relaxed">
+              Discover our top-rated rehabilitation equipment designed to improve mobility, independence, 
+              and quality of life for individuals with disabilities.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.filter(product => product.featured).slice(0, 6).map((product) => (
+              <div key={product.id} className="group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300 hover:border-primary-gold">
+                <div className="relative overflow-hidden">
+                  <img
+                    src={product.image || '/api/placeholder/400/300'}
+                    alt={product.name}
+                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-primary-gold text-black px-3 py-1 rounded-full text-xs font-semibold">
+                      FEATURED
+                    </span>
+                  </div>
+                  <div className="absolute top-4 right-4">
+                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+                      <svg className="w-4 h-4 text-primary-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-sm font-medium text-text-gray">
+                      {categories.find(cat => cat.id === product.categoryId)?.name}
+                    </span>
+                    <div className="flex items-center">
+                      <span className="text-primary-gold text-sm font-semibold">
+                        ★★★★★
+                      </span>
+                      <span className="text-text-gray text-sm ml-1">(4.9)</span>
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-text-dark mb-3 group-hover:text-primary-gold transition-colors">
+                    {product.name}
+                  </h3>
+                  
+                  <p className="text-text-gray text-sm mb-4 line-clamp-3 leading-relaxed">
+                    {product.description}
+                  </p>
+                  
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center">
+                      <svg className="w-4 h-4 text-primary-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span className="text-sm font-medium text-text-dark">Certified Quality</span>
+                    </div>
+                    <div className="flex items-center">
+                      <svg className="w-4 h-4 text-primary-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                      </svg>
+                      <span className="text-sm font-medium text-text-dark">Free Shipping</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <span className="text-2xl font-bold text-primary-gold">
+                        {product.price ? `€${product.price}` : 'Contact for Price'}
+                      </span>
+                    </div>
+                    <div className="flex space-x-2">
+                      <Link href={`/products/${product.id}`}>
+                        <Button size="sm" style={{backgroundColor: '#ffeb3b', color: '#000'}} className="hover:opacity-90 transition-all duration-300 font-semibold">
+                          View Details
+                        </Button>
+                      </Link>
+                      <Button size="sm" variant="outline" className="border-primary-gold text-primary-gold hover:bg-primary-gold hover:text-black transition-all duration-300">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0L17 18m0 0v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5m8 0V9" />
+                        </svg>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <Link href="/products">
+              <Button style={{backgroundColor: '#ffeb3b', color: '#000'}} className="hover:opacity-90 px-8 py-4 rounded-lg transition-all duration-300 font-semibold text-lg">
+                View All Products
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
