@@ -282,8 +282,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Products */}
-      <FeaturedProducts />
+
 
       {/* Video Feature */}
       <section className="py-16 bg-gray-50">
