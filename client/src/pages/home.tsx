@@ -760,24 +760,12 @@ export default function Home() {
                     </div>
                   </div>
                   
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <span className="text-2xl font-bold text-primary-gold">
-                        Contact for Price
-                      </span>
-                    </div>
-                    <div className="flex space-x-2">
-                      <Link href={`/products/${product.id}`}>
-                        <Button size="sm" style={{backgroundColor: '#ffeb3b', color: '#000'}} className="hover:opacity-90 transition-all duration-300 font-semibold">
-                          View Details
-                        </Button>
-                      </Link>
-                      <Button size="sm" variant="outline" className="border-primary-gold text-primary-gold hover:bg-primary-gold hover:text-black transition-all duration-300">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0L17 18m0 0v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5m8 0V9" />
-                        </svg>
+                  <div className="flex items-center justify-center">
+                    <Link href={`/products/${product.id}`}>
+                      <Button size="sm" style={{backgroundColor: '#ffeb3b', color: '#000'}} className="hover:opacity-90 transition-all duration-300 font-semibold">
+                        View Details
                       </Button>
-                    </div>
+                    </Link>
                   </div>
                 </div>
               </div>
