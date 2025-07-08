@@ -160,18 +160,7 @@ export default function About() {
           </div>
         </section>
 
-        {/* Company Logo Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center max-w-2xl mx-auto">
-              <img
-                src="/attached_assets/1599038152about_us_home_1751993313592.jpg"
-                alt="Your ability to dream!"
-                className="mx-auto h-auto max-w-lg"
-              />
-            </div>
-          </div>
-        </section>
+
 
         {/* Mission and Vision */}
         <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
