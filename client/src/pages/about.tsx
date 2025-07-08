@@ -187,10 +187,18 @@ export default function About() {
               </div>
 
               <div className="mt-12 bg-gradient-to-r from-yellow-50 to-orange-50 p-8 rounded-xl border-l-4 border-yellow-400">
-                <h3 className="font-bold text-xl mb-4 text-gray-900 text-center">Our Commitment</h3>
-                <p className="text-lg text-gray-700 text-center">
-                  We maintain <strong>"the Ability to Dream"</strong> of every individual, providing support equipment to optimize quality of life and independence.
-                </p>
+                <h3 className="font-bold text-xl mb-4 text-gray-900 text-center">Our Vision</h3>
+                <div className="space-y-4 text-gray-700">
+                  <p>
+                    Our focus is the customer's experience and our vision is to achieve a high-quality life and independency for every user's daily routine. We consider each client as an individual 'challenge' and our goal is to provide them customised solutions which can potentially achieve an optimal lifestyle.
+                  </p>
+                  <p>
+                    Our company doesn't compromise in just offering products for the clients. Education is equally important, as we provide equipment trainings and seminars addressed to a wide range of healthcare professionals. AbleTools aims to continuously create new collaborations with major healthcare companies worldwide, keeping up with the latest rehabilitation methods and equipment.
+                  </p>
+                  <p className="font-semibold text-gray-800 text-center bg-white p-4 rounded-lg">
+                    We maintain <strong>"the Ability to Dream"</strong> of every individual and aspiring to meet the needs of the informed customer by providing the support equipment needed to optimize its quality of life!
+                  </p>
+                </div>
               </div>
             </div>
           </div>
