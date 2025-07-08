@@ -36,6 +36,76 @@
   --euz-bg-yellow: hsl(47, 100%, 96%);
 }
 
+/* Original AbleTools Custom Styles */
+.anavelink {
+  color: var(--text-gray);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 16px;
+  transition: color 0.3s ease;
+}
+
+.anavelink:hover,
+.anavelink.active {
+  color: var(--primary-gold);
+}
+
+.h1font {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.pfont {
+  font-size: 1.2rem;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.btn-customslider {
+  background-color: var(--primary-gold);
+  border-color: var(--primary-gold);
+  color: var(--text-dark);
+  font-weight: bold;
+  padding: 12px 30px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.btn-customslider:hover {
+  background-color: var(--secondary-green);
+  border-color: var(--secondary-green);
+  color: white;
+}
+
+.carousel-caption {
+  bottom: 25%;
+  text-align: left;
+  padding-left: 0;
+}
+
+.euz_bg_grey {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.euz_bg_grey:hover {
+  background-color: var(--bg-yellow-light);
+  transform: translateY(-2px);
+}
+
+.section2link {
+  color: var(--text-dark);
+  text-decoration: none;
+}
+
+.section2link:hover {
+  color: var(--primary-gold);
+  text-decoration: none;
+}
+
 .dark {
   --background: hsl(240, 10%, 3.9%);
   --foreground: hsl(0, 0%, 98%);

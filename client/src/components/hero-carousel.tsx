@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'wouter';
 
 export default function HeroCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -70,23 +71,21 @@ export default function HeroCarousel() {
               <img
                 src={slide.image}
                 alt={slide.title}
-                className="w-full h-96 md:h-[500px] object-cover"
+                className="w-full h-[500px] md:h-[600px] lg:h-[700px] object-cover"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center text-white px-4 max-w-4xl">
-                  <h1 className="text-3xl md:text-5xl font-bold mb-4 slide-up">
-                    {slide.title}
-                  </h1>
-                  <p className="text-lg md:text-xl mb-6 opacity-90 fade-in">
-                    {slide.subtitle}
-                  </p>
-                  <Button
-                    className="btn-cardbutn fade-in"
-                    onClick={() => window.location.href = slide.link || '/contact'}
-                  >
-                    Contact Us
-                  </Button>
+              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end">
+                <div className="container mx-auto px-4 pb-20">
+                  <div className="max-w-3xl text-white carousel-caption">
+                    <h1 className="h1font mb-4">
+                      {slide.title}
+                    </h1>
+                    <p className="pfont mb-8">
+                      {slide.subtitle}
+                    </p>
+                    <Link href={slide.link || '/contact'}>
+                      <button className="btn-customslider">Contact Us</button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

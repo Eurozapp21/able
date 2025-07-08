@@ -54,11 +54,11 @@ export default function Header() {
           <nav className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
               <Link key={item.name} href={item.href}>
-                <a className={`anavelink font-medium ${
-                  location === item.href ? 'active' : ''
+                <span className={`anavelink font-medium cursor-pointer text-gray-700 hover:text-primary-gold transition-colors ${
+                  location === item.href ? 'text-primary-gold border-b-2 border-primary-gold' : ''
                 }`}>
                   {item.name}
-                </a>
+                </span>
               </Link>
             ))}
           </nav>
@@ -114,22 +114,22 @@ export default function Header() {
                 <nav className="flex flex-col space-y-4 mt-8">
                   {navigation.map((item) => (
                     <Link key={item.name} href={item.href}>
-                      <a className="text-lg font-medium text-gray-custom hover:text-primary-gold transition-colors">
+                      <span className="text-lg font-medium text-gray-custom hover:text-primary-gold transition-colors cursor-pointer">
                         {item.name}
-                      </a>
+                      </span>
                     </Link>
                   ))}
                   {user ? (
                     <>
                       <Link href="/dashboard">
-                        <a className="text-lg font-medium text-gray-custom hover:text-primary-gold transition-colors">
+                        <span className="text-lg font-medium text-gray-custom hover:text-primary-gold transition-colors cursor-pointer">
                           Dashboard
-                        </a>
+                        </span>
                       </Link>
                       <Link href="/enquiry">
-                        <a className="text-lg font-medium text-gray-custom hover:text-primary-gold transition-colors">
+                        <span className="text-lg font-medium text-gray-custom hover:text-primary-gold transition-colors cursor-pointer">
                           Enquiries
-                        </a>
+                        </span>
                       </Link>
                       <Button 
                         variant="ghost" 
@@ -141,9 +141,9 @@ export default function Header() {
                     </>
                   ) : (
                     <Link href="/login">
-                      <a className="text-lg font-medium text-gray-custom hover:text-primary-gold transition-colors">
+                      <span className="text-lg font-medium text-gray-custom hover:text-primary-gold transition-colors cursor-pointer">
                         Login
-                      </a>
+                      </span>
                     </Link>
                   )}
                 </nav>
