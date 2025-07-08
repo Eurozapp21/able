@@ -70,6 +70,13 @@ export default function Home() {
                 <Button className="btn-customslider">Read more</Button>
               </Link>
             </div>
+            <div className="flex justify-center">
+              <img
+                src="/attached_assets/1599038152about_us_home_1751993313592.jpg"
+                alt="Your ability to dream!"
+                className="max-w-full h-auto rounded-lg shadow-md"
+              />
+            </div>
             <div className="grid grid-cols-3 gap-4">
               <Link href="/products">
                 <div className="text-center group cursor-pointer euz_bg_grey p-4 rounded-lg hover:bg-bg-yellow-light transition-all">
