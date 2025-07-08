@@ -172,27 +172,27 @@ export class MemStorage implements IStorage {
     const achievementData = [
       {
         id: 1,
-        title: "Assess and Treat 1",
+        title: "Excellence in Service",
         description: "We began our operations in 2006, with a focus on people in need of rehabilitation",
-        image: "/api/placeholder/400/300"
+        image: "/attached_assets/able_1752003982447.jpg"
       },
       {
         id: 2,
-        title: "Assess and Treat 2",
-        description: "We began our operations in 2006, with a focus on people in need of rehabilitation",
-        image: "/api/placeholder/400/300"
+        title: "Team Achievement",
+        description: "Collaborative success in advancing rehabilitation technology and patient care",
+        image: "/attached_assets/Achievement_1752003982449.jpg"
       },
       {
         id: 3,
-        title: "Assess and Treat 3",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-        image: "/api/placeholder/400/300"
+        title: "Community Impact",
+        description: "Supporting individuals with disabilities to achieve their full potential",
+        image: "/attached_assets/what-is-true-sense-of-accomplishment-and-how-to-achive-it_1752003982450.jpg"
       },
       {
         id: 4,
-        title: "Assess and Treat 4",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-        image: "/api/placeholder/400/300"
+        title: "Industry Recognition",
+        description: "Recognized excellence in rehabilitation equipment and innovative solutions",
+        image: "/attached_assets/send-award-virtual-celebration-employee-milestones_1752004100582.jpg"
       },
     ];
 
