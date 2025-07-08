@@ -67,42 +67,42 @@ export default function Home() {
                 Able Tools Ltd has been operating since 2006 in the field of rehabilitation equipment and new technology solutions for people in need. Our focus is the customer's experience and our vision is to achieve a high-quality life and independency for every user's daily routine.
               </p>
               <Link href="/about">
-                <Button className="btn-customlogin">Read more</Button>
+                <Button className="btn-customslider">Read more</Button>
               </Link>
             </div>
             <div className="grid grid-cols-3 gap-4">
               <Link href="/products">
-                <div className="text-center group cursor-pointer">
-                  <img
-                    src="/api/placeholder/120/80"
-                    alt="Products"
-                    className="w-full h-20 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform"
-                  />
-                  <h3 className="font-semibold text-sm text-gray-custom group-hover:text-primary-gold transition-colors">
+                <div className="text-center group cursor-pointer euz_bg_grey p-4 rounded-lg hover:bg-bg-yellow-light transition-all">
+                  <div className="w-16 h-16 mx-auto mb-3 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                    <svg className="w-8 h-8 text-secondary-green" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
+                    </svg>
+                  </div>
+                  <h3 className="font-semibold text-sm text-text-dark group-hover:text-primary-gold transition-colors">
                     Products
                   </h3>
                 </div>
               </Link>
               <Link href="/events">
-                <div className="text-center group cursor-pointer">
-                  <img
-                    src="/api/placeholder/120/80"
-                    alt="Newsroom"
-                    className="w-full h-20 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform"
-                  />
-                  <h3 className="font-semibold text-sm text-gray-custom group-hover:text-primary-gold transition-colors">
+                <div className="text-center group cursor-pointer euz_bg_grey p-4 rounded-lg hover:bg-bg-yellow-light transition-all">
+                  <div className="w-16 h-16 mx-auto mb-3 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                    <svg className="w-8 h-8 text-secondary-green" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clipRule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <h3 className="font-semibold text-sm text-text-dark group-hover:text-primary-gold transition-colors">
                     Newsroom
                   </h3>
                 </div>
               </Link>
               <Link href="/seminars">
-                <div className="text-center group cursor-pointer">
-                  <img
-                    src="/api/placeholder/120/80"
-                    alt="Education"
-                    className="w-full h-20 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform"
-                  />
-                  <h3 className="font-semibold text-sm text-gray-custom group-hover:text-primary-gold transition-colors">
+                <div className="text-center group cursor-pointer euz_bg_grey p-4 rounded-lg hover:bg-bg-yellow-light transition-all">
+                  <div className="w-16 h-16 mx-auto mb-3 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                    <svg className="w-8 h-8 text-secondary-green" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                    </svg>
+                  </div>
+                  <h3 className="font-semibold text-sm text-text-dark group-hover:text-primary-gold transition-colors">
                     Education
                   </h3>
                 </div>
