@@ -142,7 +142,7 @@ export class MemStorage implements IStorage {
         date: new Date("2024-03-15"),
         location: "Nicosia Training Center",
         speaker: "Dr. Maria Constantinou",
-        image: "/api/placeholder/400/300",
+        image: "/attached_assets/image_1751996976633.png",
         fee: "€150",
         maxParticipants: 25
       },
@@ -159,7 +159,7 @@ export class MemStorage implements IStorage {
         title: "HUR - Spinal Cord and Neurological Rehabilitation",
         content: "In an inclusive wellness facility, it is easy to get on and off machines. The machines can be used safely and independently by as many different users as possible, regardless of ability, while in between machines there is ample room to manoeuvre with various mobility aids.",
         date: new Date("2024-02-20"),
-        image: "/api/placeholder/400/300",
+        image: "/attached_assets/image_1751999015367.png",
         excerpt: "Discover HUR's innovative approach to neurological rehabilitation equipment."
       },
     ];
