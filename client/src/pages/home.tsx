@@ -563,7 +563,7 @@ export default function Home() {
                   
                   <div className="mt-8 text-center">
                     <Link href="/seminars">
-                      <Button style={{backgroundColor: '#8bc34a', color: '#fff'}} className="hover:opacity-90 px-8 py-4 rounded-lg transition-all duration-300 font-semibold text-lg">
+                      <Button style={{backgroundColor: '#ffeb3b', color: '#000'}} className="hover:opacity-90 px-8 py-4 rounded-lg transition-all duration-300 font-semibold text-lg">
                         View All Seminars
                       </Button>
                     </Link>
@@ -575,16 +575,16 @@ export default function Home() {
             {/* Right Column - Events */}
             <div>
               <div className="bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden">
-                <div className="bg-gradient-to-r from-secondary-green to-green-500 p-6">
+                <div className="bg-gradient-to-r from-primary-gold to-yellow-500 p-6">
                   <div className="flex items-center">
                     <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mr-4">
-                      <svg className="w-7 h-7 text-secondary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-7 h-7 text-primary-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                       </svg>
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-white">Recent Events</h3>
-                      <p className="text-white opacity-80 text-sm">Industry News & Updates</p>
+                      <h3 className="text-2xl font-bold text-black">Recent Events</h3>
+                      <p className="text-black opacity-80 text-sm">Industry News & Updates</p>
                     </div>
                   </div>
                 </div>
@@ -593,7 +593,7 @@ export default function Home() {
                   <div className="space-y-6">
                     {events && events.length > 0 ? (
                       events.slice(0, 3).map((event) => (
-                        <div key={event.id} className="group bg-gradient-to-r from-gray-50 to-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-secondary-green">
+                        <div key={event.id} className="group bg-gradient-to-r from-gray-50 to-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-primary-gold">
                           <div className="flex items-start space-x-4">
                             <div className="relative">
                               <img
@@ -601,19 +601,19 @@ export default function Home() {
                                 alt={event.title}
                                 className="w-20 h-20 object-cover rounded-xl flex-shrink-0 group-hover:scale-105 transition-transform duration-300"
                               />
-                              <div className="absolute -top-2 -right-2 w-6 h-6 bg-secondary-green rounded-full flex items-center justify-center">
-                                <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary-gold rounded-full flex items-center justify-center">
+                                <svg className="w-3 h-3 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5z" />
                                 </svg>
                               </div>
                             </div>
                             <div className="flex-1">
                               <div className="flex items-center mb-3">
-                                <span className="bg-secondary-green text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                <span className="bg-primary-gold text-black px-3 py-1 rounded-full text-xs font-semibold">
                                   LATEST
                                 </span>
                               </div>
-                              <h4 className="font-bold text-lg mb-2 text-text-dark group-hover:text-secondary-green transition-colors">
+                              <h4 className="font-bold text-lg mb-2 text-text-dark group-hover:text-primary-gold transition-colors">
                                 {event.title}
                               </h4>
                               <div className="flex items-center text-text-gray text-sm mb-3">
@@ -660,7 +660,7 @@ export default function Home() {
                   
                   <div className="mt-8 text-center">
                     <Link href="/events">
-                      <Button style={{backgroundColor: '#8bc34a', color: '#fff'}} className="hover:opacity-90 px-8 py-4 rounded-lg transition-all duration-300 font-semibold text-lg">
+                      <Button style={{backgroundColor: '#ffeb3b', color: '#000'}} className="hover:opacity-90 px-8 py-4 rounded-lg transition-all duration-300 font-semibold text-lg">
                         View All Events
                       </Button>
                     </Link>
