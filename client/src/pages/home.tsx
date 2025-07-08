@@ -452,7 +452,7 @@ export default function Home() {
                   </Button>
                 </Link>
                 <Link href="/contact">
-                  <Button variant="outline" className="border-2 border-secondary-green text-secondary-green hover:bg-secondary-green hover:text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300">
+                  <Button className="bg-primary-gold hover:bg-primary-gold/90 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 hover:shadow-lg">
                     Get Quote
                   </Button>
                 </Link>
