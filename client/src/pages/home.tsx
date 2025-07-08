@@ -12,7 +12,15 @@ import {
   Car,
   Bath,
   Baby,
-  HelpingHand
+  HelpingHand,
+  Activity,
+  Heart,
+  Armchair,
+  Target,
+  Smile,
+  Zap,
+  Circle,
+  Camera
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -139,9 +147,7 @@ export default function Home() {
                 <Link href="/products?category=bikes" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M16 2.5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm-8-2.5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm4-7.5l-1.5-1.5H9v2h1.5l1.5 1.5z"/>
-                      </svg>
+                      <Bike className="w-5 h-5 text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Bikes</span>
                   </div>
@@ -150,9 +156,7 @@ export default function Home() {
                 <Link href="/products?category=pressure-care" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M2,3H22V21H2V3M20,19V5H4V19H20M15,7H21V13H15V7M16,8V12H20V8H16M3,7H13V9H3V7M3,15H13V17H3V15M3,11H13V13H3V11Z"/>
-                      </svg>
+                      <Bed className="w-5 h-5 text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Pressure Care Aids</span>
                   </div>
@@ -161,9 +165,7 @@ export default function Home() {
                 <Link href="/products?category=vehicle-adaptation" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M18.92,6.01C18.72,5.42 18.16,5 17.5,5H15V4A2,2 0 0,0 13,2H11A2,2 0 0,0 9,4V5H6.5C5.84,5 5.28,5.42 5.08,6.01L3,12V20A1,1 0 0,0 4,21H5A1,1 0 0,0 6,20V19H18V20A1,1 0 0,0 19,21H20A1,1 0 0,0 21,20V12L18.92,6.01M6.5,7H17.5L19,11H5L6.5,7M11,4H13V5H11V4M7.5,16A1.5,1.5 0 0,1 6,14.5A1.5,1.5 0 0,1 7.5,13A1.5,1.5 0 0,1 9,14.5A1.5,1.5 0 0,1 7.5,16M16.5,16A1.5,1.5 0 0,1 15,14.5A1.5,1.5 0 0,1 16.5,13A1.5,1.5 0 0,1 18,14.5A1.5,1.5 0 0,1 16.5,16Z"/>
-                      </svg>
+                      <Car className="w-5 h-5 text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Vehicle Adaptation</span>
                   </div>
@@ -172,9 +174,7 @@ export default function Home() {
                 <Link href="/products?category=bath-toilet" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M9,2V8H7V10H9V11A6,6 0 0,0 3,17A6,6 0 0,0 9,23A6,6 0 0,0 15,17A6,6 0 0,0 9,11V10H11V8H9V6H13V4H9V2M9,12A5,5 0 0,1 14,17A5,5 0 0,1 9,22A5,5 0 0,1 4,17A5,5 0 0,1 9,12M18,14V20H20V14H18M16,16V20H18V16H16M22,12V20H24V12H22Z"/>
-                      </svg>
+                      <Bath className="w-5 h-5 text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Bath and Toilet Aids</span>
                   </div>
@@ -183,9 +183,7 @@ export default function Home() {
                 <Link href="/products?category=seat-systems" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M7,11H17V13H7V11M5,6H19A2,2 0 0,1 21,8V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V8A2,2 0 0,1 5,6M5,8V19H19V8H5Z"/>
-                      </svg>
+                      <Armchair className="w-5 h-5 text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Seat Systems</span>
                   </div>
@@ -194,9 +192,7 @@ export default function Home() {
                 <Link href="/products?category=wheelchairs" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16M12,10A2,2 0 0,0 10,12A2,2 0 0,0 12,14A2,2 0 0,0 14,12A2,2 0 0,0 12,10Z"/>
-                      </svg>
+                      <Activity className="w-5 h-5 text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Wheelchairs</span>
                   </div>
@@ -205,9 +201,7 @@ export default function Home() {
                 <Link href="/products?category=rehabilitation-equipment" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"/>
-                      </svg>
+                      <Heart className="w-5 h-5 text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Rehabilitation Equipment</span>
                   </div>
@@ -216,9 +210,7 @@ export default function Home() {
                 <Link href="/products?category=sensory-integration" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8M12,10A2,2 0 0,0 10,12A2,2 0 0,0 12,14A2,2 0 0,0 14,12A2,2 0 0,0 12,10Z"/>
-                      </svg>
+                      <Target className="w-5 h-5 text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Sensory Integration Rooms</span>
                   </div>
@@ -227,9 +219,7 @@ export default function Home() {
                 <Link href="/products?category=multi-sensory" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4M9.5,8A1.5,1.5 0 0,0 8,9.5A1.5,1.5 0 0,0 9.5,11A1.5,1.5 0 0,0 11,9.5A1.5,1.5 0 0,0 9.5,8M14.5,8A1.5,1.5 0 0,0 13,9.5A1.5,1.5 0 0,0 14.5,11A1.5,1.5 0 0,0 16,9.5A1.5,1.5 0 0,0 14.5,8M12,17.23C10.25,17.23 8.71,16.5 7.81,15.42L9.23,14C9.68,14.72 10.75,15.27 12,15.27C13.25,15.27 14.32,14.72 14.77,14L16.19,15.42C15.29,16.5 13.75,17.23 12,17.23Z"/>
-                      </svg>
+                      <Smile className="w-5 h-5 text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Multi Sensory Rooms</span>
                   </div>
@@ -238,9 +228,7 @@ export default function Home() {
                 <Link href="/products?category=lifting-systems" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12,2A2,2 0 0,1 14,4V8.5A2.5,2.5 0 0,1 11.5,11H11V14L16,17V21H8V17L13,14V11H12.5A2.5,2.5 0 0,1 10,8.5V4A2,2 0 0,1 12,2M12,4V8.5A0.5,0.5 0 0,0 12.5,9H11.5A0.5,0.5 0 0,0 12,8.5V4M9,10H15V12H9V10M9,12H15V14H9V12Z"/>
-                      </svg>
+                      <Zap className="w-5 h-5 text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Lifting Systems</span>
                   </div>
@@ -249,9 +237,7 @@ export default function Home() {
                 <Link href="/products?category=life-golf" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4M12,6C9.79,6 8,7.79 8,10C8,12.21 9.79,14 12,14C14.21,14 16,12.21 16,10C16,7.79 14.21,6 12,6M12,8C13.1,8 14,8.9 14,10C14,11.1 13.1,12 12,12C10.9,12 10,11.1 10,10C10,8.9 10.9,8 12,8Z"/>
-                      </svg>
+                      <Circle className="w-5 h-5 text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Life Golf</span>
                   </div>
@@ -260,9 +246,7 @@ export default function Home() {
                 <Link href="/products?category=rehab-pushchairs" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M22,16A6,6 0 0,1 16,22A6,6 0 0,1 10,16A6,6 0 0,1 16,10A6,6 0 0,1 22,16M20,16A4,4 0 0,0 16,12A4,4 0 0,0 12,16A4,4 0 0,0 16,20A4,4 0 0,0 20,16M6,16A6,6 0 0,1 12,10V8A8,8 0 0,0 4,16A8,8 0 0,0 12,24V22A6,6 0 0,1 6,16M18,11.74A2.67,2.67 0 0,0 16.26,11.74A2.67,2.67 0 0,0 14.26,13.74A2.67,2.67 0 0,0 16.26,15.74A2.67,2.67 0 0,0 18,13.74A2.67,2.67 0 0,0 18,11.74Z"/>
-                      </svg>
+                      <Baby className="w-5 h-5 text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Rehab Pushchairs</span>
                   </div>
