@@ -447,7 +447,7 @@ export default function Home() {
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/events/1">
-                  <Button style={{backgroundColor: '#8bc34a', color: '#fff'}} className="hover:opacity-90 px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 hover:shadow-lg border border-green-400">
+                  <Button className="btn-customlogin px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 hover:shadow-lg">
                     Read more
                   </Button>
                 </Link>
