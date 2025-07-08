@@ -67,7 +67,7 @@ export default function Home() {
               </div>
               
               {/* Service Icons */}
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <Link href="/products">
                   <div className="text-center group cursor-pointer euz_bg_grey p-4 rounded-lg hover:bg-bg-yellow-light transition-all">
                     <div className="w-16 h-16 mx-auto mb-3 bg-white rounded-lg flex items-center justify-center shadow-sm">
@@ -117,7 +117,7 @@ export default function Home() {
             {/* Left Column - Product Categories */}
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-8 text-text-dark">Products</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Category Items */}
                 <Link href="/products?category=bikes" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
@@ -437,7 +437,7 @@ export default function Home() {
                 </div>
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
                 <Link href="/events/1">
                   <Button style={{backgroundColor: '#ffeb3b', color: '#000'}} className="hover:opacity-90 px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 hover:shadow-lg border border-yellow-400">
                     Read more
@@ -701,7 +701,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {products.filter(product => product.isFeatured).slice(0, 6).map((product) => (
               <div key={product.id} className="group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300 hover:border-primary-gold">
                 <div className="relative overflow-hidden">
@@ -790,7 +790,7 @@ export default function Home() {
             <p className="text-gray-custom text-lg">Assess and Treat - Making a difference since 2006</p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {achievements.map((achievement) => (
               <div key={achievement.id} className="text-center">
                 <div className="relative mb-4">
