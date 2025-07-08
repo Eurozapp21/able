@@ -339,36 +339,124 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Video Feature */}
-      <section className="py-16 bg-gray-50">
+      {/* Video Feature - Enhanced */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Video Player */}
             <div className="relative">
-              <div className="aspect-video bg-black rounded-lg overflow-hidden">
+              <div className="relative aspect-video bg-black rounded-xl overflow-hidden shadow-2xl">
                 <img
                   src="/api/placeholder/800/450"
                   alt="HUR Spinal Cord Rehabilitation Equipment"
                   className="w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                
+                {/* Play Button */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <Button className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-colors">
-                    <svg className="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                  <Button className="w-24 h-24 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-all duration-300 hover:scale-105 shadow-lg">
+                    <svg className="w-10 h-10 ml-1" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z" />
                     </svg>
                   </Button>
                 </div>
+                
+                {/* Video Badge */}
+                <div className="absolute top-4 left-4">
+                  <div className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-2">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                    <span>Watch Demo</span>
+                  </div>
+                </div>
               </div>
             </div>
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-text-dark">
-                HUR - Spinal Cord and Neurological Rehabilitation
-              </h2>
-              <p className="text-gray-custom text-lg leading-relaxed mb-6">
-                In an inclusive wellness facility, it is easy to get on and off machines. The machines can be used safely and independently by as many different users as possible, regardless of ability, while in between machines there is ample room to manoeuvre with various mobility aids. HUR equipment is designed in accordance with current requirements for accessibility.
+            
+            {/* Content */}
+            <div className="space-y-6">
+              <div className="space-y-4">
+                <div className="inline-block">
+                  <span className="bg-primary-gold text-white px-4 py-2 rounded-full text-sm font-medium">
+                    Featured Equipment
+                  </span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-text-dark leading-tight">
+                  HUR - Spinal Cord and Neurological Rehabilitation
+                </h2>
+              </div>
+              
+              <p className="text-lg text-text-gray leading-relaxed">
+                In an inclusive wellness facility, it is easy to get on and off machines. The machines can be
+                used safely and independently by as many different users as possible, regardless of ability,
+                while in between machines there is ample room to manoeuvre with various mobility aids.
+                HUR equipment is designed in accordance with current requirements for accessibility.
               </p>
-              <Link href="/events/1">
-                <Button className="btn-customlogin">Read more</Button>
-              </Link>
+              
+              {/* Key Features */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+                <div className="flex items-start space-x-3">
+                  <div className="w-6 h-6 rounded-full bg-secondary-green flex items-center justify-center flex-shrink-0 mt-1">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-text-dark">Accessible Design</h4>
+                    <p className="text-sm text-text-gray">Easy access for all ability levels</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <div className="w-6 h-6 rounded-full bg-secondary-green flex items-center justify-center flex-shrink-0 mt-1">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-text-dark">Safe Operation</h4>
+                    <p className="text-sm text-text-gray">Independent use with confidence</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <div className="w-6 h-6 rounded-full bg-secondary-green flex items-center justify-center flex-shrink-0 mt-1">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-text-dark">Mobility Friendly</h4>
+                    <p className="text-sm text-text-gray">Ample space for mobility aids</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <div className="w-6 h-6 rounded-full bg-secondary-green flex items-center justify-center flex-shrink-0 mt-1">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-text-dark">Compliance</h4>
+                    <p className="text-sm text-text-gray">Meets accessibility standards</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/events/1">
+                  <Button className="bg-secondary-green hover:bg-secondary-green-dark text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 hover:shadow-lg">
+                    Read more
+                  </Button>
+                </Link>
+                <Link href="/contact">
+                  <Button variant="outline" className="border-2 border-secondary-green text-secondary-green hover:bg-secondary-green hover:text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300">
+                    Get Quote
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
