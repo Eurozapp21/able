@@ -282,14 +282,57 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column - Background Image */}
+            {/* Right Column - Enhanced Product Showcase */}
             <div className="relative">
-              <div className="relative z-10">
-                <img
-                  src="/attached_assets/1599058641products_home_1751993768399.jpg"
-                  alt="Rehabilitation Equipment"
-                  className="w-full h-auto"
-                />
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                {/* Header Section */}
+                <div className="p-6 border-b border-gray-100">
+                  <h3 className="text-xl font-bold text-text-dark mb-2">Our Equipment Range</h3>
+                  <p className="text-text-gray text-sm">Professional rehabilitation solutions for enhanced mobility and independence</p>
+                </div>
+                
+                {/* Main Image */}
+                <div className="relative">
+                  <img
+                    src="/attached_assets/1599058641products_home_1751993768399.jpg"
+                    alt="Rehabilitation Equipment"
+                    className="w-full h-64 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+                  
+                  {/* Overlay Content */}
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4">
+                      <h4 className="font-semibold text-text-dark mb-1">Advanced Technology</h4>
+                      <p className="text-sm text-text-gray">Cutting-edge rehabilitation equipment designed for optimal patient outcomes</p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Features List */}
+                <div className="p-6 space-y-3">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 rounded-full" style={{backgroundColor: '#ffeb3b'}}></div>
+                    <span className="text-sm text-text-gray">Quality certified equipment</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 rounded-full" style={{backgroundColor: '#ffeb3b'}}></div>
+                    <span className="text-sm text-text-gray">Professional training & support</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 rounded-full" style={{backgroundColor: '#ffeb3b'}}></div>
+                    <span className="text-sm text-text-gray">Comprehensive warranty</span>
+                  </div>
+                </div>
+                
+                {/* Call to Action */}
+                <div className="p-6 pt-0">
+                  <Link href="/products">
+                    <Button className="w-full bg-primary-gold hover:bg-primary-gold/90 text-white font-medium py-3 rounded-lg transition-all">
+                      Explore All Products
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
