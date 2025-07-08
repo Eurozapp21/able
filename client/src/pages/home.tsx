@@ -798,13 +798,7 @@ export default function Home() {
                     src={achievement.image || '/api/placeholder/300/200'}
                     alt={achievement.title}
                     className="w-full h-40 object-cover rounded-lg"
-                    onError={(e) => {
-                      console.error('Failed to load achievement image:', achievement.image);
-                      e.currentTarget.src = '/api/placeholder/300/200';
-                    }}
-                    onLoad={() => console.log('Successfully loaded achievement image:', achievement.image)}
                   />
-                  <div className="absolute inset-0 bg-primary bg-opacity-10 rounded-lg"></div>
                 </div>
                 <h3 className="font-semibold text-lg mb-2 text-text-dark">{achievement.title}</h3>
                 <p className="text-gray-custom text-sm">{achievement.description}</p>
