@@ -177,9 +177,17 @@ export default function About() {
                 </div>
                 <h3 className="text-2xl font-bold text-text-dark">Our Vision</h3>
               </div>
-              <p className="text-gray-custom leading-relaxed">
-                To be the leading provider of rehabilitation solutions in Cyprus and the region, recognized for our expertise, innovation, and unwavering commitment to improving the lives of people with disabilities. We envision a world where everyone has access to the tools they need to live independently and pursue their dreams.
-              </p>
+              <div className="text-gray-custom leading-relaxed space-y-4">
+                <p>
+                  Our focus is the customer's experience and our vision is to achieve a high-quality life and independency for every user's daily routine. We consider each client as an individual 'challenge' and our goal is to provide them customised solutions which can potentially achieve an optimal lifestyle.
+                </p>
+                <p>
+                  Our company doesn't compromise in just offering products for the clients. Education is equally important, as we provide equipment trainings and seminars addressed to a wide range of healthcare professionals.
+                </p>
+                <p>
+                  AbleTools aims to continuously create new collaborations with major healthcare companies worldwide, keeping up with the latest rehabilitation methods and equipment. We maintain <strong>"the Ability to Dream"</strong> of every individual and aspiring to meet the needs of the informed customer by providing the support equipment needed to optimize its quality of life!
+                </p>
+              </div>
             </div>
           </div>
         </section>
