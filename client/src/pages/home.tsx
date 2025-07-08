@@ -1,0 +1,292 @@
+import { useQuery } from '@tanstack/react-query';
+import { Link } from 'wouter';
+import { 
+  Accessibility, 
+  Battery, 
+  Bed, 
+  Brain, 
+  SlidersVertical, 
+  Footprints,
+  UserCheck,
+  Bike,
+  Car,
+  Bath,
+  Baby,
+  HelpingHand
+} from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import HeroCarousel from '@/components/hero-carousel';
+import FeaturedProducts from '@/components/featured-products';
+
+const categoryIcons = {
+  wheelchair: Accessibility,
+  'battery-full': Battery,
+  bed: Bed,
+  brain: Brain,
+  stairs: SlidersVertical,
+  walking: Footprints,
+  'user-check': UserCheck,
+  bicycle: Bike,
+  'hands-helping': HelpingHand,
+  car: Car,
+  bath: Bath,
+  'baby-carriage': Baby,
+};
+
+export default function Home() {
+  const { data: categories = [] } = useQuery({
+    queryKey: ['/api/categories', { parentId: null }],
+  });
+
+  const { data: seminars = [] } = useQuery({
+    queryKey: ['/api/seminars', { upcoming: true }],
+  });
+
+  const { data: events = [] } = useQuery({
+    queryKey: ['/api/events', { recent: true }],
+  });
+
+  const { data: achievements = [] } = useQuery({
+    queryKey: ['/api/achievements'],
+  });
+
+  return (
+    <div className="pt-20">
+      {/* Hero Carousel */}
+      <HeroCarousel />
+
+      {/* About Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-text-dark">About Us</h2>
+              <p className="text-gray-custom text-lg leading-relaxed mb-6">
+                Able Tools Ltd has been operating since 2006 in the field of rehabilitation equipment and new technology solutions for people in need. Our focus is the customer's experience and our vision is to achieve a high-quality life and independency for every user's daily routine.
+              </p>
+              <Link href="/about">
+                <Button className="btn-customlogin">Read more</Button>
+              </Link>
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              <Link href="/products">
+                <div className="text-center group cursor-pointer">
+                  <img
+                    src="/api/placeholder/120/80"
+                    alt="Products"
+                    className="w-full h-20 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform"
+                  />
+                  <h3 className="font-semibold text-sm text-gray-custom group-hover:text-primary-gold transition-colors">
+                    Products
+                  </h3>
+                </div>
+              </Link>
+              <Link href="/events">
+                <div className="text-center group cursor-pointer">
+                  <img
+                    src="/api/placeholder/120/80"
+                    alt="Newsroom"
+                    className="w-full h-20 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform"
+                  />
+                  <h3 className="font-semibold text-sm text-gray-custom group-hover:text-primary-gold transition-colors">
+                    Newsroom
+                  </h3>
+                </div>
+              </Link>
+              <Link href="/seminars">
+                <div className="text-center group cursor-pointer">
+                  <img
+                    src="/api/placeholder/120/80"
+                    alt="Education"
+                    className="w-full h-20 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform"
+                  />
+                  <h3 className="font-semibold text-sm text-gray-custom group-hover:text-primary-gold transition-colors">
+                    Education
+                  </h3>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Categories */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-text-dark">Products</h2>
+            <p className="text-gray-custom text-lg">Comprehensive rehabilitation equipment and solutions</p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+            {categories.map((category) => {
+              const IconComponent = categoryIcons[category.icon as keyof typeof categoryIcons] || Accessibility;
+              
+              return (
+                <Link key={category.id} href={`/products?category=${category.id}`}>
+                  <div className="euz_bgyelo rounded-lg p-6 text-center hover:shadow-lg transition-shadow cursor-pointer group">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-full flex items-center justify-center hover-gold transition-colors">
+                      <IconComponent className="w-8 h-8 text-gray-custom group-hover:text-white" />
+                    </div>
+                    <h3 className="font-semibold text-text-dark group-hover:text-primary-gold transition-colors">
+                      {category.name}
+                    </h3>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="text-center">
+            <Link href="/products">
+              <Button className="btn-cardbutn">View More</Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products */}
+      <FeaturedProducts />
+
+      {/* Video Feature */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="relative">
+              <div className="aspect-video bg-black rounded-lg overflow-hidden">
+                <img
+                  src="/api/placeholder/800/450"
+                  alt="HUR Spinal Cord Rehabilitation Equipment"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Button className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-colors">
+                    <svg className="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </Button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-text-dark">
+                HUR - Spinal Cord and Neurological Rehabilitation
+              </h2>
+              <p className="text-gray-custom text-lg leading-relaxed mb-6">
+                In an inclusive wellness facility, it is easy to get on and off machines. The machines can be used safely and independently by as many different users as possible, regardless of ability, while in between machines there is ample room to manoeuvre with various mobility aids. HUR equipment is designed in accordance with current requirements for accessibility.
+              </p>
+              <Link href="/events/1">
+                <Button className="btn-customlogin">Read more</Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Seminars and Training */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Seminars */}
+            <div>
+              <h2 className="text-2xl font-bold mb-6 text-text-dark">Upcoming Seminars</h2>
+              <div className="space-y-4">
+                {seminars.length > 0 ? (
+                  seminars.slice(0, 3).map((seminar) => (
+                    <Card key={seminar.id} className="euz_bgyelo">
+                      <CardContent className="p-6">
+                        <div className="flex items-start space-x-4">
+                          <img
+                            src={seminar.image || '/api/placeholder/80/80'}
+                            alt={seminar.title}
+                            className="w-20 h-20 object-cover rounded-lg flex-shrink-0"
+                          />
+                          <div className="flex-1">
+                            <Badge className="bg-primary text-text-dark mb-2">
+                              Upcoming Seminar
+                            </Badge>
+                            <h3 className="font-semibold text-lg mb-2">{seminar.title}</h3>
+                            <p className="text-gray-custom text-sm mb-3">
+                              {new Date(seminar.date).toLocaleDateString('en-GB')}
+                            </p>
+                            <Link href={`/seminars/${seminar.id}`}>
+                              <Button className="btn-customlogin text-sm">More Info</Button>
+                            </Link>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))
+                ) : (
+                  <p className="text-gray-custom">No upcoming seminars at the moment.</p>
+                )}
+              </div>
+            </div>
+
+            {/* Training/Events */}
+            <div>
+              <h2 className="text-2xl font-bold mb-6 text-text-dark">Recent Events</h2>
+              <div className="space-y-4">
+                {events.length > 0 ? (
+                  events.slice(0, 3).map((event) => (
+                    <Card key={event.id} className="euz_bgyelo">
+                      <CardContent className="p-6">
+                        <div className="flex items-start space-x-4">
+                          <img
+                            src={event.image || '/api/placeholder/80/80'}
+                            alt={event.title}
+                            className="w-20 h-20 object-cover rounded-lg flex-shrink-0"
+                          />
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-lg mb-2">{event.title}</h3>
+                            <p className="text-gray-custom text-sm mb-3">
+                              {new Date(event.date).toLocaleDateString('en-GB')}
+                            </p>
+                            <Link href={`/events/${event.id}`}>
+                              <Button className="btn-customlogin text-sm">More info</Button>
+                            </Link>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))
+                ) : (
+                  <p className="text-gray-custom">No recent events.</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Achievements */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-text-dark">Our Achievements</h2>
+            <p className="text-gray-custom text-lg">Assess and Treat - Making a difference since 2006</p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-8">
+            {achievements.map((achievement) => (
+              <div key={achievement.id} className="text-center">
+                <div className="relative mb-4">
+                  <img
+                    src={achievement.image || '/api/placeholder/300/200'}
+                    alt={achievement.title}
+                    className="w-full h-40 object-cover rounded-lg"
+                  />
+                  <div className="absolute inset-0 bg-primary bg-opacity-10 rounded-lg"></div>
+                </div>
+                <h3 className="font-semibold text-lg mb-2 text-text-dark">{achievement.title}</h3>
+                <p className="text-gray-custom text-sm">{achievement.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
