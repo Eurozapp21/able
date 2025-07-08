@@ -1,27 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'wouter';
-import { 
-  Accessibility, 
-  Battery, 
-  Bed, 
-  Brain, 
-  SlidersVertical, 
-  Footprints,
-  UserCheck,
-  Bike,
-  Car,
-  Bath,
-  Baby,
-  HelpingHand,
-  Activity,
-  Heart,
-  Armchair,
-  Target,
-  Smile,
-  Zap,
-  Circle,
-  Camera
-} from 'lucide-react';
+// Icons are now inline SVG - removed unused imports
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -133,8 +112,8 @@ export default function Home() {
                 {/* Category Items */}
                 <Link href="/products?category=bikes" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
-                    <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0" style={{backgroundColor: '#ffeb3b'}}>
+                      <svg className="w-5 h-5" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
                         <circle cx="18.5" cy="17.5" r="3.5"/>
                         <circle cx="5.5" cy="17.5" r="3.5"/>
                         <circle cx="15" cy="5" r="1"/>
@@ -153,8 +132,8 @@ export default function Home() {
 
                 <Link href="/products?category=pressure-care" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
-                    <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0" style={{backgroundColor: '#ffeb3b'}}>
+                      <svg className="w-5 h-5" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M2 4v16"/>
                         <path d="M2 8h18a2 2 0 0 1 2 2v10"/>
                         <path d="M2 17h20"/>
@@ -167,8 +146,8 @@ export default function Home() {
 
                 <Link href="/products?category=vehicle-adaptation" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
-                    <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0" style={{backgroundColor: '#ffeb3b'}}>
+                      <svg className="w-5 h-5" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.7 9c-.2-.6-.8-1-1.5-1h-5.4c-.7 0-1.3.4-1.5 1L8.5 11.1C7.7 11.3 7 12.1 7 13v3c0 .6.4 1 1 1h2"/>
                         <circle cx="7" cy="17" r="2"/>
                         <path d="M9 17h6"/>
@@ -181,8 +160,8 @@ export default function Home() {
 
                 <Link href="/products?category=bath-toilet" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
-                    <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0" style={{backgroundColor: '#ffeb3b'}}>
+                      <svg className="w-5 h-5" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/>
                         <line x1="10" x2="8" y1="5" y2="7"/>
                         <line x1="2" x2="22" y1="12" y2="12"/>
@@ -196,8 +175,8 @@ export default function Home() {
 
                 <Link href="/products?category=seat-systems" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
-                    <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0" style={{backgroundColor: '#ffeb3b'}}>
+                      <svg className="w-5 h-5" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/>
                         <path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/>
                         <path d="M4 18v2"/>
@@ -211,8 +190,8 @@ export default function Home() {
 
                 <Link href="/products?category=wheelchairs" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
-                    <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0" style={{backgroundColor: '#ffeb3b'}}>
+                      <svg className="w-5 h-5" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M3 3v18h18"/>
                         <path d="m7 12 4 4 4-4"/>
                         <path d="M17 8v4"/>
@@ -225,8 +204,8 @@ export default function Home() {
 
                 <Link href="/products?category=rehabilitation-equipment" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
-                    <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0" style={{backgroundColor: '#ffeb3b'}}>
+                      <svg className="w-5 h-5" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7z"/>
                       </svg>
                     </div>
@@ -236,8 +215,8 @@ export default function Home() {
 
                 <Link href="/products?category=sensory-integration" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
-                    <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0" style={{backgroundColor: '#ffeb3b'}}>
+                      <svg className="w-5 h-5" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="10"/>
                         <circle cx="12" cy="12" r="6"/>
                         <circle cx="12" cy="12" r="2"/>
@@ -249,8 +228,8 @@ export default function Home() {
 
                 <Link href="/products?category=multi-sensory" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
-                    <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0" style={{backgroundColor: '#ffeb3b'}}>
+                      <svg className="w-5 h-5" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="10"/>
                         <path d="m9 12 2 2 4-4"/>
                       </svg>
@@ -261,8 +240,8 @@ export default function Home() {
 
                 <Link href="/products?category=lifting-systems" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
-                    <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0" style={{backgroundColor: '#ffeb3b'}}>
+                      <svg className="w-5 h-5" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
                         <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/>
                       </svg>
                     </div>
@@ -272,8 +251,8 @@ export default function Home() {
 
                 <Link href="/products?category=life-golf" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
-                    <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0" style={{backgroundColor: '#ffeb3b'}}>
+                      <svg className="w-5 h-5" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="10"/>
                         <path d="M8 12h8"/>
                         <path d="M12 8v8"/>
@@ -285,8 +264,8 @@ export default function Home() {
 
                 <Link href="/products?category=rehab-pushchairs" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
-                    <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0" style={{backgroundColor: '#ffeb3b'}}>
+                      <svg className="w-5 h-5" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
                         <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
                       </svg>
