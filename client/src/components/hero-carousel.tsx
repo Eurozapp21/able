@@ -58,14 +58,16 @@ export default function HeroCarousel() {
 
   return (
     <section className="relative">
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden h-[500px] md:h-[600px] lg:h-[700px]">
         {/* Carousel Inner */}
-        <div className="relative">
+        <div className="relative h-full">
           {slides.map((slide, index) => (
             <div
               key={index}
-              className={`carousel-item relative ${
-                index === currentSlide ? 'block' : 'hidden'
+              className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
+                index === currentSlide 
+                  ? 'opacity-100 z-10 carousel-fade-in' 
+                  : 'opacity-0 z-0'
               }`}
             >
               <img

@@ -117,25 +117,25 @@ export default function Footer() {
               <h3 className="font-bold text-lg mb-4">Information</h3>
               <div className="space-y-2">
                 <Link href="/about">
-                  <a className="block text-gray-300 hover:text-primary-gold transition-colors">About Us</a>
+                  <span className="block text-gray-300 hover:text-primary-gold transition-colors cursor-pointer">About Us</span>
                 </Link>
                 <Link href="/seminars">
-                  <a className="block text-gray-300 hover:text-primary-gold transition-colors">Education</a>
+                  <span className="block text-gray-300 hover:text-primary-gold transition-colors cursor-pointer">Education</span>
                 </Link>
                 <Link href="/events">
-                  <a className="block text-gray-300 hover:text-primary-gold transition-colors">Newsroom</a>
+                  <span className="block text-gray-300 hover:text-primary-gold transition-colors cursor-pointer">Newsroom</span>
                 </Link>
                 <Link href="/products">
-                  <a className="block text-gray-300 hover:text-primary-gold transition-colors">Products</a>
+                  <span className="block text-gray-300 hover:text-primary-gold transition-colors cursor-pointer">Products</span>
                 </Link>
                 <Link href="/contact">
-                  <a className="block text-gray-300 hover:text-primary-gold transition-colors">Contact Us</a>
+                  <span className="block text-gray-300 hover:text-primary-gold transition-colors cursor-pointer">Contact Us</span>
                 </Link>
                 <Link href="/privacy">
-                  <a className="block text-gray-300 hover:text-primary-gold transition-colors">Privacy Notice</a>
+                  <span className="block text-gray-300 hover:text-primary-gold transition-colors cursor-pointer">Privacy Notice</span>
                 </Link>
                 <Link href="/terms">
-                  <a className="block text-gray-300 hover:text-primary-gold transition-colors">Terms and Conditions</a>
+                  <span className="block text-gray-300 hover:text-primary-gold transition-colors cursor-pointer">Terms and Conditions</span>
                 </Link>
               </div>
             </div>
