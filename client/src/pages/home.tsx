@@ -168,7 +168,6 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Product Categories */}
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-text-dark">Products</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Category Items */}
                 <Link href="/products?category=lifting-systems" className="group">
