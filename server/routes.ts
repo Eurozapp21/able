@@ -6,6 +6,8 @@ import {
 } from "@shared/schema";
 import { z } from "zod";
 
+// Session type extensions handled inline with type assertions
+
 export async function registerRoutes(app: Express): Promise<Server> {
   
   // Authentication middleware

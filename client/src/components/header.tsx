@@ -44,7 +44,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <img 
-              src="/api/placeholder/120/40" 
+              src="/attached_assets/1600154678logo1_1751991035400.png" 
               alt="AbleTools Logo" 
               className="h-12 w-auto"
             />

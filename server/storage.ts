@@ -253,7 +253,16 @@ export class MemStorage implements IStorage {
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = this.currentId++;
-    const user: User = { ...insertUser, id, createdAt: new Date() };
+    const user: User = { 
+      ...insertUser, 
+      id, 
+      createdAt: new Date(),
+      address: insertUser.address ?? null,
+      phone: insertUser.phone ?? null,
+      city: insertUser.city ?? null,
+      postcode: insertUser.postcode ?? null,
+      occupation: insertUser.occupation ?? null
+    };
     this.users.set(id, user);
     return user;
   }
@@ -273,7 +282,14 @@ export class MemStorage implements IStorage {
 
   async createCategory(insertCategory: InsertCategory): Promise<Category> {
     const id = this.currentId++;
-    const category: Category = { ...insertCategory, id };
+    const category: Category = { 
+      ...insertCategory, 
+      id,
+      image: insertCategory.image ?? null,
+      description: insertCategory.description ?? null,
+      parentId: insertCategory.parentId ?? null,
+      icon: insertCategory.icon ?? null
+    };
     this.categories.set(id, category);
     return category;
   }
@@ -305,7 +321,15 @@ export class MemStorage implements IStorage {
 
   async createProduct(insertProduct: InsertProduct): Promise<Product> {
     const id = this.currentId++;
-    const product: Product = { ...insertProduct, id, createdAt: new Date() };
+    const product: Product = { 
+      ...insertProduct, 
+      id, 
+      createdAt: new Date(),
+      description: insertProduct.description ?? null,
+      images: insertProduct.images ?? null,
+      isFeatured: insertProduct.isFeatured ?? null,
+      specifications: insertProduct.specifications ?? null
+    };
     this.products.set(id, product);
     return product;
   }
@@ -328,7 +352,17 @@ export class MemStorage implements IStorage {
 
   async createSeminar(insertSeminar: InsertSeminar): Promise<Seminar> {
     const id = this.currentId++;
-    const seminar: Seminar = { ...insertSeminar, id, createdAt: new Date() };
+    const seminar: Seminar = { 
+      ...insertSeminar, 
+      id, 
+      createdAt: new Date(),
+      description: insertSeminar.description ?? null,
+      image: insertSeminar.image ?? null,
+      location: insertSeminar.location ?? null,
+      speaker: insertSeminar.speaker ?? null,
+      fee: insertSeminar.fee ?? null,
+      maxParticipants: insertSeminar.maxParticipants ?? null
+    };
     this.seminars.set(id, seminar);
     return seminar;
   }
@@ -350,7 +384,14 @@ export class MemStorage implements IStorage {
 
   async createEvent(insertEvent: InsertEvent): Promise<Event> {
     const id = this.currentId++;
-    const event: Event = { ...insertEvent, id, createdAt: new Date() };
+    const event: Event = { 
+      ...insertEvent, 
+      id, 
+      createdAt: new Date(),
+      image: insertEvent.image ?? null,
+      content: insertEvent.content ?? null,
+      excerpt: insertEvent.excerpt ?? null
+    };
     this.events.set(id, event);
     return event;
   }
@@ -370,7 +411,13 @@ export class MemStorage implements IStorage {
 
   async createEnquiry(insertEnquiry: InsertEnquiry): Promise<Enquiry> {
     const id = this.currentId++;
-    const enquiry: Enquiry = { ...insertEnquiry, id, status: "new", createdAt: new Date() };
+    const enquiry: Enquiry = { 
+      ...insertEnquiry, 
+      id, 
+      status: "new", 
+      createdAt: new Date(),
+      about: insertEnquiry.about ?? null
+    };
     this.enquiries.set(id, enquiry);
     return enquiry;
   }
@@ -391,7 +438,12 @@ export class MemStorage implements IStorage {
 
   async createEnquiryMessage(insertMessage: InsertEnquiryMessage): Promise<EnquiryMessage> {
     const id = this.currentId++;
-    const message: EnquiryMessage = { ...insertMessage, id, createdAt: new Date() };
+    const message: EnquiryMessage = { 
+      ...insertMessage, 
+      id, 
+      createdAt: new Date(),
+      senderId: insertMessage.senderId ?? null
+    };
     this.enquiryMessages.set(id, message);
     return message;
   }
@@ -403,7 +455,13 @@ export class MemStorage implements IStorage {
 
   async createAchievement(insertAchievement: InsertAchievement): Promise<Achievement> {
     const id = this.currentId++;
-    const achievement: Achievement = { ...insertAchievement, id, createdAt: new Date() };
+    const achievement: Achievement = { 
+      ...insertAchievement, 
+      id, 
+      createdAt: new Date(),
+      description: insertAchievement.description ?? null,
+      image: insertAchievement.image ?? null
+    };
     this.achievements.set(id, achievement);
     return achievement;
   }
@@ -412,12 +470,19 @@ export class MemStorage implements IStorage {
   async getActiveBanners(): Promise<Banner[]> {
     return Array.from(this.banners.values())
       .filter(banner => banner.isActive)
-      .sort((a, b) => a.order - b.order);
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
   }
 
   async createBanner(insertBanner: InsertBanner): Promise<Banner> {
     const id = this.currentId++;
-    const banner: Banner = { ...insertBanner, id };
+    const banner: Banner = { 
+      ...insertBanner, 
+      id,
+      link: insertBanner.link ?? null,
+      subtitle: insertBanner.subtitle ?? null,
+      isActive: insertBanner.isActive ?? null,
+      order: insertBanner.order ?? null
+    };
     this.banners.set(id, banner);
     return banner;
   }
