@@ -108,6 +108,7 @@ The system manages several core entities:
 
 ## Changelog
 - July 08, 2025. Initial setup
+- July 08, 2025. Integrated authentic company logo and banner images from uploaded assets
 
 ## User Preferences
 

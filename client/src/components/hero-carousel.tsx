@@ -16,19 +16,19 @@ export default function HeroCarousel() {
     {
       title: "Rehabilitation Equipment & Solutions for All",
       subtitle: "Your ability to dream!",
-      image: "/api/placeholder/1200/500",
+      image: "/attached_assets/Modern Investment Mobile App Promotion_1751991371433.png",
       link: "/contact"
     },
     {
-      title: "Rehabilitation Equipment & Solutions for All", 
-      subtitle: "Changing Lives Together",
-      image: "/api/placeholder/1200/500",
-      link: "/contact"
+      title: "Summer 2025 Collection", 
+      subtitle: "Advanced Mobility Solutions",
+      image: "/attached_assets/Blue Modern Investment Mobile App Promotion_1751991371437.png",
+      link: "/products"
     },
     {
       title: "Rehabilitation Equipment & Solutions for All",
       subtitle: "Either we know the way or we find a way.",
-      image: "/api/placeholder/1200/500", 
+      image: "/attached_assets/Modern Investment Mobile App Promotion_1751991371433.png", 
       link: "/contact"
     }
   ];
