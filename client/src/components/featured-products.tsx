@@ -17,11 +17,6 @@ export default function FeaturedProducts() {
       
       {/* Content */}
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-text-dark">Products</h2>
-          <p className="text-gray-custom text-lg">Comprehensive rehabilitation equipment and solutions</p>
-        </div>
-        
         <ProductGrid featured={true} limit={3} />
         
         <div className="text-center mt-8">
