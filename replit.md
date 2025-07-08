@@ -119,6 +119,7 @@ The system manages several core entities:
 - July 08, 2025. Embedded authentic YouTube video for HUR rehabilitation equipment demonstration
 - July 08, 2025. Completely redesigned seminars and events section with professional card layouts, icons, and enhanced user experience
 - July 08, 2025. Added authentic medical images for Advanced Rehabilitation Techniques and HUR Spinal Cord seminars/events
+- July 08, 2025. Removed duplicate old seminars/events section to maintain clean layout with single enhanced version
 
 ## User Preferences
 
