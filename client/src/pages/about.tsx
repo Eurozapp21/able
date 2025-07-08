@@ -94,27 +94,59 @@ export default function About() {
 
         {/* Company Introduction */}
         <section className="mb-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="mb-6">
-                <img
-                  src="/attached_assets/1599038152about_us_home_1751993313592.jpg"
-                  alt="Your ability to dream!"
-                  className="max-w-full h-auto"
-                />
+          <div className="bg-white p-8 md:p-12 rounded-xl shadow-lg">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-text-dark">About Us</h2>
+                <div className="prose prose-lg text-gray-custom leading-relaxed space-y-6">
+                  <p>
+                    <strong>Able Tools Ltd</strong> has been operated since 2006 in the field of rehabilitation equipment and new technology solutions for people in need. Able Tools has a wide range of innovative products, specially adapted for people with mobility difficulties, neurological and orthopaedic injuries, as well as for people with autism.
+                  </p>
+                  
+                  <p>
+                    Our products include, among others, specialized wheelchairs, rehab pushchairs, electric beds, lifting systems, stair lifts, seating systems, standing frames, walkers, bath and commode chairs, walking aids, pillows for pressure relief and for lying down prevention, functional and dynamic splints to assist movement.
+                  </p>
+                  
+                  <p>
+                    Also, aids for everyday life activities such as bath accessories for grooming and hygiene, clothing, feeding, for stabilization, movement and transport. Modified house equipment (kitchen utensils, etc) and modern clinical equipment for therapeutic retraining and functional procedures are included on company's stock.
+                  </p>
+                  
+                  <p>
+                    Additionally, we are specialized in the design and implementation of <strong>multi-sensory rooms</strong>, for rehabilitation centres and user's homes. Multi-sensory rooms combine a range of stimuli to help the user to develop and engage their senses. Using multiple stimuli such as lights, colours, sounds, sensory soft play objects, aromas, all within a safe environment, they allow user to explore and interact without any risk.
+                  </p>
+                </div>
               </div>
-              <p className="text-gray-custom text-lg leading-relaxed">
-                Able Tools Ltd has been operating since 2006 in the field of rehabilitation equipment and new technology solutions for people in need. Our focus is the customer's experience and our vision is to achieve a high-quality life and independency for every user's daily routine.
-              </p>
+              
+              <div className="space-y-6">
+                <div className="relative">
+                  <img
+                    src="/attached_assets/1602069478aboutus_temp_1752007885489.jpg"
+                    alt="AbleTools - Rehabilitation Equipment & Solutions"
+                    className="w-full h-auto rounded-lg shadow-lg"
+                  />
+                </div>
+                
+                <div className="relative">
+                  <img
+                    src="/attached_assets/1601936002aboutus_small2_1752007885488.jpg"
+                    alt="AbleTools rehabilitation therapy session"
+                    className="w-full h-64 object-cover rounded-lg shadow-lg"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
+                </div>
+              </div>
             </div>
-            <div className="relative">
-              <img
-                src="/attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg"
-                alt="AbleTools rehabilitation equipment and training"
-                className="w-full h-96 object-cover rounded-lg shadow-lg"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
-            </div>
+          </div>
+        </section>
+
+        {/* Company Logo Section */}
+        <section className="mb-16">
+          <div className="text-center">
+            <img
+              src="/attached_assets/1599038152about_us_home_1751993313592.jpg"
+              alt="Your ability to dream!"
+              className="max-w-md mx-auto h-auto"
+            />
           </div>
         </section>
 

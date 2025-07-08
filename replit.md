@@ -127,6 +127,7 @@ The system manages several core entities:
 - July 08, 2025. Fixed achievements image display by removing yellow overlay that was covering the authentic images
 - July 08, 2025. Updated footer to match authentic design with Address, Information, Newsletter, and Follow Us sections with proper gray styling
 - July 08, 2025. Enhanced About Us page with authentic AbleTools exhibition header image, improved design with yellow branding, and professional card layouts
+- July 08, 2025. Added comprehensive About Us content with detailed company description, product range, and multi-sensory room specialization. Integrated authentic therapy and logo images
 
 ## User Preferences
 
