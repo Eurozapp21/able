@@ -1,4 +1,4 @@
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { Facebook, Twitter, Linkedin, Instagram, Phone, Mail, MapPin, Printer } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,6 +8,7 @@ import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
 
 export default function Footer() {
+  const [location] = useLocation();
   const [email, setEmail] = useState('');
   const { toast } = useToast();
 
@@ -44,8 +45,9 @@ export default function Footer() {
 
   return (
     <>
-      {/* Newsletter Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
+      {/* Newsletter Section - Hidden on About Us page */}
+      {location !== '/about' && (
+        <section className="py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">YOUR ABILITY TO DREAM!</h2>
@@ -77,7 +79,8 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </section>
+        </section>
+      )}
 
       {/* Footer */}
       <footer className="bg-gray-600 text-white py-12">
