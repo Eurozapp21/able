@@ -134,7 +134,7 @@ export default function Home() {
                 <Link href="/products?category=bikes" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <Bike className="w-5 h-5 text-white" />
+                      <Bike size={20} className="text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Bikes</span>
                   </div>
@@ -143,7 +143,7 @@ export default function Home() {
                 <Link href="/products?category=pressure-care" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <Bed className="w-5 h-5 text-white" />
+                      <Bed size={20} className="text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Pressure Care Aids</span>
                   </div>
@@ -152,7 +152,7 @@ export default function Home() {
                 <Link href="/products?category=vehicle-adaptation" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <Car className="w-5 h-5 text-white" />
+                      <Car size={20} className="text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Vehicle Adaptation</span>
                   </div>
@@ -161,7 +161,7 @@ export default function Home() {
                 <Link href="/products?category=bath-toilet" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <Bath className="w-5 h-5 text-white" />
+                      <Bath size={20} className="text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Bath and Toilet Aids</span>
                   </div>
@@ -170,7 +170,7 @@ export default function Home() {
                 <Link href="/products?category=seat-systems" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <Armchair className="w-5 h-5 text-white" />
+                      <Armchair size={20} className="text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Seat Systems</span>
                   </div>
@@ -179,7 +179,7 @@ export default function Home() {
                 <Link href="/products?category=wheelchairs" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <Activity className="w-5 h-5 text-white" />
+                      <Activity size={20} className="text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Wheelchairs</span>
                   </div>
@@ -188,7 +188,7 @@ export default function Home() {
                 <Link href="/products?category=rehabilitation-equipment" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <Heart className="w-5 h-5 text-white" />
+                      <Heart size={20} className="text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Rehabilitation Equipment</span>
                   </div>
@@ -197,7 +197,7 @@ export default function Home() {
                 <Link href="/products?category=sensory-integration" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <Target className="w-5 h-5 text-white" />
+                      <Target size={20} className="text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Sensory Integration Rooms</span>
                   </div>
@@ -206,7 +206,7 @@ export default function Home() {
                 <Link href="/products?category=multi-sensory" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <Smile className="w-5 h-5 text-white" />
+                      <Smile size={20} className="text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Multi Sensory Rooms</span>
                   </div>
@@ -215,7 +215,7 @@ export default function Home() {
                 <Link href="/products?category=lifting-systems" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <Zap className="w-5 h-5 text-white" />
+                      <Zap size={20} className="text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Lifting Systems</span>
                   </div>
@@ -224,7 +224,7 @@ export default function Home() {
                 <Link href="/products?category=life-golf" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <Circle className="w-5 h-5 text-white" />
+                      <Circle size={20} className="text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Life Golf</span>
                   </div>
@@ -233,7 +233,7 @@ export default function Home() {
                 <Link href="/products?category=rehab-pushchairs" className="group">
                   <div className="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:bg-bg-yellow-light">
                     <div className="w-10 h-10 rounded-full bg-primary-gold flex items-center justify-center mr-4 flex-shrink-0">
-                      <Baby className="w-5 h-5 text-white" />
+                      <Baby size={20} className="text-white" />
                     </div>
                     <span className="font-medium text-text-dark group-hover:text-primary-gold transition-colors">Rehab Pushchairs</span>
                   </div>
