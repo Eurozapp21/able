@@ -346,31 +346,14 @@ export default function Home() {
             {/* Video Player */}
             <div className="relative">
               <div className="relative aspect-video bg-black rounded-xl overflow-hidden shadow-2xl">
-                <img
-                  src="/api/placeholder/800/450"
-                  alt="HUR Spinal Cord Rehabilitation Equipment"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                
-                {/* Play Button */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Button className="w-24 h-24 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-all duration-300 hover:scale-105 shadow-lg">
-                    <svg className="w-10 h-10 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </Button>
-                </div>
-                
-                {/* Video Badge */}
-                <div className="absolute top-4 left-4">
-                  <div className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-2">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                    <span>Watch Demo</span>
-                  </div>
-                </div>
+                <iframe
+                  src="https://www.youtube.com/embed/Ea0aB500fo4"
+                  title="HUR - Spinal Cord and Neurological Rehabilitation"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="w-full h-full"
+                ></iframe>
               </div>
             </div>
             
