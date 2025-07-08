@@ -28,20 +28,7 @@ import { Badge } from '@/components/ui/badge';
 import HeroCarousel from '@/components/hero-carousel';
 
 
-const categoryIcons = {
-  wheelchair: Accessibility,
-  'battery-full': Battery,
-  bed: Bed,
-  brain: Brain,
-  stairs: SlidersVertical,
-  walking: Footprints,
-  'user-check': UserCheck,
-  bicycle: Bike,
-  'hands-helping': HelpingHand,
-  car: Car,
-  bath: Bath,
-  'baby-carriage': Baby,
-};
+
 
 export default function Home() {
   const { data: categories = [] } = useQuery({
