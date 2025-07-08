@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import { Facebook, Twitter, Linkedin, Instagram, Phone, Mail } from 'lucide-react';
+import { Facebook, Twitter, Linkedin, Instagram, Phone, Mail, MapPin, Printer } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
@@ -88,19 +88,19 @@ export default function Footer() {
               <h3 className="text-lg font-bold mb-4">Address</h3>
               <div className="space-y-2 text-gray-300 text-sm">
                 <div className="flex items-start">
-                  <span className="mr-2 text-yellow-400">📍</span>
+                  <MapPin className="w-4 h-4 mr-2 text-yellow-400 mt-0.5 flex-shrink-0" />
                   <span>Strovolos Avenue 149K, Strovolos, Nicosia, 2048, Cyprus</span>
                 </div>
                 <div className="flex items-center">
-                  <span className="mr-2 text-yellow-400">✉️</span>
+                  <Mail className="w-4 h-4 mr-2 text-yellow-400" />
                   <span>info@abletools.com.cy</span>
                 </div>
                 <div className="flex items-center">
-                  <span className="mr-2 text-yellow-400">📞</span>
+                  <Phone className="w-4 h-4 mr-2 text-yellow-400" />
                   <span>+357 22 250 115</span>
                 </div>
                 <div className="flex items-center">
-                  <span className="mr-2 text-yellow-400">📠</span>
+                  <Printer className="w-4 h-4 mr-2 text-yellow-400" />
                   <span>+357 22 250 116</span>
                 </div>
               </div>
@@ -145,13 +145,13 @@ export default function Footer() {
               <h4 className="text-lg font-bold mb-4">Follow Us</h4>
               <div className="flex space-x-3">
                 <a href="#" className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-black hover:bg-yellow-500 transition-colors">
-                  <span className="text-sm font-bold">f</span>
+                  <Facebook className="w-4 h-4" />
                 </a>
                 <a href="#" className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-black hover:bg-yellow-500 transition-colors">
-                  <span className="text-sm font-bold">▶</span>
+                  <span className="text-xs font-bold">▶</span>
                 </a>
                 <a href="#" className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-black hover:bg-yellow-500 transition-colors">
-                  <span className="text-sm font-bold">📷</span>
+                  <Instagram className="w-4 h-4" />
                 </a>
               </div>
             </div>
