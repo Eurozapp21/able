@@ -452,7 +452,7 @@ export default function Home() {
                   </Button>
                 </Link>
                 <Link href="/contact">
-                  <Button className="bg-primary-gold hover:bg-primary-gold/90 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 hover:shadow-lg">
+                  <Button style={{backgroundColor: '#ffeb3b', color: '#000'}} className="hover:opacity-90 px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 hover:shadow-lg border border-yellow-400">
                     Get Quote
                   </Button>
                 </Link>
