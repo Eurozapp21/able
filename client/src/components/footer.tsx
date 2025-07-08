@@ -80,91 +80,82 @@ export default function Footer() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-text-dark text-white py-12">
+      <footer className="bg-gray-600 text-white py-12">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
-            {/* Contact Info */}
+            {/* Address Section */}
             <div>
-              <h3 className="font-bold text-lg mb-4">Contact Information</h3>
-              <div className="space-y-2 text-gray-300">
-                <p className="flex items-center">
-                  <Phone className="w-4 h-4 mr-2" />
-                  +357 22 250 115
-                </p>
-                <p className="flex items-center">
-                  <Phone className="w-4 h-4 mr-2" />
-                  +357 22 250 116
-                </p>
-                <p className="flex items-center">
-                  <Mail className="w-4 h-4 mr-2" />
-                  info@abletools.com.cy
-                </p>
+              <h3 className="text-lg font-bold mb-4">Address</h3>
+              <div className="space-y-2 text-gray-300 text-sm">
+                <div className="flex items-start">
+                  <span className="mr-2">📍</span>
+                  <span>Strovolos Avenue 149K, Strovolos, Nicosia, 2048, Cyprus</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="mr-2">✉️</span>
+                  <span>info@abletools.com.cy</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="mr-2">📞</span>
+                  <span>+357 22 250 115</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="mr-2">📠</span>
+                  <span>+357 22 250 116</span>
+                </div>
               </div>
             </div>
             
-            {/* Address */}
+            {/* Information Section */}
             <div>
-              <h3 className="font-bold text-lg mb-4">Address</h3>
-              <div className="text-gray-300">
-                <p>Strovolos Avenue 149K</p>
-                <p>Strovolos, Nicosia, 2048</p>
-                <p>Cyprus</p>
+              <h4 className="text-lg font-bold mb-4">Information</h4>
+              <ul className="space-y-2 text-gray-300 text-sm">
+                <li><Link href="/about"><span className="hover:text-primary-gold transition-colors cursor-pointer">About Us</span></Link></li>
+                <li><Link href="/events"><span className="hover:text-primary-gold transition-colors cursor-pointer">Education</span></Link></li>
+                <li><Link href="/events"><span className="hover:text-primary-gold transition-colors cursor-pointer">Events</span></Link></li>
+                <li><Link href="/products"><span className="hover:text-primary-gold transition-colors cursor-pointer">Products</span></Link></li>
+                <li><Link href="/contact"><span className="hover:text-primary-gold transition-colors cursor-pointer">Contact Us</span></Link></li>
+                <li><Link href="/privacy"><span className="hover:text-primary-gold transition-colors cursor-pointer">Privacy Notice</span></Link></li>
+                <li><Link href="/terms"><span className="hover:text-primary-gold transition-colors cursor-pointer">Terms and Conditions</span></Link></li>
+                <li><Link href="/newsletter"><span className="hover:text-primary-gold transition-colors cursor-pointer">Newsletter Consent</span></Link></li>
+              </ul>
+            </div>
+            
+            {/* Newsletter Section */}
+            <div>
+              <h4 className="text-lg font-bold mb-4">Newsletter</h4>
+              <div className="flex mb-4">
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className="flex-1 px-3 py-2 bg-white text-gray-900 rounded-l text-sm focus:outline-none"
+                />
+                <button className="bg-primary-gold hover:bg-yellow-500 text-black px-4 py-2 rounded-r text-sm font-medium transition-colors">
+                  Newsletter/Consent
+                </button>
               </div>
             </div>
             
-            {/* Information Links */}
+            {/* Follow Us Section */}
             <div>
-              <h3 className="font-bold text-lg mb-4">Information</h3>
-              <div className="space-y-2">
-                <Link href="/about">
-                  <span className="block text-gray-300 hover:text-primary-gold transition-colors cursor-pointer">About Us</span>
-                </Link>
-                <Link href="/seminars">
-                  <span className="block text-gray-300 hover:text-primary-gold transition-colors cursor-pointer">Education</span>
-                </Link>
-                <Link href="/events">
-                  <span className="block text-gray-300 hover:text-primary-gold transition-colors cursor-pointer">Newsroom</span>
-                </Link>
-                <Link href="/products">
-                  <span className="block text-gray-300 hover:text-primary-gold transition-colors cursor-pointer">Products</span>
-                </Link>
-                <Link href="/contact">
-                  <span className="block text-gray-300 hover:text-primary-gold transition-colors cursor-pointer">Contact Us</span>
-                </Link>
-                <Link href="/privacy">
-                  <span className="block text-gray-300 hover:text-primary-gold transition-colors cursor-pointer">Privacy Notice</span>
-                </Link>
-                <Link href="/terms">
-                  <span className="block text-gray-300 hover:text-primary-gold transition-colors cursor-pointer">Terms and Conditions</span>
-                </Link>
-              </div>
-            </div>
-            
-            {/* Follow Us */}
-            <div>
-              <h3 className="font-bold text-lg mb-4">Follow Us</h3>
-              <div className="flex space-x-4">
-                <a href="#" className="text-gray-300 hover:text-primary-gold transition-colors">
-                  <Facebook className="w-6 h-6" />
+              <h4 className="text-lg font-bold mb-4">Follow Us</h4>
+              <div className="flex space-x-3">
+                <a href="#" className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors">
+                  <span className="text-sm font-bold">f</span>
                 </a>
-                <a href="#" className="text-gray-300 hover:text-primary-gold transition-colors">
-                  <Twitter className="w-6 h-6" />
+                <a href="#" className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-colors">
+                  <span className="text-sm font-bold">▶</span>
                 </a>
-                <a href="#" className="text-gray-300 hover:text-primary-gold transition-colors">
-                  <Linkedin className="w-6 h-6" />
-                </a>
-                <a href="#" className="text-gray-300 hover:text-primary-gold transition-colors">
-                  <Instagram className="w-6 h-6" />
+                <a href="#" className="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center text-white hover:bg-pink-700 transition-colors">
+                  <span className="text-sm font-bold">📷</span>
                 </a>
               </div>
             </div>
           </div>
           
-          <div className="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-300 text-sm">Copyrights © AbleTools 2025. All Rights Reserved.</p>
-            <p className="text-gray-300 text-sm mt-2 md:mt-0">
-              Powered by <a href="https://eurozapp.com/" className="text-primary-gold hover:underline">Eurozapp</a>
-            </p>
+          <div className="border-t border-gray-500 mt-8 pt-6 flex justify-between items-center text-gray-300 text-sm">
+            <p>Copyright © AbleTools 2025. All Rights Reserved.</p>
+            <p>Powered by Euroepps</p>
           </div>
         </div>
       </footer>
