@@ -18,7 +18,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import HeroCarousel from '@/components/hero-carousel';
-import FeaturedProducts from '@/components/featured-products';
+
 
 const categoryIcons = {
   wheelchair: Accessibility,
@@ -281,8 +281,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-
 
       {/* Video Feature */}
       <section className="py-16 bg-gray-50">
