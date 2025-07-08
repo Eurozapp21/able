@@ -80,19 +80,17 @@
   transform: translateY(-2px);
 }
 
-/* Carousel fade effects */
+/* Simple carousel fade effect */
 .carousel-fade-in {
-  animation: fadeIn 1s ease-in-out;
+  animation: simpleFadeIn 1s ease-in-out;
 }
 
-@keyframes fadeIn {
+@keyframes simpleFadeIn {
   from {
     opacity: 0;
-    transform: scale(1.05);
   }
   to {
     opacity: 1;
-    transform: scale(1);
   }
 }
 

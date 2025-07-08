@@ -71,7 +71,7 @@ export default function Footer() {
               </form>
               <p className="text-sm mt-2">
                 <Link href="/newsletter-consent">
-                  <a className="underline hover:no-underline">Newsletter Consent</a>
+                  <span className="underline hover:no-underline cursor-pointer">Newsletter Consent</span>
                 </Link>
               </p>
             </div>
