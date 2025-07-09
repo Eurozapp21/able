@@ -303,12 +303,12 @@ export default function Products() {
                         {/* Category Counts overlaid on icon */}
                         <div className="absolute -top-1 -right-1 flex flex-col gap-1">
                           {getCategorySubcategoryCount(category.id) > 0 && (
-                            <div className="flex items-center justify-center w-5 h-5 bg-blue-500 text-white rounded-full text-xs font-bold">
+                            <div className="flex items-center justify-center w-5 h-5 bg-yellow-400 text-black rounded-full text-xs font-bold">
                               {getCategorySubcategoryCount(category.id)}
                             </div>
                           )}
                           {getCategoryProductCount(category.id) > 0 && (
-                            <div className="flex items-center justify-center w-5 h-5 bg-green-500 text-white rounded-full text-xs font-bold">
+                            <div className="flex items-center justify-center w-5 h-5 bg-yellow-400 text-black rounded-full text-xs font-bold">
                               {getCategoryProductCount(category.id)}
                             </div>
                           )}
