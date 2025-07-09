@@ -46,11 +46,14 @@ export default function Products() {
   });
 
   const { data: products = [], isLoading: productsLoading } = useQuery({
-    queryKey: ['/api/products', selectedCategory],
+    queryKey: ['/api/products', selectedCategory, searchQuery],
     queryFn: async () => {
-      const url = selectedCategory 
-        ? `/api/products?categoryId=${selectedCategory}`
-        : '/api/products';
+      const params = new URLSearchParams();
+      if (selectedCategory) params.append('categoryId', selectedCategory.toString());
+      if (searchQuery.trim()) params.append('search', searchQuery.trim());
+      
+      const url = `/api/products${params.toString() ? '?' + params.toString() : ''}`;
+      console.log('Products page fetching:', url);
       const response = await fetch(url);
       if (!response.ok) throw new Error('Failed to fetch products');
       return response.json();
@@ -355,11 +358,12 @@ export default function Products() {
             </div>
             
             <ProductGrid 
-              categoryId={selectedCategory || undefined}
+              products={products}
               searchQuery={searchQuery}
               limit={searchQuery ? undefined : 12}
               sortBy={sortBy}
               viewMode={viewMode}
+              isLoading={productsLoading}
             />
           </div>
         )}

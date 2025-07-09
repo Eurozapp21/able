@@ -7,39 +7,26 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface ProductGridProps {
-  categoryId?: number;
-  featured?: boolean;
+  products: any[];
   searchQuery?: string;
   limit?: number;
   sortBy?: string;
   viewMode?: 'grid' | 'list';
+  isLoading?: boolean;
 }
 
 export default function ProductGrid({ 
-  categoryId, 
-  featured = false, 
+  products = [],
   searchQuery, 
   limit,
   sortBy = 'name',
-  viewMode = 'grid'
+  viewMode = 'grid',
+  isLoading = false
 }: ProductGridProps) {
-  const { data: products = [], isLoading } = useQuery({
-    queryKey: ['/api/products', categoryId, featured, searchQuery],
-    queryFn: async () => {
-      const params = new URLSearchParams();
-      if (categoryId) params.append('categoryId', categoryId.toString());
-      if (featured) params.append('featured', 'true');
-      if (searchQuery) params.append('search', searchQuery);
-      
-      const url = `/api/products?${params}`;
-      console.log('Fetching products with URL:', url);
-      const response = await fetch(url);
-      if (!response.ok) throw new Error('Failed to fetch products');
-      return response.json();
-    },
-  });
 
-  // Sort products (filtering is now done server-side)
+  console.log('ProductGrid received:', { products: products.length, viewMode, isLoading });
+
+  // Sort products 
   const sortedProducts = [...products].sort((a, b) => {
     switch (sortBy) {
       case 'name':
@@ -81,6 +68,8 @@ export default function ProductGrid({
 
 
   
+  console.log('ProductGrid viewMode rendering:', viewMode);
+  
   const gridClasses = viewMode === 'list' 
     ? "space-y-4" 
     : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
@@ -89,7 +78,7 @@ export default function ProductGrid({
     <div className={gridClasses}>
       {displayProducts.map((product) => (
         <Card key={product.id} className={`overflow-hidden hover:shadow-lg transition-all duration-300 group ${
-          viewMode === 'list' ? 'flex flex-row bg-white' : 'bg-white'
+          viewMode === 'list' ? 'flex flex-row bg-white min-h-32' : 'bg-white'
         }`}>
           <div className={`relative overflow-hidden ${
             viewMode === 'list' ? 'w-48 flex-shrink-0' : 'w-full'
@@ -100,6 +89,9 @@ export default function ProductGrid({
               className={`object-cover group-hover:scale-105 transition-transform duration-300 ${
                 viewMode === 'list' ? 'w-full h-32' : 'w-full h-48'
               }`}
+              style={{
+                backgroundColor: viewMode === 'list' ? '#f0f0f0' : 'transparent'
+              }}
             />
             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
               <Link href={`/products/detail/${product.id}`}>
