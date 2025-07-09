@@ -162,6 +162,9 @@ The system manages several core entities:
 - July 09, 2025. Updated Solutions page branding to use consistent AbleTools yellow/gold colors: changed process step numbers, header backgrounds, call-to-action sections, and service card icons from blue to yellow (#ffeb3b) for unified brand appearance
 - July 09, 2025. Removed "Our Process" section from Solutions page as requested by user
 - July 09, 2025. Completely redesigned Solutions page with modern layout: enhanced hero section with gradient backgrounds and statistics, improved introduction with 2-column approach section, redesigned service cards with hover animations, upgraded solution categories with premium styling and floating badges, and enhanced call-to-action with dark theme and feature highlights
+- July 09, 2025. Created comprehensive Catalogue page with category grid view, downloadable brochures functionality, and professional healthcare design. Added database schema for catalogue categories and brochures with complete backend storage implementation
+- July 09, 2025. Implemented Catalogue category detail pages with brochure listings, download tracking, and new tab functionality. Added catalogue navigation to main menu between Solutions and Education sections
+- July 09, 2025. Added 6 catalogue categories (Wheelchairs & Mobility, Lifting & Transfer Systems, Sensory Integration, Stair Lifts & Access, Rehabilitation Equipment, Daily Living Aids) with 13 downloadable brochures featuring authentic product information and download counters
 
 
 ## User Preferences

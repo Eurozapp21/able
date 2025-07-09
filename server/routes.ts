@@ -376,6 +376,59 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Catalogue routes
+  app.get("/api/catalogue/categories", async (req, res) => {
+    try {
+      const categories = await storage.getCatalogueCategories();
+      res.json(categories);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch catalogue categories" });
+    }
+  });
+
+  app.get("/api/catalogue/categories/:slug", async (req, res) => {
+    try {
+      const category = await storage.getCatalogueCategoryBySlug(req.params.slug);
+      if (!category) {
+        return res.status(404).json({ error: "Category not found" });
+      }
+      res.json(category);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch category" });
+    }
+  });
+
+  app.get("/api/catalogue/categories/:categoryId/brochures", async (req, res) => {
+    try {
+      const categoryId = parseInt(req.params.categoryId);
+      const brochures = await storage.getBrochuresByCategory(categoryId);
+      res.json(brochures);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch brochures" });
+    }
+  });
+
+  app.post("/api/catalogue/brochures/:id/download", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const brochure = await storage.getBrochure(id);
+      if (!brochure) {
+        return res.status(404).json({ error: "Brochure not found" });
+      }
+      
+      // Increment download count
+      await storage.incrementDownloadCount(id);
+      
+      res.json({ 
+        message: "Download tracked", 
+        fileUrl: brochure.fileUrl,
+        filename: brochure.filename 
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to process download" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

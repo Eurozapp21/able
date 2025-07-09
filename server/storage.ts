@@ -1,10 +1,11 @@
 import { 
-  users, categories, products, seminars, events, enquiries, enquiryMessages, achievements, banners,
+  users, categories, products, seminars, events, enquiries, enquiryMessages, achievements, banners, catalogueCategories, brochures,
   type User, type InsertUser, type Category, type InsertCategory, 
   type Product, type InsertProduct, type Seminar, type InsertSeminar,
   type Event, type InsertEvent, type Enquiry, type InsertEnquiry,
   type EnquiryMessage, type InsertEnquiryMessage, type Achievement, type InsertAchievement,
-  type Banner, type InsertBanner
+  type Banner, type InsertBanner, type CatalogueCategory, type InsertCatalogueCategory,
+  type Brochure, type InsertBrochure
 } from "@shared/schema";
 
 export interface IStorage {
@@ -58,6 +59,19 @@ export interface IStorage {
   // Banners
   getActiveBanners(): Promise<Banner[]>;
   createBanner(banner: InsertBanner): Promise<Banner>;
+  
+  // Catalogue Categories
+  getCatalogueCategories(): Promise<CatalogueCategory[]>;
+  getCatalogueCategory(id: number): Promise<CatalogueCategory | undefined>;
+  getCatalogueCategoryBySlug(slug: string): Promise<CatalogueCategory | undefined>;
+  createCatalogueCategory(category: InsertCatalogueCategory): Promise<CatalogueCategory>;
+  
+  // Brochures
+  getBrochures(): Promise<Brochure[]>;
+  getBrochure(id: number): Promise<Brochure | undefined>;
+  getBrochuresByCategory(categoryId: number): Promise<Brochure[]>;
+  createBrochure(brochure: InsertBrochure): Promise<Brochure>;
+  incrementDownloadCount(id: number): Promise<void>;
 }
 
 export class MemStorage implements IStorage {
@@ -70,11 +84,15 @@ export class MemStorage implements IStorage {
   private enquiryMessages: Map<number, EnquiryMessage> = new Map();
   private achievements: Map<number, Achievement> = new Map();
   private banners: Map<number, Banner> = new Map();
+  private catalogueCategories: Map<number, CatalogueCategory> = new Map();
+  private brochures: Map<number, Brochure> = new Map();
   
   private currentId = 1;
 
   constructor() {
     this.seedData();
+    this.seedCatalogueCategories();
+    this.seedBrochures();
   }
 
   private seedData() {
@@ -687,6 +705,318 @@ export class MemStorage implements IStorage {
     };
     this.banners.set(id, banner);
     return banner;
+  }
+
+  private seedCatalogueCategories() {
+    const categoryData = [
+      {
+        id: 1,
+        title: "Wheelchairs & Mobility",
+        description: "Manual and electric wheelchairs, mobility scooters, and walking aids for enhanced independence",
+        image: "/attached_assets/bingo_evolution_twins-1_1752003228920.jpg",
+        slug: "wheelchairs-mobility",
+        isActive: true,
+        displayOrder: 1,
+        createdAt: new Date()
+      },
+      {
+        id: 2,
+        title: "Lifting & Transfer Systems",
+        description: "Professional lifting equipment, ceiling hoists, and transfer solutions for safe patient handling",
+        image: "/attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg",
+        slug: "lifting-transfer-systems",
+        isActive: true,
+        displayOrder: 2,
+        createdAt: new Date()
+      },
+      {
+        id: 3,
+        title: "Sensory Integration",
+        description: "Multi-sensory rooms, therapy equipment, and specialized environments for sensory development",
+        image: "/attached_assets/maxresdefault_1752003228921.jpg",
+        slug: "sensory-integration",
+        isActive: true,
+        displayOrder: 3,
+        createdAt: new Date()
+      },
+      {
+        id: 4,
+        title: "Stair Lifts & Access",
+        description: "Residential and commercial stair lifts, platform lifts, and accessibility solutions",
+        image: "/attached_assets/cc1b09e90722c7d00b3f0cb8757c6d79_1752003228919.jpg",
+        slug: "stair-lifts-access",
+        isActive: true,
+        displayOrder: 4,
+        createdAt: new Date()
+      },
+      {
+        id: 5,
+        title: "Rehabilitation Equipment",
+        description: "Therapeutic exercise machines, physiotherapy equipment, and rehabilitation technology",
+        image: "/attached_assets/Spinal-Cord-Rehabilitation_1752000796341.jpg",
+        slug: "rehabilitation-equipment",
+        isActive: true,
+        displayOrder: 5,
+        createdAt: new Date()
+      },
+      {
+        id: 6,
+        title: "Daily Living Aids",
+        description: "Assistive tools, bathroom safety equipment, and devices for independent daily living",
+        image: "/attached_assets/1601936002aboutus_small2_1752007885488.jpg",
+        slug: "daily-living-aids",
+        isActive: true,
+        displayOrder: 6,
+        createdAt: new Date()
+      }
+    ];
+
+    categoryData.forEach(cat => {
+      this.catalogueCategories.set(cat.id, cat);
+    });
+  }
+
+  private seedBrochures() {
+    const brochureData = [
+      // Wheelchairs & Mobility
+      {
+        id: 1,
+        title: "Premium Wheelchair Collection 2024",
+        description: "Complete range of manual and electric wheelchairs with detailed specifications and features",
+        categoryId: 1,
+        filename: "wheelchair-collection-2024.pdf",
+        fileUrl: "/brochures/wheelchair-collection-2024.pdf",
+        fileSize: "2.4 MB",
+        downloadCount: 145,
+        isActive: true,
+        createdAt: new Date()
+      },
+      {
+        id: 2,
+        title: "Mobility Scooter Guide",
+        description: "Comprehensive guide to mobility scooters for indoor and outdoor use",
+        categoryId: 1,
+        filename: "mobility-scooter-guide.pdf",
+        fileUrl: "/brochures/mobility-scooter-guide.pdf",
+        fileSize: "1.8 MB",
+        downloadCount: 98,
+        isActive: true,
+        createdAt: new Date()
+      },
+      {
+        id: 3,
+        title: "Walking Aids & Support Equipment",
+        description: "Walking frames, rollators, and mobility support devices for enhanced stability",
+        categoryId: 1,
+        filename: "walking-aids-catalog.pdf",
+        fileUrl: "/brochures/walking-aids-catalog.pdf",
+        fileSize: "1.2 MB",
+        downloadCount: 67,
+        isActive: true,
+        createdAt: new Date()
+      },
+
+      // Lifting & Transfer Systems
+      {
+        id: 4,
+        title: "Ceiling Hoist Systems",
+        description: "Professional ceiling-mounted lifting solutions for healthcare facilities",
+        categoryId: 2,
+        filename: "ceiling-hoist-systems.pdf",
+        fileUrl: "/brochures/ceiling-hoist-systems.pdf",
+        fileSize: "3.1 MB",
+        downloadCount: 234,
+        isActive: true,
+        createdAt: new Date()
+      },
+      {
+        id: 5,
+        title: "Mobile Lifting Equipment",
+        description: "Portable hoists and transfer aids for flexible patient handling",
+        categoryId: 2,
+        filename: "mobile-lifting-equipment.pdf",
+        fileUrl: "/brochures/mobile-lifting-equipment.pdf",
+        fileSize: "2.6 MB",
+        downloadCount: 156,
+        isActive: true,
+        createdAt: new Date()
+      },
+
+      // Sensory Integration
+      {
+        id: 6,
+        title: "Multi-Sensory Room Design Guide",
+        description: "Complete guide to designing and equipping multi-sensory therapy environments",
+        categoryId: 3,
+        filename: "multi-sensory-room-guide.pdf",
+        fileUrl: "/brochures/multi-sensory-room-guide.pdf",
+        fileSize: "4.2 MB",
+        downloadCount: 189,
+        isActive: true,
+        createdAt: new Date()
+      },
+      {
+        id: 7,
+        title: "Sensory Equipment Catalog",
+        description: "Interactive equipment for sensory stimulation and therapeutic activities",
+        categoryId: 3,
+        filename: "sensory-equipment-catalog.pdf",
+        fileUrl: "/brochures/sensory-equipment-catalog.pdf",
+        fileSize: "2.9 MB",
+        downloadCount: 123,
+        isActive: true,
+        createdAt: new Date()
+      },
+
+      // Stair Lifts & Access
+      {
+        id: 8,
+        title: "Residential Stair Lift Solutions",
+        description: "Home stair lifts for straight and curved staircases with installation guide",
+        categoryId: 4,
+        filename: "residential-stair-lifts.pdf",
+        fileUrl: "/brochures/residential-stair-lifts.pdf",
+        fileSize: "2.1 MB",
+        downloadCount: 87,
+        isActive: true,
+        createdAt: new Date()
+      },
+      {
+        id: 9,
+        title: "Platform Lifts & Accessibility",
+        description: "Vertical platform lifts and accessibility solutions for commercial buildings",
+        categoryId: 4,
+        filename: "platform-lifts-accessibility.pdf",
+        fileUrl: "/brochures/platform-lifts-accessibility.pdf",
+        fileSize: "1.9 MB",
+        downloadCount: 76,
+        isActive: true,
+        createdAt: new Date()
+      },
+
+      // Rehabilitation Equipment
+      {
+        id: 10,
+        title: "HUR Rehabilitation Technology",
+        description: "Pneumatic exercise equipment for neurological and spinal cord rehabilitation",
+        categoryId: 5,
+        filename: "hur-rehabilitation-technology.pdf",
+        fileUrl: "/brochures/hur-rehabilitation-technology.pdf",
+        fileSize: "3.5 MB",
+        downloadCount: 267,
+        isActive: true,
+        createdAt: new Date()
+      },
+      {
+        id: 11,
+        title: "Physiotherapy Equipment Range",
+        description: "Professional physiotherapy tools and therapeutic exercise machines",
+        categoryId: 5,
+        filename: "physiotherapy-equipment-range.pdf",
+        fileUrl: "/brochures/physiotherapy-equipment-range.pdf",
+        fileSize: "2.7 MB",
+        downloadCount: 178,
+        isActive: true,
+        createdAt: new Date()
+      },
+
+      // Daily Living Aids
+      {
+        id: 12,
+        title: "Bathroom Safety Solutions",
+        description: "Complete range of bathroom aids, shower seats, and safety equipment",
+        categoryId: 6,
+        filename: "bathroom-safety-solutions.pdf",
+        fileUrl: "/brochures/bathroom-safety-solutions.pdf",
+        fileSize: "1.6 MB",
+        downloadCount: 94,
+        isActive: true,
+        createdAt: new Date()
+      },
+      {
+        id: 13,
+        title: "Kitchen & Dining Aids",
+        description: "Adaptive tools and equipment for independent meal preparation and dining",
+        categoryId: 6,
+        filename: "kitchen-dining-aids.pdf",
+        fileUrl: "/brochures/kitchen-dining-aids.pdf",
+        fileSize: "1.4 MB",
+        downloadCount: 55,
+        isActive: true,
+        createdAt: new Date()
+      }
+    ];
+
+    brochureData.forEach(brochure => {
+      this.brochures.set(brochure.id, brochure);
+    });
+  }
+
+  // Catalogue Categories
+  async getCatalogueCategories(): Promise<CatalogueCategory[]> {
+    return Array.from(this.catalogueCategories.values())
+      .filter(cat => cat.isActive)
+      .sort((a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0));
+  }
+
+  async getCatalogueCategory(id: number): Promise<CatalogueCategory | undefined> {
+    return this.catalogueCategories.get(id);
+  }
+
+  async getCatalogueCategoryBySlug(slug: string): Promise<CatalogueCategory | undefined> {
+    return Array.from(this.catalogueCategories.values()).find(cat => cat.slug === slug);
+  }
+
+  async createCatalogueCategory(insertCategory: InsertCatalogueCategory): Promise<CatalogueCategory> {
+    const id = this.currentId++;
+    const category: CatalogueCategory = { 
+      ...insertCategory, 
+      id, 
+      createdAt: new Date(),
+      description: insertCategory.description ?? null,
+      isActive: insertCategory.isActive ?? true,
+      displayOrder: insertCategory.displayOrder ?? 0
+    };
+    this.catalogueCategories.set(id, category);
+    return category;
+  }
+
+  // Brochures
+  async getBrochures(): Promise<Brochure[]> {
+    return Array.from(this.brochures.values()).filter(brochure => brochure.isActive);
+  }
+
+  async getBrochure(id: number): Promise<Brochure | undefined> {
+    return this.brochures.get(id);
+  }
+
+  async getBrochuresByCategory(categoryId: number): Promise<Brochure[]> {
+    return Array.from(this.brochures.values())
+      .filter(brochure => brochure.categoryId === categoryId && brochure.isActive)
+      .sort((a, b) => b.downloadCount! - a.downloadCount!); // Sort by popularity
+  }
+
+  async createBrochure(insertBrochure: InsertBrochure): Promise<Brochure> {
+    const id = this.currentId++;
+    const brochure: Brochure = { 
+      ...insertBrochure, 
+      id, 
+      createdAt: new Date(),
+      description: insertBrochure.description ?? null,
+      categoryId: insertBrochure.categoryId ?? null,
+      fileSize: insertBrochure.fileSize ?? null,
+      downloadCount: insertBrochure.downloadCount ?? 0,
+      isActive: insertBrochure.isActive ?? true
+    };
+    this.brochures.set(id, brochure);
+    return brochure;
+  }
+
+  async incrementDownloadCount(id: number): Promise<void> {
+    const brochure = this.brochures.get(id);
+    if (brochure) {
+      this.brochures.set(id, { ...brochure, downloadCount: (brochure.downloadCount ?? 0) + 1 });
+    }
   }
 }
 

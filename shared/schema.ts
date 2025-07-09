@@ -143,6 +143,40 @@ export const insertBannerSchema = createInsertSchema(banners).omit({
   id: true,
 });
 
+export const catalogueCategories = pgTable("catalogue_categories", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  description: text("description"),
+  image: text("image").notNull(),
+  slug: text("slug").notNull().unique(),
+  isActive: boolean("is_active").default(true),
+  displayOrder: integer("display_order").default(0),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const brochures = pgTable("brochures", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  description: text("description"),
+  categoryId: integer("category_id").references(() => catalogueCategories.id),
+  filename: text("filename").notNull(),
+  fileUrl: text("file_url").notNull(),
+  fileSize: text("file_size"),
+  downloadCount: integer("download_count").default(0),
+  isActive: boolean("is_active").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertCatalogueCategorySchema = createInsertSchema(catalogueCategories).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertBrochureSchema = createInsertSchema(brochures).omit({
+  id: true,
+  createdAt: true,
+});
+
 // Types
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
@@ -162,3 +196,7 @@ export type Achievement = typeof achievements.$inferSelect;
 export type InsertAchievement = z.infer<typeof insertAchievementSchema>;
 export type Banner = typeof banners.$inferSelect;
 export type InsertBanner = z.infer<typeof insertBannerSchema>;
+export type CatalogueCategory = typeof catalogueCategories.$inferSelect;
+export type InsertCatalogueCategory = z.infer<typeof insertCatalogueCategorySchema>;
+export type Brochure = typeof brochures.$inferSelect;
+export type InsertBrochure = z.infer<typeof insertBrochureSchema>;
