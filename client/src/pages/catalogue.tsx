@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { Card, CardContent } from '@/components/ui/card';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import { Package, FileText, Download, ArrowRight } from 'lucide-react';
@@ -16,9 +16,15 @@ interface CatalogueCategory {
 }
 
 export default function Catalogue() {
+  const [location, setLocation] = useLocation();
   const { data: categories = [], isLoading } = useQuery<CatalogueCategory[]>({
     queryKey: ['/api/catalogue/categories'],
   });
+
+  const handleCategoryClick = (slug: string) => {
+    console.log('Navigating to category:', slug);
+    setLocation(`/catalogue/${slug}`);
+  };
 
   if (isLoading) {
     return (
@@ -92,8 +98,11 @@ export default function Catalogue() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((category) => (
-            <Link key={category.id} href={`/catalogue/${category.slug}`}>
-              <Card className="group cursor-pointer hover:shadow-2xl transition-all duration-300 border-0 overflow-hidden bg-white" onClick={() => console.log('Clicking category:', category.slug)}>
+            <Card 
+              key={category.id} 
+              className="group cursor-pointer hover:shadow-2xl transition-all duration-300 border-0 overflow-hidden bg-white" 
+              onClick={() => handleCategoryClick(category.slug)}
+            >
                 <div className="relative h-64 overflow-hidden">
                   <img 
                     src={category.image} 
@@ -129,7 +138,6 @@ export default function Catalogue() {
                   </div>
                 </CardContent>
               </Card>
-            </Link>
           ))}
         </div>
 
