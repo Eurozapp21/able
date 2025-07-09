@@ -12,6 +12,7 @@ import ProductDetail from "./pages/product-detail";
 import About from "./pages/about";
 import Contact from "./pages/contact";
 import Seminars from "./pages/seminars";
+import SeminarDetail from "./pages/seminar-detail";
 import Events from "./pages/events";
 import Login from "./pages/login";
 import Register from "./pages/register";
@@ -31,6 +32,7 @@ function Router() {
           <Route path="/products" component={Products} />
           <Route path="/products/detail/:id" component={ProductDetail} />
           <Route path="/seminars" component={Seminars} />
+          <Route path="/seminars/:id" component={SeminarDetail} />
           <Route path="/events" component={Events} />
           <Route path="/contact" component={Contact} />
           <Route path="/login" component={Login} />
