@@ -31,20 +31,16 @@ export default function ProductGrid({
       if (featured) params.append('featured', 'true');
       if (searchQuery) params.append('search', searchQuery);
       
-      const response = await fetch(`/api/products?${params}`);
+      const url = `/api/products?${params}`;
+      console.log('Fetching products with URL:', url);
+      const response = await fetch(url);
       if (!response.ok) throw new Error('Failed to fetch products');
       return response.json();
     },
   });
 
-  // Filter and sort products
-  const filteredProducts = products.filter((product: any) => {
-    if (!searchQuery) return true;
-    return product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-           product.description.toLowerCase().includes(searchQuery.toLowerCase());
-  });
-
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
+  // Sort products (filtering is now done server-side)
+  const sortedProducts = [...products].sort((a, b) => {
     switch (sortBy) {
       case 'name':
         return a.name.localeCompare(b.name);
@@ -83,7 +79,7 @@ export default function ProductGrid({
     );
   }
 
-  console.log('Product Grid viewMode:', viewMode);
+
   
   const gridClasses = viewMode === 'list' 
     ? "space-y-4" 
@@ -92,11 +88,11 @@ export default function ProductGrid({
   return (
     <div className={gridClasses}>
       {displayProducts.map((product) => (
-        <Card key={product.id} className={`overflow-hidden hover-lift group ${
-          viewMode === 'list' ? 'flex flex-row' : ''
+        <Card key={product.id} className={`overflow-hidden hover:shadow-lg transition-all duration-300 group ${
+          viewMode === 'list' ? 'flex flex-row bg-white' : 'bg-white'
         }`}>
           <div className={`relative overflow-hidden ${
-            viewMode === 'list' ? 'w-48 flex-shrink-0' : ''
+            viewMode === 'list' ? 'w-48 flex-shrink-0' : 'w-full'
           }`}>
             <img
               src={product.images?.[0] || '/api/placeholder/400/300'}

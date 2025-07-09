@@ -147,6 +147,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/products", async (req, res) => {
     try {
       const { categoryId, featured, search } = req.query;
+      console.log('Products API called with:', { categoryId, featured, search });
       
       let products;
       
