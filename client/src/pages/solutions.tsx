@@ -32,7 +32,7 @@ export default function Solutions() {
         "Universal design principles",
         "Individual lifestyle needs"
       ],
-      color: "bg-green-500",
+      color: "bg-primary-gold",
       gradientFrom: "from-green-50",
       gradientTo: "to-emerald-50"
     },
@@ -162,7 +162,7 @@ export default function Solutions() {
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     <div className={`w-12 h-12 ${service.color} rounded-full flex items-center justify-center`}>
-                      <service.icon className="w-6 h-6 text-black" />
+                      <service.icon className={`w-6 h-6 ${service.color === 'bg-primary-gold' ? 'text-black' : 'text-white'}`} />
                     </div>
                     <CardTitle className="text-2xl text-text-dark">{service.title}</CardTitle>
                   </div>
