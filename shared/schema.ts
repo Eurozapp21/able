@@ -47,6 +47,7 @@ export const seminars = pgTable("seminars", {
   image: text("image"),
   fee: text("fee"),
   maxParticipants: integer("max_participants"),
+  type: text("type").notNull().default("seminar"), // "seminar" or "training"
   createdAt: timestamp("created_at").defaultNow(),
 });
 

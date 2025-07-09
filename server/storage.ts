@@ -195,21 +195,61 @@ export class MemStorage implements IStorage {
       this.products.set(prod.id, { ...prod, createdAt: new Date() });
     });
 
-    // Seed seminars
+    // Seed seminars and training
     const seminarData = [
+      // Educational Seminars
       {
         id: 1,
         title: "Advanced Rehabilitation Techniques",
-        description: "Comprehensive training on modern rehabilitation approaches for spinal cord injuries, neurological conditions, and mobility impairments. Learn evidence-based techniques used by leading rehabilitation centers worldwide.",
+        description: "Comprehensive seminar on modern rehabilitation approaches for spinal cord injuries, neurological conditions, and mobility impairments. Learn evidence-based techniques used by leading rehabilitation centers worldwide.",
         date: new Date("2025-08-15"),
         location: "AbleTools Training Center, Nicosia",
         speaker: "Dr. Maria Constantinou, PT, PhD",
         image: "/attached_assets/Spinal-Cord-Rehabilitation_1752000796341.jpg",
         fee: "€185",
-        maxParticipants: 20
+        maxParticipants: 20,
+        type: "seminar"
       },
       {
         id: 2,
+        title: "Multi-Sensory Room Design & Implementation",
+        description: "Educational seminar on designing effective multi-sensory environments for therapeutic use. Covers lighting, sound, tactile elements, and therapeutic protocols for various conditions.",
+        date: new Date("2025-11-05"),
+        location: "Sensory Innovation Lab, Paphos",
+        speaker: "Elena Pavlou, MSc Occupational Therapy",
+        image: "/attached_assets/maxresdefault_1752003228921.jpg",
+        fee: "€195",
+        maxParticipants: 12,
+        type: "seminar"
+      },
+      {
+        id: 3,
+        title: "Pediatric Rehabilitation Approaches",
+        description: "Comprehensive seminar on modern approaches to pediatric rehabilitation. Focus on evidence-based practices, family-centered care, and developmental considerations in treatment planning.",
+        date: new Date("2025-12-03"),
+        location: "Children's Rehabilitation Center, Nicosia",
+        speaker: "Dr. Sophia Michaelidou, Pediatric PT",
+        image: "/attached_assets/cc1b09e90722c7d00b3f0cb8757c6d79_1752003228919.jpg",
+        fee: "€175",
+        maxParticipants: 16,
+        type: "seminar"
+      },
+      {
+        id: 4,
+        title: "Innovation in Accessibility Design",
+        description: "Seminar exploring cutting-edge approaches to accessibility design and universal design principles. Learn about the latest research and best practices in creating inclusive environments.",
+        date: new Date("2025-10-22"),
+        location: "Design Innovation Center, Larnaca",
+        speaker: "Universal Design Consortium",
+        image: "/attached_assets/1601935107aboutus_1752007024526.jpg",
+        fee: "€155",
+        maxParticipants: 22,
+        type: "seminar"
+      },
+      
+      // Professional Training Courses
+      {
+        id: 5,
         title: "HUR Equipment Training Certification",
         description: "Professional certification course for HUR pneumatic exercise equipment. Master safe operation, assessment protocols, and therapeutic applications for neurological rehabilitation.",
         date: new Date("2025-09-12"),
@@ -217,73 +257,56 @@ export class MemStorage implements IStorage {
         speaker: "International HUR Trainer Team",
         image: "/attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg",
         fee: "€245",
-        maxParticipants: 15
+        maxParticipants: 15,
+        type: "training"
       },
       {
-        id: 3,
-        title: "Wheelchair Assessment & Fitting",
-        description: "Intensive hands-on workshop covering comprehensive wheelchair assessment, proper fitting techniques, and customization for individual needs. Includes manual and power wheelchair systems.",
+        id: 6,
+        title: "Wheelchair Assessment & Fitting Training",
+        description: "Intensive hands-on training covering comprehensive wheelchair assessment, proper fitting techniques, and customization for individual needs. Includes manual and power wheelchair systems.",
         date: new Date("2025-10-08"),
         location: "AbleTools Showroom, Nicosia",
         speaker: "Andreas Georgiou, OTR/L, ATP",
         image: "/attached_assets/bingo_evolution_twins-1_1752003228920.jpg",
         fee: "€165",
-        maxParticipants: 18
+        maxParticipants: 18,
+        type: "training"
       },
       {
-        id: 4,
-        title: "Multi-Sensory Room Design & Implementation",
-        description: "Learn to design and implement effective multi-sensory environments for therapeutic use. Covers lighting, sound, tactile elements, and therapeutic protocols for various conditions.",
-        date: new Date("2025-11-05"),
-        location: "Sensory Innovation Lab, Paphos",
-        speaker: "Elena Pavlou, MSc Occupational Therapy",
-        image: "/attached_assets/maxresdefault_1752003228921.jpg",
-        fee: "€195",
-        maxParticipants: 12
-      },
-      {
-        id: 5,
-        title: "Safe Patient Transfer Techniques",
-        description: "Essential training for healthcare professionals on safe patient handling and transfer methods. Includes manual techniques, mechanical lifts, and injury prevention strategies.",
+        id: 7,
+        title: "Safe Patient Transfer Techniques Training",
+        description: "Essential hands-on training for healthcare professionals on safe patient handling and transfer methods. Includes manual techniques, mechanical lifts, and injury prevention strategies.",
         date: new Date("2025-09-25"),
         location: "Cyprus University of Technology, Limassol",
         speaker: "Nursing Education Consortium",
         image: "/attached_assets/send-award-virtual-celebration-employee-milestones_1752004100582.jpg",
         fee: "€125",
-        maxParticipants: 30
-      },
-      {
-        id: 6,
-        title: "Pediatric Rehabilitation Equipment Training",
-        description: "Specialized training for working with children with disabilities. Focus on age-appropriate equipment, family-centered care, and developmental considerations in equipment selection.",
-        date: new Date("2025-12-03"),
-        location: "Children's Rehabilitation Center, Nicosia",
-        speaker: "Dr. Sophia Michaelidou, Pediatric PT",
-        image: "/attached_assets/cc1b09e90722c7d00b3f0cb8757c6d79_1752003228919.jpg",
-        fee: "€175",
-        maxParticipants: 16
-      },
-      {
-        id: 7,
-        title: "Home Accessibility Assessment",
-        description: "Complete training on conducting thorough home assessments for accessibility modifications. Includes stair lifts, ramps, bathroom modifications, and technology integration.",
-        date: new Date("2025-10-22"),
-        location: "Home Modification Demonstration House, Larnaca",
-        speaker: "Home Access Specialists Team",
-        image: "/attached_assets/1601935107aboutus_1752007024526.jpg",
-        fee: "€155",
-        maxParticipants: 22
+        maxParticipants: 30,
+        type: "training"
       },
       {
         id: 8,
-        title: "Advanced Seating & Positioning",
-        description: "In-depth course on complex seating and positioning solutions for individuals with severe physical disabilities. Covers pressure management, postural support, and custom solutions.",
+        title: "Home Accessibility Assessment Training",
+        description: "Complete hands-on training on conducting thorough home assessments for accessibility modifications. Includes stair lifts, ramps, bathroom modifications, and technology integration.",
+        date: new Date("2025-10-15"),
+        location: "Home Modification Demonstration House, Larnaca",
+        speaker: "Home Access Specialists Team",
+        image: "/attached_assets/Achievement_1752003982449.jpg",
+        fee: "€155",
+        maxParticipants: 22,
+        type: "training"
+      },
+      {
+        id: 9,
+        title: "Advanced Seating & Positioning Training",
+        description: "In-depth hands-on training on complex seating and positioning solutions for individuals with severe physical disabilities. Covers pressure management, postural support, and custom solutions.",
         date: new Date("2025-11-19"),
         location: "Seating Clinic, Famagusta",
         speaker: "International Seating Consortium",
         image: "/attached_assets/what-is-true-sense-of-accomplishment-and-how-to-achive-it_1752003982450.jpg",
         fee: "€205",
-        maxParticipants: 14
+        maxParticipants: 14,
+        type: "training"
       }
     ];
 

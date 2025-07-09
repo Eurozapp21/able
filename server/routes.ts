@@ -184,13 +184,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/seminars", async (req, res) => {
     try {
-      const { upcoming } = req.query;
+      const { upcoming, type } = req.query;
       
       let seminars;
       if (upcoming === 'true') {
         seminars = await storage.getUpcomingSeminars();
       } else {
         seminars = await storage.getSeminars();
+      }
+      
+      // Filter by type if specified
+      if (type) {
+        seminars = seminars.filter(seminar => seminar.type === type);
       }
       
       res.json(seminars);
