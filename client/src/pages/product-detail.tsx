@@ -1,114 +1,109 @@
-import { useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRoute, Link } from 'wouter';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
-import { Textarea } from '@/components/ui/textarea';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useAuth } from '@/lib/auth';
-import { useToast } from '@/hooks/use-toast';
-import { apiRequest } from '@/lib/queryClient';
-import { Heart, Share2, ShoppingCart, ArrowLeft, Star, MessageCircle, Phone, Mail, Download, Play, FileText, ChevronLeft, ChevronRight, Zap, Settings, Shield, Award } from 'lucide-react';
-import type { Product, Category } from '@shared/schema';
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useParams, useLocation, Link } from "wouter";
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { 
+  ArrowLeft, 
+  Heart, 
+  Share2, 
+  MessageCircle, 
+  Phone, 
+  Mail, 
+  Download,
+  Play,
+  FileText,
+  Star,
+  Settings,
+  Shield,
+  ChevronLeft,
+  ChevronRight
+} from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
+
+interface Category {
+  id: number;
+  name: string;
+  parentId: number | null;
+}
+
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  specifications: string;
+  categoryId: number;
+  isFeatured: boolean;
+  images: string[];
+}
 
 export default function ProductDetail() {
-  const [, params] = useRoute('/products/detail/:id');
-  const { user } = useAuth();
+  const { id } = useParams();
+  const [, setLocation] = useLocation();
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [enquiryMessage, setEnquiryMessage] = useState("");
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const [enquiryMessage, setEnquiryMessage] = useState('');
-  const [selectedImage, setSelectedImage] = useState(0);
 
-  const productId = params?.id ? parseInt(params.id) : null;
-
-  // Fetch product
-  const { data: product, isLoading: productLoading } = useQuery({
-    queryKey: ['/api/products', productId],
-    enabled: !!productId,
+  const { data: product, isLoading: productLoading } = useQuery<Product>({
+    queryKey: [`/api/products/${id}`],
+    enabled: !!id,
   });
 
-  // Build category breadcrumb path
-  const buildCategoryPath = async (categoryId: number): Promise<Category[]> => {
-    const categories: Category[] = [];
-    let currentCategoryId: number | null = categoryId;
-    
-    while (currentCategoryId) {
-      const response = await fetch(`/api/categories/${currentCategoryId}`);
-      if (response.ok) {
-        const category = await response.json();
-        categories.unshift(category);
-        currentCategoryId = category.parentId;
-      } else {
-        break;
-      }
-    }
-    
-    return categories;
-  };
-
-  const { data: categoryPath = [] } = useQuery({
-    queryKey: ['/api/categories/path', product?.categoryId],
-    queryFn: () => buildCategoryPath(product!.categoryId),
-    enabled: !!product?.categoryId,
+  const { data: categories = [] } = useQuery<Category[]>({
+    queryKey: ["/api/categories"],
   });
 
-  // Submit enquiry mutation
   const enquiryMutation = useMutation({
-    mutationFn: async (data: { message: string; productId: number }) => {
-      return apiRequest('/api/enquiries', {
+    mutationFn: async (data: any) => {
+      const response = await apiRequest('/api/enquiries', {
         method: 'POST',
-        body: JSON.stringify({
-          subject: `Product Enquiry: ${product?.name}`,
-          message: data.message,
-          userId: user?.id,
-          status: 'open'
-        }),
+        body: JSON.stringify(data),
       });
+      return response;
     },
     onSuccess: () => {
-      toast({ title: 'Success', description: 'Your enquiry has been submitted successfully.' });
-      setEnquiryMessage('');
-      queryClient.invalidateQueries({ queryKey: ['/api/enquiries'] });
+      toast({
+        title: "Enquiry sent successfully!",
+        description: "We'll get back to you within 24 hours.",
+      });
+      setEnquiryMessage("");
     },
-    onError: (error) => {
-      toast({ title: 'Error', description: 'Failed to submit enquiry. Please try again.' });
+    onError: () => {
+      toast({
+        title: "Error sending enquiry",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      });
     },
   });
 
   const handleEnquirySubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user) {
-      toast({ title: 'Login Required', description: 'Please log in to submit an enquiry.' });
-      return;
-    }
-    if (!enquiryMessage.trim() || !productId) return;
+    const formData = new FormData(e.target as HTMLFormElement);
     
-    enquiryMutation.mutate({ 
+    enquiryMutation.mutate({
+      subject: `Product enquiry: ${product?.name}`,
       message: enquiryMessage,
-      productId: productId
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      productId: product?.id
     });
   };
 
   if (productLoading) {
     return (
-      <div className="pt-20 min-h-screen bg-gray-50">
-        <div className="container mx-auto px-4 py-8">
-          <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 rounded w-3/4 mb-6"></div>
-            <div className="grid lg:grid-cols-2 gap-8">
-              <div className="h-96 bg-gray-200 rounded"></div>
-              <div className="space-y-4">
-                <div className="h-8 bg-gray-200 rounded w-1/2"></div>
-                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                <div className="h-32 bg-gray-200 rounded"></div>
-              </div>
-            </div>
-          </div>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading product details...</p>
         </div>
       </div>
     );
@@ -116,148 +111,93 @@ export default function ProductDetail() {
 
   if (!product) {
     return (
-      <div className="pt-20 min-h-screen bg-gray-50">
-        <div className="container mx-auto px-4 py-8 text-center">
-          <h1 className="text-3xl font-bold mb-4">Product Not Found</h1>
-          <p className="text-gray-600 mb-8">The product you're looking for doesn't exist.</p>
-          <Link href="/products">
-            <Button className="bg-yellow-400 hover:bg-yellow-500 text-black">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Products
-            </Button>
-          </Link>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Product not found</h1>
+          <p className="text-gray-600 mb-4">The product you're looking for doesn't exist.</p>
+          <Button onClick={() => setLocation("/products")} className="bg-yellow-400 hover:bg-yellow-500 text-black">
+            Browse Products
+          </Button>
         </div>
       </div>
     );
   }
 
-  return (
-    <div className="pt-20 min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        {/* Breadcrumb */}
-        <Breadcrumb className="mb-6">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/">Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/products">Products</BreadcrumbLink>
-            </BreadcrumbItem>
-            {categoryPath.map((category, index) => (
-              <div key={category.id} className="flex items-center">
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  {index === categoryPath.length - 1 ? (
-                    <BreadcrumbPage>{category.name}</BreadcrumbPage>
-                  ) : (
-                    <BreadcrumbLink 
-                      href={`/products?category=${category.id}`}
-                    >
-                      {category.name}
-                    </BreadcrumbLink>
-                  )}
-                </BreadcrumbItem>
-              </div>
-            ))}
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage className="text-yellow-600">{product.name}</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+  // Build category path
+  const categoryPath: Category[] = [];
+  let currentCategory = categories.find(c => c.id === product.categoryId);
+  while (currentCategory) {
+    categoryPath.unshift(currentCategory);
+    currentCategory = categories.find(c => c.id === currentCategory.parentId);
+  }
 
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Back Button */}
         <div className="mb-6">
           <Button
             variant="ghost"
-            onClick={() => window.history.back()}
-            className="text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50"
+            onClick={() => setLocation("/products")}
+            className="text-gray-600 hover:text-gray-900"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back
+            Back to Products
           </Button>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Product Images Gallery */}
-          <div className="space-y-4">
-            <div className="relative aspect-square overflow-hidden rounded-xl bg-white shadow-lg group">
-              <img
-                src={product.images?.[selectedImage] || '/api/placeholder/600/600'}
-                alt={product.name}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              
-              {/* Image Navigation Arrows */}
-              {product.images && product.images.length > 1 && (
-                <>
-                  <button
-                    onClick={() => setSelectedImage(selectedImage > 0 ? selectedImage - 1 : product.images!.length - 1)}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
-                  >
-                    <ChevronLeft className="h-5 w-5 text-gray-700" />
-                  </button>
-                  <button
-                    onClick={() => setSelectedImage(selectedImage < product.images!.length - 1 ? selectedImage + 1 : 0)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
-                  >
-                    <ChevronRight className="h-5 w-5 text-gray-700" />
-                  </button>
-                </>
-              )}
-              
-              {/* Image Counter */}
-              {product.images && product.images.length > 1 && (
-                <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">
-                  {selectedImage + 1} / {product.images.length}
-                </div>
-              )}
-            </div>
-            
-            {/* Thumbnail Gallery */}
-            {product.images && product.images.length > 1 && (
-              <div className="grid grid-cols-6 gap-2">
-                {product.images.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(index)}
-                    className={`aspect-square rounded-lg overflow-hidden border-2 transition-all hover:border-yellow-400 ${
-                      selectedImage === index ? 'border-yellow-400 ring-2 ring-yellow-400/20' : 'border-gray-200'
-                    }`}
-                  >
-                    <img
-                      src={image}
-                      alt={`${product.name} ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
+        {/* Main Product Layout */}
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Product Image - Compact */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+              <div className="aspect-square relative">
+                <img
+                  src={product.images?.[selectedImage] || '/api/placeholder/500/500'}
+                  alt={product.name}
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Image Navigation Dots */}
+                {product.images && product.images.length > 1 && (
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                    {product.images.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setSelectedImage(index)}
+                        className={`w-2 h-2 rounded-full transition-all ${
+                          selectedImage === index ? 'bg-yellow-400 w-6' : 'bg-white/60 hover:bg-white/80'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
-            )}
-            
-            {/* Product Actions */}
-            <div className="flex gap-3">
-              <Button className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">
-                <Download className="h-4 w-4 mr-2" />
-                Download Brochure
-              </Button>
-              <Button variant="outline" className="flex-1 border-yellow-400 text-yellow-600 hover:bg-yellow-50">
-                <Play className="h-4 w-4 mr-2" />
-                Watch Videos
-              </Button>
+              
+              {/* Quick Actions */}
+              <div className="p-4 grid grid-cols-2 gap-3">
+                <Button className="bg-yellow-400 hover:bg-yellow-500 text-black">
+                  <Download className="h-4 w-4 mr-2" />
+                  Brochure
+                </Button>
+                <Button variant="outline" className="border-yellow-400 text-yellow-600">
+                  <Play className="h-4 w-4 mr-2" />
+                  Videos
+                </Button>
+              </div>
             </div>
           </div>
 
           {/* Product Information */}
-          <div className="space-y-6">
-            <div>
-              <div className="flex items-center justify-between mb-4">
+          <div className="lg:col-span-2 space-y-6">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-2xl p-6">
+              <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
                   {product.isFeatured && (
-                    <Badge className="bg-yellow-400 text-black">Featured</Badge>
+                    <Badge className="bg-yellow-400 text-black font-semibold">★ Featured</Badge>
                   )}
-                  <Badge variant="outline" className="border-gray-300">
+                  <Badge variant="outline" className="border-yellow-300 text-yellow-700 bg-white">
                     {categoryPath[categoryPath.length - 1]?.name || 'Product'}
                   </Badge>
                 </div>
@@ -271,425 +211,293 @@ export default function ProductDetail() {
                 </div>
               </div>
               
-              <h1 className="text-4xl font-bold mb-4 text-gray-900">{product.name}</h1>
-              <p className="text-lg text-gray-600 leading-relaxed mb-6">{product.description}</p>
-              
-              {/* Product Highlights */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                <div className="flex items-center gap-3 p-3 bg-yellow-50 rounded-lg">
-                  <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center">
-                    <Zap className="h-5 w-5 text-black" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-sm">High Performance</p>
-                    <p className="text-xs text-gray-600">Premium quality</p>
-                  </div>
+              <h1 className="text-3xl font-bold mb-3 text-gray-900">{product.name}</h1>
+              <p className="text-gray-700 leading-relaxed">{product.description}</p>
+            </div>
+
+            {/* Quick Specs */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <span className="text-yellow-600 font-bold text-sm">6.5kg</span>
                 </div>
-                <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
-                  <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-                    <Settings className="h-5 w-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-sm">Customizable</p>
-                    <p className="text-xs text-gray-600">Adjustable features</p>
-                  </div>
+                <p className="text-xs text-gray-600 font-medium">Starting Weight</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <span className="text-blue-600 font-bold text-sm">150kg</span>
                 </div>
-                <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-                  <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                    <Shield className="h-5 w-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-sm">Certified</p>
-                    <p className="text-xs text-gray-600">Safety approved</p>
-                  </div>
+                <p className="text-xs text-gray-600 font-medium">Max User Weight</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Settings className="h-5 w-5 text-green-600" />
                 </div>
+                <p className="text-xs text-gray-600 font-medium">Adjustable</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
+                <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Shield className="h-5 w-5 text-red-600" />
+                </div>
+                <p className="text-xs text-gray-600 font-medium">CE Certified</p>
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap gap-3">
-              <Button size="lg" className="bg-yellow-400 hover:bg-yellow-500 text-black flex-1 sm:flex-none">
-                <MessageCircle className="h-5 w-5 mr-2" />
-                Request Quote
-              </Button>
-              <Button size="lg" variant="outline" className="border-yellow-400 text-yellow-600 hover:bg-yellow-50">
-                <Heart className="h-5 w-5 mr-2" />
-                Save
-              </Button>
-              <Button size="lg" variant="outline" className="border-yellow-400 text-yellow-600 hover:bg-yellow-50">
-                <Share2 className="h-5 w-5 mr-2" />
-                Share
-              </Button>
-            </div>
-
-            {/* Quick Contact */}
-            <Card className="border-yellow-200 bg-yellow-50">
-              <CardContent className="p-4">
-                <h3 className="font-semibold mb-3 text-gray-900">Need Help?</h3>
-                <div className="flex flex-col sm:flex-row gap-2">
-                  <Button variant="outline" size="sm" className="flex-1">
-                    <Phone className="h-4 w-4 mr-2" />
-                    Call Us
-                  </Button>
-                  <Button variant="outline" size="sm" className="flex-1">
-                    <Mail className="h-4 w-4 mr-2" />
-                    Email
-                  </Button>
+            {/* Key Features */}
+            <Card className="border-0 shadow-sm">
+              <CardContent className="p-6">
+                <h3 className="font-bold text-lg mb-4 flex items-center">
+                  <Star className="h-5 w-5 text-yellow-500 mr-2" />
+                  Key Features
+                </h3>
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                    <span className="text-sm text-gray-700">Crash-tested safety design</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                    <span className="text-sm text-gray-700">Quick-release axle system</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                    <span className="text-sm text-gray-700">Fully customizable setup</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                    <span className="text-sm text-gray-700">Easy car transportation</span>
+                  </div>
                 </div>
               </CardContent>
             </Card>
+
+            {/* Action Buttons */}
+            <div className="flex gap-4">
+              <Button className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold h-12">
+                <MessageCircle className="h-4 w-4 mr-2" />
+                Request Quote
+              </Button>
+              <Button variant="outline" className="flex-1 border-yellow-400 text-yellow-600 hover:bg-yellow-50 h-12">
+                <Phone className="h-4 w-4 mr-2" />
+                Call Expert
+              </Button>
+            </div>
           </div>
         </div>
 
-        <Separator className="my-12" />
+        {/* Tabs Section */}
+        <div className="mt-12">
+          <Tabs defaultValue="specifications" className="w-full">
+            <TabsList className="grid w-full grid-cols-3 mb-8 bg-gray-100 p-1 rounded-xl">
+              <TabsTrigger value="specifications" className="rounded-lg">Specifications</TabsTrigger>
+              <TabsTrigger value="videos" className="rounded-lg">Videos & Media</TabsTrigger>
+              <TabsTrigger value="enquiry" className="rounded-lg">Contact Us</TabsTrigger>
+            </TabsList>
 
-        {/* Detailed Information Tabs */}
-        <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-5 mb-8">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="specifications">Specifications</TabsTrigger>
-            <TabsTrigger value="technical">Technical Data</TabsTrigger>
-            <TabsTrigger value="videos">Videos</TabsTrigger>
-            <TabsTrigger value="enquiry">Make Enquiry</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="overview" className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <FileText className="h-5 w-5 text-yellow-600" />
-                    Product Features
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-sm">Fully welded or adjustable configuration</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-sm">Fixed or adjustable back and rear axle</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-sm">Crash-tested for safety</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-sm">Propulsion weight from 6.5 kg</p>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-sm">User weight max. 150 kg</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Award className="h-5 w-5 text-yellow-600" />
-                    Key Benefits
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                      <div className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
-                        <span className="text-xs font-bold text-black">1</span>
+            <TabsContent value="specifications" className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-8">
+                <Card className="border-0 shadow-sm">
+                  <CardHeader>
+                    <CardTitle className="text-lg">Dimensions & Weight</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-yellow-50 p-4 rounded-xl text-center">
+                        <div className="text-xl font-bold text-yellow-600 mb-1">320-480mm</div>
+                        <div className="text-xs text-gray-600">Seat Width</div>
                       </div>
-                      <div>
-                        <p className="font-semibold text-sm">Optimal Strength-to-Weight Ratio</p>
-                        <p className="text-xs text-gray-600">Maximum efficiency for active users</p>
+                      <div className="bg-blue-50 p-4 rounded-xl text-center">
+                        <div className="text-xl font-bold text-blue-600 mb-1">250-500mm</div>
+                        <div className="text-xs text-gray-600">Seat Depth</div>
+                      </div>
+                      <div className="bg-green-50 p-4 rounded-xl text-center">
+                        <div className="text-xl font-bold text-green-600 mb-1">300-520mm</div>
+                        <div className="text-xs text-gray-600">Seat Height</div>
+                      </div>
+                      <div className="bg-red-50 p-4 rounded-xl text-center">
+                        <div className="text-xl font-bold text-red-600 mb-1">6.5kg+</div>
+                        <div className="text-xs text-gray-600">Weight</div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                      <div className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
-                        <span className="text-xs font-bold text-black">2</span>
-                      </div>
-                      <div>
-                        <p className="font-semibold text-sm">Customizable Configuration</p>
-                        <p className="text-xs text-gray-600">Adaptable to individual needs</p>
-                      </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-0 shadow-sm">
+                  <CardHeader>
+                    <CardTitle className="text-lg">Key Features</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      {[
+                        { feature: "Seat depth adjustable", available: true },
+                        { feature: "Balance point adjustable", available: true },
+                        { feature: "Backrest height adjustable", available: true },
+                        { feature: "Quick-release axle", available: true },
+                        { feature: "Car-compatible", available: true },
+                        { feature: "Crash-tested", available: true }
+                      ].map((item, index) => (
+                        <div key={index} className="flex items-center justify-between py-2">
+                          <span className="text-sm text-gray-700">{item.feature}</span>
+                          <span className={`text-sm font-medium ${item.available ? 'text-green-600' : 'text-gray-400'}`}>
+                            {item.available ? '✓ Yes' : '✗ No'}
+                          </span>
+                        </div>
+                      ))}
                     </div>
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                      <div className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
-                        <span className="text-xs font-bold text-black">3</span>
-                      </div>
-                      <div>
-                        <p className="font-semibold text-sm">Easy Transportation</p>
-                        <p className="text-xs text-gray-600">Convenient for car storage</p>
-                      </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="videos" className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-8">
+                <Card className="border-0 shadow-sm">
+                  <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl relative overflow-hidden">
+                    <img
+                      src="/api/placeholder/600/337"
+                      alt="Product Demo Video"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                      <Button className="w-16 h-16 rounded-full bg-yellow-400 hover:bg-yellow-500 text-black">
+                        <Play className="h-6 w-6 ml-1" />
+                      </Button>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="specifications" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Product Specifications</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-4 gap-6">
-                  <div className="text-center p-4 bg-gray-50 rounded-lg">
-                    <div className="text-2xl font-bold text-yellow-600 mb-2">320-480mm</div>
-                    <div className="text-sm text-gray-600">Seat Width Range</div>
-                  </div>
-                  <div className="text-center p-4 bg-gray-50 rounded-lg">
-                    <div className="text-2xl font-bold text-yellow-600 mb-2">250-500mm</div>
-                    <div className="text-sm text-gray-600">Seat Depth Range</div>
-                  </div>
-                  <div className="text-center p-4 bg-gray-50 rounded-lg">
-                    <div className="text-2xl font-bold text-yellow-600 mb-2">300-520mm</div>
-                    <div className="text-sm text-gray-600">Seat Height Range</div>
-                  </div>
-                  <div className="text-center p-4 bg-gray-50 rounded-lg">
-                    <div className="text-2xl font-bold text-yellow-600 mb-2">6.5kg</div>
-                    <div className="text-sm text-gray-600">Weight from</div>
-                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-bold mb-2">Product Demonstration</h3>
+                    <p className="text-sm text-gray-600">Complete overview of features and real-world usage</p>
+                  </CardContent>
+                </Card>
+
+                <div className="space-y-4">
+                  <Card className="border-0 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                    <CardContent className="p-4 flex items-center gap-4">
+                      <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <FileText className="h-6 w-6 text-blue-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-sm">Product Brochure</h4>
+                        <p className="text-xs text-gray-600">Detailed specifications PDF</p>
+                      </div>
+                      <Download className="h-4 w-4 text-gray-400" />
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-0 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                    <CardContent className="p-4 flex items-center gap-4">
+                      <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                        <Play className="h-6 w-6 text-green-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-sm">Assembly Guide</h4>
+                        <p className="text-xs text-gray-600">Step-by-step video tutorial</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-0 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                    <CardContent className="p-4 flex items-center gap-4">
+                      <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                        <Star className="h-6 w-6 text-purple-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-sm">User Stories</h4>
+                        <p className="text-xs text-gray-600">Real customer experiences</p>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
-                <div className="mt-6">
-                  <div className="prose max-w-none">
-                    <p className="whitespace-pre-line">{product.specifications}</p>
-                  </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="enquiry" className="space-y-6">
+              <div className="max-w-4xl mx-auto">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold mb-2">Get Expert Advice</h3>
+                  <p className="text-gray-600">Our rehabilitation specialists are here to help you choose the perfect solution</p>
                 </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-          
-          <TabsContent value="technical" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Technical Data</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="overflow-x-auto">
-                  <table className="w-full border-collapse">
-                    <tbody className="text-sm">
-                      <tr className="border-b">
-                        <td className="py-3 pr-4 font-medium">Seat width adjustable</td>
-                        <td className="py-3">NO</td>
-                      </tr>
-                      <tr className="border-b bg-gray-50">
-                        <td className="py-3 pr-4 font-medium">Seat depth adjustable</td>
-                        <td className="py-3">YES</td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="py-3 pr-4 font-medium">Seat angle adjustable</td>
-                        <td className="py-3">NO</td>
-                      </tr>
-                      <tr className="border-b bg-gray-50">
-                        <td className="py-3 pr-4 font-medium">Balance point adjustable</td>
-                        <td className="py-3">YES</td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="py-3 pr-4 font-medium">Harness seat</td>
-                        <td className="py-3">YES</td>
-                      </tr>
-                      <tr className="border-b bg-gray-50">
-                        <td className="py-3 pr-4 font-medium">Fixed seat</td>
-                        <td className="py-3">YES</td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="py-3 pr-4 font-medium">Backrest angle adjustable</td>
-                        <td className="py-3">NO</td>
-                      </tr>
-                      <tr className="border-b bg-gray-50">
-                        <td className="py-3 pr-4 font-medium">Backrest height adjustable</td>
-                        <td className="py-3">YES</td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="py-3 pr-4 font-medium">Quick-release axle</td>
-                        <td className="py-3">YES</td>
-                      </tr>
-                      <tr className="border-b bg-gray-50">
-                        <td className="py-3 pr-4 font-medium">Suitable for fastening in car</td>
-                        <td className="py-3">YES</td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="py-3 pr-4 font-medium">Weight from</td>
-                        <td className="py-3">6.5 kg</td>
-                      </tr>
-                      <tr className="border-b bg-gray-50">
-                        <td className="py-3 pr-4 font-medium">User weight max.</td>
-                        <td className="py-3">150 kg</td>
-                      </tr>
-                    </tbody>
-                  </table>
+
+                <div className="grid md:grid-cols-3 gap-6 mb-8">
+                  <Card className="border-0 shadow-sm text-center">
+                    <CardContent className="p-6">
+                      <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Phone className="h-8 w-8 text-yellow-600" />
+                      </div>
+                      <h4 className="font-bold mb-2">Call Us</h4>
+                      <p className="text-sm text-gray-600 mb-3">Speak directly with our product experts</p>
+                      <p className="font-bold text-yellow-600">+357 22 250 115</p>
+                      <p className="text-xs text-gray-500">Mon-Fri, 9:00-17:00</p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-0 shadow-sm text-center">
+                    <CardContent className="p-6">
+                      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Mail className="h-8 w-8 text-blue-600" />
+                      </div>
+                      <h4 className="font-bold mb-2">Email Us</h4>
+                      <p className="text-sm text-gray-600 mb-3">Detailed product information</p>
+                      <p className="font-bold text-blue-600">info@abletools.com.cy</p>
+                      <p className="text-xs text-gray-500">24-48 hour response</p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-0 shadow-sm text-center">
+                    <CardContent className="p-6">
+                      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <MessageCircle className="h-8 w-8 text-green-600" />
+                      </div>
+                      <h4 className="font-bold mb-2">Quick Form</h4>
+                      <p className="text-sm text-gray-600 mb-3">Fast response guaranteed</p>
+                      <Button className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">
+                        Send Message
+                      </Button>
+                    </CardContent>
+                  </Card>
                 </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-          
-          <TabsContent value="videos" className="space-y-6">
-            <div className="grid md:grid-cols-3 gap-6">
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow">
-                <div className="aspect-video bg-gray-100 rounded-t-lg relative overflow-hidden">
-                  <img
-                    src="/api/placeholder/400/225"
-                    alt="Product Demo Video"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                    <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
-                      <Play className="h-6 w-6 text-gray-700 ml-1" />
-                    </div>
-                  </div>
-                </div>
-                <CardContent className="p-4">
-                  <h3 className="font-semibold mb-2">Product Overview</h3>
-                  <p className="text-sm text-gray-600">Complete walkthrough of features and benefits</p>
-                </CardContent>
-              </Card>
-              
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow">
-                <div className="aspect-video bg-gray-100 rounded-t-lg relative overflow-hidden">
-                  <img
-                    src="/api/placeholder/400/225"
-                    alt="Assembly Video"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                    <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
-                      <Play className="h-6 w-6 text-gray-700 ml-1" />
-                    </div>
-                  </div>
-                </div>
-                <CardContent className="p-4">
-                  <h3 className="font-semibold mb-2">Assembly Guide</h3>
-                  <p className="text-sm text-gray-600">Step-by-step assembly instructions</p>
-                </CardContent>
-              </Card>
-              
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow">
-                <div className="aspect-video bg-gray-100 rounded-t-lg relative overflow-hidden">
-                  <img
-                    src="/api/placeholder/400/225"
-                    alt="Usage Video"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                    <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
-                      <Play className="h-6 w-6 text-gray-700 ml-1" />
-                    </div>
-                  </div>
-                </div>
-                <CardContent className="p-4">
-                  <h3 className="font-semibold mb-2">User Experience</h3>
-                  <p className="text-sm text-gray-600">Real user testimonials and demonstrations</p>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="enquiry" className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Product Enquiry</CardTitle>
-                  <p className="text-gray-600">
-                    Have questions about this product? Send us a message and our experts will get back to you.
-                  </p>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleEnquirySubmit} className="space-y-4">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="name">Full Name *</Label>
-                        <Input id="name" placeholder="Enter your full name" required />
+
+                <Card className="border-0 shadow-sm">
+                  <CardContent className="p-6">
+                    <form onSubmit={handleEnquirySubmit} className="space-y-4">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="name">Full Name *</Label>
+                          <Input id="name" name="name" placeholder="Your full name" required className="mt-1" />
+                        </div>
+                        <div>
+                          <Label htmlFor="email">Email Address *</Label>
+                          <Input id="email" name="email" type="email" placeholder="your.email@example.com" required className="mt-1" />
+                        </div>
                       </div>
                       <div>
-                        <Label htmlFor="email">Email Address *</Label>
-                        <Input id="email" type="email" placeholder="Enter your email" required />
+                        <Label htmlFor="message">Your Message *</Label>
+                        <Textarea
+                          id="message"
+                          value={enquiryMessage}
+                          onChange={(e) => setEnquiryMessage(e.target.value)}
+                          placeholder={`I'm interested in the ${product.name}. Please provide more information about...`}
+                          rows={4}
+                          required
+                          className="mt-1"
+                        />
                       </div>
-                    </div>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="phone">Phone Number</Label>
-                        <Input id="phone" placeholder="Enter your phone number" />
-                      </div>
-                      <div>
-                        <Label htmlFor="company">Company/Organization</Label>
-                        <Input id="company" placeholder="Enter company name" />
-                      </div>
-                    </div>
-                    <div>
-                      <Label htmlFor="subject">Subject</Label>
-                      <Input id="subject" placeholder="Enquiry about Wolturnus W5" value={`Enquiry about ${product.name}`} />
-                    </div>
-                    <div>
-                      <Label htmlFor="message" className="block text-sm font-medium mb-2">
-                        Your Message *
-                      </Label>
-                      <Textarea
-                        id="message"
-                        value={enquiryMessage}
-                        onChange={(e) => setEnquiryMessage(e.target.value)}
-                        placeholder="Please provide details about your enquiry, specific requirements, or questions about this product..."
-                        rows={5}
-                        required
-                      />
-                    </div>
-                    
-                    <Button 
-                      type="submit" 
-                      className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold"
-                      disabled={enquiryMutation.isPending}
-                    >
-                      {enquiryMutation.isPending ? 'Sending Enquiry...' : 'Send Product Enquiry'}
-                      <MessageCircle className="h-4 w-4 ml-2" />
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardHeader>
-                  <CardTitle>Contact Information</CardTitle>
-                  <p className="text-gray-600">
-                    Get in touch with our product specialists directly.
-                  </p>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center">
-                      <Phone className="h-5 w-5 text-black" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Phone Support</h4>
-                      <p className="text-gray-600 text-sm mb-2">Monday - Friday, 9:00 - 17:00</p>
-                      <p className="font-medium text-yellow-600">+357 22 250 115</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-                      <Mail className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Email Support</h4>
-                      <p className="text-gray-600 text-sm mb-2">Get detailed product information</p>
-                      <p className="font-medium text-blue-600">info@abletools.com.cy</p>
-                    </div>
-                  </div>
-                  
-                  <div className="p-4 bg-yellow-50 rounded-lg">
-                    <h4 className="font-semibold mb-2 text-yellow-800">Expert Consultation</h4>
-                    <p className="text-sm text-yellow-700">
-                      Our rehabilitation specialists can help you choose the right configuration and accessories for your specific needs.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-        </Tabs>
+                      
+                      <Button 
+                        type="submit" 
+                        className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold h-12"
+                        disabled={enquiryMutation.isPending}
+                      >
+                        {enquiryMutation.isPending ? 'Sending...' : 'Send Enquiry'}
+                        <MessageCircle className="h-4 w-4 ml-2" />
+                      </Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
       </div>
     </div>
   );
