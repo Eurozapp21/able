@@ -87,6 +87,8 @@ export default function Products() {
 
   const hasSubcategories = currentLevelCategories.length > 0;
   const hasProducts = products.length > 0;
+  
+  console.log('DEBUG:', { hasSubcategories, hasProducts, selectedCategory, searchQuery, productsCount: products.length });
 
   const getCategoryStats = () => {
     const mainCategories = allCategories.filter((cat: Category) => !cat.parentId);
@@ -321,7 +323,7 @@ export default function Products() {
         )}
 
         {/* Enhanced Products Section - Show products when available */}
-        {(searchQuery || (hasProducts && !hasSubcategories)) && (
+        {(searchQuery || hasProducts) && (
           <div>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl font-bold text-gray-900">
