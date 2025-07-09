@@ -36,6 +36,8 @@ export default function CatalogueCategory() {
   const { toast } = useToast();
   
   const slug = params?.slug;
+  
+  console.log('CatalogueCategory component loaded:', { match, params, slug });
 
   const { data: category, isLoading: categoryLoading } = useQuery<CatalogueCategory>({
     queryKey: ['/api/catalogue/categories', slug],

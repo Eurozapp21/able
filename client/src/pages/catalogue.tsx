@@ -93,7 +93,7 @@ export default function Catalogue() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((category) => (
             <Link key={category.id} href={`/catalogue/${category.slug}`}>
-              <Card className="group cursor-pointer hover:shadow-2xl transition-all duration-300 border-0 overflow-hidden bg-white">
+              <Card className="group cursor-pointer hover:shadow-2xl transition-all duration-300 border-0 overflow-hidden bg-white" onClick={() => console.log('Clicking category:', category.slug)}>
                 <div className="relative h-64 overflow-hidden">
                   <img 
                     src={category.image} 
