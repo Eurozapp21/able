@@ -147,6 +147,7 @@ The system manages several core entities:
 - July 09, 2025. Enhanced Product Detail page with thumbnail image gallery featuring navigation arrows, image counter, and 4-thumbnail grid. Added detailed descriptions to product features with professional card layouts and comprehensive explanations
 - July 09, 2025. Added comprehensive seminar and training content with 8 detailed courses covering rehabilitation techniques, equipment certification, accessibility assessment, and specialized pediatric training. Enhanced events with 6 professional activities including equipment expo, community initiatives, and technology showcases
 - July 09, 2025. Created separate sections for Seminars and Training with distinct 3-column layout: Educational Seminars (yellow), Professional Training (blue), and Latest Events (green). Updated database schema with type field and API filtering to distinguish between seminar and training content
+- July 09, 2025. Removed "Upcoming Seminars" and "Recent Events" sections from homepage as requested by user to simplify the layout
 
 
 ## User Preferences
