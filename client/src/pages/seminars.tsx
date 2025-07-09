@@ -181,7 +181,7 @@ export default function Seminars() {
                 <div className="text-gray-300">Training Courses</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-green-400 mb-2">
+                <div className="text-3xl md:text-4xl font-bold text-primary-gold mb-2">
                   500+
                 </div>
                 <div className="text-gray-300">Professionals Trained</div>
