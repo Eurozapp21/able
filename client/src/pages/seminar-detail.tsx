@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Calendar, MapPin, Users, Clock, Euro, Award, BookOpen, Download, Mail, User, Target, CheckCircle } from 'lucide-react';
+import { Calendar, MapPin, Users, Clock, Euro, Award, BookOpen, Download, Mail, User, Target, CheckCircle, Plane, Hotel, FileText, AlertTriangle } from 'lucide-react';
 
 export default function SeminarDetail() {
   const { id } = useParams();
@@ -115,11 +115,13 @@ export default function SeminarDetail() {
           {/* Main Content */}
           <div className="lg:col-span-2">
             <Tabs defaultValue="overview" className="w-full">
-              <TabsList className="grid w-full grid-cols-4 mb-8">
+              <TabsList className="grid w-full grid-cols-6 mb-8">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="details">Course Details</TabsTrigger>
                 <TabsTrigger value="speakers">Speakers</TabsTrigger>
                 <TabsTrigger value="resources">Resources</TabsTrigger>
+                <TabsTrigger value="accommodation">Travel/Accommodation</TabsTrigger>
+                <TabsTrigger value="terms">Terms & Conditions</TabsTrigger>
               </TabsList>
 
               <TabsContent value="overview" className="space-y-6">
@@ -323,6 +325,198 @@ export default function SeminarDetail() {
                         <Button variant="outline" size="sm" className="hover-gold">
                           Download
                         </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="accommodation" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Plane className="w-6 h-6 text-primary-gold" />
+                      Travel Information
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                        <h4 className="font-semibold text-blue-900 mb-2">Venue Location</h4>
+                        <p className="text-blue-800">
+                          {seminar.location} - Easily accessible by public transport and car. 
+                          Detailed directions will be provided upon registration.
+                        </p>
+                      </div>
+                      
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="bg-gray-50 p-4 rounded-lg">
+                          <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                            <Plane className="w-4 h-4 text-primary-gold" />
+                            Airport Transfer
+                          </h4>
+                          <p className="text-gray-600 text-sm">
+                            Larnaca International Airport is 45 minutes from the venue. 
+                            Airport shuttle service available upon request.
+                          </p>
+                        </div>
+                        
+                        <div className="bg-gray-50 p-4 rounded-lg">
+                          <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                            <MapPin className="w-4 h-4 text-primary-gold" />
+                            Parking
+                          </h4>
+                          <p className="text-gray-600 text-sm">
+                            Free parking available at the venue. 
+                            Limited spaces - early arrival recommended.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Hotel className="w-6 h-6 text-primary-gold" />
+                      Accommodation
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <p className="text-gray-700">
+                        We have partnered with local hotels to offer special rates for seminar participants. 
+                        Book early to secure the best rates and availability.
+                      </p>
+                      
+                      <div className="space-y-4">
+                        <div className="border rounded-lg p-4">
+                          <div className="flex justify-between items-start mb-2">
+                            <h4 className="font-semibold">Recommended Hotel</h4>
+                            <Badge className="bg-primary-gold text-black">Partner Rate</Badge>
+                          </div>
+                          <p className="text-gray-600 text-sm mb-2">
+                            4-star accommodation within walking distance of the venue
+                          </p>
+                          <div className="flex justify-between items-center">
+                            <span className="text-primary-gold font-bold">€85/night</span>
+                            <Button variant="outline" size="sm" className="hover-gold">
+                              Book Now
+                            </Button>
+                          </div>
+                        </div>
+                        
+                        <div className="border rounded-lg p-4">
+                          <div className="flex justify-between items-start mb-2">
+                            <h4 className="font-semibold">Budget Option</h4>
+                            <Badge variant="outline">Standard Rate</Badge>
+                          </div>
+                          <p className="text-gray-600 text-sm mb-2">
+                            3-star hotel, 10 minutes by taxi from venue
+                          </p>
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-700 font-bold">€55/night</span>
+                            <Button variant="outline" size="sm" className="hover-gold">
+                              Book Now
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+                        <p className="text-sm text-gray-700">
+                          <strong>Booking Information:</strong> Contact our team at 
+                          <a href="mailto:education@abletools.com.cy" className="text-primary-gold hover:underline ml-1">
+                            education@abletools.com.cy
+                          </a> to access partner rates and make reservations.
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="terms" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <FileText className="w-6 h-6 text-primary-gold" />
+                      Terms and Conditions
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-6">
+                      <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+                        <div className="flex items-center gap-2 mb-2">
+                          <AlertTriangle className="w-5 h-5 text-red-600" />
+                          <h4 className="font-semibold text-red-900">Important Notice</h4>
+                        </div>
+                        <p className="text-red-800 text-sm">
+                          Participants must attend all {seminar.duration || '3 days'} of the seminar to receive certification. 
+                          Late arrivals or early departures will result in non-certification.
+                        </p>
+                      </div>
+
+                      <div className="space-y-4">
+                        <div>
+                          <h4 className="font-semibold text-gray-800 mb-2">Registration and Payment</h4>
+                          <ul className="text-gray-600 text-sm space-y-1 list-disc list-inside">
+                            <li>Full payment required at time of registration</li>
+                            <li>Registration confirmations sent within 24 hours</li>
+                            <li>Course materials included in registration fee</li>
+                            <li>Lunch and refreshments provided during seminar days</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold text-gray-800 mb-2">Cancellation Policy</h4>
+                          <ul className="text-gray-600 text-sm space-y-1 list-disc list-inside">
+                            <li>Cancellations 30+ days before: Full refund minus 10% admin fee</li>
+                            <li>Cancellations 15-30 days before: 50% refund</li>
+                            <li>Cancellations less than 15 days: No refund</li>
+                            <li>Transfers to future seminars allowed with 48 hours notice</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold text-gray-800 mb-2">Certification Requirements</h4>
+                          <ul className="text-gray-600 text-sm space-y-1 list-disc list-inside">
+                            <li>100% attendance required for all seminar sessions</li>
+                            <li>Active participation in practical exercises mandatory</li>
+                            <li>Completion of evaluation forms required</li>
+                            <li>Certificate issued within 2 weeks of seminar completion</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold text-gray-800 mb-2">Professional Recognition</h4>
+                          <ul className="text-gray-600 text-sm space-y-1 list-disc list-inside">
+                            <li>Seminar approved for 38 Continuing Professional Education credits</li>
+                            <li>Recognized by Cyprus Speech Pathology Registration Council</li>
+                            <li>International certification valid for portfolio development</li>
+                            <li>Annual recertification recommended for best practices</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold text-gray-800 mb-2">Code of Conduct</h4>
+                          <ul className="text-gray-600 text-sm space-y-1 list-disc list-inside">
+                            <li>Professional behavior expected at all times</li>
+                            <li>Confidentiality of case studies and participant information</li>
+                            <li>Respectful interaction with speakers and fellow participants</li>
+                            <li>Mobile devices on silent during sessions</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div className="bg-gray-100 p-4 rounded-lg">
+                        <p className="text-sm text-gray-700">
+                          <strong>Questions about Terms and Conditions?</strong> Contact us at 
+                          <a href="mailto:education@abletools.com.cy" className="text-primary-gold hover:underline ml-1">
+                            education@abletools.com.cy
+                          </a> or call +357 22 123456 for clarification.
+                        </p>
                       </div>
                     </div>
                   </CardContent>
