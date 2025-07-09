@@ -80,22 +80,37 @@ export class MemStorage implements IStorage {
   private seedData() {
     // Seed categories
     const categoryData = [
-      { id: 1, name: "Lifting Systems", description: "Patient lifting and transfer equipment", icon: "wheelchair", parentId: null },
-      { id: 2, name: "Power Mobility", description: "Electric wheelchairs and mobility devices", icon: "battery-full", parentId: null },
-      { id: 3, name: "Bedroom Aids", description: "Bedroom assistance equipment", icon: "bed", parentId: null },
-      { id: 4, name: "Sensory Integration Rooms", description: "Sensory therapy equipment", icon: "brain", parentId: null },
-      { id: 5, name: "Stair Lifts", description: "Staircase accessibility solutions", icon: "stairs", parentId: null },
-      { id: 6, name: "Walkers", description: "Walking assistance devices", icon: "walking", parentId: null },
-      { id: 7, name: "Standing Frames", description: "Standing support equipment", icon: "user-check", parentId: null },
-      { id: 8, name: "Bikes", description: "Therapeutic bicycles", icon: "bicycle", parentId: null },
-      { id: 9, name: "Positioning Supports", description: "Positioning and support equipment", icon: "hands-helping", parentId: null },
-      { id: 10, name: "Vehicle Adaptation", description: "Vehicle modification solutions", icon: "car", parentId: null },
-      { id: 11, name: "Bath and Toilet Aids", description: "Bathroom assistance equipment", icon: "bath", parentId: null },
-      { id: 12, name: "Rehab Pushchairs", description: "Specialized pushchairs for rehabilitation", icon: "baby-carriage", parentId: null },
+      // Main Categories
+      { id: 1, name: "Lifting Systems", description: "Professional lifting and transfer systems for safe patient handling", icon: "wheelchair", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 2, name: "Wheelchairs", description: "Manual and electric wheelchairs for enhanced mobility", icon: "battery-full", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 3, name: "Mobility Aids", description: "Walking aids and mobility equipment for independence", icon: "walking", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 4, name: "Sensory Integration Rooms", description: "Multi-sensory therapy equipment and environments", icon: "brain", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 5, name: "Stair Lifts", description: "Staircase accessibility solutions", icon: "stairs", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 6, name: "Seating Systems", description: "Specialized seating and positioning solutions", icon: "user-check", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 7, name: "Exercise Equipment", description: "Rehabilitation and therapeutic exercise machines", icon: "bicycle", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 8, name: "Daily Living Aids", description: "Assistive tools for everyday tasks and independence", icon: "hands-helping", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 9, name: "Medical Equipment", description: "Clinical and therapeutic medical devices", icon: "car", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 10, name: "Bath and Toilet Aids", description: "Bathroom safety and assistance equipment", icon: "bath", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 11, name: "Pediatric Equipment", description: "Specialized equipment for children with disabilities", icon: "baby-carriage", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 12, name: "Rehab Pushchairs", description: "Specialized pushchairs for rehabilitation", icon: "baby-carriage", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      
+      // Sub Categories for Wheelchairs (parentId: 2)
+      { id: 21, name: "Manual Wheelchairs", description: "Self-propelled wheelchairs for active users", icon: "wheelchair", parentId: 2, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 22, name: "Electric Wheelchairs", description: "Powered wheelchairs for enhanced mobility", icon: "battery-full", parentId: 2, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 23, name: "Sports Wheelchairs", description: "Athletic wheelchairs for recreational activities", icon: "bicycle", parentId: 2, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      
+      // Sub Categories for Lifting Systems (parentId: 1)
+      { id: 31, name: "Ceiling Hoists", description: "Track-mounted lifting systems for patient transfer", icon: "stairs", parentId: 1, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 32, name: "Mobile Hoists", description: "Portable lifting equipment for flexible use", icon: "car", parentId: 1, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 33, name: "Transfer Boards", description: "Sliding boards for safe patient transfer", icon: "hands-helping", parentId: 1, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      
+      // Sub Categories for Medical Equipment (parentId: 9)
+      { id: 41, name: "Therapy Equipment", description: "Physical therapy and rehabilitation devices", icon: "user-check", parentId: 9, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 42, name: "Positioning Aids", description: "Medical positioning and support equipment", icon: "hands-helping", parentId: 9, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
     ];
 
     categoryData.forEach(cat => {
-      this.categories.set(cat.id, { ...cat, image: null });
+      this.categories.set(cat.id, { ...cat, image: cat.image || null });
     });
 
     // Seed products
