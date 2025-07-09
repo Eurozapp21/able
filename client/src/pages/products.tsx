@@ -319,8 +319,8 @@ export default function Products() {
           </div>
         )}
 
-        {/* Enhanced Products Section - Always show when products exist OR searching */}
-        {(searchQuery || (!selectedCategory && hasProducts) || (selectedCategory && hasProducts && !hasSubcategories)) && (
+        {/* Enhanced Products Section - Show when searching OR when in a specific category with products */}
+        {(searchQuery || (selectedCategory && hasProducts)) && (
           <div>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl font-bold text-gray-900">
@@ -357,8 +357,8 @@ export default function Products() {
           </div>
         )}
 
-        {/* Enhanced No Results */}
-        {!hasSubcategories && (!hasProducts || searchQuery) && !categoriesLoading && !productsLoading && (
+        {/* Enhanced No Results - Only show when searching or in a specific category */}
+        {(searchQuery || selectedCategory) && !hasSubcategories && !hasProducts && !categoriesLoading && !productsLoading && (
           <div className="text-center py-20">
             <div className="max-w-md mx-auto">
               <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
