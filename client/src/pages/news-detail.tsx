@@ -25,6 +25,9 @@ export default function NewsDetail() {
   };
 
   const getCategoryBadge = (article) => {
+    if (!article || !article.title || !article.content) {
+      return { label: 'General News', color: 'bg-gray-500 text-white' };
+    }
     const content = (article.title + ' ' + article.content).toLowerCase();
     if (content.includes('abletools') || content.includes('award')) return { label: 'Company News', color: 'bg-primary-gold text-black' };
     if (content.includes('technology') || content.includes('innovation')) return { label: 'Technology', color: 'bg-blue-500 text-white' };
@@ -162,11 +165,11 @@ export default function NewsDetail() {
               {/* Article Content */}
               <div className="prose prose-lg max-w-none">
                 <p className="text-xl text-gray-600 mb-6 leading-relaxed">
-                  {article.excerpt || article.content.substring(0, 200) + '...'}
+                  {article.excerpt || (article.content ? article.content.substring(0, 200) + '...' : 'No excerpt available.')}
                 </p>
                 
                 <div className="text-gray-700 leading-relaxed space-y-6">
-                  {article.content.split('\n\n').map((paragraph, index) => (
+                  {(article.content || '').split('\n\n').map((paragraph, index) => (
                     <p key={index} className="mb-4">
                       {paragraph}
                     </p>
