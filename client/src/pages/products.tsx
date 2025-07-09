@@ -88,7 +88,7 @@ export default function Products() {
   const hasSubcategories = currentLevelCategories.length > 0;
   const hasProducts = products.length > 0;
   
-  console.log('DEBUG:', { hasSubcategories, hasProducts, selectedCategory, searchQuery, productsCount: products.length });
+
 
   const getCategoryStats = () => {
     const mainCategories = allCategories.filter((cat: Category) => !cat.parentId);
@@ -207,10 +207,7 @@ export default function Products() {
                 />
               </div>
               
-              <Select value={sortBy} onValueChange={(value) => {
-                console.log('Sort changed to:', value);
-                setSortBy(value);
-              }}>
+              <Select value={sortBy} onValueChange={setSortBy}>
                 <SelectTrigger className="w-full sm:w-48 h-12 border-gray-300">
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>

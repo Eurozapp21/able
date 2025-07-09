@@ -22,7 +22,7 @@ export default function ProductGrid({
   isLoading = false
 }: ProductGridProps) {
   
-  console.log('ProductGrid render:', { products: products.length, viewMode, searchQuery });
+
 
   // Sort products 
   const sortedProducts = [...products].sort((a, b) => {
@@ -60,9 +60,12 @@ export default function ProductGrid({
         <p className="text-gray-500 text-lg">
           {searchQuery ? `No products found matching "${searchQuery}".` : 'No products found.'}
         </p>
+        <p className="text-gray-400 text-sm mt-2">Debug: {products.length} products received</p>
       </div>
     );
   }
+
+  console.log('About to render products:', displayProducts.length, 'viewMode:', viewMode);
 
   // Different layouts based on viewMode
   if (viewMode === 'list') {
@@ -112,9 +115,13 @@ export default function ProductGrid({
     );
   }
 
-  // Grid layout
+  // Grid layout  
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div>
+      <div className="mb-4 p-4 bg-red-100 border border-red-400">
+        <p>DEBUG: Rendering {displayProducts.length} products in {viewMode} mode</p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {displayProducts.map((product) => (
         <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group bg-white">
           <div className="relative overflow-hidden">
@@ -155,6 +162,7 @@ export default function ProductGrid({
           </CardContent>
         </Card>
       ))}
+      </div>
     </div>
   );
 }
