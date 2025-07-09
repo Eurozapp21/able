@@ -13,11 +13,29 @@ import type { IStorage } from "./storage";
 export class MySQLStorage implements IStorage {
   private connection: mysql.Connection | null = null;
 
-  constructor(private connectionString: string) {}
+  constructor(private connectionString: string) {
+    // For development, use a simple localhost connection if DATABASE_URL is PostgreSQL
+    if (connectionString.includes('postgresql://') || connectionString.includes('postgres://')) {
+      this.connectionString = 'mysql://root:@localhost:3306/abletools';
+    }
+  }
 
   async connect() {
     if (!this.connection) {
-      this.connection = await mysql.createConnection(this.connectionString);
+      // Parse the connection string and create proper MySQL config
+      const url = new URL(this.connectionString);
+      const config = {
+        host: url.hostname,
+        port: parseInt(url.port) || 3306,
+        user: url.username,
+        password: url.password,
+        database: url.pathname.slice(1), // Remove leading slash
+        ssl: false, // Disable SSL for local development
+        connectTimeout: 60000,
+        acquireTimeout: 60000,
+      };
+      
+      this.connection = await mysql.createConnection(config);
       await this.initializeTables();
       await this.seedInitialData();
     }
