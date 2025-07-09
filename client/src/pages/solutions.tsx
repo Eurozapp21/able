@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import { Badge } from '@/components/ui/badge';
-import { Brain, Home, Car, Wrench, Users, Star, CheckCircle, ArrowRight, Lightbulb, Target, Palette } from 'lucide-react';
+import { Brain, Home, Car, Wrench, Star, CheckCircle, ArrowRight, Lightbulb } from 'lucide-react';
 
 export default function Solutions() {
   const services = [
@@ -95,32 +95,7 @@ export default function Solutions() {
     }
   ];
 
-  const process = [
-    {
-      step: 1,
-      title: "Consultation",
-      description: "Initial assessment and understanding of your specific needs",
-      icon: Users
-    },
-    {
-      step: 2,
-      title: "Design",
-      description: "3D design and technical drawings tailored to your requirements",
-      icon: Palette
-    },
-    {
-      step: 3,
-      title: "Construction",
-      description: "Professional installation and construction by our expert team",
-      icon: Wrench
-    },
-    {
-      step: 4,
-      title: "Training & Support",
-      description: "Comprehensive training and ongoing maintenance support",
-      icon: Target
-    }
-  ];
+
 
   return (
     <div className="pt-20 min-h-screen bg-gray-50">
@@ -176,26 +151,7 @@ export default function Solutions() {
           </div>
         </div>
 
-        {/* Our Process */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-center text-text-dark mb-12">Our Process</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {process.map((item, index) => (
-              <Card key={index} className="relative bg-white shadow-lg border-0 hover:shadow-xl transition-all duration-300">
-                <CardContent className="p-6 text-center">
-                  <div className="w-16 h-16 bg-primary-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                    <item.icon className="w-8 h-8 text-black" />
-                  </div>
-                  <div className="absolute -top-3 -right-3 w-8 h-8 bg-primary-gold text-black rounded-full flex items-center justify-center font-bold text-sm">
-                    {item.step}
-                  </div>
-                  <h3 className="font-bold text-lg text-text-dark mb-2">{item.title}</h3>
-                  <p className="text-gray-custom text-sm">{item.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
+
 
         {/* Services Section */}
         <div className="mb-16">
