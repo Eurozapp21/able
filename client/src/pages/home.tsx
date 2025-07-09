@@ -7,11 +7,13 @@ import { Badge } from '@/components/ui/badge';
 import HeroCarousel from '@/components/hero-carousel';
 import { getQueryFn } from '@/lib/queryClient';
 import type { Product, Category, Seminar, Event, Achievement } from '@shared/schema';
+import { useTranslation } from 'react-i18next';
 
 
 
 
 export default function Home() {
+  const { t } = useTranslation();
   const { data: categories = [] } = useQuery({
     queryKey: ['/api/categories'],
     queryFn: () => getQueryFn<Category[]>({ on401: "returnNull" })('/api/categories'),
@@ -46,12 +48,12 @@ export default function Home() {
           <div className="grid lg:grid-cols-7 gap-8 items-center">
             {/* Left Column - Text Content */}
             <div className="lg:col-span-4">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-text-dark">About Us</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-text-dark">{t('home.about.title')}</h2>
               <p className="text-gray-custom text-lg leading-relaxed mb-6">
-                Able Tools Ltd has been operating since 2006 in the field of rehabilitation equipment and new technology solutions for people in need. Our focus is the customer's experience and our vision is to achieve a high-quality life and independency for every user's daily routine.
+                {t('home.about.description')}
               </p>
               <Link href="/about">
-                <Button className="btn-customslider">Read more</Button>
+                <Button className="btn-customslider">{t('home.about.cta')}</Button>
               </Link>
             </div>
             
@@ -76,7 +78,7 @@ export default function Home() {
                       </svg>
                     </div>
                     <h3 className="font-semibold text-sm text-text-dark group-hover:text-primary-gold transition-colors">
-                      Products
+                      {t('navigation.products')}
                     </h3>
                   </div>
                 </Link>
@@ -88,7 +90,7 @@ export default function Home() {
                       </svg>
                     </div>
                     <h3 className="font-semibold text-sm text-text-dark group-hover:text-primary-gold transition-colors">
-                      Newsroom
+                      {t('navigation.newsroom')}
                     </h3>
                   </div>
                 </Link>
@@ -100,7 +102,7 @@ export default function Home() {
                       </svg>
                     </div>
                     <h3 className="font-semibold text-sm text-text-dark group-hover:text-primary-gold transition-colors">
-                      Education
+                      {t('navigation.education')}
                     </h3>
                   </div>
                 </Link>
@@ -116,7 +118,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Product Categories */}
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-text-dark">Products</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-text-dark">{t('home.products.title')}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Category Items */}
                 <Link href="/products?category=bikes" className="group">

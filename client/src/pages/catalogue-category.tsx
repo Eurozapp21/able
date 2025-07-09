@@ -6,6 +6,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import { FileText, Download, Eye, Users, Calendar, ArrowLeft, ExternalLink } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface CatalogueCategory {
   id: number;
@@ -32,6 +33,7 @@ interface Brochure {
 }
 
 export default function CatalogueCategory() {
+  const { t } = useTranslation();
   const [match, params] = useRoute('/catalogue/:slug');
   const { toast } = useToast();
   
