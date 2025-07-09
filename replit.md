@@ -172,6 +172,7 @@ The system manages several core entities:
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Hosting requirement: Must use user's own hosting server, not cloud platforms.
 
 ## Current Footer Requirements
 - All icons must use yellow color (#ffeb3b) for consistent AbleTools branding
