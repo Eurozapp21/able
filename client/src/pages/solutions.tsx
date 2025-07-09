@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import { Badge } from '@/components/ui/badge';
-import { Brain, Home, Car, Wrench, Star, CheckCircle, ArrowRight, Lightbulb } from 'lucide-react';
+import { Brain, Home, Car, Wrench, Star, CheckCircle, ArrowRight, Lightbulb, Award, Users, Phone, Mail } from 'lucide-react';
 
 export default function Solutions() {
   const services = [
@@ -98,16 +98,69 @@ export default function Solutions() {
 
 
   return (
-    <div className="pt-20 min-h-screen bg-gray-50">
-      {/* Header Image */}
-      <div className="relative h-80 bg-gradient-to-r from-yellow-600 to-amber-600 overflow-hidden">
-        <div className="absolute inset-0 bg-black bg-opacity-40" />
-        <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
-          <div className="text-white max-w-3xl">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">Solutions</h1>
-            <p className="text-xl md:text-2xl leading-relaxed">
-              Consulting, Designing, Installing
+    <div className="pt-20 min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* Modern Hero Section */}
+      <div className="relative bg-gradient-to-br from-yellow-600 via-amber-600 to-orange-500 overflow-hidden">
+        <div className="absolute inset-0 bg-black bg-opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
+        
+        {/* Geometric Background Elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-yellow-300/20 rounded-full blur-2xl"></div>
+        
+        <div className="relative z-10 container mx-auto px-4 py-20">
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center gap-3 mb-6 bg-white/20 backdrop-blur-sm rounded-full px-6 py-2">
+              <Award className="w-5 h-5 text-yellow-200" />
+              <span className="text-yellow-100 font-medium">Professional Solutions Since 2009</span>
+            </div>
+            
+            <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight">
+              Transform
+              <span className="block text-yellow-200">Your Space</span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-gray-100 mb-8 leading-relaxed max-w-2xl">
+              From initial consultation to final installation - we create accessible, therapeutic environments that enhance lives and empower independence.
             </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+              <Button 
+                size="lg"
+                className="bg-white text-gray-900 hover:bg-gray-100 font-semibold px-8 py-4 text-lg"
+              >
+                <Phone className="w-5 h-5 mr-2" />
+                Get Free Consultation
+              </Button>
+              <Button 
+                size="lg"
+                variant="outline"
+                className="border-white text-white hover:bg-white hover:text-gray-900 font-semibold px-8 py-4 text-lg"
+              >
+                <Mail className="w-5 h-5 mr-2" />
+                View Our Portfolio
+              </Button>
+            </div>
+            
+            {/* Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-white mb-1">150+</div>
+                <div className="text-yellow-200 text-sm">Projects Completed</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-white mb-1">25+</div>
+                <div className="text-yellow-200 text-sm">Countries Served</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-white mb-1">15+</div>
+                <div className="text-yellow-200 text-sm">Years Experience</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-white mb-1">98%</div>
+                <div className="text-yellow-200 text-sm">Client Satisfaction</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -127,26 +180,70 @@ export default function Solutions() {
         </Breadcrumb>
 
         {/* Introduction Section */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-primary-gold rounded-full flex items-center justify-center">
-              <Lightbulb className="w-6 h-6 text-black" />
+        <div className="max-w-6xl mx-auto mb-20">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-primary-gold rounded-full flex items-center justify-center shadow-lg">
+                <Lightbulb className="w-6 h-6 text-black" />
+              </div>
+              <h2 className="text-4xl font-bold text-text-dark">Our Approach</h2>
             </div>
-            <h2 className="text-3xl font-bold text-text-dark">Our Approach</h2>
+            
+            <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-4xl mx-auto">
+              AbleTools creates customized design solutions, adapting to each client. Our specialized staff undertakes a wide range of projects, from design to construction and maintenance.
+            </p>
           </div>
           
-          <p className="text-lg text-gray-custom leading-relaxed mb-8">
-            AbleTools creates customized design solutions, adapting to each client. Our specialized staff undertakes a wide range of projects, from design to construction and maintenance. We offer a wide variety of services that correspond to multiple projects.
-          </p>
-          
-          <div className="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-xl p-8 border border-yellow-200">
-            <p className="text-lg text-gray-700 font-medium mb-4">
-              We consider every project as a unique case-study, that needs to be addressed carefully, recognizing the needs, doing extensive research and finally providing our consultation or proposal.
-            </p>
-            <div className="inline-flex items-center gap-2 text-primary-gold font-bold text-xl">
-              <Star className="w-6 h-6" />
-              "Your ability to dream!"
-              <Star className="w-6 h-6" />
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="relative">
+              <div className="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-2xl p-8 border border-yellow-200 shadow-xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 bg-primary-gold rounded-full flex items-center justify-center">
+                    <Users className="w-5 h-5 text-black" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-800">Personalized Solutions</h3>
+                </div>
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  We consider every project as a unique case-study, that needs to be addressed carefully, recognizing the needs, doing extensive research and finally providing our consultation or proposal.
+                </p>
+                <div className="inline-flex items-center gap-2 text-primary-gold font-bold text-xl">
+                  <Star className="w-6 h-6" />
+                  "Your ability to dream!"
+                  <Star className="w-6 h-6" />
+                </div>
+              </div>
+            </div>
+            
+            <div className="space-y-6">
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                    <CheckCircle className="w-4 h-4 text-white" />
+                  </div>
+                  <h4 className="font-semibold text-gray-800">Comprehensive Assessment</h4>
+                </div>
+                <p className="text-gray-600 text-sm">Detailed analysis of your specific needs and requirements</p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                    <CheckCircle className="w-4 h-4 text-white" />
+                  </div>
+                  <h4 className="font-semibold text-gray-800">Custom Design</h4>
+                </div>
+                <p className="text-gray-600 text-sm">3D modeling and technical drawings tailored to your space</p>
+              </div>
+              
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                    <CheckCircle className="w-4 h-4 text-white" />
+                  </div>
+                  <h4 className="font-semibold text-gray-800">Professional Installation</h4>
+                </div>
+                <p className="text-gray-600 text-sm">Expert implementation with ongoing support and training</p>
+              </div>
             </div>
           </div>
         </div>
@@ -154,28 +251,42 @@ export default function Solutions() {
 
 
         {/* Services Section */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-center text-text-dark mb-12">Our Services</h2>
+        <div className="mb-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-text-dark mb-4">Our Services</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Comprehensive solutions from concept to completion, tailored to your unique requirements
+            </p>
+          </div>
+          
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className={`shadow-xl border-0 bg-gradient-to-br ${service.gradientFrom} ${service.gradientTo} hover:shadow-2xl transition-all duration-300`}>
-                <CardHeader>
+              <Card key={index} className={`group shadow-xl border-0 bg-gradient-to-br ${service.gradientFrom} ${service.gradientTo} hover:shadow-2xl transition-all duration-500 hover:-translate-y-2`}>
+                <CardHeader className="pb-4">
                   <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 ${service.color} rounded-full flex items-center justify-center`}>
-                      <service.icon className={`w-6 h-6 ${service.color === 'bg-primary-gold' ? 'text-black' : 'text-white'}`} />
+                    <div className={`w-14 h-14 ${service.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                      <service.icon className="w-7 h-7 text-black" />
                     </div>
-                    <CardTitle className="text-2xl text-text-dark">{service.title}</CardTitle>
+                    <div>
+                      <CardTitle className="text-2xl text-text-dark group-hover:text-gray-900 transition-colors">
+                        {service.title}
+                      </CardTitle>
+                      <div className="w-12 h-1 bg-primary-gold rounded-full mt-2"></div>
+                    </div>
                   </div>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-gray-custom mb-6 leading-relaxed">{service.description}</p>
-                  <div className="space-y-3">
-                    <h4 className="font-semibold text-text-dark">Key Features:</h4>
-                    <div className="grid grid-cols-1 gap-2">
+                <CardContent className="pt-0">
+                  <p className="text-gray-700 mb-6 leading-relaxed text-lg">{service.description}</p>
+                  <div className="space-y-4">
+                    <h4 className="font-bold text-text-dark text-lg flex items-center gap-2">
+                      <Star className="w-5 h-5 text-primary-gold" />
+                      Key Features
+                    </h4>
+                    <div className="grid grid-cols-1 gap-3">
                       {service.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4 text-primary-gold" />
-                          <span className="text-sm text-gray-700">{feature}</span>
+                        <div key={idx} className="flex items-center gap-3 p-2 rounded-lg bg-white/60 hover:bg-white/80 transition-colors">
+                          <CheckCircle className="w-5 h-5 text-primary-gold flex-shrink-0" />
+                          <span className="text-gray-700 font-medium">{feature}</span>
                         </div>
                       ))}
                     </div>
@@ -187,41 +298,63 @@ export default function Solutions() {
         </div>
 
         {/* Solution Categories */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-center text-text-dark mb-12">Solution Categories</h2>
+        <div className="mb-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-text-dark mb-4">Specialized Solutions</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Explore our range of therapeutic environments designed to enhance sensory experiences and support development
+            </p>
+          </div>
+          
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {solutionCategories.map((category) => (
-              <Card key={category.id} className="shadow-xl border-0 overflow-hidden hover:shadow-2xl transition-all duration-300 group">
-                <div className="relative h-48 overflow-hidden">
+            {solutionCategories.map((category, index) => (
+              <Card key={category.id} className="group shadow-2xl border-0 overflow-hidden hover:shadow-3xl transition-all duration-500 hover:-translate-y-3 bg-white">
+                <div className="relative h-64 overflow-hidden">
                   <img 
                     src={category.image}
                     alt={category.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className={`absolute inset-0 ${category.bgColor} bg-opacity-80 flex items-center justify-center`}>
-                    <h3 className="text-white text-xl font-bold text-center px-4">{category.title}</h3>
+                  <div className={`absolute inset-0 ${category.bgColor} bg-opacity-90 flex items-center justify-center group-hover:bg-opacity-95 transition-all duration-300`}>
+                    <div className="text-center px-6">
+                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
+                        <span className="text-3xl font-bold text-white">{index + 1}</span>
+                      </div>
+                      <h3 className="text-white text-2xl font-bold leading-tight">{category.title}</h3>
+                    </div>
+                  </div>
+                  
+                  {/* Floating Badge */}
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
+                    <span className="text-xs font-bold text-gray-800">PREMIUM</span>
                   </div>
                 </div>
-                <CardContent className="p-6">
-                  <p className="text-gray-custom mb-6 leading-relaxed">{category.description}</p>
-                  <div className="space-y-3 mb-6">
-                    <h4 className="font-semibold text-text-dark">Includes:</h4>
-                    <div className="flex flex-wrap gap-2">
+                
+                <CardContent className="p-8">
+                  <p className="text-gray-600 mb-6 leading-relaxed text-lg">{category.description}</p>
+                  
+                  <div className="space-y-4 mb-8">
+                    <h4 className="font-bold text-text-dark text-lg flex items-center gap-2">
+                      <Lightbulb className="w-5 h-5 text-primary-gold" />
+                      Key Features
+                    </h4>
+                    <div className="space-y-2">
                       {category.features.map((feature, idx) => (
-                        <Badge key={idx} variant="secondary" className="text-xs">
-                          {feature}
-                        </Badge>
+                        <div key={idx} className="flex items-center gap-3">
+                          <div className="w-2 h-2 bg-primary-gold rounded-full flex-shrink-0"></div>
+                          <span className="text-gray-700 font-medium">{feature}</span>
+                        </div>
                       ))}
                     </div>
                   </div>
+                  
                   <Button 
-                    className="w-full group"
-                    style={{backgroundColor: '#ffeb3b', color: '#000'}}
+                    className="w-full group bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-bold py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                     asChild
                   >
                     <a href={`/solutions/${category.id}`}>
-                      Learn More
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      Explore Solution
+                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                     </a>
                   </Button>
                 </CardContent>
@@ -230,27 +363,71 @@ export default function Solutions() {
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className="bg-gradient-to-r from-yellow-600 to-amber-600 rounded-2xl p-12 text-center text-white">
-          <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Space?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            We support a holistic approach, from a first draft idea, to 3D design and technical drawings, to construction, maintenance and training.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg"
-              style={{backgroundColor: '#ffeb3b', color: '#000'}}
-              className="hover:opacity-90 transition-opacity"
-            >
-              Get Free Consultation
-            </Button>
-            <Button 
-              size="lg"
-              variant="outline"
-              className="bg-transparent border-white text-white hover:bg-white hover:text-amber-600"
-            >
-              View Our Portfolio
-            </Button>
+        {/* Enhanced Call to Action */}
+        <div className="relative overflow-hidden">
+          <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-3xl p-12 text-center text-white relative">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/20 to-amber-600/20 rounded-3xl"></div>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/10 rounded-full blur-2xl"></div>
+            
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-3 mb-6 bg-primary-gold/20 backdrop-blur-sm rounded-full px-6 py-2">
+                <Award className="w-5 h-5 text-yellow-300" />
+                <span className="text-yellow-200 font-medium">Start Your Project Today</span>
+              </div>
+              
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                Ready to Transform 
+                <span className="block text-yellow-300">Your Space?</span>
+              </h2>
+              
+              <p className="text-xl mb-8 max-w-3xl mx-auto text-gray-300 leading-relaxed">
+                We support a holistic approach, from initial concept and 3D design to construction, maintenance, and comprehensive training. Let's bring your vision to life.
+              </p>
+              
+              <div className="grid md:grid-cols-3 gap-6 mb-10">
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-primary-gold rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Phone className="w-6 h-6 text-black" />
+                  </div>
+                  <h4 className="font-bold text-white mb-2">Free Consultation</h4>
+                  <p className="text-gray-400 text-sm">Expert advice tailored to your needs</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-primary-gold rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Lightbulb className="w-6 h-6 text-black" />
+                  </div>
+                  <h4 className="font-bold text-white mb-2">Custom Design</h4>
+                  <p className="text-gray-400 text-sm">3D modeling and technical drawings</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-primary-gold rounded-full flex items-center justify-center mx-auto mb-3">
+                    <CheckCircle className="w-6 h-6 text-black" />
+                  </div>
+                  <h4 className="font-bold text-white mb-2">Full Support</h4>
+                  <p className="text-gray-400 text-sm">Installation, training & maintenance</p>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button 
+                  size="lg"
+                  className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-bold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+                >
+                  <Phone className="w-5 h-5 mr-2" />
+                  Get Free Consultation
+                </Button>
+                <Button 
+                  size="lg"
+                  variant="outline"
+                  className="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-bold px-8 py-4 text-lg transition-all duration-300"
+                >
+                  <Mail className="w-5 h-5 mr-2" />
+                  View Our Portfolio
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
