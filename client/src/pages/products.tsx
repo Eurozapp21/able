@@ -327,8 +327,8 @@ export default function Products() {
           </div>
         )}
 
-        {/* Enhanced Products Section - Only show when no subcategories OR when searching */}
-        {hasProducts && (!hasSubcategories || searchQuery) && (
+        {/* Enhanced Products Section - Show products when available */}
+        {(searchQuery || (hasProducts && !hasSubcategories)) && (
           <div>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl font-bold text-gray-900">
