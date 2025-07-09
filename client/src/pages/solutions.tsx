@@ -47,7 +47,7 @@ export default function Solutions() {
         "Transfer solutions",
         "Safety modifications"
       ],
-      color: "bg-orange-500",
+      color: "bg-primary-gold",
       gradientFrom: "from-orange-50",
       gradientTo: "to-amber-50"
     },
@@ -62,7 +62,7 @@ export default function Solutions() {
         "Quality craftsmanship",
         "Individual adaptations"
       ],
-      color: "bg-purple-500",
+      color: "bg-primary-gold",
       gradientFrom: "from-purple-50",
       gradientTo: "to-indigo-50"
     }
@@ -83,7 +83,7 @@ export default function Solutions() {
       description: "Multi-sensory rooms are spaces developing the user's senses by immersive environments. Using specialized equipment and lighting to create therapeutic experiences.",
       image: "/attached_assets/image_1752033910480.png",
       features: ["Interactive lighting", "Fiber optics", "Sound therapy", "Aromatherapy systems"],
-      bgColor: "bg-gradient-to-r from-purple-600 to-pink-600"
+      bgColor: "bg-gradient-to-r from-yellow-500 to-amber-500"
     },
     {
       id: 3,
@@ -91,7 +91,7 @@ export default function Solutions() {
       description: "Immersive reality sensory rooms provide a virtual reality environment that creates alternative worlds for therapeutic and educational purposes.",
       image: "/attached_assets/image_1751996976633.png", 
       features: ["VR technology", "Interactive projections", "Motion sensors", "Customizable environments"],
-      bgColor: "bg-gradient-to-r from-green-600 to-teal-600"
+      bgColor: "bg-gradient-to-r from-yellow-500 to-amber-500"
     }
   ];
 
@@ -174,7 +174,7 @@ export default function Solutions() {
                     <div className="grid grid-cols-1 gap-2">
                       {service.features.map((feature, idx) => (
                         <div key={idx} className="flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-600" />
+                          <CheckCircle className="w-4 h-4 text-primary-gold" />
                           <span className="text-sm text-gray-700">{feature}</span>
                         </div>
                       ))}
