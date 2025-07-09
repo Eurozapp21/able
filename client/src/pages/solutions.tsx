@@ -17,7 +17,7 @@ export default function Solutions() {
         "Outdoor sensory areas",
         "Custom design and construction"
       ],
-      color: "bg-blue-500",
+      color: "bg-primary-gold",
       gradientFrom: "from-blue-50",
       gradientTo: "to-cyan-50"
     },
@@ -75,7 +75,7 @@ export default function Solutions() {
       description: "Sensory integration rooms are specially designed environments that offer an opportunity for users to explore and develop their sensory processing abilities through structured activities.",
       image: "/attached_assets/image_1752008837035.png",
       features: ["Proprioceptive equipment", "Vestibular activities", "Tactile experiences", "Visual stimulation"],
-      bgColor: "bg-gradient-to-r from-blue-600 to-cyan-600"
+      bgColor: "bg-gradient-to-r from-yellow-500 to-amber-500"
     },
     {
       id: 2,
@@ -125,7 +125,7 @@ export default function Solutions() {
   return (
     <div className="pt-20 min-h-screen bg-gray-50">
       {/* Header Image */}
-      <div className="relative h-80 bg-gradient-to-r from-blue-900 to-blue-600 overflow-hidden">
+      <div className="relative h-80 bg-gradient-to-r from-yellow-600 to-amber-600 overflow-hidden">
         <div className="absolute inset-0 bg-black bg-opacity-40" />
         <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
           <div className="text-white max-w-3xl">
@@ -186,7 +186,7 @@ export default function Solutions() {
                   <div className="w-16 h-16 bg-primary-gold rounded-full flex items-center justify-center mx-auto mb-4">
                     <item.icon className="w-8 h-8 text-black" />
                   </div>
-                  <div className="absolute -top-3 -right-3 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                  <div className="absolute -top-3 -right-3 w-8 h-8 bg-primary-gold text-black rounded-full flex items-center justify-center font-bold text-sm">
                     {item.step}
                   </div>
                   <h3 className="font-bold text-lg text-text-dark mb-2">{item.title}</h3>
@@ -206,7 +206,7 @@ export default function Solutions() {
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     <div className={`w-12 h-12 ${service.color} rounded-full flex items-center justify-center`}>
-                      <service.icon className="w-6 h-6 text-white" />
+                      <service.icon className="w-6 h-6 text-black" />
                     </div>
                     <CardTitle className="text-2xl text-text-dark">{service.title}</CardTitle>
                   </div>
@@ -275,7 +275,7 @@ export default function Solutions() {
         </div>
 
         {/* Call to Action */}
-        <div className="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-12 text-center text-white">
+        <div className="bg-gradient-to-r from-yellow-600 to-amber-600 rounded-2xl p-12 text-center text-white">
           <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Space?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             We support a holistic approach, from a first draft idea, to 3D design and technical drawings, to construction, maintenance and training.
@@ -291,7 +291,7 @@ export default function Solutions() {
             <Button 
               size="lg"
               variant="outline"
-              className="bg-transparent border-white text-white hover:bg-white hover:text-blue-600"
+              className="bg-transparent border-white text-white hover:bg-white hover:text-amber-600"
             >
               View Our Portfolio
             </Button>
