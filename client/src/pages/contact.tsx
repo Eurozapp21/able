@@ -345,6 +345,18 @@ export default function Contact() {
                     <li>• Accessibility solutions display</li>
                   </ul>
                 </div>
+                <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden mb-4">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3262.7234567890123!2d33.334139!3d35.138278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDA4JzE3LjgiTiAzM8KwMjAnMDIuOSJF!5e0!3m2!1sen!2scy!4v1625123456789!5m2!1sen!2scy"
+                    width="100%" 
+                    height="100%" 
+                    style={{border: 0}}
+                    allowFullScreen 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="AbleTools Location Map"
+                  />
+                </div>
                 <div className="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
                   <p className="text-sm text-gray-700 font-medium">
                     📍 Convenient Location in Strovolos
@@ -353,6 +365,17 @@ export default function Contact() {
                     Easily accessible by public transport with ample parking available. 
                     Call ahead to schedule a personalized demonstration.
                   </p>
+                  <div className="mt-3">
+                    <a 
+                      href="https://www.google.com/maps/@35.138278,33.334139,13z?hl=en-US&entry=ttu&g_ep=EgoyMDI1MDcwNi4wIKXMDSoASAFQAw%3D%3D"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-primary-gold hover:text-yellow-600 transition-colors font-medium text-sm"
+                    >
+                      <MapPin className="w-4 h-4" />
+                      View on Google Maps
+                    </a>
+                  </div>
                 </div>
               </CardContent>
             </Card>

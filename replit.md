@@ -156,6 +156,7 @@ The system manages several core entities:
 - July 09, 2025. Added authentic seminar header image to Seminar Detail page providing professional visual branding and context for educational content
 - July 09, 2025. Created comprehensive Newsroom page with professional layout, search functionality, category filtering, featured articles, news statistics, and newsletter subscription. Added news detail page with full article content, social sharing, related articles sidebar, and proper navigation structure
 - July 09, 2025. Completely redesigned Contact page with modern 3-column layout, enhanced header with service statistics, professional contact form, departmental contact cards, emergency support section, showroom information, and consistent AbleTools yellow branding throughout
+- July 09, 2025. Added interactive Google Maps integration to Contact page showing AbleTools location in Strovolos, Cyprus with embedded map view and direct link to Google Maps for navigation
 
 
 ## User Preferences
