@@ -193,66 +193,68 @@ export default function Products() {
           </Breadcrumb>
         </div>
 
-        {/* Enhanced Search and Controls */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
-            <div className="flex flex-col sm:flex-row gap-4 flex-1">
-              <div className="relative flex-1 max-w-lg">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                <Input
-                  placeholder="Search products by name or description..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400"
-                />
+        {/* Enhanced Search and Controls - Only show when searching or in a category */}
+        {(searchQuery || selectedCategory) && (
+          <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+            <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+              <div className="flex flex-col sm:flex-row gap-4 flex-1">
+                <div className="relative flex-1 max-w-lg">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                  <Input
+                    placeholder="Search products by name or description..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-10 h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400"
+                  />
+                </div>
+                
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="w-full sm:w-48 h-12 border-gray-300">
+                    <SelectValue placeholder="Sort by" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="name">Name (A-Z)</SelectItem>
+                    <SelectItem value="featured">Featured First</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-full sm:w-48 h-12 border-gray-300">
-                  <SelectValue placeholder="Sort by" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="name">Name (A-Z)</SelectItem>
-                  <SelectItem value="featured">Featured First</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            
-            <div className="flex items-center gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setShowFilters(!showFilters);
-                }}
-                className="border-yellow-400 text-yellow-600 hover:bg-yellow-50"
-              >
-                <SlidersHorizontal className="h-4 w-4 mr-2" />
-                Filters
-              </Button>
-              
-              <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+              <div className="flex items-center gap-2">
                 <Button
-                  variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                  variant="outline"
                   size="sm"
-                  onClick={() => setViewMode('grid')}
-                  className={viewMode === 'grid' ? 'bg-yellow-400 hover:bg-yellow-500 text-black' : 'hover:bg-gray-200'}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowFilters(!showFilters);
+                  }}
+                  className="border-yellow-400 text-yellow-600 hover:bg-yellow-50"
                 >
-                  <Grid className="h-4 w-4" />
+                  <SlidersHorizontal className="h-4 w-4 mr-2" />
+                  Filters
                 </Button>
-                <Button
-                  variant={viewMode === 'list' ? 'default' : 'ghost'}
-                  size="sm"
-                  onClick={() => setViewMode('list')}
-                  className={viewMode === 'list' ? 'bg-yellow-400 hover:bg-yellow-500 text-black' : 'hover:bg-gray-200'}
-                >
-                  <List className="h-4 w-4" />
-                </Button>
+                
+                <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+                  <Button
+                    variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={() => setViewMode('grid')}
+                    className={viewMode === 'grid' ? 'bg-yellow-400 hover:bg-yellow-500 text-black' : 'hover:bg-gray-200'}
+                  >
+                    <Grid className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant={viewMode === 'list' ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={() => setViewMode('list')}
+                    className={viewMode === 'list' ? 'bg-yellow-400 hover:bg-yellow-500 text-black' : 'hover:bg-gray-200'}
+                  >
+                    <List className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Enhanced Category Navigation - Only show when not searching */}
         {hasSubcategories && !searchQuery && (
