@@ -471,15 +471,15 @@ export default function Home() {
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-text-dark">
-              Educational Programs, Training & Events
+              Educational Programs & Events
             </h2>
             <p className="text-xl text-text-gray max-w-3xl mx-auto leading-relaxed">
-              Stay informed with our educational seminars, professional training courses, and industry events. Join healthcare professionals 
+              Stay informed with our latest educational seminars and industry events. Join healthcare professionals 
               advancing their knowledge in rehabilitation technology and patient care.
             </p>
           </div>
           
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-2 gap-12">
             {/* Left Column - Seminars */}
             <div>
               <div className="bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden">
@@ -491,16 +491,16 @@ export default function Home() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-black">Educational Seminars</h3>
-                      <p className="text-black opacity-80 text-sm">Professional Development</p>
+                      <h3 className="text-2xl font-bold text-black">Upcoming Seminars</h3>
+                      <p className="text-black opacity-80 text-sm">Professional Training Programs</p>
                     </div>
                   </div>
                 </div>
                 
                 <div className="p-6">
                   <div className="space-y-6">
-                    {seminars && seminars.filter(s => s.type === 'seminar').length > 0 ? (
-                      seminars.filter(s => s.type === 'seminar').slice(0, 2).map((seminar) => (
+                    {seminars && seminars.length > 0 ? (
+                      seminars.slice(0, 3).map((seminar) => (
                         <div key={seminar.id} className="group bg-gradient-to-r from-gray-50 to-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-primary-gold">
                           <div className="flex items-start space-x-4">
                             <div className="relative">
@@ -565,7 +565,7 @@ export default function Home() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
                         <p className="text-text-gray text-lg">No upcoming seminars at the moment.</p>
-                        <p className="text-text-gray text-sm mt-2">Check back soon for new educational opportunities</p>
+                        <p className="text-text-gray text-sm mt-2">Check back soon for new training opportunities</p>
                       </div>
                     )}
                   </div>
@@ -580,121 +580,21 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            
-            {/* Middle Column - Training */}
-            <div>
-              <div className="bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden">
-                <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-6">
-                  <div className="flex items-center">
-                    <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mr-4">
-                      <svg className="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-white">Professional Training</h3>
-                      <p className="text-white opacity-80 text-sm">Hands-on Certification</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  <div className="space-y-6">
-                    {seminars && seminars.filter(s => s.type === 'training').length > 0 ? (
-                      seminars.filter(s => s.type === 'training').slice(0, 2).map((training) => (
-                        <div key={training.id} className="group bg-gradient-to-r from-blue-50 to-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-blue-500">
-                          <div className="flex items-start space-x-4">
-                            <div className="relative">
-                              <img
-                                src={training.image || '/api/placeholder/80/80'}
-                                alt={training.title}
-                                className="w-20 h-20 object-cover rounded-xl flex-shrink-0 group-hover:scale-105 transition-transform duration-300"
-                              />
-                              <div className="absolute -top-2 -right-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
-                                <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                              </div>
-                            </div>
-                            <div className="flex-1">
-                              <div className="flex items-center mb-3">
-                                <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                                  CERTIFICATION
-                                </span>
-                                <span className="ml-2 text-xs text-text-gray">
-                                  {training.fee}
-                                </span>
-                              </div>
-                              <h4 className="font-bold text-lg mb-2 text-text-dark group-hover:text-blue-600 transition-colors">
-                                {training.title}
-                              </h4>
-                              <div className="flex items-center text-text-gray text-sm mb-3">
-                                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                {new Date(training.date).toLocaleDateString('en-GB', {
-                                  weekday: 'long',
-                                  year: 'numeric',
-                                  month: 'long',
-                                  day: 'numeric'
-                                })}
-                              </div>
-                              <div className="flex items-center text-text-gray text-sm mb-4">
-                                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                                {training.location}
-                              </div>
-                              <div className="flex items-center justify-between">
-                                <span className="text-xs text-text-gray">
-                                  Max: {training.maxParticipants} participants
-                                </span>
-                                <Link href={`/seminars/${training.id}`}>
-                                  <Button size="sm" className="bg-blue-500 hover:bg-blue-600 text-white transition-all duration-300 font-semibold">
-                                    Register Now
-                                  </Button>
-                                </Link>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="text-center py-12">
-                        <svg className="w-20 h-20 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                        </svg>
-                        <p className="text-text-gray text-lg">No training courses at the moment.</p>
-                        <p className="text-text-gray text-sm mt-2">Check back soon for new certification opportunities</p>
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="mt-8 text-center">
-                    <Link href="/seminars">
-                      <Button className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-lg transition-all duration-300 font-semibold text-lg">
-                        View All Training
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+
             
             {/* Right Column - Events */}
             <div>
               <div className="bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden">
-                <div className="bg-gradient-to-r from-green-500 to-green-600 p-6">
+                <div className="bg-gradient-to-r from-primary-gold to-yellow-500 p-6">
                   <div className="flex items-center">
                     <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mr-4">
-                      <svg className="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-7 h-7 text-primary-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                       </svg>
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-white">Latest Events</h3>
-                      <p className="text-white opacity-80 text-sm">Industry News & Updates</p>
+                      <h3 className="text-2xl font-bold text-black">Recent Events</h3>
+                      <p className="text-black opacity-80 text-sm">Industry News & Updates</p>
                     </div>
                   </div>
                 </div>
@@ -703,7 +603,7 @@ export default function Home() {
                   <div className="space-y-6">
                     {events && events.length > 0 ? (
                       events.slice(0, 3).map((event) => (
-                        <div key={event.id} className="group bg-gradient-to-r from-green-50 to-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-green-500">
+                        <div key={event.id} className="group bg-gradient-to-r from-gray-50 to-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-primary-gold">
                           <div className="flex items-start space-x-4">
                             <div className="relative">
                               <img
@@ -711,19 +611,19 @@ export default function Home() {
                                 alt={event.title}
                                 className="w-20 h-20 object-cover rounded-xl flex-shrink-0 group-hover:scale-105 transition-transform duration-300"
                               />
-                              <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                                <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary-gold rounded-full flex items-center justify-center">
+                                <svg className="w-3 h-3 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5z" />
                                 </svg>
                               </div>
                             </div>
                             <div className="flex-1">
                               <div className="flex items-center mb-3">
-                                <span className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                <span className="bg-primary-gold text-black px-3 py-1 rounded-full text-xs font-semibold">
                                   LATEST
                                 </span>
                               </div>
-                              <h4 className="font-bold text-lg mb-2 text-text-dark group-hover:text-green-600 transition-colors">
+                              <h4 className="font-bold text-lg mb-2 text-text-dark group-hover:text-primary-gold transition-colors">
                                 {event.title}
                               </h4>
                               <div className="flex items-center text-text-gray text-sm mb-3">
@@ -748,7 +648,7 @@ export default function Home() {
                                   Recent Update
                                 </div>
                                 <Link href={`/events/${event.id}`}>
-                                  <Button size="sm" className="bg-green-500 hover:bg-green-600 text-white transition-all duration-300 font-semibold">
+                                  <Button size="sm" style={{backgroundColor: '#ffeb3b', color: '#000'}} className="hover:opacity-90 transition-all duration-300 font-semibold">
                                     Learn More
                                   </Button>
                                 </Link>
@@ -770,7 +670,7 @@ export default function Home() {
                   
                   <div className="mt-8 text-center">
                     <Link href="/events">
-                      <Button className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg transition-all duration-300 font-semibold text-lg">
+                      <Button style={{backgroundColor: '#ffeb3b', color: '#000'}} className="hover:opacity-90 px-8 py-4 rounded-lg transition-all duration-300 font-semibold text-lg">
                         View All Events
                       </Button>
                     </Link>
