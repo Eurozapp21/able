@@ -267,25 +267,41 @@ export default function Products() {
               {currentLevelCategories.map((category: Category) => (
                 <Card 
                   key={category.id} 
-                  className="cursor-pointer hover:shadow-xl transition-all duration-300 hover:border-yellow-400 hover:-translate-y-1 group bg-white"
+                  className="cursor-pointer hover:shadow-xl transition-all duration-300 hover:border-yellow-400 hover:-translate-y-2 group bg-white overflow-hidden"
                   onClick={() => handleCategoryClick(category.id)}
                 >
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center mb-3">
-                          <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center mr-3">
-                            <Package className="h-5 w-5 text-yellow-600" />
-                          </div>
-                          <h3 className="font-semibold text-lg group-hover:text-yellow-600 transition-colors">
-                            {category.name}
-                          </h3>
-                        </div>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                          {category.description}
-                        </p>
+                  {/* Category Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={category.image || '/api/placeholder/400/300'}
+                      alt={category.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                    <div className="absolute top-4 right-4">
+                      <div className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center">
+                        <Package className="h-5 w-5 text-yellow-600" />
                       </div>
-                      <ChevronRight className="h-6 w-6 text-yellow-600 group-hover:transform group-hover:translate-x-1 transition-all duration-300 flex-shrink-0 ml-2" />
+                    </div>
+                    <div className="absolute bottom-4 right-4">
+                      <ChevronRight className="h-8 w-8 text-white group-hover:transform group-hover:translate-x-1 transition-all duration-300" />
+                    </div>
+                  </div>
+                  
+                  {/* Category Content */}
+                  <CardContent className="p-6">
+                    <div className="space-y-3">
+                      <h3 className="font-semibold text-lg group-hover:text-yellow-600 transition-colors leading-tight">
+                        {category.name}
+                      </h3>
+                      <p className="text-gray-600 text-sm leading-relaxed">
+                        {category.description}
+                      </p>
+                      <div className="pt-2">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 group-hover:bg-yellow-200 transition-colors">
+                          Explore Category
+                        </span>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>

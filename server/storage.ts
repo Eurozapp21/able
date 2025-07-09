@@ -81,35 +81,35 @@ export class MemStorage implements IStorage {
     // Seed categories
     const categoryData = [
       // Main Categories
-      { id: 1, name: "Lifting Systems", description: "Professional lifting and transfer systems for safe patient handling", icon: "wheelchair", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 2, name: "Wheelchairs", description: "Manual and electric wheelchairs for enhanced mobility", icon: "battery-full", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 3, name: "Mobility Aids", description: "Walking aids and mobility equipment for independence", icon: "walking", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 4, name: "Sensory Integration Rooms", description: "Multi-sensory therapy equipment and environments", icon: "brain", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 5, name: "Stair Lifts", description: "Staircase accessibility solutions", icon: "stairs", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 6, name: "Seating Systems", description: "Specialized seating and positioning solutions", icon: "user-check", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 7, name: "Exercise Equipment", description: "Rehabilitation and therapeutic exercise machines", icon: "bicycle", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 8, name: "Daily Living Aids", description: "Assistive tools for everyday tasks and independence", icon: "hands-helping", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 9, name: "Medical Equipment", description: "Clinical and therapeutic medical devices", icon: "car", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 10, name: "Bath and Toilet Aids", description: "Bathroom safety and assistance equipment", icon: "bath", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 11, name: "Pediatric Equipment", description: "Specialized equipment for children with disabilities", icon: "baby-carriage", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 12, name: "Rehab Pushchairs", description: "Specialized pushchairs for rehabilitation", icon: "baby-carriage", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 1, name: "Lifting Systems", description: "Professional lifting and transfer systems for safe patient handling", icon: "wheelchair", parentId: null, image: "/attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg" },
+      { id: 2, name: "Wheelchairs", description: "Manual and electric wheelchairs for enhanced mobility", icon: "battery-full", parentId: null, image: "/attached_assets/bingo_evolution_twins-1_1752003228920.jpg" },
+      { id: 3, name: "Mobility Aids", description: "Walking aids and mobility equipment for independence", icon: "walking", parentId: null, image: "/attached_assets/1601935107aboutus_1752007024526.jpg" },
+      { id: 4, name: "Sensory Integration Rooms", description: "Multi-sensory therapy equipment and environments", icon: "brain", parentId: null, image: "/attached_assets/maxresdefault_1752003228921.jpg" },
+      { id: 5, name: "Stair Lifts", description: "Staircase accessibility solutions", icon: "stairs", parentId: null, image: "/attached_assets/cc1b09e90722c7d00b3f0cb8757c6d79_1752003228919.jpg" },
+      { id: 6, name: "Seating Systems", description: "Specialized seating and positioning solutions", icon: "user-check", parentId: null, image: "/attached_assets/send-award-virtual-celebration-employee-milestones_1752004100582.jpg" },
+      { id: 7, name: "Exercise Equipment", description: "Rehabilitation and therapeutic exercise machines", icon: "bicycle", parentId: null, image: "/attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg" },
+      { id: 8, name: "Daily Living Aids", description: "Assistive tools for everyday tasks and independence", icon: "hands-helping", parentId: null, image: "/attached_assets/1601936002aboutus_small2_1752007885488.jpg" },
+      { id: 9, name: "Medical Equipment", description: "Clinical and therapeutic medical devices", icon: "car", parentId: null, image: "/attached_assets/Spinal-Cord-Rehabilitation_1752000796341.jpg" },
+      { id: 10, name: "Bath and Toilet Aids", description: "Bathroom safety and assistance equipment", icon: "bath", parentId: null, image: "/attached_assets/1601936002aboutus_small2_1752009993907.jpg" },
+      { id: 11, name: "Pediatric Equipment", description: "Specialized equipment for children with disabilities", icon: "baby-carriage", parentId: null, image: "/attached_assets/bingo_evolution_twins-1_1752003228920.jpg" },
+      { id: 12, name: "Rehab Pushchairs", description: "Specialized pushchairs for rehabilitation", icon: "baby-carriage", parentId: null, image: "/attached_assets/cc1b09e90722c7d00b3f0cb8757c6d79_1752003228919.jpg" },
       
       // Sub Categories for Wheelchairs (parentId: 2) - Example: Products/Wheelchairs/Rigid Wheelchairs/Wolturnus W5
-      { id: 21, name: "Manual Wheelchairs", description: "Self-propelled wheelchairs for active users", icon: "wheelchair", parentId: 2, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 22, name: "Electric Wheelchairs", description: "Powered wheelchairs for enhanced mobility", icon: "battery-full", parentId: 2, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 23, name: "Rigid Wheelchairs", description: "Ultra-lightweight rigid frame wheelchairs for performance", icon: "bicycle", parentId: 2, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 21, name: "Manual Wheelchairs", description: "Self-propelled wheelchairs for active users", icon: "wheelchair", parentId: 2, image: "/attached_assets/bingo_evolution_twins-1_1752003228920.jpg" },
+      { id: 22, name: "Electric Wheelchairs", description: "Powered wheelchairs for enhanced mobility", icon: "battery-full", parentId: 2, image: "/attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg" },
+      { id: 23, name: "Rigid Wheelchairs", description: "Ultra-lightweight rigid frame wheelchairs for performance", icon: "bicycle", parentId: 2, image: "/attached_assets/cc1b09e90722c7d00b3f0cb8757c6d79_1752003228919.jpg" },
       
       // Third-level Categories for Rigid Wheelchairs (parentId: 23) - Example: Products/Wheelchairs/Rigid Wheelchairs/[Product]
-      { id: 231, name: "Wolturnus Series", description: "Premium Danish wheelchair engineering", icon: "wheelchair", parentId: 23, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 231, name: "Wolturnus Series", description: "Premium Danish wheelchair engineering", icon: "wheelchair", parentId: 23, image: "/attached_assets/bingo_evolution_twins-1_1752003228920.jpg" },
       
       // Sub Categories for Lifting Systems (parentId: 1)
-      { id: 31, name: "Ceiling Hoists", description: "Track-mounted lifting systems for patient transfer", icon: "stairs", parentId: 1, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 32, name: "Mobile Hoists", description: "Portable lifting equipment for flexible use", icon: "car", parentId: 1, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 33, name: "Transfer Boards", description: "Sliding boards for safe patient transfer", icon: "hands-helping", parentId: 1, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 31, name: "Ceiling Hoists", description: "Track-mounted lifting systems for patient transfer", icon: "stairs", parentId: 1, image: "/attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg" },
+      { id: 32, name: "Mobile Hoists", description: "Portable lifting equipment for flexible use", icon: "car", parentId: 1, image: "/attached_assets/send-award-virtual-celebration-employee-milestones_1752004100582.jpg" },
+      { id: 33, name: "Transfer Boards", description: "Sliding boards for safe patient transfer", icon: "hands-helping", parentId: 1, image: "/attached_assets/1601935107aboutus_1752007024526.jpg" },
       
       // Sub Categories for Medical Equipment (parentId: 9)
-      { id: 41, name: "Therapy Equipment", description: "Physical therapy and rehabilitation devices", icon: "user-check", parentId: 9, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 42, name: "Positioning Aids", description: "Medical positioning and support equipment", icon: "hands-helping", parentId: 9, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 41, name: "Therapy Equipment", description: "Physical therapy and rehabilitation devices", icon: "user-check", parentId: 9, image: "/attached_assets/Spinal-Cord-Rehabilitation_1752000796341.jpg" },
+      { id: 42, name: "Positioning Aids", description: "Medical positioning and support equipment", icon: "hands-helping", parentId: 9, image: "/attached_assets/maxresdefault_1752003228921.jpg" },
     ];
 
     categoryData.forEach(cat => {
