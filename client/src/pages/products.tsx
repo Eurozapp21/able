@@ -79,24 +79,8 @@ export default function Products() {
     setSearchQuery('');
   };
 
-  const filteredProducts = products.filter((product: Product) =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    product.description.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    switch (sortBy) {
-      case 'name':
-        return a.name.localeCompare(b.name);
-      case 'featured':
-        return (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0);
-      default:
-        return 0;
-    }
-  });
-
   const hasSubcategories = currentLevelCategories.length > 0;
-  const hasProducts = sortedProducts.length > 0;
+  const hasProducts = products.length > 0;
 
   const getCategoryStats = () => {
     const mainCategories = allCategories.filter((cat: Category) => !cat.parentId);
@@ -331,12 +315,12 @@ export default function Products() {
               </h2>
               <div className="flex items-center gap-3">
                 <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 px-3 py-1">
-                  {sortedProducts.length} products
+                  {products.length} products
                 </Badge>
-                {sortedProducts.filter(p => p.isFeatured).length > 0 && (
+                {products.filter((p: Product) => p.isFeatured).length > 0 && (
                   <Badge variant="secondary" className="bg-green-100 text-green-800 px-3 py-1">
                     <Star className="h-3 w-3 mr-1" />
-                    {sortedProducts.filter(p => p.isFeatured).length} featured
+                    {products.filter((p: Product) => p.isFeatured).length} featured
                   </Badge>
                 )}
               </div>
@@ -346,6 +330,8 @@ export default function Products() {
               categoryId={selectedCategory || undefined}
               searchQuery={searchQuery}
               limit={searchQuery ? undefined : 12}
+              sortBy={sortBy}
+              viewMode={viewMode}
             />
           </div>
         )}
