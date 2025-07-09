@@ -297,8 +297,8 @@ export default function Seminars() {
             
             <CardContent className="py-20 relative z-10">
               <div className="flex justify-center mb-8">
-                <div className="w-20 h-20 bg-primary-gold rounded-full flex items-center justify-center">
-                  <Target className="w-10 h-10 text-black" />
+                <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-primary-gold">
+                  <Target className="w-10 h-10 text-primary-gold" />
                 </div>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
