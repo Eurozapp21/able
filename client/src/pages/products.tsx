@@ -17,6 +17,8 @@ export default function Products() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  
+  console.log('Products page viewMode state:', viewMode);
   const [categoryPath, setCategoryPath] = useState<Category[]>([]);
   const [sortBy, setSortBy] = useState('name');
   const [showFilters, setShowFilters] = useState(false);
@@ -234,8 +236,9 @@ export default function Products() {
                   size="sm"
                   onClick={(e) => {
                     e.preventDefault();
-                    console.log('Grid view clicked');
+                    console.log('Grid view clicked, current viewMode:', viewMode);
                     setViewMode('grid');
+                    console.log('Grid view set');
                   }}
                   className={viewMode === 'grid' ? 'bg-yellow-400 hover:bg-yellow-500 text-black' : 'hover:bg-gray-200'}
                 >
@@ -246,8 +249,9 @@ export default function Products() {
                   size="sm"
                   onClick={(e) => {
                     e.preventDefault();
-                    console.log('List view clicked');
+                    console.log('List view clicked, current viewMode:', viewMode);
                     setViewMode('list');
+                    console.log('List view set');
                   }}
                   className={viewMode === 'list' ? 'bg-yellow-400 hover:bg-yellow-500 text-black' : 'hover:bg-gray-200'}
                 >
