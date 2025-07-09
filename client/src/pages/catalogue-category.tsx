@@ -39,13 +39,17 @@ export default function CatalogueCategory() {
   
   console.log('CatalogueCategory component loaded:', { match, params, slug });
 
-  const { data: category, isLoading: categoryLoading } = useQuery<CatalogueCategory>({
-    queryKey: ['/api/catalogue/categories', slug],
+  const { data: category, isLoading: categoryLoading, error: categoryError } = useQuery<CatalogueCategory>({
+    queryKey: [`/api/catalogue/categories/${slug}`],
     enabled: !!slug,
   });
+  
+  if (categoryError) {
+    console.error('Category loading error:', categoryError);
+  }
 
   const { data: brochures = [], isLoading: brochuresLoading } = useQuery<Brochure[]>({
-    queryKey: ['/api/catalogue/categories', category?.id, 'brochures'],
+    queryKey: [`/api/catalogue/categories/${category?.id}/brochures`],
     enabled: !!category?.id,
   });
 
