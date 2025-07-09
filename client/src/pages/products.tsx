@@ -151,7 +151,10 @@ export default function Products() {
               <BreadcrumbItem>
                 <BreadcrumbLink 
                   href="/products" 
-                  onClick={() => handleCategoryClick(null)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleCategoryClick(null);
+                  }}
                   className="text-yellow-600 hover:text-yellow-700"
                 >
                   Products
@@ -166,7 +169,10 @@ export default function Products() {
                     ) : (
                       <BreadcrumbLink 
                         href={`/products?category=${category.id}`}
-                        onClick={() => handleCategoryClick(category.id)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleCategoryClick(category.id);
+                        }}
                         className="text-yellow-600 hover:text-yellow-700"
                       >
                         {category.name}
@@ -193,7 +199,7 @@ export default function Products() {
                 />
               </div>
               
-              <Select value={sortBy} onValueChange={setSortBy}>
+              <Select value={sortBy} onValueChange={(value) => setSortBy(value)}>
                 <SelectTrigger className="w-full sm:w-48 h-12 border-gray-300">
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
@@ -208,7 +214,10 @@ export default function Products() {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => setShowFilters(!showFilters)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowFilters(!showFilters);
+                }}
                 className="border-yellow-400 text-yellow-600 hover:bg-yellow-50"
               >
                 <SlidersHorizontal className="h-4 w-4 mr-2" />
@@ -219,7 +228,10 @@ export default function Products() {
                 <Button
                   variant={viewMode === 'grid' ? 'default' : 'ghost'}
                   size="sm"
-                  onClick={() => setViewMode('grid')}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setViewMode('grid');
+                  }}
                   className={viewMode === 'grid' ? 'bg-yellow-400 hover:bg-yellow-500 text-black' : 'hover:bg-gray-200'}
                 >
                   <Grid className="h-4 w-4" />
@@ -227,7 +239,10 @@ export default function Products() {
                 <Button
                   variant={viewMode === 'list' ? 'default' : 'ghost'}
                   size="sm"
-                  onClick={() => setViewMode('list')}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setViewMode('list');
+                  }}
                   className={viewMode === 'list' ? 'bg-yellow-400 hover:bg-yellow-500 text-black' : 'hover:bg-gray-200'}
                 >
                   <List className="h-4 w-4" />
@@ -257,7 +272,10 @@ export default function Products() {
                 <Card 
                   key={category.id} 
                   className="cursor-pointer hover:shadow-xl transition-all duration-300 hover:border-yellow-400 hover:-translate-y-2 group bg-white overflow-hidden"
-                  onClick={() => handleCategoryClick(category.id)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleCategoryClick(category.id);
+                  }}
                 >
                   {/* Category Image */}
                   <div className="relative h-48 overflow-hidden">
@@ -353,7 +371,10 @@ export default function Products() {
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 {selectedCategory && (
                   <Button 
-                    onClick={() => handleCategoryClick(null)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryClick(null);
+                    }}
                     className="bg-yellow-400 hover:bg-yellow-500 text-black"
                   >
                     <Package className="h-4 w-4 mr-2" />
@@ -363,7 +384,10 @@ export default function Products() {
                 {searchQuery && (
                   <Button 
                     variant="outline"
-                    onClick={() => setSearchQuery('')}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setSearchQuery('');
+                    }}
                     className="border-yellow-400 text-yellow-600 hover:bg-yellow-50"
                   >
                     Clear Search
@@ -398,7 +422,10 @@ export default function Products() {
           <div className="mt-12 text-center">
             <Button 
               variant="outline" 
-              onClick={() => handleCategoryClick(null)}
+              onClick={(e) => {
+                e.preventDefault();
+                handleCategoryClick(null);
+              }}
               className="border-yellow-400 text-yellow-600 hover:bg-yellow-50 px-6 py-3"
             >
               <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
