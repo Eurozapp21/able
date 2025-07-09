@@ -7,11 +7,60 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Skeleton } from '@/components/ui/skeleton';
 import { Calendar, Clock, User, Share2, ArrowLeft, Mail, Facebook, Twitter, Linkedin } from 'lucide-react';
 
+const RelatedArticles = ({ currentArticleId }) => {
+  const { data: allArticles = [] } = useQuery({
+    queryKey: ['/api/events'],
+  });
+
+  const relatedArticles = allArticles
+    .filter(article => article.id !== currentArticleId)
+    .slice(0, 3);
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Related Articles</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-4">
+          {relatedArticles.map((article) => (
+            <Link key={article.id} href={`/news/${article.id}`}>
+              <div className="border-b border-gray-200 pb-4 last:border-b-0 hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
+                <img 
+                  src={article.image || '/api/placeholder/200/120'} 
+                  alt={article.title}
+                  className="w-full h-20 object-cover rounded-lg mb-2"
+                />
+                <h4 className="font-medium text-sm text-text-dark line-clamp-2 mb-1 hover:text-primary-gold transition-colors">
+                  {article.title}
+                </h4>
+                <p className="text-xs text-gray-custom">
+                  {new Date(article.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                </p>
+              </div>
+            </Link>
+          ))}
+          {relatedArticles.length === 0 && (
+            <p className="text-gray-500 text-sm">No related articles available.</p>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
 export default function NewsDetail() {
   const { id } = useParams();
   
   const { data: article, isLoading } = useQuery({
     queryKey: ['/api/events', id],
+    queryFn: async () => {
+      const response = await fetch(`/api/events/${id}`);
+      if (!response.ok) {
+        throw new Error('Article not found');
+      }
+      return response.json();
+    },
     enabled: !!id,
   });
 
@@ -234,29 +283,7 @@ export default function NewsDetail() {
 
           {/* Sidebar */}
           <div className="space-y-6">
-            {/* Related Articles */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Related Articles</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="border-b border-gray-200 pb-4 last:border-b-0">
-                      <img 
-                        src="/api/placeholder/200/120" 
-                        alt="Related article"
-                        className="w-full h-20 object-cover rounded-lg mb-2"
-                      />
-                      <h4 className="font-medium text-sm text-text-dark line-clamp-2 mb-1">
-                        Related Rehabilitation Technology Update {i}
-                      </h4>
-                      <p className="text-xs text-gray-custom">2 days ago</p>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <RelatedArticles currentArticleId={article?.id} />
 
             {/* Contact CTA */}
             <Card className="bg-gradient-to-br from-slate-900 to-slate-800 text-white">

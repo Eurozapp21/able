@@ -319,7 +319,7 @@ export class MemStorage implements IStorage {
       {
         id: 1,
         title: "HUR - Spinal Cord and Neurological Rehabilitation",
-        content: "In an inclusive wellness facility, it is easy to get on and off machines. The machines can be used safely and independently by as many different users as possible, regardless of ability, while in between machines there is ample room to manoeuvre with various mobility aids. HUR's pneumatic technology provides variable resistance training that adapts to each user's capabilities, making it ideal for neurological rehabilitation programs.",
+        content: "HUR (HUR Oy) is a Finnish company that develops and manufactures pneumatic exercise equipment specifically designed for medical rehabilitation, wellness, and fitness applications. The company has been a pioneer in pneumatic resistance technology since 1989.\n\nOur partnership with HUR brings cutting-edge rehabilitation technology to Cyprus, offering healthcare professionals and patients access to the most advanced pneumatic exercise systems available today. These systems are specifically designed for individuals with spinal cord injuries, neurological conditions, and those requiring gentle, controlled resistance training.\n\nThe HUR pneumatic technology offers several key advantages in rehabilitation settings:\n\n• Zero Starting Weight: Patients can begin exercises with virtually no resistance, making it ideal for early-stage rehabilitation\n• Precise Control: Air pressure systems allow for exact resistance adjustments in small increments\n• Safety Features: Built-in safety mechanisms prevent injury during use\n• Accessibility: Equipment designed for wheelchair users and individuals with limited mobility\n• Clinical Integration: Seamless integration with existing rehabilitation protocols\n\nHUR equipment is widely used in hospitals, rehabilitation centers, and specialized clinics across Europe and North America. The technology has been clinically proven to improve functional outcomes in patients with various neurological conditions, including spinal cord injuries, stroke recovery, and neuromuscular disorders.\n\nAbleTools is proud to be the exclusive distributor of HUR equipment in Cyprus, providing comprehensive training, installation, and ongoing technical support to healthcare facilities throughout the region.",
         date: new Date("2025-07-15"),
         image: "/attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg",
         excerpt: "Discover HUR's innovative approach to neurological rehabilitation equipment and its impact on patient outcomes."
@@ -362,7 +362,7 @@ export class MemStorage implements IStorage {
         content: "Discover the latest innovations in stair lift technology featuring curved rail systems, outdoor installations, and smart home integration. Our expert team will demonstrate installation processes and maintenance procedures for residential and commercial applications.",
         date: new Date("2025-12-15"),
         image: "/attached_assets/cc1b09e90722c7d00b3f0cb8757c6d79_1752003228919.jpg",
-        excerpt: "Latest stair lift innovations featuring smart technology and enhanced safety features."
+        excerpt: "Latest stair lift innovations featuring smart technology and enhanced safety features for residential and commercial applications."
       }
     ];
 
