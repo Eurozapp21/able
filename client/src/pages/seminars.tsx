@@ -320,7 +320,7 @@ export default function Seminars() {
                   <p className="text-gray-300 text-sm">Recognized credentials</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                  <Users className="w-8 h-8 text-green-400 mx-auto mb-3" />
+                  <Users className="w-8 h-8 text-primary-gold mx-auto mb-3" />
                   <h3 className="font-bold text-lg mb-2">Networking Opportunities</h3>
                   <p className="text-gray-300 text-sm">Connect with peers</p>
                 </div>
