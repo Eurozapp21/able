@@ -75,6 +75,7 @@ export default function Products() {
   }, [selectedCategory, allCategories]);
 
   const handleCategoryClick = (categoryId: number | null) => {
+    console.log('Category clicked:', categoryId);
     setSelectedCategory(categoryId);
     setSearchQuery('');
   };
@@ -199,7 +200,10 @@ export default function Products() {
                 />
               </div>
               
-              <Select value={sortBy} onValueChange={(value) => setSortBy(value)}>
+              <Select value={sortBy} onValueChange={(value) => {
+                console.log('Sort changed to:', value);
+                setSortBy(value);
+              }}>
                 <SelectTrigger className="w-full sm:w-48 h-12 border-gray-300">
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
@@ -230,6 +234,7 @@ export default function Products() {
                   size="sm"
                   onClick={(e) => {
                     e.preventDefault();
+                    console.log('Grid view clicked');
                     setViewMode('grid');
                   }}
                   className={viewMode === 'grid' ? 'bg-yellow-400 hover:bg-yellow-500 text-black' : 'hover:bg-gray-200'}
@@ -241,6 +246,7 @@ export default function Products() {
                   size="sm"
                   onClick={(e) => {
                     e.preventDefault();
+                    console.log('List view clicked');
                     setViewMode('list');
                   }}
                   className={viewMode === 'list' ? 'bg-yellow-400 hover:bg-yellow-500 text-black' : 'hover:bg-gray-200'}
