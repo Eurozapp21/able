@@ -297,12 +297,10 @@ export default function Products() {
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                    <div className="absolute top-4 right-4">
+                    <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
                       <div className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center">
                         <Package className="h-5 w-5 text-yellow-600" />
                       </div>
-                    </div>
-                    <div className="absolute bottom-4 right-4 flex flex-col items-end gap-2">
                       {/* Category Counts */}
                       <div className="flex flex-col gap-1">
                         {getCategorySubcategoryCount(category.id) > 0 && (
@@ -316,7 +314,6 @@ export default function Products() {
                           </div>
                         )}
                       </div>
-                      <ChevronRight className="h-8 w-8 text-white group-hover:transform group-hover:translate-x-1 transition-all duration-300" />
                     </div>
                   </div>
                   

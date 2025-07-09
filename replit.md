@@ -140,6 +140,7 @@ The system manages several core entities:
 - July 09, 2025. Removed the "YOUR ABILITY TO DREAM!" newsletter section from the footer as requested by user
 - July 09, 2025. Removed filter options from subcategories - filters only appear when viewing actual products within a specific category
 - July 09, 2025. Added category statistics badges to each category card showing subcategory count (blue badges) and product count (green badges) for better navigation
+- July 09, 2025. Moved category counts to package icon area and removed arrow for cleaner design
 
 ## User Preferences
 
