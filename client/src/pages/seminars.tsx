@@ -36,16 +36,16 @@ export default function Seminars() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <Badge 
-          className={`absolute top-4 right-4 ${type === 'seminar' ? 'bg-primary-gold text-black' : 'bg-blue-500 text-white'} shadow-lg`}
+          className={`absolute top-4 right-4 ${type === 'seminar' ? 'bg-primary-gold text-black' : 'bg-primary-gold text-black'} shadow-lg`}
         >
           {type === 'seminar' ? 'Educational' : 'Certification'}
         </Badge>
         <div className="absolute top-4 left-4">
-          <div className={`w-10 h-10 rounded-full flex items-center justify-center ${type === 'seminar' ? 'bg-primary-gold' : 'bg-blue-500'} shadow-lg`}>
+          <div className={`w-10 h-10 rounded-full flex items-center justify-center ${type === 'seminar' ? 'bg-primary-gold' : 'bg-primary-gold'} shadow-lg`}>
             {type === 'seminar' ? (
               <BookOpen className="w-5 h-5 text-black" />
             ) : (
-              <Award className="w-5 h-5 text-white" />
+              <Award className="w-5 h-5 text-black" />
             )}
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function Seminars() {
         
         <div className="flex gap-3">
           <Button 
-            style={{backgroundColor: type === 'seminar' ? '#ffeb3b' : '#3b82f6', color: type === 'seminar' ? '#000' : '#fff'}}
+            style={{backgroundColor: '#ffeb3b', color: '#000'}}
             className="hover:opacity-90 hover:scale-105 transition-all duration-300 font-bold flex-1 py-3 rounded-xl shadow-lg"
           >
             {type === 'seminar' ? 'Register Now' : 'Get Certified'}
@@ -175,7 +175,7 @@ export default function Seminars() {
                 <div className="text-gray-300">Educational Seminars</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">
+                <div className="text-3xl md:text-4xl font-bold text-primary-gold mb-2">
                   {trainingCourses.length}
                 </div>
                 <div className="text-gray-300">Training Courses</div>
@@ -242,18 +242,18 @@ export default function Seminars() {
 
         {/* Professional Training Section */}
         <section className="mb-24">
-          <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 border-0 shadow-2xl rounded-3xl overflow-hidden">
-            <div className="bg-gradient-to-r from-blue-600 to-cyan-600 p-8">
+          <Card className="bg-gradient-to-br from-yellow-50 to-amber-50 border-0 shadow-2xl rounded-3xl overflow-hidden">
+            <div className="bg-gradient-to-r from-primary-gold to-yellow-500 p-8">
               <div className="flex items-center justify-center mb-6">
                 <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mr-6">
-                  <Award className="w-10 h-10 text-white" />
+                  <Award className="w-10 h-10 text-black" />
                 </div>
                 <div className="text-center">
-                  <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">Professional Training</h2>
-                  <p className="text-white/90 text-lg">Hands-On Certification</p>
+                  <h2 className="text-4xl md:text-5xl font-bold text-black mb-2">Professional Training</h2>
+                  <p className="text-black/80 text-lg">Hands-On Certification</p>
                 </div>
               </div>
-              <p className="text-center text-white/95 text-xl max-w-3xl mx-auto leading-relaxed">
+              <p className="text-center text-black/90 text-xl max-w-3xl mx-auto leading-relaxed">
                 Master practical skills with our comprehensive certification programs designed for immediate workplace application.
               </p>
             </div>
@@ -269,15 +269,15 @@ export default function Seminars() {
                 </div>
               ) : (
                 <div className="text-center py-16">
-                  <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Award className="w-12 h-12 text-blue-600" />
+                  <div className="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Award className="w-12 h-12 text-yellow-600" />
                   </div>
                   <h3 className="text-2xl font-bold mb-4 text-text-dark">No Training Courses Available</h3>
                   <p className="text-gray-custom mb-8 text-lg max-w-md mx-auto">
                     Professional certification programs are in development. Join our waitlist for early access.
                   </p>
                   <Link href="/contact">
-                    <Button style={{backgroundColor: '#3b82f6', color: '#fff'}} className="hover:opacity-90 transition-all duration-300 font-semibold px-8 py-3 text-lg">
+                    <Button style={{backgroundColor: '#ffeb3b', color: '#000'}} className="hover:opacity-90 transition-all duration-300 font-semibold px-8 py-3 text-lg">
                       Join Waitlist
                     </Button>
                   </Link>
@@ -315,7 +315,7 @@ export default function Seminars() {
                   <p className="text-gray-300 text-sm">Learn from industry leaders</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                  <Award className="w-8 h-8 text-blue-400 mx-auto mb-3" />
+                  <Award className="w-8 h-8 text-primary-gold mx-auto mb-3" />
                   <h3 className="font-bold text-lg mb-2">Professional Certification</h3>
                   <p className="text-gray-300 text-sm">Recognized credentials</p>
                 </div>
