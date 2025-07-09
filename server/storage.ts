@@ -200,14 +200,91 @@ export class MemStorage implements IStorage {
       {
         id: 1,
         title: "Advanced Rehabilitation Techniques",
-        description: "Learn the latest techniques in patient rehabilitation and therapy",
-        date: new Date("2024-03-15"),
-        location: "Nicosia Training Center",
-        speaker: "Dr. Maria Constantinou",
+        description: "Comprehensive training on modern rehabilitation approaches for spinal cord injuries, neurological conditions, and mobility impairments. Learn evidence-based techniques used by leading rehabilitation centers worldwide.",
+        date: new Date("2025-08-15"),
+        location: "AbleTools Training Center, Nicosia",
+        speaker: "Dr. Maria Constantinou, PT, PhD",
         image: "/attached_assets/Spinal-Cord-Rehabilitation_1752000796341.jpg",
-        fee: "€150",
-        maxParticipants: 25
+        fee: "€185",
+        maxParticipants: 20
       },
+      {
+        id: 2,
+        title: "HUR Equipment Training Certification",
+        description: "Professional certification course for HUR pneumatic exercise equipment. Master safe operation, assessment protocols, and therapeutic applications for neurological rehabilitation.",
+        date: new Date("2025-09-12"),
+        location: "HUR Training Facility, Limassol",
+        speaker: "International HUR Trainer Team",
+        image: "/attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg",
+        fee: "€245",
+        maxParticipants: 15
+      },
+      {
+        id: 3,
+        title: "Wheelchair Assessment & Fitting",
+        description: "Intensive hands-on workshop covering comprehensive wheelchair assessment, proper fitting techniques, and customization for individual needs. Includes manual and power wheelchair systems.",
+        date: new Date("2025-10-08"),
+        location: "AbleTools Showroom, Nicosia",
+        speaker: "Andreas Georgiou, OTR/L, ATP",
+        image: "/attached_assets/bingo_evolution_twins-1_1752003228920.jpg",
+        fee: "€165",
+        maxParticipants: 18
+      },
+      {
+        id: 4,
+        title: "Multi-Sensory Room Design & Implementation",
+        description: "Learn to design and implement effective multi-sensory environments for therapeutic use. Covers lighting, sound, tactile elements, and therapeutic protocols for various conditions.",
+        date: new Date("2025-11-05"),
+        location: "Sensory Innovation Lab, Paphos",
+        speaker: "Elena Pavlou, MSc Occupational Therapy",
+        image: "/attached_assets/maxresdefault_1752003228921.jpg",
+        fee: "€195",
+        maxParticipants: 12
+      },
+      {
+        id: 5,
+        title: "Safe Patient Transfer Techniques",
+        description: "Essential training for healthcare professionals on safe patient handling and transfer methods. Includes manual techniques, mechanical lifts, and injury prevention strategies.",
+        date: new Date("2025-09-25"),
+        location: "Cyprus University of Technology, Limassol",
+        speaker: "Nursing Education Consortium",
+        image: "/attached_assets/send-award-virtual-celebration-employee-milestones_1752004100582.jpg",
+        fee: "€125",
+        maxParticipants: 30
+      },
+      {
+        id: 6,
+        title: "Pediatric Rehabilitation Equipment Training",
+        description: "Specialized training for working with children with disabilities. Focus on age-appropriate equipment, family-centered care, and developmental considerations in equipment selection.",
+        date: new Date("2025-12-03"),
+        location: "Children's Rehabilitation Center, Nicosia",
+        speaker: "Dr. Sophia Michaelidou, Pediatric PT",
+        image: "/attached_assets/cc1b09e90722c7d00b3f0cb8757c6d79_1752003228919.jpg",
+        fee: "€175",
+        maxParticipants: 16
+      },
+      {
+        id: 7,
+        title: "Home Accessibility Assessment",
+        description: "Complete training on conducting thorough home assessments for accessibility modifications. Includes stair lifts, ramps, bathroom modifications, and technology integration.",
+        date: new Date("2025-10-22"),
+        location: "Home Modification Demonstration House, Larnaca",
+        speaker: "Home Access Specialists Team",
+        image: "/attached_assets/1601935107aboutus_1752007024526.jpg",
+        fee: "€155",
+        maxParticipants: 22
+      },
+      {
+        id: 8,
+        title: "Advanced Seating & Positioning",
+        description: "In-depth course on complex seating and positioning solutions for individuals with severe physical disabilities. Covers pressure management, postural support, and custom solutions.",
+        date: new Date("2025-11-19"),
+        location: "Seating Clinic, Famagusta",
+        speaker: "International Seating Consortium",
+        image: "/attached_assets/what-is-true-sense-of-accomplishment-and-how-to-achive-it_1752003982450.jpg",
+        fee: "€205",
+        maxParticipants: 14
+      }
     ];
 
     seminarData.forEach(sem => {
@@ -219,11 +296,51 @@ export class MemStorage implements IStorage {
       {
         id: 1,
         title: "HUR - Spinal Cord and Neurological Rehabilitation",
-        content: "In an inclusive wellness facility, it is easy to get on and off machines. The machines can be used safely and independently by as many different users as possible, regardless of ability, while in between machines there is ample room to manoeuvre with various mobility aids.",
-        date: new Date("2024-02-20"),
+        content: "In an inclusive wellness facility, it is easy to get on and off machines. The machines can be used safely and independently by as many different users as possible, regardless of ability, while in between machines there is ample room to manoeuvre with various mobility aids. HUR's pneumatic technology provides variable resistance training that adapts to each user's capabilities, making it ideal for neurological rehabilitation programs.",
+        date: new Date("2025-07-15"),
         image: "/attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg",
-        excerpt: "Discover HUR's innovative approach to neurological rehabilitation equipment."
+        excerpt: "Discover HUR's innovative approach to neurological rehabilitation equipment and its impact on patient outcomes."
       },
+      {
+        id: 2,
+        title: "International Rehabilitation Equipment Expo Cyprus 2025",
+        content: "Join us for the largest rehabilitation equipment exhibition in Cyprus. Featuring the latest innovations in mobility aids, therapeutic equipment, and assistive technology. Meet with leading manufacturers, attend live demonstrations, and network with healthcare professionals from across the region.",
+        date: new Date("2025-09-18"),
+        image: "/attached_assets/1601930431PRODUCTS_COVER_1752027894926.jpg",
+        excerpt: "Cyprus's premier rehabilitation equipment showcase featuring cutting-edge technology and innovations."
+      },
+      {
+        id: 3,
+        title: "Breakthrough in Pediatric Mobility Solutions",
+        content: "AbleTools announces the launch of our new pediatric mobility program, featuring specialized equipment designed specifically for children with disabilities. This comprehensive program includes adaptive wheelchairs, positioning devices, and educational support for families and caregivers.",
+        date: new Date("2025-08-28"),
+        image: "/attached_assets/bingo_evolution_twins-1_1752003228920.jpg",
+        excerpt: "Revolutionary pediatric mobility solutions designed to support children's development and independence."
+      },
+      {
+        id: 4,
+        title: "Multi-Sensory Therapy Room Grand Opening",
+        content: "Experience our state-of-the-art multi-sensory therapy room, now open for demonstrations and training sessions. This immersive environment features interactive lighting systems, therapeutic sound technology, and tactile elements designed to enhance sensory integration therapy outcomes.",
+        date: new Date("2025-10-12"),
+        image: "/attached_assets/maxresdefault_1752003228921.jpg",
+        excerpt: "Cutting-edge multi-sensory therapy environment now available for professional training and demonstrations."
+      },
+      {
+        id: 5,
+        title: "Community Accessibility Initiative Launch",
+        content: "AbleTools partners with local municipalities to improve community accessibility. Our comprehensive assessment program will evaluate public spaces, recommend modifications, and provide training to local officials on disability awareness and universal design principles.",
+        date: new Date("2025-11-08"),
+        image: "/attached_assets/Achievement_1752003982449.jpg",
+        excerpt: "Collaborative community program aimed at improving accessibility across Cyprus public spaces."
+      },
+      {
+        id: 6,
+        title: "Advanced Stair Lift Technology Showcase",
+        content: "Discover the latest innovations in stair lift technology featuring curved rail systems, outdoor installations, and smart home integration. Our expert team will demonstrate installation processes and maintenance procedures for residential and commercial applications.",
+        date: new Date("2025-12-15"),
+        image: "/attached_assets/cc1b09e90722c7d00b3f0cb8757c6d79_1752003228919.jpg",
+        excerpt: "Latest stair lift innovations featuring smart technology and enhanced safety features."
+      }
     ];
 
     eventData.forEach(event => {
