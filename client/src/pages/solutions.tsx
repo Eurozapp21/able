@@ -18,8 +18,8 @@ export default function Solutions() {
         "Custom design and construction"
       ],
       color: "bg-primary-gold",
-      gradientFrom: "from-blue-50",
-      gradientTo: "to-cyan-50"
+      gradientFrom: "from-yellow-50",
+      gradientTo: "to-amber-50"
     },
     {
       icon: Home,
@@ -33,8 +33,8 @@ export default function Solutions() {
         "Individual lifestyle needs"
       ],
       color: "bg-primary-gold",
-      gradientFrom: "from-green-50",
-      gradientTo: "to-emerald-50"
+      gradientFrom: "from-yellow-50",
+      gradientTo: "to-amber-50"
     },
     {
       icon: Car,
@@ -48,7 +48,7 @@ export default function Solutions() {
         "Safety modifications"
       ],
       color: "bg-primary-gold",
-      gradientFrom: "from-orange-50",
+      gradientFrom: "from-yellow-50",
       gradientTo: "to-amber-50"
     },
     {
@@ -63,8 +63,8 @@ export default function Solutions() {
         "Individual adaptations"
       ],
       color: "bg-primary-gold",
-      gradientFrom: "from-purple-50",
-      gradientTo: "to-indigo-50"
+      gradientFrom: "from-yellow-50",
+      gradientTo: "to-amber-50"
     }
   ];
 
@@ -217,8 +217,8 @@ export default function Solutions() {
             <div className="space-y-6">
               <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                    <CheckCircle className="w-4 h-4 text-white" />
+                  <div className="w-8 h-8 bg-primary-gold rounded-full flex items-center justify-center">
+                    <CheckCircle className="w-4 h-4 text-black" />
                   </div>
                   <h4 className="font-semibold text-gray-800">Comprehensive Assessment</h4>
                 </div>
@@ -227,8 +227,8 @@ export default function Solutions() {
               
               <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                    <CheckCircle className="w-4 h-4 text-white" />
+                  <div className="w-8 h-8 bg-primary-gold rounded-full flex items-center justify-center">
+                    <CheckCircle className="w-4 h-4 text-black" />
                   </div>
                   <h4 className="font-semibold text-gray-800">Custom Design</h4>
                 </div>
@@ -237,8 +237,8 @@ export default function Solutions() {
               
               <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
-                    <CheckCircle className="w-4 h-4 text-white" />
+                  <div className="w-8 h-8 bg-primary-gold rounded-full flex items-center justify-center">
+                    <CheckCircle className="w-4 h-4 text-black" />
                   </div>
                   <h4 className="font-semibold text-gray-800">Professional Installation</h4>
                 </div>
@@ -365,55 +365,55 @@ export default function Solutions() {
 
         {/* Enhanced Call to Action */}
         <div className="relative overflow-hidden">
-          <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-3xl p-12 text-center text-white relative">
+          <div className="bg-gradient-to-br from-yellow-600 via-amber-600 to-yellow-700 rounded-3xl p-12 text-center text-white relative">
             {/* Background Pattern */}
-            <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/20 to-amber-600/20 rounded-3xl"></div>
-            <div className="absolute top-0 right-0 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/10 rounded-full blur-2xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-amber-400/20 rounded-3xl"></div>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-yellow-300/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-300/20 rounded-full blur-2xl"></div>
             
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-3 mb-6 bg-primary-gold/20 backdrop-blur-sm rounded-full px-6 py-2">
-                <Award className="w-5 h-5 text-yellow-300" />
-                <span className="text-yellow-200 font-medium">Start Your Project Today</span>
+              <div className="inline-flex items-center gap-3 mb-6 bg-white/20 backdrop-blur-sm rounded-full px-6 py-2">
+                <Award className="w-5 h-5 text-yellow-100" />
+                <span className="text-yellow-100 font-medium">Start Your Project Today</span>
               </div>
               
               <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
                 Ready to Transform 
-                <span className="block text-yellow-300">Your Space?</span>
+                <span className="block text-yellow-100">Your Space?</span>
               </h2>
               
-              <p className="text-xl mb-8 max-w-3xl mx-auto text-gray-300 leading-relaxed">
+              <p className="text-xl mb-8 max-w-3xl mx-auto text-yellow-100 leading-relaxed">
                 We support a holistic approach, from initial concept and 3D design to construction, maintenance, and comprehensive training. Let's bring your vision to life.
               </p>
               
               <div className="grid md:grid-cols-3 gap-6 mb-10">
                 <div className="text-center">
-                  <div className="w-12 h-12 bg-primary-gold rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Phone className="w-6 h-6 text-black" />
+                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Phone className="w-6 h-6 text-yellow-600" />
                   </div>
                   <h4 className="font-bold text-white mb-2">Free Consultation</h4>
-                  <p className="text-gray-400 text-sm">Expert advice tailored to your needs</p>
+                  <p className="text-yellow-100 text-sm">Expert advice tailored to your needs</p>
                 </div>
                 <div className="text-center">
-                  <div className="w-12 h-12 bg-primary-gold rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Lightbulb className="w-6 h-6 text-black" />
+                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Lightbulb className="w-6 h-6 text-yellow-600" />
                   </div>
                   <h4 className="font-bold text-white mb-2">Custom Design</h4>
-                  <p className="text-gray-400 text-sm">3D modeling and technical drawings</p>
+                  <p className="text-yellow-100 text-sm">3D modeling and technical drawings</p>
                 </div>
                 <div className="text-center">
-                  <div className="w-12 h-12 bg-primary-gold rounded-full flex items-center justify-center mx-auto mb-3">
-                    <CheckCircle className="w-6 h-6 text-black" />
+                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3">
+                    <CheckCircle className="w-6 h-6 text-yellow-600" />
                   </div>
                   <h4 className="font-bold text-white mb-2">Full Support</h4>
-                  <p className="text-gray-400 text-sm">Installation, training & maintenance</p>
+                  <p className="text-yellow-100 text-sm">Installation, training & maintenance</p>
                 </div>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   size="lg"
-                  className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-bold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+                  className="bg-white text-yellow-600 hover:bg-yellow-50 font-bold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
                 >
                   <Phone className="w-5 h-5 mr-2" />
                   Get Free Consultation
@@ -421,7 +421,7 @@ export default function Solutions() {
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-bold px-8 py-4 text-lg transition-all duration-300"
+                  className="border-2 border-white text-white hover:bg-white hover:text-yellow-600 font-bold px-8 py-4 text-lg transition-all duration-300"
                 >
                   <Mail className="w-5 h-5 mr-2" />
                   View Our Portfolio
