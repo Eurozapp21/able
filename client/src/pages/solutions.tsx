@@ -261,9 +261,12 @@ export default function Solutions() {
                   <Button 
                     className="w-full group"
                     style={{backgroundColor: '#ffeb3b', color: '#000'}}
+                    asChild
                   >
-                    Learn More
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    <a href={`/solutions/${category.id}`}>
+                      Learn More
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </a>
                   </Button>
                 </CardContent>
               </Card>

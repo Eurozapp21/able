@@ -11,6 +11,7 @@ import Products from "./pages/products";
 import ProductDetail from "./pages/product-detail";
 import About from "./pages/about";
 import Solutions from "./pages/solutions";
+import SolutionDetail from "./pages/solution-detail";
 import Contact from "./pages/contact";
 import Seminars from "./pages/seminars";
 import SeminarDetail from "./pages/seminar-detail";
@@ -35,6 +36,7 @@ function Router() {
           <Route path="/products" component={Products} />
           <Route path="/products/detail/:id" component={ProductDetail} />
           <Route path="/solutions" component={Solutions} />
+          <Route path="/solutions/:id" component={SolutionDetail} />
           <Route path="/seminars" component={Seminars} />
           <Route path="/seminars/:id" component={SeminarDetail} />
           <Route path="/events" component={Events} />
