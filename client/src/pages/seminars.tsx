@@ -328,12 +328,12 @@ export default function Seminars() {
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link href="/contact">
-                  <Button className="bg-primary-gold text-black hover:bg-yellow-400 transition-all duration-300 font-bold px-10 py-4 text-lg rounded-xl">
+                  <Button style={{backgroundColor: '#ffeb3b', color: '#000'}} className="hover:opacity-90 hover:scale-105 transition-all duration-300 font-bold px-10 py-4 text-lg rounded-xl shadow-lg">
                     Start Your Journey
                   </Button>
                 </Link>
                 <Link href="/about">
-                  <Button variant="outline" className="border-white/30 text-white hover:bg-white hover:text-black transition-all duration-300 font-bold px-10 py-4 text-lg rounded-xl">
+                  <Button variant="outline" style={{borderColor: '#ffeb3b', color: '#ffeb3b'}} className="hover:bg-primary-gold hover:text-black transition-all duration-300 font-bold px-10 py-4 text-lg rounded-xl border-2">
                     Learn About AbleTools
                   </Button>
                 </Link>
