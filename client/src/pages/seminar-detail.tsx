@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams, Link } from 'wouter';
+import seminarHeaderImage from "@assets/seminar_1752044011822.jpeg";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -95,7 +96,7 @@ export default function SeminarDetail() {
         {/* Hero Image */}
         <div className="relative mb-8 rounded-2xl overflow-hidden shadow-lg">
           <img 
-            src={seminar.image || '/api/placeholder/1200/400'} 
+            src={seminarHeaderImage} 
             alt={seminar.title}
             className="w-full h-64 md:h-80 object-cover"
           />
