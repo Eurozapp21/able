@@ -124,7 +124,13 @@ export class MemStorage implements IStorage {
         name: "Wolturnus W5",
         description: "Premium ultra-lightweight rigid wheelchair with advanced engineering for superior performance and comfort",
         categoryId: 231, // Wolturnus Series (4th level)
-        images: ["/attached_assets/bingo_evolution_twins-1_1752003228920.jpg"],
+        images: [
+          "/attached_assets/bingo_evolution_twins-1_1752003228920.jpg",
+          "/attached_assets/cc1b09e90722c7d00b3f0cb8757c6d79_1752003228919.jpg", 
+          "/attached_assets/maxresdefault_1752003228921.jpg",
+          "/attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg",
+          "/attached_assets/Spinal-Cord-Rehabilitation_1752000796341.jpg"
+        ],
         isFeatured: true,
         specifications: "Carbon fiber frame, adjustable geometry, premium components, weight: 6.8kg"
       },

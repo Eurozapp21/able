@@ -148,34 +148,75 @@ export default function ProductDetail() {
 
         {/* Main Product Layout */}
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Product Image - Compact */}
+          {/* Product Image Gallery */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-              <div className="aspect-square relative">
+              {/* Main Image */}
+              <div className="aspect-square relative group">
                 <img
                   src={product.images?.[selectedImage] || '/api/placeholder/500/500'}
                   alt={product.name}
                   className="w-full h-full object-cover"
                 />
                 
-                {/* Image Navigation Dots */}
+                {/* Navigation Arrows */}
                 {product.images && product.images.length > 1 && (
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                    {product.images.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setSelectedImage(index)}
-                        className={`w-2 h-2 rounded-full transition-all ${
-                          selectedImage === index ? 'bg-yellow-400 w-6' : 'bg-white/60 hover:bg-white/80'
-                        }`}
-                      />
-                    ))}
+                  <>
+                    <button
+                      onClick={() => setSelectedImage(selectedImage > 0 ? selectedImage - 1 : product.images!.length - 1)}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white shadow-lg"
+                    >
+                      <ChevronLeft className="h-4 w-4 text-gray-700" />
+                    </button>
+                    <button
+                      onClick={() => setSelectedImage(selectedImage < product.images!.length - 1 ? selectedImage + 1 : 0)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white shadow-lg"
+                    >
+                      <ChevronRight className="h-4 w-4 text-gray-700" />
+                    </button>
+                  </>
+                )}
+                
+                {/* Image Counter */}
+                {product.images && product.images.length > 1 && (
+                  <div className="absolute bottom-3 right-3 bg-black/50 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs">
+                    {selectedImage + 1} / {product.images.length}
                   </div>
                 )}
               </div>
               
+              {/* Thumbnail Gallery */}
+              {product.images && product.images.length > 1 && (
+                <div className="p-4">
+                  <div className="grid grid-cols-4 gap-2">
+                    {product.images.slice(0, 4).map((image, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setSelectedImage(index)}
+                        className={`aspect-square rounded-lg overflow-hidden border-2 transition-all hover:border-yellow-400 ${
+                          selectedImage === index ? 'border-yellow-400 ring-2 ring-yellow-400/20' : 'border-gray-200'
+                        }`}
+                      >
+                        <img
+                          src={image || '/api/placeholder/100/100'}
+                          alt={`${product.name} ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                  {product.images.length > 4 && (
+                    <div className="mt-2 text-center">
+                      <Button variant="ghost" size="sm" className="text-yellow-600 hover:text-yellow-700 text-xs">
+                        View all {product.images.length} images
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              )}
+              
               {/* Quick Actions */}
-              <div className="p-4 grid grid-cols-2 gap-3">
+              <div className="p-4 pt-0 grid grid-cols-2 gap-3">
                 <Button className="bg-yellow-400 hover:bg-yellow-500 text-black">
                   <Download className="h-4 w-4 mr-2" />
                   Brochure
@@ -243,29 +284,41 @@ export default function ProductDetail() {
               </div>
             </div>
 
-            {/* Key Features */}
+            {/* Key Features with Descriptions */}
             <Card className="border-0 shadow-sm">
               <CardContent className="p-6">
-                <h3 className="font-bold text-lg mb-4 flex items-center">
+                <h3 className="font-bold text-lg mb-6 flex items-center">
                   <Star className="h-5 w-5 text-yellow-500 mr-2" />
                   Key Features
                 </h3>
-                <div className="grid md:grid-cols-2 gap-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                    <span className="text-sm text-gray-700">Crash-tested safety design</span>
+                <div className="space-y-4">
+                  <div className="flex gap-4 p-3 bg-gray-50 rounded-lg">
+                    <div className="w-3 h-3 bg-yellow-400 rounded-full mt-1 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="font-semibold text-sm text-gray-900 mb-1">Crash-tested Safety Design</h4>
+                      <p className="text-xs text-gray-600">Rigorously tested to meet international safety standards, ensuring maximum protection during use and transportation.</p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                    <span className="text-sm text-gray-700">Quick-release axle system</span>
+                  <div className="flex gap-4 p-3 bg-gray-50 rounded-lg">
+                    <div className="w-3 h-3 bg-yellow-400 rounded-full mt-1 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="font-semibold text-sm text-gray-900 mb-1">Quick-release Axle System</h4>
+                      <p className="text-xs text-gray-600">Innovative axle design allows for easy removal and installation, making transportation and storage more convenient.</p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                    <span className="text-sm text-gray-700">Fully customizable setup</span>
+                  <div className="flex gap-4 p-3 bg-gray-50 rounded-lg">
+                    <div className="w-3 h-3 bg-yellow-400 rounded-full mt-1 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="font-semibold text-sm text-gray-900 mb-1">Fully Customizable Setup</h4>
+                      <p className="text-xs text-gray-600">Adaptable configuration options to meet individual user needs, including adjustable seat dimensions and positioning.</p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                    <span className="text-sm text-gray-700">Easy car transportation</span>
+                  <div className="flex gap-4 p-3 bg-gray-50 rounded-lg">
+                    <div className="w-3 h-3 bg-yellow-400 rounded-full mt-1 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="font-semibold text-sm text-gray-900 mb-1">Easy Car Transportation</h4>
+                      <p className="text-xs text-gray-600">Designed for optimal portability with features that make loading and securing in vehicles simple and efficient.</p>
+                    </div>
                   </div>
                 </div>
               </CardContent>
