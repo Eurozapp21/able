@@ -9,7 +9,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Skeleton } from '@/components/ui/skeleton';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search, Grid, List, Filter, ArrowRight, Package, ChevronRight, Layers, Star, ShoppingCart, Eye, SlidersHorizontal } from 'lucide-react';
-import ProductGrid from '@/components/product-grid';
+import ProductGrid from '@/components/product-grid-new';
 import type { Category, Product } from '@shared/schema';
 
 export default function Products() {
@@ -18,7 +18,7 @@ export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   
-  console.log('Products page viewMode state:', viewMode);
+
   const [categoryPath, setCategoryPath] = useState<Category[]>([]);
   const [sortBy, setSortBy] = useState('name');
   const [showFilters, setShowFilters] = useState(false);
@@ -53,7 +53,7 @@ export default function Products() {
       if (searchQuery.trim()) params.append('search', searchQuery.trim());
       
       const url = `/api/products${params.toString() ? '?' + params.toString() : ''}`;
-      console.log('Products page fetching:', url);
+
       const response = await fetch(url);
       if (!response.ok) throw new Error('Failed to fetch products');
       return response.json();
@@ -237,12 +237,7 @@ export default function Products() {
                 <Button
                   variant={viewMode === 'grid' ? 'default' : 'ghost'}
                   size="sm"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    console.log('Grid view clicked, current viewMode:', viewMode);
-                    setViewMode('grid');
-                    console.log('Grid view set');
-                  }}
+                  onClick={() => setViewMode('grid')}
                   className={viewMode === 'grid' ? 'bg-yellow-400 hover:bg-yellow-500 text-black' : 'hover:bg-gray-200'}
                 >
                   <Grid className="h-4 w-4" />
@@ -250,12 +245,7 @@ export default function Products() {
                 <Button
                   variant={viewMode === 'list' ? 'default' : 'ghost'}
                   size="sm"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    console.log('List view clicked, current viewMode:', viewMode);
-                    setViewMode('list');
-                    console.log('List view set');
-                  }}
+                  onClick={() => setViewMode('list')}
                   className={viewMode === 'list' ? 'bg-yellow-400 hover:bg-yellow-500 text-black' : 'hover:bg-gray-200'}
                 >
                   <List className="h-4 w-4" />
