@@ -21,6 +21,8 @@ export default function ProductGrid({
   viewMode = 'grid',
   isLoading = false
 }: ProductGridProps) {
+  
+  console.log('ProductGrid render:', { products: products.length, viewMode, searchQuery });
 
   // Sort products 
   const sortedProducts = [...products].sort((a, b) => {

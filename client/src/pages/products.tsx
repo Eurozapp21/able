@@ -257,8 +257,8 @@ export default function Products() {
           </div>
         </div>
 
-        {/* Enhanced Category Navigation */}
-        {hasSubcategories && (
+        {/* Enhanced Category Navigation - Only show when not searching */}
+        {hasSubcategories && !searchQuery && (
           <div className="mb-8">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl font-bold text-gray-900">
@@ -322,8 +322,8 @@ export default function Products() {
           </div>
         )}
 
-        {/* Enhanced Products Section - Show products when available */}
-        {(searchQuery || hasProducts) && (
+        {/* Enhanced Products Section - Always show when products exist OR searching */}
+        {(searchQuery || (!selectedCategory && hasProducts) || (selectedCategory && hasProducts && !hasSubcategories)) && (
           <div>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl font-bold text-gray-900">
