@@ -14,6 +14,8 @@ import Contact from "./pages/contact";
 import Seminars from "./pages/seminars";
 import SeminarDetail from "./pages/seminar-detail";
 import Events from "./pages/events";
+import Newsroom from "./pages/newsroom";
+import NewsDetail from "./pages/news-detail";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Dashboard from "./pages/dashboard";
@@ -34,6 +36,8 @@ function Router() {
           <Route path="/seminars" component={Seminars} />
           <Route path="/seminars/:id" component={SeminarDetail} />
           <Route path="/events" component={Events} />
+          <Route path="/newsroom" component={Newsroom} />
+          <Route path="/news/:id" component={NewsDetail} />
           <Route path="/contact" component={Contact} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />

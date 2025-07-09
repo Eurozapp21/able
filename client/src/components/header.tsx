@@ -17,7 +17,7 @@ export default function Header() {
     { name: 'About Us', href: '/about' },
     { name: 'Products', href: '/products' },
     { name: 'Education', href: '/seminars' },
-    { name: 'Newsroom', href: '/events' },
+    { name: 'Newsroom', href: '/newsroom' },
     { name: 'Contact', href: '/contact' },
   ];
 
