@@ -100,7 +100,14 @@ export default function Products() {
   const stats = getCategoryStats();
 
   const getCategoryProductCount = (categoryId: number): number => {
-    return products.filter((p: Product) => p.categoryId === categoryId).length;
+    // Get all products for this category and its subcategories
+    const getProductsRecursively = (catId: number): Product[] => {
+      const directProducts = products.filter((p: Product) => p.categoryId === catId);
+      const subcategories = allCategories.filter((cat: Category) => cat.parentId === catId);
+      const subcategoryProducts = subcategories.flatMap(subcat => getProductsRecursively(subcat.id));
+      return [...directProducts, ...subcategoryProducts];
+    };
+    return getProductsRecursively(categoryId).length;
   };
 
   const getCategorySubcategoryCount = (categoryId: number): number => {
