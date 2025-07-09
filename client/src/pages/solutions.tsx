@@ -100,9 +100,9 @@ export default function Solutions() {
   return (
     <div className="pt-20 min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Modern Hero Section */}
-      <div className="relative bg-gradient-to-br from-yellow-600 via-amber-600 to-orange-500 overflow-hidden">
-        <div className="absolute inset-0 bg-black bg-opacity-30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
+      <div className="relative bg-gradient-to-br from-yellow-400 via-yellow-500 to-amber-400 overflow-hidden">
+        <div className="absolute inset-0 bg-white bg-opacity-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent" />
         
         {/* Geometric Background Elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
@@ -110,24 +110,24 @@ export default function Solutions() {
         
         <div className="relative z-10 container mx-auto px-4 py-20">
           <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-3 mb-6 bg-white/20 backdrop-blur-sm rounded-full px-6 py-2">
-              <Award className="w-5 h-5 text-yellow-200" />
-              <span className="text-yellow-100 font-medium">Professional Solutions Since 2009</span>
+            <div className="inline-flex items-center gap-3 mb-6 bg-white/30 backdrop-blur-sm rounded-full px-6 py-2">
+              <Award className="w-5 h-5 text-gray-800" />
+              <span className="text-gray-800 font-medium">Professional Solutions Since 2009</span>
             </div>
             
-            <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-6xl md:text-7xl font-bold text-gray-800 mb-6 leading-tight">
               Transform
-              <span className="block text-yellow-200">Your Space</span>
+              <span className="block text-gray-700">Your Space</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-100 mb-8 leading-relaxed max-w-2xl">
+            <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed max-w-2xl">
               From initial consultation to final installation - we create accessible, therapeutic environments that enhance lives and empower independence.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <Button 
                 size="lg"
-                className="bg-white text-gray-900 hover:bg-gray-100 font-semibold px-8 py-4 text-lg"
+                className="bg-gray-800 text-white hover:bg-gray-700 font-semibold px-8 py-4 text-lg"
               >
                 <Phone className="w-5 h-5 mr-2" />
                 Get Free Consultation
@@ -135,7 +135,7 @@ export default function Solutions() {
               <Button 
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-gray-900 font-semibold px-8 py-4 text-lg"
+                className="border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-semibold px-8 py-4 text-lg"
               >
                 <Mail className="w-5 h-5 mr-2" />
                 View Our Portfolio
@@ -145,20 +145,20 @@ export default function Solutions() {
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-1">150+</div>
-                <div className="text-yellow-200 text-sm">Projects Completed</div>
+                <div className="text-3xl font-bold text-gray-800 mb-1">150+</div>
+                <div className="text-gray-700 text-sm">Projects Completed</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-1">25+</div>
-                <div className="text-yellow-200 text-sm">Countries Served</div>
+                <div className="text-3xl font-bold text-gray-800 mb-1">25+</div>
+                <div className="text-gray-700 text-sm">Countries Served</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-1">15+</div>
-                <div className="text-yellow-200 text-sm">Years Experience</div>
+                <div className="text-3xl font-bold text-gray-800 mb-1">15+</div>
+                <div className="text-gray-700 text-sm">Years Experience</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-1">98%</div>
-                <div className="text-yellow-200 text-sm">Client Satisfaction</div>
+                <div className="text-3xl font-bold text-gray-800 mb-1">98%</div>
+                <div className="text-gray-700 text-sm">Client Satisfaction</div>
               </div>
             </div>
           </div>
@@ -349,7 +349,7 @@ export default function Solutions() {
                   </div>
                   
                   <Button 
-                    className="w-full group bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-black font-bold py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full group bg-gradient-to-r from-yellow-300 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 text-gray-800 font-bold py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                     asChild
                   >
                     <a href={`/solutions/${category.id}`}>
@@ -365,55 +365,55 @@ export default function Solutions() {
 
         {/* Enhanced Call to Action */}
         <div className="relative overflow-hidden">
-          <div className="bg-gradient-to-br from-yellow-600 via-amber-600 to-yellow-700 rounded-3xl p-12 text-center text-white relative">
+          <div className="bg-gradient-to-br from-yellow-300 via-yellow-400 to-amber-300 rounded-3xl p-12 text-center text-gray-800 relative">
             {/* Background Pattern */}
-            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-amber-400/20 rounded-3xl"></div>
-            <div className="absolute top-0 right-0 w-96 h-96 bg-yellow-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-300/20 rounded-full blur-2xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-200/30 to-amber-200/30 rounded-3xl"></div>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-yellow-100/40 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-100/40 rounded-full blur-2xl"></div>
             
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-3 mb-6 bg-white/20 backdrop-blur-sm rounded-full px-6 py-2">
-                <Award className="w-5 h-5 text-yellow-100" />
-                <span className="text-yellow-100 font-medium">Start Your Project Today</span>
+              <div className="inline-flex items-center gap-3 mb-6 bg-white/40 backdrop-blur-sm rounded-full px-6 py-2">
+                <Award className="w-5 h-5 text-gray-700" />
+                <span className="text-gray-700 font-medium">Start Your Project Today</span>
               </div>
               
               <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
                 Ready to Transform 
-                <span className="block text-yellow-100">Your Space?</span>
+                <span className="block text-gray-700">Your Space?</span>
               </h2>
               
-              <p className="text-xl mb-8 max-w-3xl mx-auto text-yellow-100 leading-relaxed">
+              <p className="text-xl mb-8 max-w-3xl mx-auto text-gray-700 leading-relaxed">
                 We support a holistic approach, from initial concept and 3D design to construction, maintenance, and comprehensive training. Let's bring your vision to life.
               </p>
               
               <div className="grid md:grid-cols-3 gap-6 mb-10">
                 <div className="text-center">
-                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Phone className="w-6 h-6 text-yellow-600" />
+                  <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Phone className="w-6 h-6 text-white" />
                   </div>
-                  <h4 className="font-bold text-white mb-2">Free Consultation</h4>
-                  <p className="text-yellow-100 text-sm">Expert advice tailored to your needs</p>
+                  <h4 className="font-bold text-gray-800 mb-2">Free Consultation</h4>
+                  <p className="text-gray-700 text-sm">Expert advice tailored to your needs</p>
                 </div>
                 <div className="text-center">
-                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Lightbulb className="w-6 h-6 text-yellow-600" />
+                  <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Lightbulb className="w-6 h-6 text-white" />
                   </div>
-                  <h4 className="font-bold text-white mb-2">Custom Design</h4>
-                  <p className="text-yellow-100 text-sm">3D modeling and technical drawings</p>
+                  <h4 className="font-bold text-gray-800 mb-2">Custom Design</h4>
+                  <p className="text-gray-700 text-sm">3D modeling and technical drawings</p>
                 </div>
                 <div className="text-center">
-                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3">
-                    <CheckCircle className="w-6 h-6 text-yellow-600" />
+                  <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <CheckCircle className="w-6 h-6 text-white" />
                   </div>
-                  <h4 className="font-bold text-white mb-2">Full Support</h4>
-                  <p className="text-yellow-100 text-sm">Installation, training & maintenance</p>
+                  <h4 className="font-bold text-gray-800 mb-2">Full Support</h4>
+                  <p className="text-gray-700 text-sm">Installation, training & maintenance</p>
                 </div>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   size="lg"
-                  className="bg-white text-yellow-600 hover:bg-yellow-50 font-bold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+                  className="bg-gray-800 text-white hover:bg-gray-700 font-bold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
                 >
                   <Phone className="w-5 h-5 mr-2" />
                   Get Free Consultation
@@ -421,7 +421,7 @@ export default function Solutions() {
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="border-2 border-white text-white hover:bg-white hover:text-yellow-600 font-bold px-8 py-4 text-lg transition-all duration-300"
+                  className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-bold px-8 py-4 text-lg transition-all duration-300"
                 >
                   <Mail className="w-5 h-5 mr-2" />
                   View Our Portfolio
