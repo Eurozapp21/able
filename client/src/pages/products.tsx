@@ -302,7 +302,20 @@ export default function Products() {
                         <Package className="h-5 w-5 text-yellow-600" />
                       </div>
                     </div>
-                    <div className="absolute bottom-4 right-4">
+                    <div className="absolute bottom-4 right-4 flex flex-col items-end gap-2">
+                      {/* Category Counts */}
+                      <div className="flex flex-col gap-1">
+                        {getCategorySubcategoryCount(category.id) > 0 && (
+                          <div className="flex items-center justify-center w-8 h-6 bg-blue-500 text-white rounded-full text-xs font-semibold">
+                            {getCategorySubcategoryCount(category.id)}
+                          </div>
+                        )}
+                        {getCategoryProductCount(category.id) > 0 && (
+                          <div className="flex items-center justify-center w-8 h-6 bg-green-500 text-white rounded-full text-xs font-semibold">
+                            {getCategoryProductCount(category.id)}
+                          </div>
+                        )}
+                      </div>
                       <ChevronRight className="h-8 w-8 text-white group-hover:transform group-hover:translate-x-1 transition-all duration-300" />
                     </div>
                   </div>
@@ -317,21 +330,7 @@ export default function Products() {
                         {category.description}
                       </p>
                       
-                      {/* Category Stats */}
-                      <div className="flex flex-wrap gap-2 pt-2">
-                        {getCategorySubcategoryCount(category.id) > 0 && (
-                          <div className="flex items-center px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">
-                            <Layers className="h-3 w-3 mr-1" />
-                            {getCategorySubcategoryCount(category.id)} subcategories
-                          </div>
-                        )}
-                        {getCategoryProductCount(category.id) > 0 && (
-                          <div className="flex items-center px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
-                            <Package className="h-3 w-3 mr-1" />
-                            {getCategoryProductCount(category.id)} products
-                          </div>
-                        )}
-                      </div>
+
                       
                       <div className="pt-2">
                         <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 group-hover:bg-yellow-200 transition-colors">
