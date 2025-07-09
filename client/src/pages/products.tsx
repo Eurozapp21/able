@@ -257,7 +257,12 @@ export default function Products() {
         {hasSubcategories && (
           <div className="mb-8">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-bold text-gray-900">Categories</h2>
+              <h2 className="text-3xl font-bold text-gray-900">
+                {selectedCategory && categoryPath.length > 0 
+                  ? `${categoryPath[categoryPath.length - 1].name} Categories`
+                  : 'Product Categories'
+                }
+              </h2>
               <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 px-3 py-1">
                 {currentLevelCategories.length} categories
               </Badge>
@@ -315,7 +320,12 @@ export default function Products() {
           <div>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl font-bold text-gray-900">
-                {selectedCategory ? 'Products' : 'All Products'}
+                {selectedCategory && categoryPath.length > 0 
+                  ? `${categoryPath[categoryPath.length - 1].name} Products`
+                  : selectedCategory 
+                    ? 'Products' 
+                    : 'All Products'
+                }
               </h2>
               <div className="flex items-center gap-3">
                 <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 px-3 py-1">
