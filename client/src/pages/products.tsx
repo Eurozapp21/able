@@ -1,227 +1,242 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useLocation, Link } from 'wouter';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { useLocation } from 'wouter';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Search, Grid, List, Filter, ArrowRight, Package, ChevronRight, Layers, Star, ShoppingCart, Eye, SlidersHorizontal } from 'lucide-react';
 import ProductGrid from '@/components/product-grid';
-import { Search, Grid, List, ChevronRight, ArrowLeft } from 'lucide-react';
 import type { Category, Product } from '@shared/schema';
 
 export default function Products() {
   const [location] = useLocation();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
-  const [selectedSubCategory, setSelectedSubCategory] = useState<number | null>(null);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [categoryPath, setCategoryPath] = useState<Category[]>([]);
+  const [sortBy, setSortBy] = useState('name');
+  const [showFilters, setShowFilters] = useState(false);
 
-  // Get query parameters
-  const urlParams = new URLSearchParams(window.location.search);
-  const categoryParam = urlParams.get('category');
-  const subCategoryParam = urlParams.get('subcategory');
-  const searchParam = urlParams.get('search');
-
+  // Parse URL parameters
   useEffect(() => {
+    const urlParams = new URLSearchParams(location.split('?')[1] || '');
+    const categoryParam = urlParams.get('category');
     if (categoryParam) {
       setSelectedCategory(parseInt(categoryParam));
     }
-    if (subCategoryParam) {
-      setSelectedSubCategory(parseInt(subCategoryParam));
-    }
-    if (searchParam) {
-      setSearchQuery(searchParam);
-    }
-  }, [categoryParam, subCategoryParam, searchParam]);
+  }, [location]);
 
-  // Main categories (parentId = null)
-  const { data: mainCategories = [] } = useQuery({
+  const { data: allCategories = [], isLoading: categoriesLoading } = useQuery({
     queryKey: ['/api/categories'],
-    select: (data: Category[]) => data.filter(cat => cat.parentId === null),
   });
 
-  // Sub categories for selected category
-  const { data: subCategories = [] } = useQuery({
-    queryKey: ['/api/categories', 'subcategories', selectedCategory],
-    select: (data: Category[]) => data.filter(cat => cat.parentId === selectedCategory),
-    enabled: !!selectedCategory,
-  });
-
-  const { data: selectedCategoryData } = useQuery({
+  const { data: currentLevelCategories = [], isLoading: currentCategoriesLoading } = useQuery({
     queryKey: ['/api/categories', selectedCategory],
-    enabled: !!selectedCategory,
+    queryFn: async () => {
+      const response = await fetch(`/api/categories?parentId=${selectedCategory || 'null'}`);
+      if (!response.ok) throw new Error('Failed to fetch categories');
+      return response.json();
+    },
   });
 
-  const { data: selectedSubCategoryData } = useQuery({
-    queryKey: ['/api/categories', selectedSubCategory],
-    enabled: !!selectedSubCategory,
+  const { data: products = [], isLoading: productsLoading } = useQuery({
+    queryKey: ['/api/products', selectedCategory],
+    queryFn: async () => {
+      const url = selectedCategory 
+        ? `/api/products?categoryId=${selectedCategory}`
+        : '/api/products';
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Failed to fetch products');
+      return response.json();
+    },
   });
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      const newUrl = `/products?search=${encodeURIComponent(searchQuery)}`;
-      window.history.pushState({}, '', newUrl);
-      setSelectedCategory(null);
-      setSelectedSubCategory(null);
+  // Build category path for breadcrumbs
+  useEffect(() => {
+    if (selectedCategory && allCategories.length > 0) {
+      const buildPath = (categoryId: number): Category[] => {
+        const category = allCategories.find((cat: Category) => cat.id === categoryId);
+        if (!category) return [];
+        
+        if (category.parentId) {
+          return [...buildPath(category.parentId), category];
+        }
+        return [category];
+      };
+      
+      setCategoryPath(buildPath(selectedCategory));
+    } else {
+      setCategoryPath([]);
     }
-  };
+  }, [selectedCategory, allCategories]);
 
-  const handleCategorySelect = (categoryId: number) => {
+  const handleCategoryClick = (categoryId: number | null) => {
     setSelectedCategory(categoryId);
-    setSelectedSubCategory(null);
     setSearchQuery('');
-    const newUrl = `/products?category=${categoryId}`;
-    window.history.pushState({}, '', newUrl);
   };
 
-  const handleSubCategorySelect = (subCategoryId: number) => {
-    setSelectedSubCategory(subCategoryId);
-    setSearchQuery('');
-    const newUrl = `/products?category=${selectedCategory}&subcategory=${subCategoryId}`;
-    window.history.pushState({}, '', newUrl);
+  const filteredProducts = products.filter((product: Product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    product.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    switch (sortBy) {
+      case 'name':
+        return a.name.localeCompare(b.name);
+      case 'featured':
+        return (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0);
+      default:
+        return 0;
+    }
+  });
+
+  const hasSubcategories = currentLevelCategories.length > 0;
+  const hasProducts = sortedProducts.length > 0;
+
+  const getCategoryStats = () => {
+    const mainCategories = allCategories.filter((cat: Category) => !cat.parentId);
+    const totalProducts = products.length;
+    const featuredProducts = products.filter((prod: Product) => prod.isFeatured).length;
+    return { mainCategories: mainCategories.length, totalProducts, featuredProducts };
   };
 
-  const goBackToCategories = () => {
-    setSelectedCategory(null);
-    setSelectedSubCategory(null);
-    setSearchQuery('');
-    window.history.pushState({}, '', '/products');
-  };
-
-  const goBackToSubCategories = () => {
-    setSelectedSubCategory(null);
-    const newUrl = `/products?category=${selectedCategory}`;
-    window.history.pushState({}, '', newUrl);
-  };
-
-  const clearFilters = () => {
-    setSelectedCategory(null);
-    setSelectedSubCategory(null);
-    setSearchQuery('');
-    window.history.pushState({}, '', '/products');
-  };
+  const stats = getCategoryStats();
 
   return (
-    <div className="pt-20 min-h-screen bg-gray-50">
-      {/* Hero Header with Image */}
-      <section className="relative h-96 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="/attached_assets/1601930431PRODUCTS_COVER_1752027894926.jpg"
-            alt="AbleTools Products - Rehabilitation Equipment Solutions"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        </div>
-        
-        <div className="relative z-10 container mx-auto px-4 h-full flex items-center justify-center">
-          <div className="text-center text-white">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">
-              {selectedSubCategoryData ? selectedSubCategoryData.name :
-               selectedCategoryData ? selectedCategoryData.name : 'Products'}
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-              {selectedSubCategoryData ? selectedSubCategoryData.description :
-               selectedCategoryData ? selectedCategoryData.description : 
-               'Comprehensive rehabilitation equipment and solutions for enhanced mobility and independence'}
-            </p>
+    <div className="pt-20 min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      {/* Enhanced Header Section */}
+      <div className="bg-white shadow-sm border-b">
+        <div 
+          className="relative h-64 bg-gradient-to-r from-yellow-600 via-yellow-500 to-yellow-400 flex items-center justify-center overflow-hidden"
+          style={{
+            backgroundImage: `linear-gradient(135deg, rgba(255,235,59,0.95), rgba(255,193,7,0.95)), url('/attached_assets/1601930431PRODUCTS_COVER_1752027894926.jpg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        >
+          <div className="absolute inset-0 bg-black/20"></div>
+          <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
+            <div className="flex items-center justify-center mb-4">
+              <Package className="h-12 w-12 mr-3 text-white" />
+              <h1 className="text-5xl font-bold">Our Products</h1>
+            </div>
+            <p className="text-xl opacity-95 mb-6">Discover our comprehensive range of rehabilitation equipment and assistive technologies</p>
             
-            {/* Breadcrumb */}
-            <Breadcrumb className="justify-center">
-              <BreadcrumbList className="text-white">
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/" className="text-white hover:text-yellow-400">Home</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="text-white" />
-                <BreadcrumbItem>
-                  <BreadcrumbLink 
-                    href="/products" 
-                    className="text-white hover:text-yellow-400"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      goBackToCategories();
-                    }}
-                  >
-                    Products
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                {selectedCategoryData && (
-                  <>
-                    <BreadcrumbSeparator className="text-white" />
-                    <BreadcrumbItem>
-                      {selectedSubCategoryData ? (
-                        <BreadcrumbLink 
-                          href="#" 
-                          className="text-white hover:text-yellow-400"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            goBackToSubCategories();
-                          }}
-                        >
-                          {selectedCategoryData.name}
-                        </BreadcrumbLink>
-                      ) : (
-                        <BreadcrumbPage className="text-yellow-400">{selectedCategoryData.name}</BreadcrumbPage>
-                      )}
-                    </BreadcrumbItem>
-                  </>
-                )}
-                {selectedSubCategoryData && (
-                  <>
-                    <BreadcrumbSeparator className="text-white" />
-                    <BreadcrumbItem>
-                      <BreadcrumbPage className="text-yellow-400">{selectedSubCategoryData.name}</BreadcrumbPage>
-                    </BreadcrumbItem>
-                  </>
-                )}
-              </BreadcrumbList>
-            </Breadcrumb>
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div className="flex items-center justify-center mb-2">
+                  <Layers className="h-6 w-6 mr-2" />
+                  <span className="text-2xl font-bold">{stats.mainCategories}</span>
+                </div>
+                <p className="text-sm opacity-90">Main Categories</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div className="flex items-center justify-center mb-2">
+                  <Package className="h-6 w-6 mr-2" />
+                  <span className="text-2xl font-bold">{stats.totalProducts}</span>
+                </div>
+                <p className="text-sm opacity-90">Total Products</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div className="flex items-center justify-center mb-2">
+                  <Star className="h-6 w-6 mr-2" />
+                  <span className="text-2xl font-bold">{stats.featuredProducts}</span>
+                </div>
+                <p className="text-sm opacity-90">Featured Products</p>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-8">
+        {/* Enhanced Breadcrumb */}
+        <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/" className="text-yellow-600 hover:text-yellow-700">Home</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink 
+                  href="/products" 
+                  onClick={() => handleCategoryClick(null)}
+                  className="text-yellow-600 hover:text-yellow-700"
+                >
+                  Products
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              {categoryPath.map((category, index) => (
+                <div key={category.id} className="flex items-center">
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    {index === categoryPath.length - 1 ? (
+                      <BreadcrumbPage className="text-yellow-600 font-semibold">{category.name}</BreadcrumbPage>
+                    ) : (
+                      <BreadcrumbLink 
+                        href={`/products?category=${category.id}`}
+                        onClick={() => handleCategoryClick(category.id)}
+                        className="text-yellow-600 hover:text-yellow-700"
+                      >
+                        {category.name}
+                      </BreadcrumbLink>
+                    )}
+                  </BreadcrumbItem>
+                </div>
+              ))}
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
 
-        {/* Search and View Controls */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 bg-white p-6 rounded-xl shadow-sm">
-          <div className="flex-1 mb-4 lg:mb-0">
-            {(selectedCategory || selectedSubCategory || searchQuery) && (
+        {/* Enhanced Search and Controls */}
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+            <div className="flex flex-col sm:flex-row gap-4 flex-1">
+              <div className="relative flex-1 max-w-lg">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <Input
+                  placeholder="Search products by name or description..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 h-12 border-gray-300 focus:border-yellow-400 focus:ring-yellow-400"
+                />
+              </div>
+              
+              <Select value={sortBy} onValueChange={setSortBy}>
+                <SelectTrigger className="w-full sm:w-48 h-12 border-gray-300">
+                  <SelectValue placeholder="Sort by" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="name">Name (A-Z)</SelectItem>
+                  <SelectItem value="featured">Featured First</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div className="flex items-center gap-2">
               <Button
-                variant="ghost"
-                onClick={selectedSubCategory ? goBackToSubCategories : goBackToCategories}
-                className="mb-4 text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50"
+                variant="outline"
+                size="sm"
+                onClick={() => setShowFilters(!showFilters)}
+                className="border-yellow-400 text-yellow-600 hover:bg-yellow-50"
               >
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                {selectedSubCategory ? 'Back to Subcategories' : 'Back to Categories'}
+                <SlidersHorizontal className="h-4 w-4 mr-2" />
+                Filters
               </Button>
-            )}
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 items-center">
-            {/* Search */}
-            <form onSubmit={handleSearch} className="flex">
-              <Input
-                type="text"
-                placeholder="Search products..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="rounded-r-none focus:ring-2 focus:ring-yellow-400 min-w-[300px]"
-              />
-              <Button type="submit" className="bg-yellow-400 hover:bg-yellow-500 text-black rounded-l-none">
-                <Search className="h-4 w-4" />
-              </Button>
-            </form>
-
-            {/* View Mode Toggle */}
-            {(selectedSubCategory || searchQuery) && (
-              <div className="flex border border-gray-200 rounded-lg overflow-hidden">
+              
+              <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
                 <Button
                   variant={viewMode === 'grid' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setViewMode('grid')}
-                  className={`rounded-none ${viewMode === 'grid' ? 'bg-yellow-400 text-black' : ''}`}
+                  className={viewMode === 'grid' ? 'bg-yellow-400 hover:bg-yellow-500 text-black' : 'hover:bg-gray-200'}
                 >
                   <Grid className="h-4 w-4" />
                 </Button>
@@ -229,121 +244,152 @@ export default function Products() {
                   variant={viewMode === 'list' ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setViewMode('list')}
-                  className={`rounded-none ${viewMode === 'list' ? 'bg-yellow-400 text-black' : ''}`}
+                  className={viewMode === 'list' ? 'bg-yellow-400 hover:bg-yellow-500 text-black' : 'hover:bg-gray-200'}
                 >
                   <List className="h-4 w-4" />
                 </Button>
               </div>
-            )}
+            </div>
           </div>
         </div>
 
-        {/* Main Content Area */}
-        {!selectedCategory && !searchQuery ? (
-          /* Categories View */
-          <div>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4 text-gray-900">Product Categories</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Explore our comprehensive range of rehabilitation equipment organized by category
-              </p>
+        {/* Enhanced Category Navigation */}
+        {hasSubcategories && (
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-3xl font-bold text-gray-900">Categories</h2>
+              <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 px-3 py-1">
+                {currentLevelCategories.length} categories
+              </Badge>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {mainCategories.map((category) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {currentLevelCategories.map((category: Category) => (
                 <Card 
                   key={category.id} 
-                  className="group cursor-pointer hover:shadow-xl transition-all duration-300 overflow-hidden border-2 hover:border-yellow-400"
-                  onClick={() => handleCategorySelect(category.id)}
+                  className="cursor-pointer hover:shadow-xl transition-all duration-300 hover:border-yellow-400 hover:-translate-y-1 group bg-white"
+                  onClick={() => handleCategoryClick(category.id)}
                 >
-                  <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={category.image || '/api/placeholder/400/300'}
-                      alt={category.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    <div className="absolute bottom-4 left-4 text-white">
-                      <h3 className="text-xl font-bold">{category.name}</h3>
-                    </div>
-                  </div>
                   <CardContent className="p-6">
-                    <p className="text-gray-600 mb-4">{category.description}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-yellow-600 font-medium">Explore Products</span>
-                      <ChevronRight className="h-5 w-5 text-yellow-600 group-hover:translate-x-1 transition-transform" />
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-center mb-3">
+                          <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center mr-3">
+                            <Package className="h-5 w-5 text-yellow-600" />
+                          </div>
+                          <h3 className="font-semibold text-lg group-hover:text-yellow-600 transition-colors">
+                            {category.name}
+                          </h3>
+                        </div>
+                        <p className="text-gray-600 text-sm leading-relaxed">
+                          {category.description}
+                        </p>
+                      </div>
+                      <ChevronRight className="h-6 w-6 text-yellow-600 group-hover:transform group-hover:translate-x-1 transition-all duration-300 flex-shrink-0 ml-2" />
                     </div>
                   </CardContent>
                 </Card>
               ))}
             </div>
           </div>
-        ) : selectedCategory && !selectedSubCategory && !searchQuery ? (
-          /* Sub Categories View */
+        )}
+
+        {/* Enhanced Products Section */}
+        {hasProducts && (
           <div>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4 text-gray-900">{selectedCategoryData?.name} Subcategories</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                {selectedCategoryData?.description}
-              </p>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-3xl font-bold text-gray-900">
+                {selectedCategory ? 'Products' : 'All Products'}
+              </h2>
+              <div className="flex items-center gap-3">
+                <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 px-3 py-1">
+                  {sortedProducts.length} products
+                </Badge>
+                {sortedProducts.filter(p => p.isFeatured).length > 0 && (
+                  <Badge variant="secondary" className="bg-green-100 text-green-800 px-3 py-1">
+                    <Star className="h-3 w-3 mr-1" />
+                    {sortedProducts.filter(p => p.isFeatured).length} featured
+                  </Badge>
+                )}
+              </div>
             </div>
             
-            {subCategories.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {subCategories.map((subCategory) => (
-                  <Card 
-                    key={subCategory.id} 
-                    className="group cursor-pointer hover:shadow-xl transition-all duration-300 overflow-hidden border-2 hover:border-yellow-400"
-                    onClick={() => handleSubCategorySelect(subCategory.id)}
-                  >
-                    <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={subCategory.image || '/api/placeholder/400/300'}
-                        alt={subCategory.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                      <div className="absolute bottom-4 left-4 text-white">
-                        <h3 className="text-xl font-bold">{subCategory.name}</h3>
-                      </div>
-                    </div>
-                    <CardContent className="p-6">
-                      <p className="text-gray-600 mb-4">{subCategory.description}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-yellow-600 font-medium">View Products</span>
-                        <ChevronRight className="h-5 w-5 text-yellow-600 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            ) : (
-              /* Direct to Products if no subcategories */
-              <div>
-                <div className="mb-8">
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Products in {selectedCategoryData?.name}</h3>
-                </div>
-                <ProductGrid 
-                  categoryId={selectedCategory} 
-                  searchQuery={searchQuery}
-                />
-              </div>
-            )}
-          </div>
-        ) : (
-          /* Products View */
-          <div>
-            <div className="mb-8">
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">
-                {searchQuery ? `Search Results for "${searchQuery}"` : 
-                 selectedSubCategoryData ? `Products in ${selectedSubCategoryData.name}` :
-                 selectedCategoryData ? `Products in ${selectedCategoryData.name}` : 'All Products'}
-              </h3>
-            </div>
             <ProductGrid 
-              categoryId={selectedSubCategory || selectedCategory} 
+              categoryId={selectedCategory || undefined}
               searchQuery={searchQuery}
+              limit={searchQuery ? undefined : 12}
             />
+          </div>
+        )}
+
+        {/* Enhanced No Results */}
+        {!hasSubcategories && !hasProducts && !categoriesLoading && !productsLoading && (
+          <div className="text-center py-20">
+            <div className="max-w-md mx-auto">
+              <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Package className="h-12 w-12 text-gray-400" />
+              </div>
+              <h3 className="text-2xl font-semibold mb-3 text-gray-900">No products found</h3>
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                {searchQuery 
+                  ? `We couldn't find any products matching "${searchQuery}". Try adjusting your search terms or browse our categories.`
+                  : 'This category doesn\'t contain any products yet. Check back soon for new additions!'
+                }
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                {selectedCategory && (
+                  <Button 
+                    onClick={() => handleCategoryClick(null)}
+                    className="bg-yellow-400 hover:bg-yellow-500 text-black"
+                  >
+                    <Package className="h-4 w-4 mr-2" />
+                    Browse All Products
+                  </Button>
+                )}
+                {searchQuery && (
+                  <Button 
+                    variant="outline"
+                    onClick={() => setSearchQuery('')}
+                    className="border-yellow-400 text-yellow-600 hover:bg-yellow-50"
+                  >
+                    Clear Search
+                  </Button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Enhanced Loading State */}
+        {(categoriesLoading || productsLoading) && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <Card key={index} className="overflow-hidden">
+                <Skeleton className="h-48 w-full" />
+                <CardHeader>
+                  <Skeleton className="h-6 w-3/4" />
+                  <Skeleton className="h-4 w-1/2" />
+                  <Skeleton className="h-4 w-2/3" />
+                </CardHeader>
+                <CardContent>
+                  <Skeleton className="h-10 w-full" />
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
+
+        {/* Enhanced Back Navigation */}
+        {selectedCategory && (
+          <div className="mt-12 text-center">
+            <Button 
+              variant="outline" 
+              onClick={() => handleCategoryClick(null)}
+              className="border-yellow-400 text-yellow-600 hover:bg-yellow-50 px-6 py-3"
+            >
+              <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
+              Back to All Categories
+            </Button>
           </div>
         )}
       </div>
