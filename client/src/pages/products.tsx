@@ -99,6 +99,14 @@ export default function Products() {
 
   const stats = getCategoryStats();
 
+  const getCategoryProductCount = (categoryId: number): number => {
+    return products.filter((p: Product) => p.categoryId === categoryId).length;
+  };
+
+  const getCategorySubcategoryCount = (categoryId: number): number => {
+    return allCategories.filter((cat: Category) => cat.parentId === categoryId).length;
+  };
+
   return (
     <div className="pt-20 min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Enhanced Header Section */}
@@ -308,6 +316,23 @@ export default function Products() {
                       <p className="text-gray-600 text-sm leading-relaxed">
                         {category.description}
                       </p>
+                      
+                      {/* Category Stats */}
+                      <div className="flex flex-wrap gap-2 pt-2">
+                        {getCategorySubcategoryCount(category.id) > 0 && (
+                          <div className="flex items-center px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">
+                            <Layers className="h-3 w-3 mr-1" />
+                            {getCategorySubcategoryCount(category.id)} subcategories
+                          </div>
+                        )}
+                        {getCategoryProductCount(category.id) > 0 && (
+                          <div className="flex items-center px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
+                            <Package className="h-3 w-3 mr-1" />
+                            {getCategoryProductCount(category.id)} products
+                          </div>
+                        )}
+                      </div>
+                      
                       <div className="pt-2">
                         <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 group-hover:bg-yellow-200 transition-colors">
                           Explore Category
