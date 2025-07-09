@@ -94,10 +94,13 @@ export class MemStorage implements IStorage {
       { id: 11, name: "Pediatric Equipment", description: "Specialized equipment for children with disabilities", icon: "baby-carriage", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
       { id: 12, name: "Rehab Pushchairs", description: "Specialized pushchairs for rehabilitation", icon: "baby-carriage", parentId: null, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
       
-      // Sub Categories for Wheelchairs (parentId: 2)
+      // Sub Categories for Wheelchairs (parentId: 2) - Example: Products/Wheelchairs/Rigid Wheelchairs/Wolturnus W5
       { id: 21, name: "Manual Wheelchairs", description: "Self-propelled wheelchairs for active users", icon: "wheelchair", parentId: 2, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
       { id: 22, name: "Electric Wheelchairs", description: "Powered wheelchairs for enhanced mobility", icon: "battery-full", parentId: 2, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
-      { id: 23, name: "Sports Wheelchairs", description: "Athletic wheelchairs for recreational activities", icon: "bicycle", parentId: 2, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      { id: 23, name: "Rigid Wheelchairs", description: "Ultra-lightweight rigid frame wheelchairs for performance", icon: "bicycle", parentId: 2, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
+      
+      // Third-level Categories for Rigid Wheelchairs (parentId: 23) - Example: Products/Wheelchairs/Rigid Wheelchairs/[Product]
+      { id: 231, name: "Wolturnus Series", description: "Premium Danish wheelchair engineering", icon: "wheelchair", parentId: 23, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
       
       // Sub Categories for Lifting Systems (parentId: 1)
       { id: 31, name: "Ceiling Hoists", description: "Track-mounted lifting systems for patient transfer", icon: "stairs", parentId: 1, image: "/attached_assets/1599058641products_home_1751993768399.jpg" },
@@ -113,10 +116,44 @@ export class MemStorage implements IStorage {
       this.categories.set(cat.id, { ...cat, image: cat.image || null });
     });
 
-    // Seed products
+    // Seed products with variable hierarchy depth
     const productData = [
+      // Level 4: Products/Wheelchairs/Rigid Wheelchairs/Wolturnus Series/Wolturnus W5
       {
         id: 1,
+        name: "Wolturnus W5",
+        description: "Premium ultra-lightweight rigid wheelchair with advanced engineering for superior performance and comfort",
+        categoryId: 231, // Wolturnus Series (4th level)
+        images: ["/attached_assets/bingo_evolution_twins-1_1752003228920.jpg"],
+        isFeatured: true,
+        specifications: "Carbon fiber frame, adjustable geometry, premium components, weight: 6.8kg"
+      },
+      
+      // Level 3: Products/Stair Lifts/Homeglide (direct products under main category)
+      {
+        id: 2,
+        name: "Homeglide",
+        description: "Straight stair lift for indoor use with smooth operation and safety features",
+        categoryId: 5, // Stair Lifts (main category)
+        images: ["/attached_assets/cc1b09e90722c7d00b3f0cb8757c6d79_1752003228919.jpg"],
+        isFeatured: true,
+        specifications: "Weight capacity: 140kg, battery backup, safety sensors, soft start/stop"
+      },
+      
+      // Level 2: Products/Sensory Rooms (direct products under main category)
+      {
+        id: 3,
+        name: "Multi-Sensory Environment Package",
+        description: "Complete sensory room setup with interactive lighting, sounds, and tactile elements for therapeutic use",
+        categoryId: 4, // Sensory Integration Rooms (main category)
+        images: ["/attached_assets/maxresdefault_1752003228921.jpg"],
+        isFeatured: true,
+        specifications: "LED lighting system, fiber optics, bubble tubes, interactive projection, sound system"
+      },
+      
+      // Additional products for testing hierarchy
+      {
+        id: 4,
         name: "Bingo Evolution",
         description: "Advanced rehabilitation pushchair with superior comfort and functionality",
         categoryId: 12,
@@ -124,23 +161,27 @@ export class MemStorage implements IStorage {
         isFeatured: true,
         specifications: "Adjustable seating, weather protection, safety harness"
       },
+      
+      // Product under Manual Wheelchairs subcategory
       {
-        id: 2,
-        name: "Zip",
-        description: "Compact and lightweight rehabilitation pushchair",
-        categoryId: 12,
+        id: 5,
+        name: "Active Sport Wheelchair",
+        description: "High-performance manual wheelchair for daily use and recreational activities",
+        categoryId: 21, // Manual Wheelchairs
         images: ["/attached_assets/cc1b09e90722c7d00b3f0cb8757c6d79_1752003228919.jpg"],
-        isFeatured: true,
-        specifications: "Lightweight frame, easy folding, comfortable seating"
+        isFeatured: false,
+        specifications: "Aluminum frame, quick-release wheels, adjustable backrest, anti-tip wheels"
       },
+      
+      // Product under Ceiling Hoists subcategory
       {
-        id: 3,
-        name: "Mimos Pillow",
-        description: "Specialized medical pillow for infant care and positioning",
-        categoryId: 9,
+        id: 6,
+        name: "Ceiling Track Hoist System",
+        description: "Professional ceiling-mounted patient transfer system for healthcare facilities",
+        categoryId: 31, // Ceiling Hoists
         images: ["/attached_assets/maxresdefault_1752003228921.jpg"],
-        isFeatured: true,
-        specifications: "Medical grade materials, washable, various sizes"
+        isFeatured: false,
+        specifications: "300kg capacity, electric motor, emergency lowering, H-frame track system"
       },
     ];
 

@@ -112,8 +112,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/categories", async (req, res) => {
     try {
-      const parentId = req.query.parentId ? parseInt(req.query.parentId as string) : null;
-      const categories = await storage.getCategoriesByParent(parentId);
+      const { parentId } = req.query;
+      
+      let categories;
+      if (parentId !== undefined) {
+        const pid = parentId === 'null' ? null : parseInt(parentId as string);
+        categories = await storage.getCategoriesByParent(pid);
+      } else {
+        // Return all categories when no parentId is specified
+        categories = await storage.getCategories();
+      }
+      
       res.json(categories);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch categories" });

@@ -60,8 +60,8 @@ export default function ProductGrid({
               className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
             />
             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-              <Link href={`/products/${product.id}`}>
-                <Button className="btn-cardbutn opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <Link href={`/products/detail/${product.id}`}>
+                <Button className="bg-yellow-400 hover:bg-yellow-500 text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   More Info
                 </Button>
               </Link>
@@ -76,15 +76,15 @@ export default function ProductGrid({
                 </CardDescription>
               </div>
               {product.isFeatured && (
-                <Badge className="bg-secondary-green text-white">
+                <Badge className="bg-yellow-400 text-black">
                   Featured
                 </Badge>
               )}
             </div>
           </CardHeader>
           <CardContent>
-            <Link href={`/products/${product.id}`}>
-              <Button variant="outline" className="w-full hover-gold">
+            <Link href={`/products/detail/${product.id}`}>
+              <Button variant="outline" className="w-full border-yellow-400 text-yellow-600 hover:bg-yellow-50">
                 View Details
               </Button>
             </Link>
