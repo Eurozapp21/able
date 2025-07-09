@@ -315,16 +315,18 @@ export default function Products() {
           </div>
         )}
 
-        {/* Enhanced Products Section */}
-        {hasProducts && (
+        {/* Enhanced Products Section - Only show when no subcategories OR when searching */}
+        {hasProducts && (!hasSubcategories || searchQuery) && (
           <div>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl font-bold text-gray-900">
-                {selectedCategory && categoryPath.length > 0 
-                  ? `${categoryPath[categoryPath.length - 1].name} Products`
-                  : selectedCategory 
-                    ? 'Products' 
-                    : 'All Products'
+                {searchQuery 
+                  ? `Search Results for "${searchQuery}"`
+                  : selectedCategory && categoryPath.length > 0 
+                    ? `${categoryPath[categoryPath.length - 1].name} Products`
+                    : selectedCategory 
+                      ? 'Products' 
+                      : 'All Products'
                 }
               </h2>
               <div className="flex items-center gap-3">
@@ -349,7 +351,7 @@ export default function Products() {
         )}
 
         {/* Enhanced No Results */}
-        {!hasSubcategories && !hasProducts && !categoriesLoading && !productsLoading && (
+        {!hasSubcategories && (!hasProducts || searchQuery) && !categoriesLoading && !productsLoading && (
           <div className="text-center py-20">
             <div className="max-w-md mx-auto">
               <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
