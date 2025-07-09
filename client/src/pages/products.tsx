@@ -193,8 +193,8 @@ export default function Products() {
           </Breadcrumb>
         </div>
 
-        {/* Enhanced Search and Controls - Only show when searching or in a category */}
-        {(searchQuery || selectedCategory) && (
+        {/* Enhanced Search and Controls - Only show when searching or when in a category with products (no subcategories) */}
+        {(searchQuery || (selectedCategory && hasProducts && !hasSubcategories)) && (
           <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
             <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
               <div className="flex flex-col sm:flex-row gap-4 flex-1">
