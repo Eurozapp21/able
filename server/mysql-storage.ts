@@ -7,7 +7,7 @@ import {
   type EnquiryMessage, type InsertEnquiryMessage, type Achievement, type InsertAchievement,
   type Banner, type InsertBanner, type CatalogueCategory, type InsertCatalogueCategory,
   type Brochure, type InsertBrochure
-} from "@shared/schema";
+} from "../shared/schema";
 import type { IStorage } from "./storage";
 
 export class MySQLStorage implements IStorage {
