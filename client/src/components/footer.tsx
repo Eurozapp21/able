@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Fax } from "lucide-react";
+import { MapPin, Phone, Mail, Printer } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -34,7 +34,7 @@ export default function Footer() {
                 <span>info@abletools.com.cy</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Fax className="h-4 w-4 text-yellow-400" />
+                <Printer className="h-4 w-4 text-yellow-400" />
                 <span>+357 22 123457</span>
               </div>
             </div>

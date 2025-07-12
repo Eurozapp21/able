@@ -1,14 +1,14 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Switch } from "wouter";
-import { Toaster } from "@/components/ui/toaster";
-import Home from "@/pages/home";
-import Products from "@/pages/products";
-import About from "@/pages/about";
-import Contact from "@/pages/contact";
-import Login from "@/pages/login";
-import Register from "@/pages/register";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+// import { Toaster } from "@/components/ui/toaster";
+import Home from "./pages/home";
+import Products from "./pages/products";
+import About from "./pages/about";
+import Contact from "./pages/contact";
+import Login from "./pages/login";
+import Register from "./pages/register";
+import Header from "./components/header";
+import Footer from "./components/footer";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,7 +42,7 @@ function App() {
         </main>
         <Footer />
       </div>
-      <Toaster />
+      {/* <Toaster /> */}
     </QueryClientProvider>
   );
 }

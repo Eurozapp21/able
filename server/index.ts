@@ -25,31 +25,33 @@ app.use(session({
   }
 }));
 
+// Add CORS headers for development
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  next();
+});
+
 // Serve attached assets
 app.use('/attached_assets', express.static('attached_assets'));
 
 // API routes
 app.use('/api', routes);
 
-// Serve static files in production
-if (process.env.NODE_ENV === 'production') {
-  const distPath = path.join(__dirname, '../dist');
-  app.use(express.static(distPath));
-  
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(distPath, 'index.html'));
-  });
-} else {
-  // Development: Vite will handle frontend
-  app.get('*', (req, res) => {
-    res.json({ message: 'Development server running. Frontend served by Vite.' });
-  });
-}
+// Serve static files
+const publicPath = path.join(__dirname, '../dist/public');
+app.use(express.static(publicPath));
+
+// Handle React routing - serve index.html for all non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
+});
 
 const server = createServer(app);
 const port = process.env.PORT || 5000;
 
-server.listen(port, () => {
+server.listen(port, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${port}`);
   console.log(`📱 Environment: ${process.env.NODE_ENV || 'development'}`);
 });
