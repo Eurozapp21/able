@@ -1,14 +1,10 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { MySQLStorage } from "./mysql-storage";
 import { 
   insertUserSchema, insertEnquirySchema, insertEnquiryMessageSchema 
 } from "@shared/schema";
 import { z } from "zod";
-
-// Initialize MySQL storage
-const mysqlStorage = new MySQLStorage(process.env.DATABASE_URL || 'mysql://user:password@localhost:3306/abletools');
 
 // Session type extensions handled inline with type assertions
 
@@ -31,8 +27,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Username and password required" });
       }
 
-      await mysqlStorage.connect();
-      const user = await mysqlStorage.getUserByUsername(username);
+      const user = await storage.getUserByUsername(username);
       
       if (!user || user.password !== password) {
         return res.status(401).json({ error: "Invalid credentials" });
@@ -53,18 +48,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const userData = insertUserSchema.parse(req.body);
       
       // Check if user already exists
-      await mysqlStorage.connect();
-      const existingUser = await mysqlStorage.getUserByEmail(userData.email);
+      const existingUser = await storage.getUserByEmail(userData.email);
       if (existingUser) {
         return res.status(400).json({ error: "Email already registered" });
       }
 
-      const existingUsername = await mysqlStorage.getUserByUsername(userData.username);
+      const existingUsername = await storage.getUserByUsername(userData.username);
       if (existingUsername) {
         return res.status(400).json({ error: "Username already taken" });
       }
 
-      const user = await mysqlStorage.createUser(userData);
+      const user = await storage.createUser(userData);
       
       req.session.userId = user.id;
       req.session.username = user.username;
@@ -94,8 +88,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
 
     try {
-      await mysqlStorage.connect();
-      const user = await mysqlStorage.getUser(req.session.userId);
+      const user = await storage.getUser(req.session.userId);
       if (!user) {
         return res.status(404).json({ error: "User not found" });
       }
@@ -110,8 +103,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Public routes
   app.get("/api/banners", async (req, res) => {
     try {
-      await mysqlStorage.connect();
-      const banners = await mysqlStorage.getActiveBanners();
+      const banners = await storage.getActiveBanners();
       res.json(banners);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch banners" });
@@ -122,14 +114,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { parentId } = req.query;
       
-      await mysqlStorage.connect();
       let categories;
       if (parentId !== undefined) {
         const pid = parentId === 'null' ? null : parseInt(parentId as string);
-        categories = await mysqlStorage.getCategoriesByParent(pid);
+        categories = await storage.getCategoriesByParent(pid);
       } else {
         // Return all categories when no parentId is specified
-        categories = await mysqlStorage.getCategories();
+        categories = await storage.getCategories();
       }
       
       res.json(categories);
@@ -140,9 +131,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/categories/:id", async (req, res) => {
     try {
-      await mysqlStorage.connect();
       const id = parseInt(req.params.id);
-      const category = await mysqlStorage.getCategory(id);
+      const category = await storage.getCategory(id);
       
       if (!category) {
         return res.status(404).json({ error: "Category not found" });
@@ -159,17 +149,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { categoryId, featured, search } = req.query;
 
       
-      await mysqlStorage.connect();
       let products;
       
       if (search) {
-        products = await mysqlStorage.searchProducts(search as string);
+        products = await storage.searchProducts(search as string);
       } else if (categoryId) {
-        products = await mysqlStorage.getProductsByCategory(parseInt(categoryId as string));
+        products = await storage.getProductsByCategory(parseInt(categoryId as string));
       } else if (featured === 'true') {
-        products = await mysqlStorage.getFeaturedProducts();
+        products = await storage.getFeaturedProducts();
       } else {
-        products = await mysqlStorage.getProducts();
+        products = await storage.getProducts();
       }
       
       res.json(products);
@@ -180,9 +169,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/products/:id", async (req, res) => {
     try {
-      await mysqlStorage.connect();
       const id = parseInt(req.params.id);
-      const product = await mysqlStorage.getProduct(id);
+      const product = await storage.getProduct(id);
       
       if (!product) {
         return res.status(404).json({ error: "Product not found" });
@@ -198,12 +186,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { upcoming, type } = req.query;
       
-      await mysqlStorage.connect();
       let seminars;
       if (upcoming === 'true') {
-        seminars = await mysqlStorage.getUpcomingSeminars();
+        seminars = await storage.getUpcomingSeminars();
       } else {
-        seminars = await mysqlStorage.getSeminars();
+        seminars = await storage.getSeminars();
       }
       
       // Filter by type if specified
@@ -219,9 +206,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/seminars/:id", async (req, res) => {
     try {
-      await mysqlStorage.connect();
       const id = parseInt(req.params.id);
-      const seminar = await mysqlStorage.getSeminar(id);
+      const seminar = await storage.getSeminar(id);
       
       if (!seminar) {
         return res.status(404).json({ error: "Seminar not found" });
@@ -237,12 +223,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { recent } = req.query;
       
-      await mysqlStorage.connect();
       let events;
       if (recent === 'true') {
-        events = await mysqlStorage.getRecentEvents();
+        events = await storage.getRecentEvents();
       } else {
-        events = await mysqlStorage.getEvents();
+        events = await storage.getEvents();
       }
       
       res.json(events);
@@ -253,9 +238,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/events/:id", async (req, res) => {
     try {
-      await mysqlStorage.connect();
       const id = parseInt(req.params.id);
-      const event = await mysqlStorage.getEvent(id);
+      const event = await storage.getEvent(id);
       
       if (!event) {
         return res.status(404).json({ error: "Event not found" });
@@ -269,8 +253,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/achievements", async (req, res) => {
     try {
-      await mysqlStorage.connect();
-      const achievements = await mysqlStorage.getAchievements();
+      const achievements = await storage.getAchievements();
       res.json(achievements);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch achievements" });

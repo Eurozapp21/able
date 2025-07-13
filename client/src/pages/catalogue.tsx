@@ -3,7 +3,6 @@ import { Link, useLocation } from 'wouter';
 import { Card, CardContent } from '@/components/ui/card';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import { Package, FileText, Download, ArrowRight } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 
 interface CatalogueCategory {
   id: number;
@@ -17,7 +16,6 @@ interface CatalogueCategory {
 }
 
 export default function Catalogue() {
-  const { t } = useTranslation();
   const [location, setLocation] = useLocation();
   const { data: categories = [], isLoading } = useQuery<CatalogueCategory[]>({
     queryKey: ['/api/catalogue/categories'],
@@ -33,7 +31,7 @@ export default function Catalogue() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-gold mx-auto"></div>
-          <p className="mt-4 text-lg text-gray-600">{t('catalogueCategory.loading')}</p>
+          <p className="mt-4 text-lg text-gray-600">Loading catalogue categories...</p>
         </div>
       </div>
     );
@@ -47,11 +45,11 @@ export default function Catalogue() {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/">{t('navigation.home')}</BreadcrumbLink>
+                <BreadcrumbLink href="/">Home</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>{t('navigation.catalogue')}</BreadcrumbPage>
+                <BreadcrumbPage>Catalogue</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -67,22 +65,22 @@ export default function Catalogue() {
       >
         <div className="container mx-auto px-4 h-full flex items-center">
           <div className="text-white">
-            <h1 className="text-5xl font-bold mb-4">{t('catalogue.hero.title')}</h1>
+            <h1 className="text-5xl font-bold mb-4">Product Catalogue</h1>
             <p className="text-xl max-w-2xl leading-relaxed">
-              {t('catalogue.hero.subtitle')}
+              Explore our comprehensive range of rehabilitation equipment and download detailed brochures for each product category.
             </p>
             <div className="flex gap-6 mt-6">
               <div className="flex items-center gap-2">
                 <Package className="w-5 h-5" style={{color: '#ffeb3b'}} />
-                <span className="text-lg">{categories.length} {t('catalogue.stats.categories')}</span>
+                <span className="text-lg">{categories.length} Categories</span>
               </div>
               <div className="flex items-center gap-2">
                 <FileText className="w-5 h-5" style={{color: '#ffeb3b'}} />
-                <span className="text-lg">{t('catalogue.stats.brochures')}</span>
+                <span className="text-lg">Professional Brochures</span>
               </div>
               <div className="flex items-center gap-2">
                 <Download className="w-5 h-5" style={{color: '#ffeb3b'}} />
-                <span className="text-lg">{t('catalogue.stats.downloads')}</span>
+                <span className="text-lg">Instant Downloads</span>
               </div>
             </div>
           </div>
@@ -92,9 +90,9 @@ export default function Catalogue() {
       {/* Categories Grid */}
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">{t('catalogue.browse.title')}</h2>
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">Browse Categories</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            {t('catalogue.browse.subtitle')}
+            Select a category to view and download detailed product brochures, specifications, and technical documentation.
           </p>
         </div>
 
@@ -122,7 +120,7 @@ export default function Catalogue() {
                       style={{backgroundColor: '#ffeb3b'}}
                     >
                       <Package className="w-4 h-4 inline mr-1" />
-                      {t('catalogue.categoryCard.brochures')}
+                      Brochures
                     </div>
                   </div>
                 </div>
@@ -131,7 +129,7 @@ export default function Catalogue() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-sm text-gray-500">
                       <FileText className="w-4 h-4" />
-                      <span>{t('catalogue.categoryCard.viewBrochures')}</span>
+                      <span>View Brochures</span>
                     </div>
                     <ArrowRight 
                       className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" 
@@ -149,13 +147,13 @@ export default function Catalogue() {
             className="inline-block p-8 rounded-2xl text-black"
             style={{backgroundColor: '#ffeb3b'}}
           >
-            <h3 className="text-2xl font-bold mb-4">{t('catalogue.cta.title')}</h3>
+            <h3 className="text-2xl font-bold mb-4">Need More Information?</h3>
             <p className="text-lg mb-6 max-w-2xl">
-              {t('catalogue.cta.description')}
+              Can't find what you're looking for? Our technical team is ready to provide custom solutions and detailed consultations.
             </p>
             <Link href="/contact">
               <button className="bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors duration-200">
-                {t('catalogue.cta.button')}
+                Contact Our Experts
               </button>
             </Link>
           </div>

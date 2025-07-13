@@ -6,10 +6,8 @@ import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
-import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
-  const { t } = useTranslation();
   const [location] = useLocation();
   const [email, setEmail] = useState('');
   const { toast } = useToast();
@@ -55,19 +53,19 @@ export default function Footer() {
           <div className="grid md:grid-cols-4 gap-8">
             {/* Address Section */}
             <div>
-              <h3 className="text-lg font-bold mb-4">{t('footer.address')}</h3>
+              <h3 className="text-lg font-bold mb-4">Address</h3>
               <div className="space-y-2 text-gray-300 text-sm">
                 <div className="flex items-start">
                   <MapPin className="w-4 h-4 mr-2 text-yellow-400 mt-0.5 flex-shrink-0" />
-                  <span>{t('footer.contactInfo.address')}</span>
+                  <span>Strovolos Avenue 149K, Strovolos, Nicosia, 2048, Cyprus</span>
                 </div>
                 <div className="flex items-center">
                   <Mail className="w-4 h-4 mr-2 text-yellow-400" />
-                  <span>{t('footer.contactInfo.email')}</span>
+                  <span>info@abletools.com.cy</span>
                 </div>
                 <div className="flex items-center">
                   <Phone className="w-4 h-4 mr-2 text-yellow-400" />
-                  <span>{t('footer.contactInfo.phone')}</span>
+                  <span>+357 22 250 115</span>
                 </div>
                 <div className="flex items-center">
                   <Printer className="w-4 h-4 mr-2 text-yellow-400" />
@@ -78,18 +76,18 @@ export default function Footer() {
             
             {/* Information Section */}
             <div>
-              <h4 className="text-lg font-bold mb-4">{t('footer.information')}</h4>
+              <h4 className="text-lg font-bold mb-4">Information</h4>
               <div className="grid grid-cols-1 gap-2 text-gray-300 text-sm">
                 <div className="space-y-1">
-                  <Link href="/about"><span className="block hover:text-yellow-400 transition-colors cursor-pointer">{t('footer.links.aboutUs')}</span></Link>
-                  <Link href="/events"><span className="block hover:text-yellow-400 transition-colors cursor-pointer">{t('footer.links.education')}</span></Link>
+                  <Link href="/about"><span className="block hover:text-yellow-400 transition-colors cursor-pointer">About Us</span></Link>
+                  <Link href="/events"><span className="block hover:text-yellow-400 transition-colors cursor-pointer">Education</span></Link>
                   <Link href="/events"><span className="block hover:text-yellow-400 transition-colors cursor-pointer">Events</span></Link>
-                  <Link href="/products"><span className="block hover:text-yellow-400 transition-colors cursor-pointer">{t('footer.links.products')}</span></Link>
+                  <Link href="/products"><span className="block hover:text-yellow-400 transition-colors cursor-pointer">Products</span></Link>
                 </div>
                 <div className="space-y-1">
-                  <Link href="/contact"><span className="block hover:text-yellow-400 transition-colors cursor-pointer">{t('footer.links.contact')}</span></Link>
-                  <Link href="/privacy"><span className="block hover:text-yellow-400 transition-colors cursor-pointer">{t('footer.links.privacyPolicy')}</span></Link>
-                  <Link href="/terms"><span className="block hover:text-yellow-400 transition-colors cursor-pointer">{t('footer.links.terms')}</span></Link>
+                  <Link href="/contact"><span className="block hover:text-yellow-400 transition-colors cursor-pointer">Contact Us</span></Link>
+                  <Link href="/privacy"><span className="block hover:text-yellow-400 transition-colors cursor-pointer">Privacy Notice</span></Link>
+                  <Link href="/terms"><span className="block hover:text-yellow-400 transition-colors cursor-pointer">Terms and Conditions</span></Link>
                   <Link href="/newsletter"><span className="block hover:text-yellow-400 transition-colors cursor-pointer">Newsletter Consent</span></Link>
                 </div>
               </div>
@@ -112,7 +110,7 @@ export default function Footer() {
             
             {/* Follow Us Section */}
             <div>
-              <h4 className="text-lg font-bold mb-4">{t('footer.followUs')}</h4>
+              <h4 className="text-lg font-bold mb-4">Follow Us</h4>
               <div className="flex space-x-3">
                 <a href="#" className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-black hover:bg-yellow-500 transition-colors">
                   <Facebook className="w-4 h-4" />

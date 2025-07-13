@@ -26,9 +26,6 @@ import Dashboard from "./pages/dashboard";
 import Enquiry from "./pages/enquiry";
 import EnquiryDetail from "./pages/enquiry-detail";
 import NotFound from "@/pages/not-found";
-import AdminLogin from "./pages/admin/login";
-import AdminDashboard from "./pages/admin/dashboard";
-import AdminProducts from "./pages/admin/products";
 
 function Router() {
   return (
@@ -55,9 +52,6 @@ function Router() {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/enquiry" component={Enquiry} />
           <Route path="/enquiry/:id" component={EnquiryDetail} />
-          <Route path="/admin/login" component={AdminLogin} />
-          <Route path="/admin/dashboard" component={AdminDashboard} />
-          <Route path="/admin/products" component={AdminProducts} />
           <Route component={NotFound} />
         </Switch>
       </main>

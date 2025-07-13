@@ -5,25 +5,22 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useAuth } from '@/lib/auth';
-import { useTranslation } from 'react-i18next';
-import LanguageSwitcher from './language-switcher';
 
 export default function Header() {
-  const { t } = useTranslation();
   const [location] = useLocation();
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { user, logout } = useAuth();
 
   const navigation = [
-    { name: t('navigation.home'), href: '/' },
-    { name: t('navigation.about'), href: '/about' },
-    { name: t('navigation.products'), href: '/products' },
-    { name: t('navigation.solutions'), href: '/solutions' },
-    { name: t('navigation.catalogue'), href: '/catalogue' },
-    { name: t('navigation.education'), href: '/seminars' },
-    { name: t('navigation.newsroom'), href: '/newsroom' },
-    { name: t('navigation.contact'), href: '/contact' },
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Products', href: '/products' },
+    { name: 'Solutions', href: '/solutions' },
+    { name: 'Catalogue', href: '/catalogue' },
+    { name: 'Education', href: '/seminars' },
+    { name: 'Newsroom', href: '/newsroom' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   const handleSearch = (e: React.FormEvent) => {
@@ -70,7 +67,6 @@ export default function Header() {
           
           {/* Search and User Actions */}
           <div className="flex items-center space-x-4">
-            <LanguageSwitcher />
             <Button
               variant="ghost"
               size="icon"
@@ -84,7 +80,7 @@ export default function Header() {
               <div className="hidden md:flex items-center space-x-4">
                 <Link href="/dashboard">
                   <Button variant="ghost" size="sm" className="text-gray-custom hover:text-primary-gold">
-                    {t('navigation.dashboard')}
+                    Dashboard
                   </Button>
                 </Link>
                 <Link href="/enquiry">
@@ -129,7 +125,7 @@ export default function Header() {
                     <>
                       <Link href="/dashboard">
                         <span className="text-lg font-medium text-gray-custom hover:text-primary-gold transition-colors cursor-pointer">
-                          {t('navigation.dashboard')}
+                          Dashboard
                         </span>
                       </Link>
                       <Link href="/enquiry">
@@ -148,7 +144,7 @@ export default function Header() {
                   ) : (
                     <Link href="/login">
                       <span className="text-lg font-medium text-gray-custom hover:text-primary-gold transition-colors cursor-pointer">
-                        {t('navigation.login')}
+                        Login
                       </span>
                     </Link>
                   )}
