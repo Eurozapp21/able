@@ -1,367 +1,451 @@
-import express, { type Request, type Response } from "express";
-import bcrypt from "bcryptjs";
-import { storage } from "./database";
+import type { Express } from "express";
+import { createServer, type Server } from "http";
+import { storage } from "./storage";
+import { MySQLStorage } from "./mysql-storage";
 import { 
   insertUserSchema, insertEnquirySchema, insertEnquiryMessageSchema 
-} from "../shared/types";
+} from "@shared/schema";
 import { z } from "zod";
 
-const router = express.Router();
+// Initialize MySQL storage
+const mysqlStorage = new MySQLStorage(process.env.DATABASE_URL || 'mysql://user:password@localhost:3306/abletools');
 
-// Authentication middleware
-const requireAuth = (req: any, res: Response, next: any) => {
-  if (!req.session?.userId) {
-    return res.status(401).json({ error: "Authentication required" });
-  }
-  next();
-};
+// Session type extensions handled inline with type assertions
 
-// Auth routes
-router.post("/auth/register", async (req: Request, res: Response) => {
-  try {
-    const userData = insertUserSchema.parse(req.body);
-    
-    // Check if user already exists
-    const existingUser = await storage.getUserByEmail(userData.email);
-    if (existingUser) {
-      return res.status(400).json({ error: "Email already registered" });
+export async function registerRoutes(app: Express): Promise<Server> {
+  
+  // Authentication middleware
+  const requireAuth = (req: any, res: any, next: any) => {
+    if (!req.session?.userId) {
+      return res.status(401).json({ error: "Authentication required" });
     }
+    next();
+  };
 
-    const existingUsername = await storage.getUserByUsername(userData.username);
-    if (existingUsername) {
-      return res.status(400).json({ error: "Username already taken" });
+  // Auth routes
+  app.post("/api/auth/login", async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      
+      if (!username || !password) {
+        return res.status(400).json({ error: "Username and password required" });
+      }
+
+      await mysqlStorage.connect();
+      const user = await mysqlStorage.getUserByUsername(username);
+      
+      if (!user || user.password !== password) {
+        return res.status(401).json({ error: "Invalid credentials" });
+      }
+
+      req.session.userId = user.id;
+      req.session.username = user.username;
+      
+      const { password: _, ...userWithoutPassword } = user;
+      res.json({ user: userWithoutPassword });
+    } catch (error) {
+      res.status(500).json({ error: "Internal server error" });
     }
-
-    // Hash password
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
-    
-    const user = await storage.createUser({
-      ...userData,
-      password: hashedPassword
-    });
-
-    // Set session
-    (req as any).session.userId = user.id;
-    (req as any).session.username = user.username;
-
-    const { password: _, ...userWithoutPassword } = user;
-    res.json({ user: userWithoutPassword });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return res.status(400).json({ error: "Invalid user data", details: error.errors });
-    }
-    res.status(500).json({ error: "Registration failed" });
-  }
-});
-
-router.post("/auth/login", async (req: Request, res: Response) => {
-  try {
-    const { username, password } = req.body;
-    
-    if (!username || !password) {
-      return res.status(400).json({ error: "Username and password required" });
-    }
-
-    const user = await storage.getUserByUsername(username);
-    if (!user) {
-      return res.status(401).json({ error: "Invalid credentials" });
-    }
-
-    const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) {
-      return res.status(401).json({ error: "Invalid credentials" });
-    }
-
-    // Set session
-    (req as any).session.userId = user.id;
-    (req as any).session.username = user.username;
-
-    const { password: _, ...userWithoutPassword } = user;
-    res.json({ user: userWithoutPassword });
-  } catch (error) {
-    res.status(500).json({ error: "Login failed" });
-  }
-});
-
-router.post("/auth/logout", (req: Request, res: Response) => {
-  (req as any).session.destroy((err: any) => {
-    if (err) {
-      return res.status(500).json({ error: "Logout failed" });
-    }
-    res.json({ success: true });
   });
-});
 
-router.get("/auth/me", requireAuth, async (req: Request, res: Response) => {
-  try {
-    const user = await storage.getUser((req as any).session.userId);
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-    
-    const { password: _, ...userWithoutPassword } = user;
-    res.json({ user: userWithoutPassword });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to get user" });
-  }
-});
+  app.post("/api/auth/register", async (req, res) => {
+    try {
+      const userData = insertUserSchema.parse(req.body);
+      
+      // Check if user already exists
+      await mysqlStorage.connect();
+      const existingUser = await mysqlStorage.getUserByEmail(userData.email);
+      if (existingUser) {
+        return res.status(400).json({ error: "Email already registered" });
+      }
 
-// Categories routes
-router.get("/categories", async (req: Request, res: Response) => {
-  try {
-    const { parent } = req.query;
-    let categories;
-    
-    if (parent !== undefined) {
-      const parentId = parent === 'null' ? null : parseInt(parent as string);
-      categories = await storage.getCategoriesByParent(parentId);
-    } else {
-      categories = await storage.getCategories();
-    }
-    
-    res.json(categories);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch categories" });
-  }
-});
+      const existingUsername = await mysqlStorage.getUserByUsername(userData.username);
+      if (existingUsername) {
+        return res.status(400).json({ error: "Username already taken" });
+      }
 
-router.get("/categories/:id", async (req: Request, res: Response) => {
-  try {
-    const id = parseInt(req.params.id);
-    const category = await storage.getCategory(id);
-    
-    if (!category) {
-      return res.status(404).json({ error: "Category not found" });
+      const user = await mysqlStorage.createUser(userData);
+      
+      req.session.userId = user.id;
+      req.session.username = user.username;
+      
+      const { password: _, ...userWithoutPassword } = user;
+      res.json({ user: userWithoutPassword });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid user data", details: error.errors });
+      }
+      res.status(500).json({ error: "Internal server error" });
     }
-    
-    res.json(category);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch category" });
-  }
-});
+  });
 
-// Products routes
-router.get("/products", async (req: Request, res: Response) => {
-  try {
-    const { category, search, featured } = req.query;
-    let products;
-    
-    if (featured === 'true') {
-      products = await storage.getFeaturedProducts();
-    } else if (search) {
-      products = await storage.searchProducts(search as string);
-    } else if (category) {
-      products = await storage.getProductsByCategory(parseInt(category as string));
-    } else {
-      products = await storage.getProducts();
-    }
-    
-    res.json(products);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch products" });
-  }
-});
-
-router.get("/products/:id", async (req: Request, res: Response) => {
-  try {
-    const id = parseInt(req.params.id);
-    const product = await storage.getProduct(id);
-    
-    if (!product) {
-      return res.status(404).json({ error: "Product not found" });
-    }
-    
-    res.json(product);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch product" });
-  }
-});
-
-// Seminars routes
-router.get("/seminars", async (req: Request, res: Response) => {
-  try {
-    const { type } = req.query;
-    let seminars;
-    
-    if (type) {
-      seminars = await storage.getSeminarsByType(type as string);
-    } else {
-      seminars = await storage.getSeminars();
-    }
-    
-    res.json(seminars);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch seminars" });
-  }
-});
-
-router.get("/seminars/:id", async (req: Request, res: Response) => {
-  try {
-    const id = parseInt(req.params.id);
-    const seminar = await storage.getSeminar(id);
-    
-    if (!seminar) {
-      return res.status(404).json({ error: "Seminar not found" });
-    }
-    
-    res.json(seminar);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch seminar" });
-  }
-});
-
-// Enquiries routes
-router.get("/enquiries", requireAuth, async (req: Request, res: Response) => {
-  try {
-    const enquiries = await storage.getEnquiriesByUser((req as any).session.userId);
-    res.json(enquiries);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch enquiries" });
-  }
-});
-
-router.post("/enquiries", async (req: Request, res: Response) => {
-  try {
-    const enquiryData = insertEnquirySchema.parse(req.body);
-    
-    // If user is logged in, set userId
-    if ((req as any).session?.userId) {
-      enquiryData.userId = (req as any).session.userId;
-    }
-    
-    const enquiry = await storage.createEnquiry(enquiryData);
-    res.json(enquiry);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return res.status(400).json({ error: "Invalid enquiry data", details: error.errors });
-    }
-    res.status(500).json({ error: "Failed to create enquiry" });
-  }
-});
-
-router.get("/enquiries/:id", requireAuth, async (req: Request, res: Response) => {
-  try {
-    const id = parseInt(req.params.id);
-    const enquiry = await storage.getEnquiry(id);
-    
-    if (!enquiry) {
-      return res.status(404).json({ error: "Enquiry not found" });
-    }
-    
-    // Check if user owns this enquiry
-    if (enquiry.userId !== (req as any).session.userId) {
-      return res.status(403).json({ error: "Access denied" });
-    }
-    
-    res.json(enquiry);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch enquiry" });
-  }
-});
-
-router.get("/enquiries/:id/messages", requireAuth, async (req: Request, res: Response) => {
-  try {
-    const enquiryId = parseInt(req.params.id);
-    
-    // Verify user owns this enquiry
-    const enquiry = await storage.getEnquiry(enquiryId);
-    if (!enquiry || enquiry.userId !== (req as any).session.userId) {
-      return res.status(403).json({ error: "Access denied" });
-    }
-    
-    const messages = await storage.getEnquiryMessages(enquiryId);
-    res.json(messages);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch messages" });
-  }
-});
-
-router.post("/enquiries/:id/messages", requireAuth, async (req: Request, res: Response) => {
-  try {
-    const enquiryId = parseInt(req.params.id);
-    const messageData = insertEnquiryMessageSchema.parse({
-      ...req.body,
-      enquiryId,
-      userId: (req as any).session.userId
+  app.post("/api/auth/logout", (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).json({ error: "Failed to logout" });
+      }
+      res.json({ success: true });
     });
-    
-    // Verify user owns this enquiry
-    const enquiry = await storage.getEnquiry(enquiryId);
-    if (!enquiry || enquiry.userId !== (req as any).session.userId) {
-      return res.status(403).json({ error: "Access denied" });
-    }
-    
-    const message = await storage.createEnquiryMessage(messageData);
-    res.json(message);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return res.status(400).json({ error: "Invalid message data", details: error.errors });
-    }
-    res.status(500).json({ error: "Failed to create message" });
-  }
-});
+  });
 
-// Catalogue routes
-router.get("/catalogue-categories", async (req: Request, res: Response) => {
-  try {
-    const categories = await storage.getCatalogueCategories();
-    res.json(categories);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch catalogue categories" });
-  }
-});
-
-router.get("/catalogue-categories/:slug", async (req: Request, res: Response) => {
-  try {
-    const slug = req.params.slug;
-    const category = await storage.getCatalogueCategoryBySlug(slug);
-    
-    if (!category) {
-      return res.status(404).json({ error: "Category not found" });
+  app.get("/api/auth/me", async (req, res) => {
+    if (!req.session?.userId) {
+      return res.status(401).json({ error: "Not authenticated" });
     }
-    
-    res.json(category);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch category" });
-  }
-});
 
-router.get("/brochures", async (req: Request, res: Response) => {
-  try {
-    const { category } = req.query;
-    let brochures;
-    
-    if (category) {
-      brochures = await storage.getBrochuresByCategory(parseInt(category as string));
-    } else {
-      brochures = await storage.getBrochures();
+    try {
+      await mysqlStorage.connect();
+      const user = await mysqlStorage.getUser(req.session.userId);
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      const { password: _, ...userWithoutPassword } = user;
+      res.json({ user: userWithoutPassword });
+    } catch (error) {
+      res.status(500).json({ error: "Internal server error" });
     }
-    
-    res.json(brochures);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch brochures" });
-  }
-});
+  });
 
-router.post("/brochures/:id/download", async (req: Request, res: Response) => {
-  try {
-    const id = parseInt(req.params.id);
-    const brochure = await storage.getBrochure(id);
-    
-    if (!brochure) {
-      return res.status(404).json({ error: "Brochure not found" });
+  // Public routes
+  app.get("/api/banners", async (req, res) => {
+    try {
+      await mysqlStorage.connect();
+      const banners = await mysqlStorage.getActiveBanners();
+      res.json(banners);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch banners" });
     }
-    
-    await storage.incrementDownloadCount(id);
-    
-    res.json({ 
-      message: "Download tracked", 
-      fileUrl: brochure.filePath,
-      filename: brochure.fileName 
-    });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to track download" });
-  }
-});
+  });
 
-export default router;
+  app.get("/api/categories", async (req, res) => {
+    try {
+      const { parentId } = req.query;
+      
+      await mysqlStorage.connect();
+      let categories;
+      if (parentId !== undefined) {
+        const pid = parentId === 'null' ? null : parseInt(parentId as string);
+        categories = await mysqlStorage.getCategoriesByParent(pid);
+      } else {
+        // Return all categories when no parentId is specified
+        categories = await mysqlStorage.getCategories();
+      }
+      
+      res.json(categories);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch categories" });
+    }
+  });
+
+  app.get("/api/categories/:id", async (req, res) => {
+    try {
+      await mysqlStorage.connect();
+      const id = parseInt(req.params.id);
+      const category = await mysqlStorage.getCategory(id);
+      
+      if (!category) {
+        return res.status(404).json({ error: "Category not found" });
+      }
+      
+      res.json(category);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch category" });
+    }
+  });
+
+  app.get("/api/products", async (req, res) => {
+    try {
+      const { categoryId, featured, search } = req.query;
+
+      
+      await mysqlStorage.connect();
+      let products;
+      
+      if (search) {
+        products = await mysqlStorage.searchProducts(search as string);
+      } else if (categoryId) {
+        products = await mysqlStorage.getProductsByCategory(parseInt(categoryId as string));
+      } else if (featured === 'true') {
+        products = await mysqlStorage.getFeaturedProducts();
+      } else {
+        products = await mysqlStorage.getProducts();
+      }
+      
+      res.json(products);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch products" });
+    }
+  });
+
+  app.get("/api/products/:id", async (req, res) => {
+    try {
+      await mysqlStorage.connect();
+      const id = parseInt(req.params.id);
+      const product = await mysqlStorage.getProduct(id);
+      
+      if (!product) {
+        return res.status(404).json({ error: "Product not found" });
+      }
+      
+      res.json(product);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch product" });
+    }
+  });
+
+  app.get("/api/seminars", async (req, res) => {
+    try {
+      const { upcoming, type } = req.query;
+      
+      await mysqlStorage.connect();
+      let seminars;
+      if (upcoming === 'true') {
+        seminars = await mysqlStorage.getUpcomingSeminars();
+      } else {
+        seminars = await mysqlStorage.getSeminars();
+      }
+      
+      // Filter by type if specified
+      if (type) {
+        seminars = seminars.filter(seminar => seminar.type === type);
+      }
+      
+      res.json(seminars);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch seminars" });
+    }
+  });
+
+  app.get("/api/seminars/:id", async (req, res) => {
+    try {
+      await mysqlStorage.connect();
+      const id = parseInt(req.params.id);
+      const seminar = await mysqlStorage.getSeminar(id);
+      
+      if (!seminar) {
+        return res.status(404).json({ error: "Seminar not found" });
+      }
+      
+      res.json(seminar);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch seminar" });
+    }
+  });
+
+  app.get("/api/events", async (req, res) => {
+    try {
+      const { recent } = req.query;
+      
+      await mysqlStorage.connect();
+      let events;
+      if (recent === 'true') {
+        events = await mysqlStorage.getRecentEvents();
+      } else {
+        events = await mysqlStorage.getEvents();
+      }
+      
+      res.json(events);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch events" });
+    }
+  });
+
+  app.get("/api/events/:id", async (req, res) => {
+    try {
+      await mysqlStorage.connect();
+      const id = parseInt(req.params.id);
+      const event = await mysqlStorage.getEvent(id);
+      
+      if (!event) {
+        return res.status(404).json({ error: "Event not found" });
+      }
+      
+      res.json(event);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch event" });
+    }
+  });
+
+  app.get("/api/achievements", async (req, res) => {
+    try {
+      await mysqlStorage.connect();
+      const achievements = await mysqlStorage.getAchievements();
+      res.json(achievements);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch achievements" });
+    }
+  });
+
+  // Protected routes
+  app.get("/api/enquiries", requireAuth, async (req, res) => {
+    try {
+      const userId = req.session.userId;
+      const enquiries = await storage.getEnquiriesByUser(userId);
+      res.json(enquiries);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch enquiries" });
+    }
+  });
+
+  app.get("/api/enquiries/:id", requireAuth, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const userId = req.session.userId;
+      
+      const enquiry = await storage.getEnquiry(id);
+      
+      if (!enquiry) {
+        return res.status(404).json({ error: "Enquiry not found" });
+      }
+      
+      if (enquiry.userId !== userId) {
+        return res.status(403).json({ error: "Access denied" });
+      }
+      
+      const messages = await storage.getEnquiryMessages(id);
+      
+      res.json({ enquiry, messages });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch enquiry" });
+    }
+  });
+
+  app.post("/api/enquiries", requireAuth, async (req, res) => {
+    try {
+      const userId = req.session.userId;
+      const enquiryData = insertEnquirySchema.parse({
+        ...req.body,
+        userId
+      });
+      
+      const enquiry = await storage.createEnquiry(enquiryData);
+      res.json(enquiry);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid enquiry data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to create enquiry" });
+    }
+  });
+
+  app.post("/api/enquiries/:id/messages", requireAuth, async (req, res) => {
+    try {
+      const enquiryId = parseInt(req.params.id);
+      const userId = req.session.userId;
+      
+      // Verify enquiry belongs to user
+      const enquiry = await storage.getEnquiry(enquiryId);
+      if (!enquiry || enquiry.userId !== userId) {
+        return res.status(403).json({ error: "Access denied" });
+      }
+      
+      const messageData = insertEnquiryMessageSchema.parse({
+        enquiryId,
+        senderId: userId,
+        senderType: 'user',
+        message: req.body.message
+      });
+      
+      const message = await storage.createEnquiryMessage(messageData);
+      res.json(message);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid message data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to send message" });
+    }
+  });
+
+  // Contact form
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const { name, email, phone, message, subject } = req.body;
+      
+      if (!name || !email || !message) {
+        return res.status(400).json({ error: "Name, email, and message are required" });
+      }
+      
+      // In a real application, you would send an email here
+      console.log("Contact form submission:", { name, email, phone, message, subject });
+      
+      res.json({ success: true, message: "Contact form submitted successfully" });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to submit contact form" });
+    }
+  });
+
+  // Newsletter subscription
+  app.post("/api/newsletter", async (req, res) => {
+    try {
+      const { email, consent } = req.body;
+      
+      if (!email || !consent) {
+        return res.status(400).json({ error: "Email and consent are required" });
+      }
+      
+      // In a real application, you would add to newsletter database
+      console.log("Newsletter subscription:", { email, consent });
+      
+      res.json({ success: true, message: "Successfully subscribed to newsletter" });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to subscribe to newsletter" });
+    }
+  });
+
+  // Catalogue routes
+  app.get("/api/catalogue/categories", async (req, res) => {
+    try {
+      const categories = await storage.getCatalogueCategories();
+      res.json(categories);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch catalogue categories" });
+    }
+  });
+
+  app.get("/api/catalogue/categories/:slug", async (req, res) => {
+    try {
+      const category = await storage.getCatalogueCategoryBySlug(req.params.slug);
+      if (!category) {
+        return res.status(404).json({ error: "Category not found" });
+      }
+      res.json(category);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch category" });
+    }
+  });
+
+  app.get("/api/catalogue/categories/:categoryId/brochures", async (req, res) => {
+    try {
+      const categoryId = parseInt(req.params.categoryId);
+      const brochures = await storage.getBrochuresByCategory(categoryId);
+      res.json(brochures);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch brochures" });
+    }
+  });
+
+  app.post("/api/catalogue/brochures/:id/download", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const brochure = await storage.getBrochure(id);
+      if (!brochure) {
+        return res.status(404).json({ error: "Brochure not found" });
+      }
+      
+      // Increment download count
+      await storage.incrementDownloadCount(id);
+      
+      res.json({ 
+        message: "Download tracked", 
+        fileUrl: brochure.fileUrl,
+        filename: brochure.filename 
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to process download" });
+    }
+  });
+
+  const httpServer = createServer(app);
+  return httpServer;
+}

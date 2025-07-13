@@ -1,57 +1,77 @@
-import express from "express";
-import session from "express-session";
-import { createServer } from "http";
-import path from "path";
-import { fileURLToPath } from "url";
-import routes from "./routes";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import express, { type Request, Response, NextFunction } from "express";
+import { registerRoutes } from "./routes";
+import { registerAdminRoutes } from "./admin-routes";
+import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
-
-// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-// Session configuration
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'your-secret-key-change-in-production',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
-  }
-}));
-
-// Add CORS headers for development
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  next();
-});
 
 // Serve attached assets
 app.use('/attached_assets', express.static('attached_assets'));
 
-// API routes
-app.use('/api', routes);
+app.use((req, res, next) => {
+  const start = Date.now();
+  const path = req.path;
+  let capturedJsonResponse: Record<string, any> | undefined = undefined;
 
-// Serve static files
-const publicPath = path.join(__dirname, '../dist/public');
-app.use(express.static(publicPath));
+  const originalResJson = res.json;
+  res.json = function (bodyJson, ...args) {
+    capturedJsonResponse = bodyJson;
+    return originalResJson.apply(res, [bodyJson, ...args]);
+  };
 
-// Handle React routing - serve index.html for all non-API routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
+  res.on("finish", () => {
+    const duration = Date.now() - start;
+    if (path.startsWith("/api")) {
+      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
+      if (capturedJsonResponse) {
+        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
+      }
+
+      if (logLine.length > 80) {
+        logLine = logLine.slice(0, 79) + "…";
+      }
+
+      log(logLine);
+    }
+  });
+
+  next();
 });
 
-const server = createServer(app);
-const port = process.env.PORT || 5000;
+(async () => {
+  const server = await registerRoutes(app);
+  
+  // Register admin routes
+  registerAdminRoutes(app);
 
-server.listen(port, '0.0.0.0', () => {
-  console.log(`🚀 Server running on port ${port}`);
-  console.log(`📱 Environment: ${process.env.NODE_ENV || 'development'}`);
-});
+  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+    const status = err.status || err.statusCode || 500;
+    const message = err.message || "Internal Server Error";
+
+    res.status(status).json({ message });
+    throw err;
+  });
+
+  // importantly only setup vite in development and after
+  // setting up all the other routes so the catch-all route
+  // doesn't interfere with the other routes
+  if (app.get("env") === "development") {
+    await setupVite(app, server);
+  } else {
+    serveStatic(app);
+  }
+
+  // ALWAYS serve the app on port 5000
+  // this serves both the API and the client.
+  // It is the only port that is not firewalled.
+  const port = 5000;
+  server.listen({
+    port,
+    host: "0.0.0.0",
+    reusePort: true,
+  }, () => {
+    log(`serving on port ${port}`);
+  });
+})();

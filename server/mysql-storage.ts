@@ -7,35 +7,17 @@ import {
   type EnquiryMessage, type InsertEnquiryMessage, type Achievement, type InsertAchievement,
   type Banner, type InsertBanner, type CatalogueCategory, type InsertCatalogueCategory,
   type Brochure, type InsertBrochure
-} from "../shared/schema";
+} from "@shared/schema";
 import type { IStorage } from "./storage";
 
 export class MySQLStorage implements IStorage {
   private connection: mysql.Connection | null = null;
 
-  constructor(private connectionString: string) {
-    // For development, use a simple localhost connection if DATABASE_URL is PostgreSQL
-    if (connectionString.includes('postgresql://') || connectionString.includes('postgres://')) {
-      this.connectionString = 'mysql://root:@localhost:3306/abletools';
-    }
-  }
+  constructor(private connectionString: string) {}
 
   async connect() {
     if (!this.connection) {
-      // Parse the connection string and create proper MySQL config
-      const url = new URL(this.connectionString);
-      const config = {
-        host: url.hostname,
-        port: parseInt(url.port) || 3306,
-        user: url.username,
-        password: url.password,
-        database: url.pathname.slice(1), // Remove leading slash
-        ssl: false, // Disable SSL for local development
-        connectTimeout: 60000,
-        acquireTimeout: 60000,
-      };
-      
-      this.connection = await mysql.createConnection(config);
+      this.connection = await mysql.createConnection(this.connectionString);
       await this.initializeTables();
       await this.seedInitialData();
     }

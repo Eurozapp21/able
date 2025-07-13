@@ -1,6 +1,9 @@
 import type { Express, Request, Response } from "express";
 import bcrypt from 'bcryptjs';
-import { storage } from './storage';
+import { MySQLStorage } from './mysql-storage';
+
+// Initialize MySQL storage
+const mysqlStorage = new MySQLStorage(process.env.DATABASE_URL || 'mysql://user:password@localhost:3306/abletools');
 
 // Middleware to check admin authentication
 const requireAdmin = async (req: Request, res: Response, next: any) => {
@@ -9,7 +12,7 @@ const requireAdmin = async (req: Request, res: Response, next: any) => {
       return res.status(401).json({ error: 'Not authenticated' });
     }
 
-    const user = await storage.getUser(req.session.userId);
+    const user = await mysqlStorage.getUser(req.session.userId);
     if (!user || user.role !== 'admin') {
       return res.status(403).json({ error: 'Admin access required' });
     }
@@ -32,7 +35,8 @@ export function registerAdminRoutes(app: Express) {
         return res.status(400).json({ error: 'Username and password required' });
       }
 
-      const user = await storage.getUserByUsername(username);
+      await mysqlStorage.connect();
+      const user = await mysqlStorage.getUserByUsername(username);
       
       if (!user || user.role !== 'admin') {
         return res.status(401).json({ error: 'Invalid credentials' });
@@ -65,16 +69,18 @@ export function registerAdminRoutes(app: Express) {
   // Admin stats
   app.get('/api/admin/stats', requireAdmin, async (req: Request, res: Response) => {
     try {
+      await mysqlStorage.connect();
+      
       // Get counts for dashboard
       const [users, products, categories, seminars, events, achievements, banners, brochures] = await Promise.all([
-        storage.getUser(1).then(() => 1), // Simple count placeholder
-        storage.getProducts(),
-        storage.getCategories(),
-        storage.getSeminars(),
-        storage.getEvents(),
-        storage.getAchievements(),
-        storage.getActiveBanners(),
-        storage.getBrochures(),
+        mysqlStorage.getUser(1).then(() => 1), // Simple count placeholder
+        mysqlStorage.getProducts(),
+        mysqlStorage.getCategories(),
+        mysqlStorage.getSeminars(),
+        mysqlStorage.getEvents(),
+        mysqlStorage.getAchievements(),
+        mysqlStorage.getActiveBanners(),
+        mysqlStorage.getBrochures(),
       ]);
 
       res.json({
@@ -115,6 +121,7 @@ export function registerAdminRoutes(app: Express) {
   // Users management
   app.get('/api/admin/users', requireAdmin, async (req: Request, res: Response) => {
     try {
+      await mysqlStorage.connect();
       // For now, return current admin user
       const user = (req as any).user;
       const { password: _, ...safeUser } = user;
@@ -128,7 +135,8 @@ export function registerAdminRoutes(app: Express) {
   // Products management
   app.get('/api/admin/products', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const products = await storage.getProducts();
+      await mysqlStorage.connect();
+      const products = await mysqlStorage.getProducts();
       res.json(products);
     } catch (error) {
       console.error('Products error:', error);
@@ -138,7 +146,8 @@ export function registerAdminRoutes(app: Express) {
 
   app.post('/api/admin/products', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const product = await storage.createProduct(req.body);
+      await mysqlStorage.connect();
+      const product = await mysqlStorage.createProduct(req.body);
       res.json(product);
     } catch (error) {
       console.error('Create product error:', error);
@@ -149,7 +158,8 @@ export function registerAdminRoutes(app: Express) {
   // Categories management
   app.get('/api/admin/categories', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const categories = await storage.getCategories();
+      await mysqlStorage.connect();
+      const categories = await mysqlStorage.getCategories();
       res.json(categories);
     } catch (error) {
       console.error('Categories error:', error);
@@ -159,7 +169,8 @@ export function registerAdminRoutes(app: Express) {
 
   app.post('/api/admin/categories', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const category = await storage.createCategory(req.body);
+      await mysqlStorage.connect();
+      const category = await mysqlStorage.createCategory(req.body);
       res.json(category);
     } catch (error) {
       console.error('Create category error:', error);
@@ -170,7 +181,8 @@ export function registerAdminRoutes(app: Express) {
   // Seminars management
   app.get('/api/admin/seminars', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const seminars = await storage.getSeminars();
+      await mysqlStorage.connect();
+      const seminars = await mysqlStorage.getSeminars();
       res.json(seminars);
     } catch (error) {
       console.error('Seminars error:', error);
@@ -180,7 +192,8 @@ export function registerAdminRoutes(app: Express) {
 
   app.post('/api/admin/seminars', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const seminar = await storage.createSeminar(req.body);
+      await mysqlStorage.connect();
+      const seminar = await mysqlStorage.createSeminar(req.body);
       res.json(seminar);
     } catch (error) {
       console.error('Create seminar error:', error);
@@ -191,7 +204,8 @@ export function registerAdminRoutes(app: Express) {
   // Events management
   app.get('/api/admin/events', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const events = await storage.getEvents();
+      await mysqlStorage.connect();
+      const events = await mysqlStorage.getEvents();
       res.json(events);
     } catch (error) {
       console.error('Events error:', error);
@@ -201,7 +215,8 @@ export function registerAdminRoutes(app: Express) {
 
   app.post('/api/admin/events', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const event = await storage.createEvent(req.body);
+      await mysqlStorage.connect();
+      const event = await mysqlStorage.createEvent(req.body);
       res.json(event);
     } catch (error) {
       console.error('Create event error:', error);
@@ -212,7 +227,8 @@ export function registerAdminRoutes(app: Express) {
   // Achievements management
   app.get('/api/admin/achievements', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const achievements = await storage.getAchievements();
+      await mysqlStorage.connect();
+      const achievements = await mysqlStorage.getAchievements();
       res.json(achievements);
     } catch (error) {
       console.error('Achievements error:', error);
@@ -222,7 +238,8 @@ export function registerAdminRoutes(app: Express) {
 
   app.post('/api/admin/achievements', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const achievement = await storage.createAchievement(req.body);
+      await mysqlStorage.connect();
+      const achievement = await mysqlStorage.createAchievement(req.body);
       res.json(achievement);
     } catch (error) {
       console.error('Create achievement error:', error);
@@ -233,7 +250,8 @@ export function registerAdminRoutes(app: Express) {
   // Banners management
   app.get('/api/admin/banners', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const banners = await storage.getActiveBanners();
+      await mysqlStorage.connect();
+      const banners = await mysqlStorage.getActiveBanners();
       res.json(banners);
     } catch (error) {
       console.error('Banners error:', error);
@@ -243,7 +261,8 @@ export function registerAdminRoutes(app: Express) {
 
   app.post('/api/admin/banners', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const banner = await storage.createBanner(req.body);
+      await mysqlStorage.connect();
+      const banner = await mysqlStorage.createBanner(req.body);
       res.json(banner);
     } catch (error) {
       console.error('Create banner error:', error);
@@ -254,7 +273,8 @@ export function registerAdminRoutes(app: Express) {
   // Catalogue categories management
   app.get('/api/admin/catalogue-categories', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const categories = await storage.getCatalogueCategories();
+      await mysqlStorage.connect();
+      const categories = await mysqlStorage.getCatalogueCategories();
       res.json(categories);
     } catch (error) {
       console.error('Catalogue categories error:', error);
@@ -264,7 +284,8 @@ export function registerAdminRoutes(app: Express) {
 
   app.post('/api/admin/catalogue-categories', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const category = await storage.createCatalogueCategory(req.body);
+      await mysqlStorage.connect();
+      const category = await mysqlStorage.createCatalogueCategory(req.body);
       res.json(category);
     } catch (error) {
       console.error('Create catalogue category error:', error);
@@ -275,7 +296,8 @@ export function registerAdminRoutes(app: Express) {
   // Brochures management
   app.get('/api/admin/brochures', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const brochures = await storage.getBrochures();
+      await mysqlStorage.connect();
+      const brochures = await mysqlStorage.getBrochures();
       res.json(brochures);
     } catch (error) {
       console.error('Brochures error:', error);
@@ -285,7 +307,8 @@ export function registerAdminRoutes(app: Express) {
 
   app.post('/api/admin/brochures', requireAdmin, async (req: Request, res: Response) => {
     try {
-      const brochure = await storage.createBrochure(req.body);
+      await mysqlStorage.connect();
+      const brochure = await mysqlStorage.createBrochure(req.body);
       res.json(brochure);
     } catch (error) {
       console.error('Create brochure error:', error);

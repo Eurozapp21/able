@@ -1,105 +1,183 @@
-import { Link, useLocation } from "wouter";
-import { Button } from "./ui/button";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState } from 'react';
+import { Link, useLocation } from 'wouter';
+import { Search, User, Menu, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { useAuth } from '@/lib/auth';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './language-switcher';
 
 export default function Header() {
+  const { t } = useTranslation();
   const [location] = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const { user, logout } = useAuth();
 
   const navigation = [
-    { name: "Home", href: "/" },
-    { name: "Products", href: "/products" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
+    { name: t('navigation.home'), href: '/' },
+    { name: t('navigation.about'), href: '/about' },
+    { name: t('navigation.products'), href: '/products' },
+    { name: t('navigation.solutions'), href: '/solutions' },
+    { name: t('navigation.catalogue'), href: '/catalogue' },
+    { name: t('navigation.education'), href: '/seminars' },
+    { name: t('navigation.newsroom'), href: '/newsroom' },
+    { name: t('navigation.contact'), href: '/contact' },
   ];
 
-  return (
-    <header className="bg-white shadow-sm border-b">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <Link href="/">
-              <img 
-                src="/attached_assets/1600154678logo1_1751991035400.png" 
-                alt="AbleTools" 
-                className="h-10 w-auto"
-              />
-            </Link>
-          </div>
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      window.location.href = `/products?search=${encodeURIComponent(searchQuery)}`;
+    }
+  };
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+      window.location.href = '/';
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
+  return (
+    <header className="bg-white shadow-sm border-b border-light fixed w-full top-0 z-50">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <Link href="/" className="flex-shrink-0">
+            <img 
+              src="/attached_assets/1600154678logo1_1751991035400.png" 
+              alt="AbleTools Logo" 
+              className="h-12 w-auto"
+            />
+          </Link>
+          
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-yellow-600 ${
-                  location === item.href
-                    ? "text-yellow-600 border-b-2 border-yellow-600"
-                    : "text-gray-700"
-                }`}
-              >
-                {item.name}
+              <Link key={item.name} href={item.href}>
+                <span className={`anavelink font-medium cursor-pointer text-gray-700 hover:text-primary-gold transition-colors ${
+                  location === item.href ? 'text-primary-gold border-b-2 border-primary-gold' : ''
+                }`}>
+                  {item.name}
+                </span>
               </Link>
             ))}
           </nav>
-
-          {/* Desktop Auth Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Link href="/login">
-              <Button variant="ghost" size="sm">
-                Login
-              </Button>
-            </Link>
-            <Link href="/register">
-              <Button size="sm" className="bg-yellow-500 hover:bg-yellow-600">
-                Register
-              </Button>
-            </Link>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          
+          {/* Search and User Actions */}
+          <div className="flex items-center space-x-4">
+            <LanguageSwitcher />
             <Button
               variant="ghost"
-              size="sm"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              size="icon"
+              onClick={() => setShowSearch(!showSearch)}
+              className="text-gray-custom hover:text-primary-gold"
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <Search className="h-5 w-5" />
             </Button>
+            
+            {user ? (
+              <div className="hidden md:flex items-center space-x-4">
+                <Link href="/dashboard">
+                  <Button variant="ghost" size="sm" className="text-gray-custom hover:text-primary-gold">
+                    {t('navigation.dashboard')}
+                  </Button>
+                </Link>
+                <Link href="/enquiry">
+                  <Button variant="ghost" size="sm" className="text-gray-custom hover:text-primary-gold">
+                    Enquiries
+                  </Button>
+                </Link>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={handleLogout}
+                  className="text-gray-custom hover:text-primary-gold"
+                >
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <Link href="/login">
+                <Button variant="ghost" size="icon" className="text-gray-custom hover:text-primary-gold">
+                  <User className="h-5 w-5" />
+                </Button>
+              </Link>
+            )}
+            
+            {/* Mobile menu */}
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="md:hidden">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <nav className="flex flex-col space-y-4 mt-8">
+                  {navigation.map((item) => (
+                    <Link key={item.name} href={item.href}>
+                      <span className="text-lg font-medium text-gray-custom hover:text-primary-gold transition-colors cursor-pointer">
+                        {item.name}
+                      </span>
+                    </Link>
+                  ))}
+                  {user ? (
+                    <>
+                      <Link href="/dashboard">
+                        <span className="text-lg font-medium text-gray-custom hover:text-primary-gold transition-colors cursor-pointer">
+                          {t('navigation.dashboard')}
+                        </span>
+                      </Link>
+                      <Link href="/enquiry">
+                        <span className="text-lg font-medium text-gray-custom hover:text-primary-gold transition-colors cursor-pointer">
+                          Enquiries
+                        </span>
+                      </Link>
+                      <Button 
+                        variant="ghost" 
+                        onClick={handleLogout}
+                        className="justify-start p-0 text-lg font-medium text-gray-custom hover:text-primary-gold"
+                      >
+                        Logout
+                      </Button>
+                    </>
+                  ) : (
+                    <Link href="/login">
+                      <span className="text-lg font-medium text-gray-custom hover:text-primary-gold transition-colors cursor-pointer">
+                        {t('navigation.login')}
+                      </span>
+                    </Link>
+                  )}
+                </nav>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 border-t">
-            <nav className="flex flex-col space-y-4">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`text-sm font-medium transition-colors hover:text-yellow-600 ${
-                    location === item.href ? "text-yellow-600" : "text-gray-700"
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
+        
+        {/* Search Bar */}
+        {showSearch && (
+          <div className="bg-gray-100 border-t border-light py-4">
+            <div className="max-w-2xl mx-auto">
+              <form onSubmit={handleSearch} className="flex">
+                <Input
+                  type="text"
+                  placeholder="Search Products"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="flex-1 rounded-r-none focus:ring-2 focus:ring-primary"
+                />
+                <Button 
+                  type="submit" 
+                  className="btn-cardbutn rounded-l-none"
                 >
-                  {item.name}
-                </Link>
-              ))}
-              <div className="flex flex-col space-y-2 pt-4 border-t">
-                <Link href="/login">
-                  <Button variant="ghost" size="sm" className="w-full justify-start">
-                    Login
-                  </Button>
-                </Link>
-                <Link href="/register">
-                  <Button size="sm" className="w-full bg-yellow-500 hover:bg-yellow-600">
-                    Register
-                  </Button>
-                </Link>
-              </div>
-            </nav>
+                  Search
+                </Button>
+              </form>
+            </div>
           </div>
         )}
       </div>

@@ -1,9 +1,9 @@
-import { pgTable, text, integer, boolean, timestamp, varchar, serial } from "drizzle-orm/pg-core";
+import { mysqlTable, text, int, boolean, timestamp, varchar } from "drizzle-orm/mysql-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
+export const users = mysqlTable("users", {
+  id: int("id").primaryKey().autoincrement(),
   username: varchar("username", { length: 100 }).notNull().unique(),
   email: varchar("email", { length: 191 }).notNull().unique(),
   password: varchar("password", { length: 255 }).notNull(),
@@ -19,23 +19,23 @@ export const users = pgTable("users", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const categories = pgTable("categories", {
-  id: serial("id").primaryKey(),
+export const categories = mysqlTable("categories", {
+  id: int("id").primaryKey().autoincrement(),
   name: varchar("name", { length: 255 }).notNull(),
   description: text("description"),
   icon: varchar("icon", { length: 255 }),
   image: varchar("image", { length: 500 }),
-  parentId: integer("parent_id"),
+  parentId: int("parent_id"),
   isActive: boolean("is_active").default(true),
-  displayOrder: integer("display_order").default(0),
+  displayOrder: int("display_order").default(0),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const products = pgTable("products", {
-  id: serial("id").primaryKey(),
+export const products = mysqlTable("products", {
+  id: int("id").primaryKey().autoincrement(),
   name: varchar("name", { length: 255 }).notNull(),
   description: text("description"),
-  categoryId: integer("category_id").notNull(),
+  categoryId: int("category_id").notNull(),
   images: text("images"), // JSON string array
   isFeatured: boolean("is_featured").default(false),
   specifications: text("specifications"),
@@ -45,8 +45,8 @@ export const products = pgTable("products", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const seminars = pgTable("seminars", {
-  id: serial("id").primaryKey(),
+export const seminars = mysqlTable("seminars", {
+  id: int("id").primaryKey().autoincrement(),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
   date: timestamp("date").notNull(),
@@ -54,14 +54,14 @@ export const seminars = pgTable("seminars", {
   speaker: varchar("speaker", { length: 255 }),
   image: varchar("image", { length: 500 }),
   fee: varchar("fee", { length: 100 }),
-  maxParticipants: integer("max_participants"),
+  maxParticipants: int("max_participants"),
   type: varchar("type", { length: 20 }).notNull().default("seminar"), // "seminar" or "training"
   isActive: boolean("is_active").default(true),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const events = pgTable("events", {
-  id: serial("id").primaryKey(),
+export const events = mysqlTable("events", {
+  id: int("id").primaryKey().autoincrement(),
   title: varchar("title", { length: 255 }).notNull(),
   content: text("content"),
   date: timestamp("date").notNull(),
@@ -71,9 +71,9 @@ export const events = pgTable("events", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const enquiries = pgTable("enquiries", {
-  id: serial("id").primaryKey(),
-  userId: integer("user_id").notNull(),
+export const enquiries = mysqlTable("enquiries", {
+  id: int("id").primaryKey().autoincrement(),
+  userId: int("user_id").notNull(),
   type: varchar("type", { length: 100 }).notNull(),
   about: varchar("about", { length: 255 }),
   message: text("message").notNull(),
@@ -81,17 +81,17 @@ export const enquiries = pgTable("enquiries", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const enquiryMessages = pgTable("enquiry_messages", {
-  id: serial("id").primaryKey(),
-  enquiryId: integer("enquiry_id").notNull(),
-  senderId: integer("sender_id"),
+export const enquiryMessages = mysqlTable("enquiry_messages", {
+  id: int("id").primaryKey().autoincrement(),
+  enquiryId: int("enquiry_id").notNull(),
+  senderId: int("sender_id"),
   senderType: varchar("sender_type", { length: 20 }).notNull(), // 'user' or 'admin'
   message: text("message").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const achievements = pgTable("achievements", {
-  id: serial("id").primaryKey(),
+export const achievements = mysqlTable("achievements", {
+  id: int("id").primaryKey().autoincrement(),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
   image: varchar("image", { length: 500 }),
@@ -100,39 +100,14 @@ export const achievements = pgTable("achievements", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const banners = pgTable("banners", {
-  id: serial("id").primaryKey(),
+export const banners = mysqlTable("banners", {
+  id: int("id").primaryKey().autoincrement(),
   title: varchar("title", { length: 255 }).notNull(),
   subtitle: varchar("subtitle", { length: 500 }),
   image: varchar("image", { length: 500 }).notNull(),
   link: varchar("link", { length: 500 }),
   isActive: boolean("is_active").default(true),
-  order: integer("order").default(0),
-});
-
-export const catalogueCategories = pgTable("catalogue_categories", {
-  id: serial("id").primaryKey(),
-  name: varchar("name", { length: 255 }).notNull(),
-  description: text("description"),
-  icon: varchar("icon", { length: 255 }),
-  image: varchar("image", { length: 500 }),
-  slug: varchar("slug", { length: 255 }).notNull().unique(),
-  isActive: boolean("is_active").default(true),
-  displayOrder: integer("display_order").default(0),
-  createdAt: timestamp("created_at").defaultNow(),
-});
-
-export const brochures = pgTable("brochures", {
-  id: serial("id").primaryKey(),
-  categoryId: integer("category_id").notNull(),
-  title: varchar("title", { length: 255 }).notNull(),
-  description: text("description"),
-  filePath: varchar("file_path", { length: 500 }),
-  fileName: varchar("file_name", { length: 255 }),
-  fileSize: varchar("file_size", { length: 50 }),
-  downloadCount: integer("download_count").default(0),
-  isActive: boolean("is_active").default(true),
-  createdAt: timestamp("created_at").defaultNow(),
+  order: int("order").default(0),
 });
 
 // Insert schemas
@@ -163,6 +138,7 @@ export const insertEventSchema = createInsertSchema(events).omit({
 export const insertEnquirySchema = createInsertSchema(enquiries).omit({
   id: true,
   createdAt: true,
+  status: true,
 });
 
 export const insertEnquiryMessageSchema = createInsertSchema(enquiryMessages).omit({
@@ -179,6 +155,30 @@ export const insertBannerSchema = createInsertSchema(banners).omit({
   id: true,
 });
 
+export const catalogueCategories = mysqlTable("catalogue_categories", {
+  id: int("id").primaryKey().autoincrement(),
+  title: varchar("title", { length: 255 }).notNull(),
+  description: text("description"),
+  image: varchar("image", { length: 500 }).notNull(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  isActive: boolean("is_active").default(true),
+  displayOrder: int("display_order").default(0),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const brochures = mysqlTable("brochures", {
+  id: int("id").primaryKey().autoincrement(),
+  title: varchar("title", { length: 255 }).notNull(),
+  description: text("description"),
+  categoryId: int("category_id").references(() => catalogueCategories.id),
+  filename: varchar("filename", { length: 255 }).notNull(),
+  fileUrl: varchar("file_url", { length: 500 }).notNull(),
+  fileSize: varchar("file_size", { length: 50 }),
+  downloadCount: int("download_count").default(0),
+  isActive: boolean("is_active").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const insertCatalogueCategorySchema = createInsertSchema(catalogueCategories).omit({
   id: true,
   createdAt: true,
@@ -189,36 +189,26 @@ export const insertBrochureSchema = createInsertSchema(brochures).omit({
   createdAt: true,
 });
 
-// Export types
+// Types
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
-
 export type Category = typeof categories.$inferSelect;
 export type InsertCategory = z.infer<typeof insertCategorySchema>;
-
 export type Product = typeof products.$inferSelect;
 export type InsertProduct = z.infer<typeof insertProductSchema>;
-
 export type Seminar = typeof seminars.$inferSelect;
 export type InsertSeminar = z.infer<typeof insertSeminarSchema>;
-
 export type Event = typeof events.$inferSelect;
 export type InsertEvent = z.infer<typeof insertEventSchema>;
-
 export type Enquiry = typeof enquiries.$inferSelect;
 export type InsertEnquiry = z.infer<typeof insertEnquirySchema>;
-
 export type EnquiryMessage = typeof enquiryMessages.$inferSelect;
 export type InsertEnquiryMessage = z.infer<typeof insertEnquiryMessageSchema>;
-
 export type Achievement = typeof achievements.$inferSelect;
 export type InsertAchievement = z.infer<typeof insertAchievementSchema>;
-
 export type Banner = typeof banners.$inferSelect;
 export type InsertBanner = z.infer<typeof insertBannerSchema>;
-
 export type CatalogueCategory = typeof catalogueCategories.$inferSelect;
 export type InsertCatalogueCategory = z.infer<typeof insertCatalogueCategorySchema>;
-
 export type Brochure = typeof brochures.$inferSelect;
 export type InsertBrochure = z.infer<typeof insertBrochureSchema>;
