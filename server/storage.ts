@@ -14,6 +14,9 @@ export interface IStorage {
   getUserByUsername(username: string): Promise<User | undefined>;
   getUserByEmail(email: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  getAllUsers(): Promise<User[]>;
+  updateUser(id: number, user: InsertUser): Promise<User>;
+  deleteUser(id: number): Promise<void>;
   
   // Categories
   getCategories(): Promise<Category[]>;
@@ -511,6 +514,34 @@ export class MemStorage implements IStorage {
     };
     this.users.set(id, user);
     return user;
+  }
+
+  async getAllUsers(): Promise<User[]> {
+    return Array.from(this.users.values());
+  }
+
+  async updateUser(id: number, insertUser: InsertUser): Promise<User> {
+    const existing = this.users.get(id);
+    if (!existing) {
+      throw new Error('User not found');
+    }
+    
+    const user: User = { 
+      ...insertUser,
+      id: existing.id,
+      createdAt: existing.createdAt,
+      address: insertUser.address ?? null,
+      phone: insertUser.phone ?? null,
+      city: insertUser.city ?? null,
+      postcode: insertUser.postcode ?? null,
+      occupation: insertUser.occupation ?? null
+    };
+    this.users.set(id, user);
+    return user;
+  }
+
+  async deleteUser(id: number): Promise<void> {
+    this.users.delete(id);
   }
 
   // Categories

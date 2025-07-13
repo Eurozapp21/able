@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
-import { Users, Package, Calendar, MessageSquare, TrendingUp } from "lucide-react";
+import { Users, Package, Calendar, MessageSquare, TrendingUp, FolderOpen } from "lucide-react";
 
 interface AdminStats {
   totalProducts: number;

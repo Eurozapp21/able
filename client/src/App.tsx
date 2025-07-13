@@ -18,6 +18,10 @@ import CatalogueCategory from "./pages/catalogue-category";
 import Contact from "./pages/contact";
 import AdminDashboard from "./pages/admin";
 import AdminProducts from "./pages/admin-products";
+import AdminCategories from "./pages/admin-categories";
+import AdminSeminars from "./pages/admin-seminars";
+import AdminUsers from "./pages/admin-users";
+import AdminEvents from "./pages/admin-events";
 import Seminars from "./pages/seminars";
 import SeminarDetail from "./pages/seminar-detail";
 import Events from "./pages/events";
@@ -57,6 +61,10 @@ function Router() {
           <Route path="/enquiry/:id" component={EnquiryDetail} />
           <Route path="/admin" component={AdminDashboard} />
           <Route path="/admin/products" component={AdminProducts} />
+          <Route path="/admin/categories" component={AdminCategories} />
+          <Route path="/admin/seminars" component={AdminSeminars} />
+          <Route path="/admin/users" component={AdminUsers} />
+          <Route path="/admin/events" component={AdminEvents} />
           <Route component={NotFound} />
         </Switch>
       </main>
