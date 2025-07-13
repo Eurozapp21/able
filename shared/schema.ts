@@ -14,40 +14,56 @@ export const users = pgTable("users", {
   city: text("city"),
   postcode: text("postcode"),
   occupation: text("occupation"),
+  role: text("role").notNull().default("user"), // "user" or "admin"
+  isActive: boolean("is_active").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
 export const categories = pgTable("categories", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
+  nameEl: text("name_el"),
   description: text("description"),
+  descriptionEl: text("description_el"),
   icon: text("icon"),
   image: text("image"),
   parentId: integer("parent_id"),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 
 export const products = pgTable("products", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
+  nameEl: text("name_el"),
   description: text("description"),
+  descriptionEl: text("description_el"),
   categoryId: integer("category_id").notNull(),
   images: text("images").array(),
   isFeatured: boolean("is_featured").default(false),
   specifications: text("specifications"),
+  specificationsEl: text("specifications_el"),
+  price: text("price"),
+  isActive: boolean("is_active").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
 export const seminars = pgTable("seminars", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
+  titleEl: text("title_el"),
   description: text("description"),
+  descriptionEl: text("description_el"),
   date: timestamp("date").notNull(),
   location: text("location"),
+  locationEl: text("location_el"),
   speaker: text("speaker"),
+  speakerEl: text("speaker_el"),
   image: text("image"),
   fee: text("fee"),
   maxParticipants: integer("max_participants"),
   type: text("type").notNull().default("seminar"), // "seminar" or "training"
+  isActive: boolean("is_active").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow(),
 });
 

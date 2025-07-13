@@ -1,26 +1,29 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Search, User, Menu, X } from 'lucide-react';
+import { Search, User, Menu, X, Settings, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useAuth } from '@/lib/auth';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './language-switcher';
 
 export default function Header() {
   const [location] = useLocation();
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { user, logout } = useAuth();
+  const { t } = useTranslation();
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/about' },
-    { name: 'Products', href: '/products' },
-    { name: 'Solutions', href: '/solutions' },
-    { name: 'Catalogue', href: '/catalogue' },
-    { name: 'Education', href: '/seminars' },
-    { name: 'Newsroom', href: '/newsroom' },
-    { name: 'Contact', href: '/contact' },
+    { name: t('nav.home'), href: '/' },
+    { name: t('nav.about'), href: '/about' },
+    { name: t('nav.products'), href: '/products' },
+    { name: t('nav.solutions'), href: '/solutions' },
+    { name: t('nav.catalogue'), href: '/catalogue' },
+    { name: t('nav.education'), href: '/seminars' },
+    { name: t('nav.newsroom'), href: '/newsroom' },
+    { name: t('nav.contact'), href: '/contact' },
   ];
 
   const handleSearch = (e: React.FormEvent) => {
@@ -65,7 +68,7 @@ export default function Header() {
             ))}
           </nav>
           
-          {/* Search and User Actions */}
+          {/* Search, Language, and User Actions */}
           <div className="flex items-center space-x-4">
             <Button
               variant="ghost"
@@ -76,6 +79,8 @@ export default function Header() {
               <Search className="h-5 w-5" />
             </Button>
             
+            <LanguageSwitcher />
+            
             {user ? (
               <div className="hidden md:flex items-center space-x-4">
                 <Link href="/dashboard">
@@ -83,6 +88,14 @@ export default function Header() {
                     Dashboard
                   </Button>
                 </Link>
+                {user.role === 'admin' && (
+                  <Link href="/admin">
+                    <Button variant="ghost" size="sm" className="text-gray-custom hover:text-primary-gold">
+                      <Settings className="h-4 w-4 mr-1" />
+                      Admin
+                    </Button>
+                  </Link>
+                )}
                 <Link href="/enquiry">
                   <Button variant="ghost" size="sm" className="text-gray-custom hover:text-primary-gold">
                     Enquiries
@@ -94,6 +107,7 @@ export default function Header() {
                   onClick={handleLogout}
                   className="text-gray-custom hover:text-primary-gold"
                 >
+                  <LogOut className="h-4 w-4 mr-1" />
                   Logout
                 </Button>
               </div>

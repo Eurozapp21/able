@@ -20,6 +20,8 @@ export interface IStorage {
   getCategory(id: number): Promise<Category | undefined>;
   getCategoriesByParent(parentId: number | null): Promise<Category[]>;
   createCategory(category: InsertCategory): Promise<Category>;
+  updateCategory(id: number, category: InsertCategory): Promise<Category>;
+  deleteCategory(id: number): Promise<void>;
   
   // Products
   getProducts(): Promise<Product[]>;
@@ -28,18 +30,24 @@ export interface IStorage {
   getFeaturedProducts(): Promise<Product[]>;
   searchProducts(query: string): Promise<Product[]>;
   createProduct(product: InsertProduct): Promise<Product>;
+  updateProduct(id: number, product: InsertProduct): Promise<Product>;
+  deleteProduct(id: number): Promise<void>;
   
   // Seminars
   getSeminars(): Promise<Seminar[]>;
   getSeminar(id: number): Promise<Seminar | undefined>;
   getUpcomingSeminars(): Promise<Seminar[]>;
   createSeminar(seminar: InsertSeminar): Promise<Seminar>;
+  updateSeminar(id: number, seminar: InsertSeminar): Promise<Seminar>;
+  deleteSeminar(id: number): Promise<void>;
   
   // Events
   getEvents(): Promise<Event[]>;
   getEvent(id: number): Promise<Event | undefined>;
   getRecentEvents(): Promise<Event[]>;
   createEvent(event: InsertEvent): Promise<Event>;
+  updateEvent(id: number, event: InsertEvent): Promise<Event>;
+  deleteEvent(id: number): Promise<void>;
   
   // Enquiries
   getEnquiries(): Promise<Enquiry[]>;
@@ -96,6 +104,24 @@ export class MemStorage implements IStorage {
   }
 
   private seedData() {
+    // Seed admin user
+    const adminUser = {
+      id: 1,
+      username: "admin",
+      email: "admin@abletools.com.cy", 
+      password: "admin123",
+      firstName: "Admin",
+      lastName: "User",
+      role: "admin",
+      address: null,
+      phone: null,
+      city: null,
+      postcode: null,
+      occupation: null,
+      createdAt: new Date()
+    };
+    this.users.set(1, adminUser);
+    
     // Seed categories
     const categoryData = [
       // Main Categories
@@ -455,7 +481,7 @@ export class MemStorage implements IStorage {
       this.banners.set(banner.id, banner);
     });
 
-    this.currentId = 100;
+    this.currentId = 1000;
   }
 
   // Users
@@ -508,10 +534,40 @@ export class MemStorage implements IStorage {
       image: insertCategory.image ?? null,
       description: insertCategory.description ?? null,
       parentId: insertCategory.parentId ?? null,
-      icon: insertCategory.icon ?? null
+      icon: insertCategory.icon ?? null,
+      nameEl: insertCategory.nameEl ?? null,
+      descriptionEl: insertCategory.descriptionEl ?? null,
+      isActive: insertCategory.isActive ?? true,
+      createdAt: new Date()
     };
     this.categories.set(id, category);
     return category;
+  }
+
+  async updateCategory(id: number, insertCategory: InsertCategory): Promise<Category> {
+    const existing = this.categories.get(id);
+    if (!existing) {
+      throw new Error('Category not found');
+    }
+    
+    const category: Category = { 
+      ...insertCategory, 
+      id,
+      image: insertCategory.image ?? null,
+      description: insertCategory.description ?? null,
+      parentId: insertCategory.parentId ?? null,
+      icon: insertCategory.icon ?? null,
+      nameEl: insertCategory.nameEl ?? null,
+      descriptionEl: insertCategory.descriptionEl ?? null,
+      isActive: insertCategory.isActive ?? true,
+      createdAt: existing.createdAt
+    };
+    this.categories.set(id, category);
+    return category;
+  }
+
+  async deleteCategory(id: number): Promise<void> {
+    this.categories.delete(id);
   }
 
   // Products
@@ -546,12 +602,45 @@ export class MemStorage implements IStorage {
       id, 
       createdAt: new Date(),
       description: insertProduct.description ?? null,
+      descriptionEl: insertProduct.descriptionEl ?? null,
+      nameEl: insertProduct.nameEl ?? null,
       images: insertProduct.images ?? null,
-      isFeatured: insertProduct.isFeatured ?? null,
-      specifications: insertProduct.specifications ?? null
+      isFeatured: insertProduct.isFeatured ?? false,
+      specifications: insertProduct.specifications ?? null,
+      specificationsEl: insertProduct.specificationsEl ?? null,
+      price: insertProduct.price ?? null,
+      isActive: insertProduct.isActive ?? true
     };
     this.products.set(id, product);
     return product;
+  }
+
+  async updateProduct(id: number, insertProduct: InsertProduct): Promise<Product> {
+    const existing = this.products.get(id);
+    if (!existing) {
+      throw new Error('Product not found');
+    }
+    
+    const product: Product = { 
+      ...insertProduct, 
+      id, 
+      createdAt: existing.createdAt,
+      description: insertProduct.description ?? null,
+      descriptionEl: insertProduct.descriptionEl ?? null,
+      nameEl: insertProduct.nameEl ?? null,
+      images: insertProduct.images ?? null,
+      isFeatured: insertProduct.isFeatured ?? false,
+      specifications: insertProduct.specifications ?? null,
+      specificationsEl: insertProduct.specificationsEl ?? null,
+      price: insertProduct.price ?? null,
+      isActive: insertProduct.isActive ?? true
+    };
+    this.products.set(id, product);
+    return product;
+  }
+
+  async deleteProduct(id: number): Promise<void> {
+    this.products.delete(id);
   }
 
   // Seminars
@@ -577,14 +666,49 @@ export class MemStorage implements IStorage {
       id, 
       createdAt: new Date(),
       description: insertSeminar.description ?? null,
+      descriptionEl: insertSeminar.descriptionEl ?? null,
+      titleEl: insertSeminar.titleEl ?? null,
       image: insertSeminar.image ?? null,
       location: insertSeminar.location ?? null,
+      locationEl: insertSeminar.locationEl ?? null,
       speaker: insertSeminar.speaker ?? null,
+      speakerEl: insertSeminar.speakerEl ?? null,
       fee: insertSeminar.fee ?? null,
-      maxParticipants: insertSeminar.maxParticipants ?? null
+      maxParticipants: insertSeminar.maxParticipants ?? null,
+      isActive: insertSeminar.isActive ?? true
     };
     this.seminars.set(id, seminar);
     return seminar;
+  }
+
+  async updateSeminar(id: number, insertSeminar: InsertSeminar): Promise<Seminar> {
+    const existing = this.seminars.get(id);
+    if (!existing) {
+      throw new Error('Seminar not found');
+    }
+    
+    const seminar: Seminar = { 
+      ...insertSeminar, 
+      id, 
+      createdAt: existing.createdAt,
+      description: insertSeminar.description ?? null,
+      descriptionEl: insertSeminar.descriptionEl ?? null,
+      titleEl: insertSeminar.titleEl ?? null,
+      image: insertSeminar.image ?? null,
+      location: insertSeminar.location ?? null,
+      locationEl: insertSeminar.locationEl ?? null,
+      speaker: insertSeminar.speaker ?? null,
+      speakerEl: insertSeminar.speakerEl ?? null,
+      fee: insertSeminar.fee ?? null,
+      maxParticipants: insertSeminar.maxParticipants ?? null,
+      isActive: insertSeminar.isActive ?? true
+    };
+    this.seminars.set(id, seminar);
+    return seminar;
+  }
+
+  async deleteSeminar(id: number): Promise<void> {
+    this.seminars.delete(id);
   }
 
   // Events
@@ -614,6 +738,28 @@ export class MemStorage implements IStorage {
     };
     this.events.set(id, event);
     return event;
+  }
+
+  async updateEvent(id: number, insertEvent: InsertEvent): Promise<Event> {
+    const existing = this.events.get(id);
+    if (!existing) {
+      throw new Error('Event not found');
+    }
+    
+    const event: Event = { 
+      ...insertEvent, 
+      id, 
+      createdAt: existing.createdAt,
+      image: insertEvent.image ?? null,
+      content: insertEvent.content ?? null,
+      excerpt: insertEvent.excerpt ?? null
+    };
+    this.events.set(id, event);
+    return event;
+  }
+
+  async deleteEvent(id: number): Promise<void> {
+    this.events.delete(id);
   }
 
   // Enquiries

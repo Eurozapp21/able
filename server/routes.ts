@@ -2,7 +2,8 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { 
-  insertUserSchema, insertEnquirySchema, insertEnquiryMessageSchema 
+  insertUserSchema, insertEnquirySchema, insertEnquiryMessageSchema,
+  insertProductSchema, insertCategorySchema, insertSeminarSchema, insertEventSchema
 } from "@shared/schema";
 import { z } from "zod";
 
@@ -15,6 +16,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     if (!req.session?.userId) {
       return res.status(401).json({ error: "Authentication required" });
     }
+    next();
+  };
+
+  // Admin middleware
+  const requireAdmin = async (req: any, res: any, next: any) => {
+    if (!req.session?.userId) {
+      return res.status(401).json({ error: "Authentication required" });
+    }
+    
+    const user = await storage.getUser(req.session.userId);
+    if (!user || user.role !== 'admin') {
+      return res.status(403).json({ error: "Admin access required" });
+    }
+    
+    req.user = user;
     next();
   };
 
@@ -426,6 +442,181 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error) {
       res.status(500).json({ error: "Failed to process download" });
+    }
+  });
+
+  // ===== ADMIN ROUTES =====
+  
+  // Product management
+  app.post("/api/admin/products", requireAdmin, async (req, res) => {
+    try {
+      const productData = insertProductSchema.parse(req.body);
+      const product = await storage.createProduct(productData);
+      res.json(product);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid product data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to create product" });
+    }
+  });
+
+  app.put("/api/admin/products/:id", requireAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const productData = insertProductSchema.parse(req.body);
+      const product = await storage.updateProduct(id, productData);
+      res.json(product);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid product data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to update product" });
+    }
+  });
+
+  app.delete("/api/admin/products/:id", requireAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteProduct(id);
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to delete product" });
+    }
+  });
+
+  // Category management
+  app.post("/api/admin/categories", requireAdmin, async (req, res) => {
+    try {
+      const categoryData = insertCategorySchema.parse(req.body);
+      const category = await storage.createCategory(categoryData);
+      res.json(category);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid category data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to create category" });
+    }
+  });
+
+  app.put("/api/admin/categories/:id", requireAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const categoryData = insertCategorySchema.parse(req.body);
+      const category = await storage.updateCategory(id, categoryData);
+      res.json(category);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid category data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to update category" });
+    }
+  });
+
+  app.delete("/api/admin/categories/:id", requireAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteCategory(id);
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to delete category" });
+    }
+  });
+
+  // Seminar management
+  app.post("/api/admin/seminars", requireAdmin, async (req, res) => {
+    try {
+      const seminarData = insertSeminarSchema.parse(req.body);
+      const seminar = await storage.createSeminar(seminarData);
+      res.json(seminar);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid seminar data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to create seminar" });
+    }
+  });
+
+  app.put("/api/admin/seminars/:id", requireAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const seminarData = insertSeminarSchema.parse(req.body);
+      const seminar = await storage.updateSeminar(id, seminarData);
+      res.json(seminar);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid seminar data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to update seminar" });
+    }
+  });
+
+  app.delete("/api/admin/seminars/:id", requireAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteSeminar(id);
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to delete seminar" });
+    }
+  });
+
+  // Event management
+  app.post("/api/admin/events", requireAdmin, async (req, res) => {
+    try {
+      const eventData = insertEventSchema.parse(req.body);
+      const event = await storage.createEvent(eventData);
+      res.json(event);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid event data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to create event" });
+    }
+  });
+
+  app.put("/api/admin/events/:id", requireAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const eventData = insertEventSchema.parse(req.body);
+      const event = await storage.updateEvent(id, eventData);
+      res.json(event);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid event data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to update event" });
+    }
+  });
+
+  app.delete("/api/admin/events/:id", requireAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteEvent(id);
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to delete event" });
+    }
+  });
+
+  // Admin stats
+  app.get("/api/admin/stats", requireAdmin, async (req, res) => {
+    try {
+      const products = await storage.getProducts();
+      const categories = await storage.getCategories();
+      const seminars = await storage.getSeminars();
+      const events = await storage.getEvents();
+      const enquiries = await storage.getEnquiries();
+
+      res.json({
+        totalProducts: products.length,
+        totalCategories: categories.length,
+        totalSeminars: seminars.length,
+        totalEvents: events.length,
+        pendingEnquiries: enquiries.filter(e => e.status === 'new').length,
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch admin stats" });
     }
   });
 

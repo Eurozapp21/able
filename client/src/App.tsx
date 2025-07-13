@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "./lib/auth";
+import "./lib/i18n";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import Home from "./pages/home";
@@ -15,6 +16,8 @@ import SolutionDetail from "./pages/solution-detail";
 import Catalogue from "./pages/catalogue";
 import CatalogueCategory from "./pages/catalogue-category";
 import Contact from "./pages/contact";
+import AdminDashboard from "./pages/admin";
+import AdminProducts from "./pages/admin-products";
 import Seminars from "./pages/seminars";
 import SeminarDetail from "./pages/seminar-detail";
 import Events from "./pages/events";
@@ -52,6 +55,8 @@ function Router() {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/enquiry" component={Enquiry} />
           <Route path="/enquiry/:id" component={EnquiryDetail} />
+          <Route path="/admin" component={AdminDashboard} />
+          <Route path="/admin/products" component={AdminProducts} />
           <Route component={NotFound} />
         </Switch>
       </main>
