@@ -7,12 +7,10 @@
 2. public/ (folder)         ← Website files
 3. attached_assets/ (folder) ← Company images  
 4. package.json             ← Dependencies
-5. .env.production          ← Configuration (EDIT FIRST!)
+5. env-production           ← Rename to .env.production (already configured!)
 
-⚡ BEFORE UPLOAD - EDIT .env.production:
-Open .env.production and update:
-- DATABASE_URL=postgresql://your_user:your_password@localhost:5432/your_database
-- SESSION_SECRET=generate_32_character_random_string
+⚡ BEFORE UPLOAD - RENAME FILE:
+Rename "env-production" to ".env.production" (already contains your database settings)
 
 📂 UPLOAD TO CPANEL:
 1. Login to cPanel → File Manager
