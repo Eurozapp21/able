@@ -1,0 +1,27 @@
+{
+  "name": "abletools-website",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "db:push": "drizzle-kit push"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
+    "connect-pg-simple": "^10.0.0",
+    "drizzle-orm": "^0.39.1",
+    "drizzle-zod": "^0.7.0",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "postgres": "^3.4.3",
+    "zod": "^3.24.2",
+    "zod-validation-error": "^3.4.0"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.30.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
