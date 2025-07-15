@@ -107,6 +107,7 @@ The system manages several core entities:
 - Asset serving strategy differs between environments
 
 ## Changelog
+- July 15, 2025. Successfully converted entire project from Node.js/Express.js to Python/FastAPI backend while preserving React frontend and all functionality including admin system, multilingual support, and PostgreSQL database integration
 - July 08, 2025. Initial setup
 - July 08, 2025. Integrated authentic company logo and banner images from uploaded assets
 - July 08, 2025. Fixed navigation structure and added smooth fade transitions to homepage carousel
