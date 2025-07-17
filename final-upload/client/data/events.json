@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "AbleTools Equipment Exhibition 2025",
+    "date": "2025-07-20",
+    "location": "Cyprus International Conference Centre",
+    "description": "Annual exhibition showcasing the latest rehabilitation equipment and assistive technology solutions.",
+    "image": "/attached_assets/1601930431PRODUCTS_COVER_1752027894926.jpg"
+  },
+  {
+    "id": 2, 
+    "title": "Healthcare Professional Achievement Awards",
+    "date": "2025-06-15",
+    "location": "Hilton Cyprus, Nicosia",
+    "description": "Recognizing outstanding contributions to rehabilitation and healthcare in Cyprus.",
+    "image": "/attached_assets/Achievement_1752003982449.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Community Accessibility Workshop",
+    "date": "2025-05-30", 
+    "location": "Various locations",
+    "description": "Community outreach program promoting accessibility awareness and equipment demonstrations.",
+    "image": "/attached_assets/able_1752003982447.jpg"
+  }
+]

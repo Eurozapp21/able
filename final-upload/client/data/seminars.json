@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "title": "Advanced Rehabilitation Techniques",
+    "date": "2025-08-15",
+    "duration": "2 days",
+    "location": "Nicosia, Cyprus",
+    "price": "€450",
+    "description": "Comprehensive training on modern rehabilitation methodologies and equipment usage.",
+    "image": "/attached_assets/seminar_1752044011822.jpeg",
+    "type": "seminar"
+  },
+  {
+    "id": 2,
+    "title": "HUR Spinal Cord Rehabilitation",
+    "date": "2025-09-20",
+    "duration": "3 days", 
+    "location": "Limassol, Cyprus",
+    "price": "€650",
+    "description": "Specialized training for spinal cord rehabilitation using HUR equipment.",
+    "image": "/attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg",
+    "type": "training"
+  },
+  {
+    "id": 3,
+    "title": "Pediatric Equipment Certification",
+    "date": "2025-10-10",
+    "duration": "1 day",
+    "location": "Nicosia, Cyprus", 
+    "price": "€280",
+    "description": "Certification course for pediatric rehabilitation equipment operation and safety.",
+    "image": "/attached_assets/bingo_evolution_twins-1_1752003228920.jpg",
+    "type": "training"
+  }
+]

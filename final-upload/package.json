@@ -1,25 +1,24 @@
 {
-  "name": "abletools-website",
+  "name": "abletools-production",
   "version": "1.0.0",
-  "type": "module",
-  "main": "dist/server.js",
+  "description": "AbleTools Rehabilitation Equipment Management System - Production Build",
+  "main": "server/index.js",
   "scripts": {
-    "start": "node dist/server.js",
-    "db:push": "drizzle-kit push"
+    "start": "node standalone-server.js",
+    "start-full": "node server/index.js",
+    "test": "echo \"No tests specified\" && exit 0"
   },
+  "keywords": ["rehabilitation", "equipment", "management", "healthcare"],
+  "author": "AbleTools Ltd",
+  "license": "MIT",
   "dependencies": {
-    "@neondatabase/serverless": "^0.10.4",
-    "connect-pg-simple": "^10.0.0",
-    "drizzle-orm": "^0.39.1",
-    "drizzle-zod": "^0.7.0",
-    "express": "^4.21.2",
-    "express-session": "^1.18.1",
-    "postgres": "^3.4.3",
-    "zod": "^3.24.2",
-    "zod-validation-error": "^3.4.0"
-  },
-  "devDependencies": {
-    "drizzle-kit": "^0.30.4"
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "cors": "^2.8.5",
+    "mysql2": "^3.6.5",
+    "bcryptjs": "^2.4.3",
+    "express-fileupload": "^1.4.0",
+    "zod": "^3.22.4"
   },
   "engines": {
     "node": ">=18.0.0"
