@@ -6,7 +6,7 @@ The AbleTools Complete Static Website has been successfully exported and all con
 
 ## Package Contents
 
-**File:** `AbleTools-Complete-Static-Website-FIXED.zip` (20.3 MB)
+**File:** `AbleTools-Complete-Static-Website-COMPLETE.zip` (20.3 MB)
 
 ### Directory Structure
 ```
@@ -61,7 +61,7 @@ static-export/
 Upload all files to your web server root directory:
 ```bash
 # Extract the zip file
-unzip AbleTools-Complete-Static-Website-FIXED.zip
+unzip AbleTools-Complete-Static-Website-COMPLETE.zip
 
 # Upload to web server
 rsync -av static-export/* user@yourserver.com:/var/www/html/
