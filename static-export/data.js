@@ -1,5 +1,72 @@
 // Static data for AbleTools website
 window.ABLETOOLS_DATA = {
+  catalogueCategories: [
+    {
+      id: 1,
+      title: "Wheelchairs & Mobility",
+      description: "Complete range of wheelchairs and mobility solutions",
+      image: "attached_assets/bingo_evolution_twins-1_1752003228920.jpg",
+      brochureCount: 3,
+      slug: "wheelchairs-mobility"
+    },
+    {
+      id: 2,
+      title: "Lifting & Transfer Systems", 
+      description: "Professional patient lifting and transfer equipment",
+      image: "attached_assets/cc1b09e90722c7d00b3f0cb8757c6d79_1752003228919.jpg",
+      brochureCount: 2,
+      slug: "lifting-systems"
+    },
+    {
+      id: 3,
+      title: "Sensory Integration",
+      description: "Multi-sensory room equipment and therapy tools",
+      image: "attached_assets/maxresdefault_1752003228921.jpg",
+      brochureCount: 2,
+      slug: "sensory-integration"
+    }
+  ],
+  
+  solutions: [
+    {
+      id: 1,
+      title: "Sensory Integration Rooms",
+      description: "Specialized environments for sensory processing therapy",
+      image: "attached_assets/1602069478aboutus_temp_1752007885489.jpg",
+      features: ["Controlled lighting", "Tactile equipment", "Sound systems"],
+      applications: ["Autism therapy", "ADHD treatment", "Developmental delays"]
+    },
+    {
+      id: 2,
+      title: "Multi-Sensory Rooms",
+      description: "Interactive environments for therapeutic intervention", 
+      image: "attached_assets/1601936002aboutus_small2_1752007885488.jpg",
+      features: ["Interactive panels", "Fiber optics", "Bubble tubes"],
+      applications: ["Learning disabilities", "Dementia care", "Relaxation therapy"]
+    }
+  ],
+  
+  newsArticles: [
+    {
+      id: 1,
+      title: "New HUR Equipment Range Now Available",
+      content: "We are excited to announce the arrival of the latest HUR pneumatic exercise equipment range, featuring advanced rehabilitation technology for spinal cord and neurological rehabilitation.",
+      date: "2025-07-20",
+      image: "attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg",
+      category: "Product Launch",
+      featured: true
+    },
+    {
+      id: 2,
+      title: "AbleTools Expands Training Programs",
+      content: "Our comprehensive training programs now include specialized courses for healthcare professionals, covering the latest rehabilitation techniques and equipment usage.",
+      date: "2025-07-15", 
+      image: "attached_assets/seminar_1752044011822.jpeg",
+      category: "Education",
+      featured: false
+    }
+  ],
+  
   banners: [
     {
       id: 1,
