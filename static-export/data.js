@@ -2,6 +2,82 @@
 window.ABLETOOLS_DATA = {
   // Helper function to use static data in static environments
   useStaticData: () => typeof window !== 'undefined' && window.location.protocol === 'file:',
+  // Product Categories with hierarchical structure
+  productCategories: [
+    {
+      id: 1,
+      name: "Wheelchairs & Mobility",
+      description: "Complete range of wheelchairs and mobility solutions",
+      image: "attached_assets/bingo_evolution_twins-1_1752003228920.jpg",
+      slug: "wheelchairs-mobility",
+      productCount: 8,
+      subcategories: [
+        { id: 1, name: "Manual Wheelchairs", slug: "manual-wheelchairs", productCount: 4 },
+        { id: 2, name: "Electric Wheelchairs", slug: "electric-wheelchairs", productCount: 4 }
+      ]
+    },
+    {
+      id: 2,
+      name: "Lifting Systems",
+      description: "Professional patient lifting and transfer equipment", 
+      image: "attached_assets/cc1b09e90722c7d00b3f0cb8757c6d79_1752003228919.jpg",
+      slug: "lifting-systems",
+      productCount: 6,
+      subcategories: [
+        { id: 3, name: "Ceiling Hoists", slug: "ceiling-hoists", productCount: 3 },
+        { id: 4, name: "Mobile Hoists", slug: "mobile-hoists", productCount: 3 }
+      ]
+    },
+    {
+      id: 3,
+      name: "Stairlifts & Access",
+      description: "Stairlifts and accessibility solutions",
+      image: "attached_assets/1599058641products_home_1751993768399.jpg",
+      slug: "stairlifts-access",
+      productCount: 4,
+      subcategories: [
+        { id: 5, name: "Straight Stairlifts", slug: "straight-stairlifts", productCount: 2 },
+        { id: 6, name: "Curved Stairlifts", slug: "curved-stairlifts", productCount: 2 }
+      ]
+    },
+    {
+      id: 4,
+      name: "Exercise & Rehabilitation",
+      description: "Advanced exercise and rehabilitation equipment",
+      image: "attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg",
+      slug: "exercise-rehabilitation",
+      productCount: 5,
+      subcategories: [
+        { id: 7, name: "HUR Equipment", slug: "hur-equipment", productCount: 3 },
+        { id: 8, name: "Therapy Equipment", slug: "therapy-equipment", productCount: 2 }
+      ]
+    },
+    {
+      id: 5,
+      name: "Sensory Integration",
+      description: "Multi-sensory room equipment and therapy tools",
+      image: "attached_assets/maxresdefault_1752003228921.jpg",
+      slug: "sensory-integration",
+      productCount: 4,
+      subcategories: [
+        { id: 9, name: "Interactive Equipment", slug: "interactive-equipment", productCount: 2 },
+        { id: 10, name: "Sensory Tools", slug: "sensory-tools", productCount: 2 }
+      ]
+    },
+    {
+      id: 6,
+      name: "Daily Living Aids",
+      description: "Essential daily living aids and assistive devices",
+      image: "attached_assets/1601936002aboutus_small2_1752007885488.jpg",
+      slug: "daily-living-aids",
+      productCount: 6,
+      subcategories: [
+        { id: 11, name: "Bathroom Aids", slug: "bathroom-aids", productCount: 3 },
+        { id: 12, name: "Kitchen Aids", slug: "kitchen-aids", productCount: 3 }
+      ]
+    }
+  ],
+
   catalogueCategories: [
     {
       id: 1,
@@ -26,6 +102,134 @@ window.ABLETOOLS_DATA = {
       image: "attached_assets/maxresdefault_1752003228921.jpg",
       brochureCount: 2,
       slug: "sensory-integration"
+    }
+  ],
+
+  // Education/Training Programs
+  educationPrograms: [
+    {
+      id: 1,
+      title: "Advanced Rehabilitation Techniques",
+      type: "seminar",
+      description: "Comprehensive training on advanced rehabilitation techniques and evidence-based practices",
+      duration: "2 days",
+      date: "2025-09-15",
+      image: "attached_assets/seminar_1752044011822.jpeg",
+      instructor: "Dr. Maria Constantinou",
+      price: 450
+    },
+    {
+      id: 2,
+      title: "HUR Equipment Certification",
+      type: "training",
+      description: "Professional certification training for HUR pneumatic rehabilitation equipment",
+      duration: "1 day", 
+      date: "2025-10-20",
+      image: "attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg",
+      instructor: "HUR Certified Trainer",
+      price: 350
+    },
+    {
+      id: 3,
+      title: "Accessibility Assessment Training",
+      type: "training",
+      description: "Comprehensive training on home and workplace accessibility assessment",
+      duration: "1 day",
+      date: "2025-11-10",
+      image: "attached_assets/1601935107aboutus_1752007024526.jpg",
+      instructor: "Prof. Andreas Dimitriou",
+      price: 300
+    },
+    {
+      id: 4,
+      title: "Pediatric Rehabilitation Training",
+      type: "seminar",
+      description: "Specialized pediatric rehabilitation training program for therapists",
+      duration: "3 days",
+      date: "2025-12-05",
+      image: "attached_assets/1602069478aboutus_temp_1752007885489.jpg",
+      instructor: "Dr. Elena Nicolaou",
+      price: 650
+    },
+    {
+      id: 5,
+      title: "Multi-Sensory Room Design",
+      type: "training",
+      description: "Comprehensive training on designing effective multi-sensory therapeutic environments",
+      duration: "2 days",
+      date: "2026-01-15",
+      image: "attached_assets/maxresdefault_1752003228921.jpg",
+      instructor: "Sensory Design Specialist",
+      price: 500
+    },
+    {
+      id: 6,
+      title: "Wheelchair Assessment & Prescription",
+      type: "training",
+      description: "Professional training in wheelchair assessment and prescription",
+      duration: "1 day",
+      date: "2026-02-20",
+      image: "attached_assets/bingo_evolution_twins-1_1752003228920.jpg",
+      instructor: "Mobility Specialist",
+      price: 400
+    }
+  ],
+
+  // News Articles
+  newsArticles: [
+    {
+      id: 1,
+      title: "New HUR Equipment Range",
+      category: "Product Launch",
+      date: "2025-07-25",
+      excerpt: "AbleTools introduces the latest HUR pneumatic equipment range for advanced rehabilitation.",
+      image: "attached_assets/HUR - Spinal Cord and Neurological Rehabilitation_1752000796341.jpg",
+      author: "Marketing Team"
+    },
+    {
+      id: 2,
+      title: "Annual Equipment Expo 2025",
+      category: "Events",
+      date: "2025-07-20",
+      excerpt: "Join us at the Annual Equipment Expo featuring the latest rehabilitation technology.",
+      image: "attached_assets/Achievement_1752003982449.jpg",
+      author: "Events Team"
+    },
+    {
+      id: 3,
+      title: "Community Outreach Program",
+      category: "Community",
+      date: "2025-07-15",
+      excerpt: "New community outreach program provides equipment support for underserved populations.",
+      image: "attached_assets/send-award-virtual-celebration-employee-milestones_1752004100582.jpg",
+      author: "Community Relations"
+    },
+    {
+      id: 4,
+      title: "Partnership with European Rehabilitation Center",
+      category: "Partnership",
+      date: "2025-07-10",
+      excerpt: "Strategic partnership with leading European centers for advanced training programs.",
+      image: "attached_assets/1601935107aboutus_1752007024526.jpg",
+      author: "Business Development"
+    },
+    {
+      id: 5,
+      title: "Award for Excellence in Healthcare Innovation",
+      category: "Awards",
+      date: "2025-07-05",
+      excerpt: "AbleTools receives prestigious award for excellence in healthcare innovation.",
+      image: "attached_assets/what-is-true-sense-of-accomplishment-and-how-to-achive-it_1752003982450.jpg",
+      author: "PR Team"
+    },
+    {
+      id: 6,
+      title: "New Showroom Opening in Limassol",
+      category: "Expansion",
+      date: "2025-06-30",
+      excerpt: "New state-of-the-art showroom opens in Limassol with latest equipment demonstrations.",
+      image: "attached_assets/1599038152about_us_home_1751993313592.jpg",
+      author: "Operations Team"
     }
   ],
   
