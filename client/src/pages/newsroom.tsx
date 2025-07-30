@@ -10,12 +10,23 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Skeleton } from '@/components/ui/skeleton';
 import { Calendar, Search, Clock, User, ArrowRight, TrendingUp, Award, Newspaper, Globe } from 'lucide-react';
 
+// Helper to get static data when available
+const getStaticData = (key: string) => {
+  if (typeof window !== 'undefined' && (window as any).ABLETOOLS_DATA) {
+    return (window as any).ABLETOOLS_DATA[key] || [];
+  }
+  return [];
+};
+
 export default function Newsroom() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  
+  const staticEvents = getStaticData('newsArticles');
 
-  const { data: allEvents = [], isLoading } = useQuery({
+  const { data: allEvents = staticEvents, isLoading } = useQuery({
     queryKey: ['/api/events'],
+    enabled: staticEvents.length === 0,
   });
 
   // Filter and categorize news articles

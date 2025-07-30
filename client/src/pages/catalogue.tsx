@@ -15,10 +15,21 @@ interface CatalogueCategory {
   createdAt: string;
 }
 
+// Helper to get static data when available
+const getStaticData = (key: string) => {
+  if (typeof window !== 'undefined' && (window as any).ABLETOOLS_DATA) {
+    return (window as any).ABLETOOLS_DATA[key] || [];
+  }
+  return [];
+};
+
 export default function Catalogue() {
   const [location, setLocation] = useLocation();
-  const { data: categories = [], isLoading } = useQuery<CatalogueCategory[]>({
+  const staticCategories = getStaticData('catalogueCategories');
+  
+  const { data: categories = staticCategories, isLoading } = useQuery<CatalogueCategory[]>({
     queryKey: ['/api/catalogue/categories'],
+    enabled: staticCategories.length === 0,
   });
 
   const handleCategoryClick = (slug: string) => {

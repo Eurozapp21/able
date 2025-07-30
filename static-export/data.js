@@ -1,5 +1,7 @@
-// Static data for AbleTools website
+// Static data for AbleTools website - Complete dataset
 window.ABLETOOLS_DATA = {
+  // Helper function to use static data in static environments
+  useStaticData: () => typeof window !== 'undefined' && window.location.protocol === 'file:',
   catalogueCategories: [
     {
       id: 1,
@@ -207,6 +209,37 @@ window.ABLETOOLS_DATA = {
       description: "Making a difference in the lives of people with disabilities through quality equipment and services",
       image: "attached_assets/what-is-true-sense-of-accomplishment-and-how-to-achive-it_1752003982450.jpg",
       year: "2024"
+    }
+  ],
+  
+  // Brochures for catalogue
+  brochures: [
+    {
+      id: 1,
+      title: "Premium Wheelchairs Collection 2025",
+      description: "Complete guide to our latest wheelchair technology",
+      categoryId: 1,
+      fileUrl: "#",
+      downloadCount: 156,
+      fileSize: "2.4 MB"
+    },
+    {
+      id: 2,
+      title: "Advanced Lifting Systems",
+      description: "Professional patient lifting and transfer solutions",
+      categoryId: 2,
+      fileUrl: "#",
+      downloadCount: 89,
+      fileSize: "1.8 MB"
+    },
+    {
+      id: 3,
+      title: "Sensory Integration Equipment Guide",
+      description: "Multi-sensory room equipment and therapy tools",
+      categoryId: 3,
+      fileUrl: "#",
+      downloadCount: 112,
+      fileSize: "3.1 MB"
     }
   ]
 };

@@ -8,29 +8,49 @@ import HeroCarousel from '@/components/hero-carousel';
 import { getQueryFn } from '@/lib/queryClient';
 import type { Product, Category, Seminar, Event, Achievement } from '@shared/schema';
 
+// Helper to get static data when available
+const getStaticData = (key: string) => {
+  if (typeof window !== 'undefined' && (window as any).ABLETOOLS_DATA) {
+    return (window as any).ABLETOOLS_DATA[key] || [];
+  }
+  return [];
+};
+
 
 
 
 export default function Home() {
-  const { data: categories = [] } = useQuery({
+  // Use static data when available, otherwise use API
+  const staticCategories = getStaticData('categories');
+  const staticSeminars = getStaticData('seminars');
+  const staticEvents = getStaticData('events');
+  const staticAchievements = getStaticData('achievements');
+  const staticProducts = getStaticData('products');
+
+  const { data: categories = staticCategories } = useQuery({
     queryKey: ['/api/categories'],
     queryFn: () => getQueryFn<Category[]>({ on401: "returnNull" })('/api/categories'),
+    enabled: staticCategories.length === 0,
   });
 
-  const { data: seminars = [] } = useQuery({
+  const { data: seminars = staticSeminars } = useQuery({
     queryKey: ['/api/seminars'],
+    enabled: staticSeminars.length === 0,
   });
 
-  const { data: events = [] } = useQuery({
+  const { data: events = staticEvents } = useQuery({
     queryKey: ['/api/events'],
+    enabled: staticEvents.length === 0,
   });
 
-  const { data: achievements = [] } = useQuery({
+  const { data: achievements = staticAchievements } = useQuery({
     queryKey: ['/api/achievements'],
+    enabled: staticAchievements.length === 0,
   });
 
-  const { data: products = [] } = useQuery({
+  const { data: products = staticProducts } = useQuery({
     queryKey: ['/api/products'],
+    enabled: staticProducts.length === 0,
   });
 
 
@@ -479,7 +499,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.filter(product => product.isFeatured).slice(0, 6).map((product) => (
+            {(products as Product[]).filter((product: Product) => product.isFeatured).slice(0, 6).map((product: Product) => (
               <div key={product.id} className="group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300 hover:border-primary-gold">
                 <div className="relative overflow-hidden">
                   <img
@@ -568,7 +588,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {achievements.map((achievement) => (
+            {(achievements as Achievement[]).map((achievement: Achievement) => (
               <div key={achievement.id} className="text-center">
                 <div className="relative mb-4">
                   <img

@@ -8,9 +8,20 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Skeleton } from '@/components/ui/skeleton';
 import { Calendar, MapPin, Users, Clock, Euro, GraduationCap, Award, BookOpen, Target } from 'lucide-react';
 
+// Helper to get static data when available
+const getStaticData = (key: string) => {
+  if (typeof window !== 'undefined' && (window as any).ABLETOOLS_DATA) {
+    return (window as any).ABLETOOLS_DATA[key] || [];
+  }
+  return [];
+};
+
 export default function Seminars() {
-  const { data: allSeminars = [], isLoading } = useQuery({
+  const staticSeminars = getStaticData('seminars');
+  
+  const { data: allSeminars = staticSeminars, isLoading } = useQuery({
     queryKey: ['/api/seminars'],
+    enabled: staticSeminars.length === 0,
   });
 
   // Filter seminars and training based on type

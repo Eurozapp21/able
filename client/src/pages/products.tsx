@@ -12,6 +12,14 @@ import { Search, Grid, List, Filter, ArrowRight, Package, ChevronRight, Layers, 
 import ProductGrid from '@/components/product-grid-new';
 import type { Category, Product } from '@shared/schema';
 
+// Helper to get static data when available
+const getStaticData = (key: string) => {
+  if (typeof window !== 'undefined' && (window as any).ABLETOOLS_DATA) {
+    return (window as any).ABLETOOLS_DATA[key] || [];
+  }
+  return [];
+};
+
 export default function Products() {
   const [location] = useLocation();
   const [searchQuery, setSearchQuery] = useState('');
@@ -32,20 +40,26 @@ export default function Products() {
     }
   }, [location]);
 
-  const { data: allCategories = [], isLoading: categoriesLoading } = useQuery({
+  // Use static data when available
+  const staticCategories = getStaticData('categories');
+  const staticProducts = getStaticData('products');
+
+  const { data: allCategories = staticCategories, isLoading: categoriesLoading } = useQuery({
     queryKey: ['/api/categories'],
+    enabled: staticCategories.length === 0,
   });
 
-  const { data: currentLevelCategories = [], isLoading: currentCategoriesLoading } = useQuery({
+  const { data: currentLevelCategories = staticCategories, isLoading: currentCategoriesLoading } = useQuery({
     queryKey: ['/api/categories', selectedCategory],
     queryFn: async () => {
       const response = await fetch(`/api/categories?parentId=${selectedCategory || 'null'}`);
       if (!response.ok) throw new Error('Failed to fetch categories');
       return response.json();
     },
+    enabled: staticCategories.length === 0,
   });
 
-  const { data: products = [], isLoading: productsLoading } = useQuery({
+  const { data: products = staticProducts, isLoading: productsLoading } = useQuery({
     queryKey: ['/api/products', selectedCategory, searchQuery],
     queryFn: async () => {
       const params = new URLSearchParams();
@@ -58,6 +72,7 @@ export default function Products() {
       if (!response.ok) throw new Error('Failed to fetch products');
       return response.json();
     },
+    enabled: staticProducts.length === 0,
   });
 
   // Build category path for breadcrumbs
