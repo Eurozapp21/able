@@ -3,7 +3,8 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { 
   insertUserSchema, insertEnquirySchema, insertEnquiryMessageSchema,
-  insertProductSchema, insertCategorySchema, insertSeminarSchema, insertEventSchema
+  insertProductSchema, insertCategorySchema, insertSeminarSchema, insertEventSchema,
+  insertUserPreferencesSchema, preferenceSchema
 } from "@shared/schema";
 import { z } from "zod";
 
@@ -664,6 +665,94 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ success: true });
     } catch (error) {
       res.status(500).json({ error: "Failed to delete user" });
+    }
+  });
+
+  // ===== USER PREFERENCES ROUTES =====
+  
+  // Get user preferences
+  app.get("/api/preferences", async (req, res) => {
+    try {
+      const userId = req.session?.userId;
+      const sessionId = req.sessionID;
+      
+      const preferences = await storage.getUserPreferences(userId, sessionId);
+      
+      if (preferences) {
+        res.json(preferences);
+      } else {
+        // Return default preferences if none found
+        const defaultPrefs = preferenceSchema.parse({});
+        res.json({ preferences: defaultPrefs });
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch preferences" });
+    }
+  });
+
+  // Save/Update user preferences
+  app.post("/api/preferences", async (req, res) => {
+    try {
+      const userId = req.session?.userId;
+      const sessionId = req.sessionID;
+      
+      // Validate preference data
+      const validatedPrefs = preferenceSchema.parse(req.body);
+      
+      // Check if preferences already exist
+      const existing = await storage.getUserPreferences(userId, sessionId);
+      
+      if (existing) {
+        // Update existing preferences
+        const updated = await storage.updateUserPreferences(existing.id, validatedPrefs);
+        res.json(updated);
+      } else {
+        // Create new preferences
+        const data = insertUserPreferencesSchema.parse({
+          userId: userId || null,
+          sessionId: userId ? null : sessionId,
+          preferences: validatedPrefs
+        });
+        
+        const created = await storage.saveUserPreferences(data);
+        res.json(created);
+      }
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid preference data", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to save preferences" });
+    }
+  });
+
+  // Apply preference changes (for specific preference updates)
+  app.patch("/api/preferences/:key", async (req, res) => {
+    try {
+      const userId = req.session?.userId;
+      const sessionId = req.sessionID;
+      const prefKey = req.params.key;
+      const { value } = req.body;
+      
+      const existing = await storage.getUserPreferences(userId, sessionId);
+      
+      if (!existing) {
+        return res.status(404).json({ error: "User preferences not found" });
+      }
+      
+      // Update specific preference key
+      const currentPrefs = existing.preferences as any;
+      const updatedPrefs = { ...currentPrefs, [prefKey]: value };
+      
+      // Validate the updated preferences
+      const validatedPrefs = preferenceSchema.parse(updatedPrefs);
+      
+      const updated = await storage.updateUserPreferences(existing.id, validatedPrefs);
+      res.json(updated);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid preference value", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to update preference" });
     }
   });
 

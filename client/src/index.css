@@ -644,3 +644,50 @@
     border: 2px solid black !important;
   }
 }
+
+
+/* Accessibility preferences */
+.high-contrast {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 10%;
+  --card-foreground: 0 0% 100%;
+  --border: 0 0% 30%;
+  --input: 0 0% 20%;
+  --primary: 60 100% 50%;
+  --primary-foreground: 0 0% 0%;
+}
+
+.large-fonts {
+  font-size: 1.125rem;
+}
+
+.large-fonts h1 {
+  font-size: 3rem;
+}
+
+.large-fonts h2 {
+  font-size: 2.25rem;
+}
+
+.large-fonts h3 {
+  font-size: 1.875rem;
+}
+
+.large-fonts .text-sm {
+  font-size: 1rem;
+}
+
+.reduced-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+.reduced-motion *,
+.reduced-motion *:before,
+.reduced-motion *:after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}

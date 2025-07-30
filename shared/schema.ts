@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, timestamp, json } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -193,6 +193,47 @@ export const insertBrochureSchema = createInsertSchema(brochures).omit({
   createdAt: true,
 });
 
+// User Preferences Schema for Dynamic Customization
+export const userPreferences = pgTable("user_preferences", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").references(() => users.id),
+  sessionId: text("session_id"), // For anonymous users
+  preferences: json("preferences").notNull(), // JSON object containing all preferences
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertUserPreferencesSchema = createInsertSchema(userPreferences).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+// Preference settings schema
+export const preferenceSchema = z.object({
+  theme: z.enum(["light", "dark", "auto"]).default("light"),
+  language: z.enum(["en", "el"]).default("en"),
+  currency: z.enum(["EUR", "USD", "GBP"]).default("EUR"),
+  productView: z.enum(["grid", "list"]).default("grid"),
+  productsPerPage: z.enum(["12", "24", "48"]).default("12"),
+  sortBy: z.enum(["name", "price", "featured", "newest"]).default("name"),
+  showPrices: z.boolean().default(true),
+  showAvailability: z.boolean().default(true),
+  favoriteCategories: z.array(z.number()).default([]),
+  notifications: z.object({
+    newProducts: z.boolean().default(true),
+    priceUpdates: z.boolean().default(false),
+    seminars: z.boolean().default(true),
+    newsletters: z.boolean().default(true),
+  }).default({}),
+  accessibility: z.object({
+    highContrast: z.boolean().default(false),
+    largeFonts: z.boolean().default(false),
+    reducedMotion: z.boolean().default(false),
+    screenReader: z.boolean().default(false),
+  }).default({}),
+});
+
 // Types
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
@@ -216,3 +257,6 @@ export type CatalogueCategory = typeof catalogueCategories.$inferSelect;
 export type InsertCatalogueCategory = z.infer<typeof insertCatalogueCategorySchema>;
 export type Brochure = typeof brochures.$inferSelect;
 export type InsertBrochure = z.infer<typeof insertBrochureSchema>;
+export type UserPreferences = typeof userPreferences.$inferSelect;
+export type InsertUserPreferences = z.infer<typeof insertUserPreferencesSchema>;
+export type PreferenceSettings = z.infer<typeof preferenceSchema>;

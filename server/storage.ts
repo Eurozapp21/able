@@ -1,11 +1,11 @@
 import { 
-  users, categories, products, seminars, events, enquiries, enquiryMessages, achievements, banners, catalogueCategories, brochures,
+  users, categories, products, seminars, events, enquiries, enquiryMessages, achievements, banners, catalogueCategories, brochures, userPreferences,
   type User, type InsertUser, type Category, type InsertCategory, 
   type Product, type InsertProduct, type Seminar, type InsertSeminar,
   type Event, type InsertEvent, type Enquiry, type InsertEnquiry,
   type EnquiryMessage, type InsertEnquiryMessage, type Achievement, type InsertAchievement,
   type Banner, type InsertBanner, type CatalogueCategory, type InsertCatalogueCategory,
-  type Brochure, type InsertBrochure
+  type Brochure, type InsertBrochure, type UserPreferences, type InsertUserPreferences
 } from "@shared/schema";
 
 export interface IStorage {
@@ -83,6 +83,11 @@ export interface IStorage {
   getBrochuresByCategory(categoryId: number): Promise<Brochure[]>;
   createBrochure(brochure: InsertBrochure): Promise<Brochure>;
   incrementDownloadCount(id: number): Promise<void>;
+  
+  // User Preferences methods
+  getUserPreferences(userId?: number, sessionId?: string): Promise<UserPreferences | null>;
+  saveUserPreferences(data: InsertUserPreferences): Promise<UserPreferences>;
+  updateUserPreferences(id: number, preferences: any): Promise<UserPreferences>;
 }
 
 export class MemStorage implements IStorage {
@@ -97,6 +102,7 @@ export class MemStorage implements IStorage {
   private banners: Map<number, Banner> = new Map();
   private catalogueCategories: Map<number, CatalogueCategory> = new Map();
   private brochures: Map<number, Brochure> = new Map();
+  private userPreferences: Map<number, UserPreferences> = new Map();
   
   private currentId = 1;
 
@@ -1194,6 +1200,43 @@ export class MemStorage implements IStorage {
     if (brochure) {
       this.brochures.set(id, { ...brochure, downloadCount: (brochure.downloadCount ?? 0) + 1 });
     }
+  }
+
+  // User Preferences Implementation
+  async getUserPreferences(userId?: number, sessionId?: string): Promise<UserPreferences | null> {
+    for (const preference of this.userPreferences.values()) {
+      if ((userId && preference.userId === userId) || (sessionId && preference.sessionId === sessionId)) {
+        return preference;
+      }
+    }
+    return null;
+  }
+
+  async saveUserPreferences(data: InsertUserPreferences): Promise<UserPreferences> {
+    const id = this.currentId++;
+    const preferences: UserPreferences = {
+      ...data,
+      id,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.userPreferences.set(id, preferences);
+    return preferences;
+  }
+
+  async updateUserPreferences(id: number, preferences: any): Promise<UserPreferences> {
+    const existing = this.userPreferences.get(id);
+    if (!existing) {
+      throw new Error('User preferences not found');
+    }
+
+    const updated: UserPreferences = {
+      ...existing,
+      preferences,
+      updatedAt: new Date()
+    };
+    this.userPreferences.set(id, updated);
+    return updated;
   }
 }
 
